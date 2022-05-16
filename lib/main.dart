@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/src/settings/view/settings.dart';
+import 'package:pesu/src/transport/view/campus.dart';
+import 'package:pesu/src/transport/view/transport_dashboard.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: Settings(),
+      home:TransportDashboard(),
     );
   }
 }
