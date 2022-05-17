@@ -25,7 +25,7 @@ titleSpacing: 0,
 
         ),
       ),
-      Text("Setting"),
+      Text("Settings"),
     ],
   ),
 
