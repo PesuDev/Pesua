@@ -24,7 +24,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
                 print("set $isSemSelected");
                 isSemSelected = true;
                 print("reset $isSemSelected");
-                _modalBottomSheetMenu();
+                _semBottomSheet();
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -139,7 +139,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
     );
   }
 
-  void _modalBottomSheetMenu() {
+  void _semBottomSheet() {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
