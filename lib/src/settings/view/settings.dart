@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:pesu/utils/view/widget.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -13,23 +14,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-appBar: AppBar(
-titleSpacing: 0,
-  title: Row(
-    children: [
-      Container(
-        child: IconButton(icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: (){
-
-          },
-
-        ),
-      ),
-      Text("Settings"),
-    ],
-  ),
-
-),
+appBar: sideNavAppBar("Settings"),
 
       drawer: Container(),
       backgroundColor:        Colors.white.withOpacity(0.9),
