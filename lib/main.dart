@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
 import 'package:pesu/src/settings/view/settings.dart';
 import 'package:pesu/src/transport/view/rr_campus.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: TransportDashboard(),
+      home: AttendanceDashboard(),
+
     );
   }
 }
