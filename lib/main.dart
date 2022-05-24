@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pesu/src/seatinginfo/view/seating_info.dart';
+import 'package:pesu/src/my_profile/view/my_profile.dart';
+import 'package:pesu/src/settings/view/settings.dart';
+import 'package:pesu/src/transport/view/campus.dart';
+import 'package:pesu/src/transport/view/transport_dashboard.dart';
 
 void main() {
   runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: SeatingInfo(),
+      home: TransportDashboard(),
     );
   }
 }
