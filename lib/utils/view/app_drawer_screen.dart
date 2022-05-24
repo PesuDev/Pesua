@@ -96,6 +96,8 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
         title,
         style: TextStyle(
           fontSize: 16,
+          color: Colors.black87,
+          fontWeight: FontWeight.w500
         ),
       ),
       trailing: Icon(Icons.arrow_forward_ios,size: 15,),
