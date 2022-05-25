@@ -36,16 +36,12 @@ class _HomePageState extends State<HomePage> {
         height: _mainHeight,
         width: _mainWidth,
         color: Colors.white,
-        padding: EdgeInsets.symmetric(
-
-          vertical: _mainHeight * 0.02,
-        ),
+        padding: EdgeInsets.only(top:  _mainHeight * 0.00,bottom:  _mainHeight * 0.015,),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
-
               height: _mainHeight * 0.1,
               child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
@@ -93,19 +89,24 @@ class _HomePageState extends State<HomePage> {
                               ),
                               fit: BoxFit.cover,
                             )),
-                      ),Positioned(
-                        bottom:0,
+                      ),
+                      Positioned(
+                        bottom: 0,
                         child: Container(
-                          width: _mainWidth,
-                            alignment: Alignment.center,
+
+                            width: _mainWidth,
+                           alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: Colors.black54,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(20)),
                             ),
                             height: 30,
                             child: Text(
                               "Invitation to Participate in an Event",
-                              style: TextStyle(fontSize: 16, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
                             )),
                       )
                     ],
@@ -114,14 +115,16 @@ class _HomePageState extends State<HomePage> {
                 autoplay: true,
                 itemCount: imageList.length,
               ),
-
             ),
             SizedBox(
-              height: _mainHeight*0.03,
+              height: _mainHeight * 0.03,
             ),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
-                child: Text('Important Announcements (2/4)',style: TextStyle(color: appThemeContrastColor),)),
+                child: Text(
+                  'Important Announcements (2/4)',
+                  style: TextStyle(color: appThemeContrastColor),
+                )),
             Container(
               padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
               height: _mainHeight * 0.1,
@@ -158,14 +161,19 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
               alignment: Alignment.centerLeft,
-              height: _mainHeight*0.04,
+              height: _mainHeight * 0.04,
               color: Colors.grey.shade200,
-              child: Text('Announcements (1)',style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w700),),
+              child: Text(
+                'Announcements (1)',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
               child: ListTile(
-
                 contentPadding: EdgeInsets.zero,
                 leading: Icon(
                   Icons.ac_unit,
