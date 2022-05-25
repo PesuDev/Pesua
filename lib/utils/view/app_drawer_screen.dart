@@ -100,7 +100,7 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
           fontWeight: FontWeight.w500
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios,size: 15,),
+      trailing: Icon(Icons.arrow_right,size: 15,),
     );
   }
 }
