@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pesu/src/announcements/view/announcement.dart';
+import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_screen.dart';
 import 'package:pesu/src/dashboard_module/view/home_Page.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         debugShowCheckedModeBanner: false,
-        home: DashboardScreen(),
+        home: Announcement(),
       ),
 
     );
