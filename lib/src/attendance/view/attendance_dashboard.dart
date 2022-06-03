@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class AttendanceDashboard extends StatefulWidget {
@@ -122,7 +123,15 @@ physics: NeverScrollableScrollPhysics(),
                         SizedBox(width: 5,),
                         Expanded(child: Text("42")),
                         SizedBox(width: 5,),
-                        Expanded(child: Text(">")),
+                        Expanded(child: IconButton(
+                          icon:      Icon(Icons.keyboard_arrow_right,
+                            size: 15,
+                            color: Color(0xff999999),
+                          ),
+                          onPressed: (){
+                            Navigator.pushNamed(context, AppRoutes.detailedAttendance);
+                          },
+                        )),
                       ],
                     ),
                     SizedBox(height: 10,),
