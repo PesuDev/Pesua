@@ -72,7 +72,10 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Assignments',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.assignment);
+
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
