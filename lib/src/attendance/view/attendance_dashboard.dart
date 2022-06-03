@@ -13,7 +13,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: sideNavAppBar("Attendance"),
-      drawer: Container(),
+     // drawer: Container(),
       body: Container(
         margin: EdgeInsets.only(top: 15,left: 15,right: 15,bottom: 15),
 child: SingleChildScrollView(

@@ -157,7 +157,10 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Transport',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.transport);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -167,7 +170,10 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Setting',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.settings);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
