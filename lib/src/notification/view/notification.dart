@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/utils/view/widget.dart';
 
@@ -28,11 +29,20 @@ margin: EdgeInsets.only(bottom: 15),
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("PESU - Announcement",style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("PESU - Announcement",style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
 
-            ),),
+                ),),
+                Icon(Icons.clear,
+                size: 15,
+                  color: Color(0xff999999),
+                ),
+              ],
+            ),
             SizedBox(height: 5,),
             Text("Intership opportunities at cRAIS",style: TextStyle(
               fontSize: 14,
@@ -40,11 +50,20 @@ margin: EdgeInsets.only(bottom: 15),
 
             ),),
             SizedBox(height: 5,),
-            Text("03-06-2022, 18:15:30",style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Color(0xff999999),
-            ),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("03-06-2022, 18:15:30",style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff999999),
+                ),),
+                Icon(Icons.keyboard_arrow_right,
+                  size: 15,
+                  color: Color(0xff999999),
+                ),
+              ],
+            ),
 
           ],
         ),
