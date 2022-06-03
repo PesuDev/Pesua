@@ -13,7 +13,7 @@ class _BackLogRegistrationState extends State<BackLogRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold( appBar: sideNavAppBar("Backlog Registration"),
-      drawer: Container(),
+     // drawer: Container(),
 body: Container(
   margin: EdgeInsets.symmetric(vertical: 20,horizontal: 25),
   child: Center(
