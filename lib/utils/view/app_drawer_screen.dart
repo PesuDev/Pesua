@@ -282,3 +282,4 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
   TextStyle get getTextStyle => TextStyle(
       fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w400);
 }
+
