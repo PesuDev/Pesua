@@ -189,35 +189,38 @@ Navigator.pushNamed(context, AppRoutes.attendance);
       required IconData icon,
       required String title,
       required Function callback}) {
-    return Container(
-      padding: EdgeInsets.only(
-        left: _mainWidth * 0.02,
-        right: _mainWidth * 0.02,
-        bottom: _mainHeight*0.01,
-          top:  _mainHeight*0.01,
-      ),
+    return GestureDetector(
+      onTap:()=> callback(),
+      child: Container(
+        padding: EdgeInsets.only(
+          left: _mainWidth * 0.02,
+          right: _mainWidth * 0.02,
+          bottom: _mainHeight*0.01,
+            top:  _mainHeight*0.01,
+        ),
 
-      color: Colors.blue,
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 20,
-          ),
-          SizedBox(width: _mainWidth*0.02,),
-          Container(
-
-            width: _mainWidth*0.62,
-            child: Text(
-              title,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
+        color: Colors.blue,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 20,
             ),
-          )
-        ],
+            SizedBox(width: _mainWidth*0.02,),
+            Container(
+
+              width: _mainWidth*0.62,
+              child: Text(
+                title,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
+            )
+          ],
+        ),
       ),
     );
     /*ListTile(
@@ -286,4 +289,3 @@ Navigator.pushNamed(context, AppRoutes.attendance);
   TextStyle get getTextStyle => TextStyle(
       fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w400);
 }
-
