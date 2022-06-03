@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
+import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
@@ -35,11 +37,17 @@ data(RouteSettings settings) {
     case AppRoutes.notification: return MaterialPageRoute(
         builder: (_) =>NotificationDashboard()
     );
+    case AppRoutes.assignment: return MaterialPageRoute(
+        builder: (_) =>AssignmentsDashboard()
+    );
     case AppRoutes.placement: return MaterialPageRoute(
         builder: (_) =>PlacementDashboard()
     );
     case AppRoutes.detailedAttendance: return MaterialPageRoute(
         builder: (_) =>DetailedAttendance()
+    );
+    case AppRoutes.detailedAssignment: return MaterialPageRoute(
+        builder: (_) =>DetailedAssignment()
     );
   }
   }
@@ -53,5 +61,6 @@ class AppRoutes {
   static const String assignment="assignment";
   static const String notification="notification";
   static const String placement="placement";
+  static const String detailedAssignment="detailedAssignment";
 
 }
