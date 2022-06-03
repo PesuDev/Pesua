@@ -72,14 +72,18 @@ class _LoginState extends State<Login> {
               ),
               Row(
                 children: [
-                  Container(
-                    height:1.0,
-                    width:80.0,
-                    color:Colors.white,),
-                  Container(
-                    height:1.0,
-                    width:80.0,
-                    color:Colors.white,),
+                  Expanded(
+                    child: Container(
+                      height:1.0,
+                      width:80.0,
+                      color:Colors.white,),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height:1.0,
+                      width:80.0,
+                      color:Colors.white,),
+                  ),
                   SizedBox(width: 20,),
 
                   Text("or",style: TextStyle(
