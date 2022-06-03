@@ -102,7 +102,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Backlog Registration',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.backLog);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -127,7 +129,10 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Notification',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.notification);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -178,7 +183,10 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Help',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.help);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
