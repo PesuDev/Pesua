@@ -59,7 +59,7 @@ child: SingleChildScrollView(
             margin: EdgeInsets.only(top: 15),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blueAccent
+              color: Color(0xff163269)
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

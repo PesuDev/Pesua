@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 
 class AppDrawerScreen extends StatefulWidget {
   const AppDrawerScreen({Key? key}) : super(key: key);
@@ -63,7 +64,10 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.wysiwyg_outlined,
                 title: 'Attendance',
-                callback: () {}),
+                callback: () {
+Navigator.pushNamed(context, AppRoutes.attendance);
+
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,

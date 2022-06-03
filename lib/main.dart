@@ -1,7 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:pesu/src/transport/view/transport_dashboard.dart';
+import 'dart:developer';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:pesu/src/announcements/view/announcement.dart';
+import 'package:pesu/src/announcements/view/announcements.dart';
+import 'package:pesu/src/dashboard_module/view/dashboard_screen.dart';
+import 'package:pesu/src/dashboard_module/view/home_Page.dart';
+import 'package:pesu/src/login/view/login.dart';
+import 'package:pesu/src/my_profile/view/my_profile.dart';
+import 'package:pesu/src/settings/view/settings.dart';
+import 'package:pesu/src/transport/view/rr_campus.dart';
+import 'package:pesu/src/transport/view/transport_dashboard.dart';
+import 'package:pesu/utils/services/app_routes.dart';
+import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
+import 'package:provider/provider.dart';
+
+void main() async{
   runApp(MyApp());
 }
 
@@ -9,22 +22,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pesu app',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_)=>BottomNavigationProvider(),
+          ),
+        ],
+      child: MaterialApp(
+        title: 'Pesu app',
+        theme: ThemeData(
+          primarySwatch: Colors.blueGrey,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: DashboardScreen(),
+        onGenerateRoute: AppRouteGenerator.generateRoute,
       ),
-      debugShowCheckedModeBanner: false,
-      home: TransportDashboard(),
+
     );
   }
 }
