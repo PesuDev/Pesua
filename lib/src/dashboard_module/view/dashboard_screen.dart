@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/dashboard_module/view/home_Page.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
@@ -29,7 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             case 2:
               return HomePage();
             case 3:
-              return HomePage();
+              return AttendanceDashboard();
             case 4:
               return HomePage();
 

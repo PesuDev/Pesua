@@ -13,9 +13,13 @@ data(RouteSettings settings) {
     case AppRoutes.transport: return MaterialPageRoute(
         builder: (_) =>TransportDashboard()
     );
+    case AppRoutes.attendance: return MaterialPageRoute(
+        builder: (_) =>TransportDashboard()
+    );
   }
   }
 class AppRoutes {
   static const String transport="transport";
+  static const String attendance="attendance";
 
 }
