@@ -41,8 +41,18 @@ class _PreviousSemState extends State<PreviousSem> {
                   children: [
                   Column(
                     children: [
-                      Text("Earned Credits"),
-                      Text("116/116"),
+                      Text("Earned Credits",style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff000000),
+                        fontFamily: 'Open Sans',
+                      ),),
+                      Text("116/116",style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xff666666),
+                        fontFamily: 'Open Sans',
+                      ),),
                     ],
                   ),
                     const VerticalDivider(
@@ -54,8 +64,18 @@ class _PreviousSemState extends State<PreviousSem> {
                     ),
                     Column(
                       children: [
-                        Text("Earned Credits"),
-                        Text("116/116"),
+                        Text("Earned Credits",style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff000000),
+                          fontFamily: 'Open Sans',
+                        ),),
+                        Text("116/116",style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xff666666),
+                          fontFamily: 'Open Sans',
+                        ),),
                       ],
                     ),
                   ],
@@ -89,7 +109,12 @@ class _PreviousSemState extends State<PreviousSem> {
                             icon: const Icon(Icons.bar_chart),
                             label: Text(""),
                           ),
-                          Text("CGPA"),
+                          Text("CGPA",style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff666666),
+                            fontFamily: 'Open Sans',
+                          ),),
                           SizedBox(
                             width: 20,
                           ),
@@ -98,7 +123,12 @@ class _PreviousSemState extends State<PreviousSem> {
                             icon: const Icon(Icons.bar_chart),
                             label: Text(""),
                           ),
-                          Text("CGPA")
+                          Text("CGPA",style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff666666),
+                            fontFamily: 'Open Sans',
+                          ),)
                         ],
                       )
                     ],
@@ -121,7 +151,7 @@ Container(
         value: selectedItem,
           items: items.map((item) => DropdownMenuItem<String>(
             value: item,
-              child: Text(item,style: TextStyle(fontFamily: 'Nunito')),)
+              child: Text(item),)
           ).toList(),
         onChanged: (item) => setState(() => selectedItem= item),
 
@@ -139,7 +169,12 @@ Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Dec 2021"),
+                      Text("Dec 2021",style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff000000),
+                        fontFamily: 'Open Sans',
+                      ),),
                       Divider(
                         thickness: 3,
                       ),
@@ -151,16 +186,31 @@ Container(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text("Grade"),
+                                Text("Grade",style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xff000000),
+                                  fontFamily: 'Open Sans',
+                                ),),
                               ],
                             ),
                           ),
                           Column(
                             children: [
-                              Text("Grade"),
+                              Text("Grade",style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff000000),
+                                fontFamily: 'Open Sans',
+                              ),),
                             ],
                           ),
-                          Text("Grade"),
+                          Text("Grade",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff000000),
+                            fontFamily: 'Open Sans',
+                          ),),
                         ],
                       ),
                     ],
@@ -177,15 +227,35 @@ Container(
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 15,
+                        itemCount: 3,
                         itemBuilder: (context, index) {
                           return Container(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "PES1234556g-Python Problem Solving",
+                                RichText(
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: 'PES1234556g -',
+
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                              fontFamily: 'Open Sans',
+                                              color: Color(0xff9B9B9B))),
+
+                                      TextSpan(
+                                          text: 'Python for Computational Problem Solving',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: 'Open Sans',
+                                              fontSize: 16,
+                                              color: Color(0xff000000))),
+                                    ],
+                                  ),
                                   maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -193,14 +263,34 @@ Container(
                                   children: [
                                     Column(
                                       children: [
-                                        Text("Grade"),
-                                        Text("A"),
+                                        Text("Grade",style: TextStyle(
+                                          color: Color(0xff000000),
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w400,
+                                            fontSize: 16
+                                        ),),
+                                        Text("A",style: TextStyle(
+                                            color: Color(0xff9B9B9B),
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14
+                                        ),),
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        Text("Grade"),
-                                        Text("A"),
+                                        Text("Grade",style: TextStyle(
+                                            color: Color(0xff000000),
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 16
+                                        ),),
+                                        Text("A",style: TextStyle(
+                                            color: Color(0xff9B9B9B),
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14
+                                        ),),
                                       ],
                                     ),
                                     TextButton.icon(
@@ -224,9 +314,19 @@ Container(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("*TAL-To be announced later"),
+                          Text("*TAL-To be announced later",style: TextStyle(
+                              color: Color(0xff000000),
+                              fontFamily: 'Open Sans',
+                              fontWeight: FontWeight.w400,
+                            fontSize: 14
+                          ),),
                           Text(
-                              "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations")
+                              "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",style: TextStyle(
+                              color: Color(0xff000000),
+                              fontFamily: 'Open Sans',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14
+                          ),)
                         ],
                       ),
                     )
