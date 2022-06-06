@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
+
+import 'package:pesu/src/dashboard_module/view/home_page.dart';
 
 
 class Login extends StatefulWidget {
@@ -168,7 +171,9 @@ class _LoginState extends State<Login> {
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xffED4700)
                   ),
-                    onPressed: (){},
+                    onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
+                    },
                     child: Text("Sign",style: TextStyle(
                         color: Color(0xffFFFFFF),
                         fontWeight: FontWeight.bold,

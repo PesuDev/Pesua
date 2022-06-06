@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
-import 'package:pesu/src/dashboard_module/view/home_Page.dart';
+import 'package:pesu/src/dashboard_module/view/home_page.dart';
+import 'package:pesu/src/dashboard_module/view/settings_page.dart';
+import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +33,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             case 3:
               return HomePage();
             case 4:
-              return HomePage();
+              return ChangeNotifierProvider(create: (_)=>DashboardViewModel(),child: SettingsPage(),);
 
             default:
               return Container();
@@ -58,7 +60,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Icons.home_outlined,
             color: Colors.black54,
           ),
-          label: 'Home',
+          label: 'HOME',
           backgroundColor: Colors.green.shade50,
           activeIcon: Icon(
             Icons.home_outlined,
@@ -69,7 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Icons.wysiwyg_outlined,
             color: Colors.black54,
           ),
-          label: 'Courses',
+          label: 'MY COURSES',
           activeIcon: Icon(
             Icons.wysiwyg_outlined,
             color: appThemeColor,
@@ -79,7 +81,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Icons.add_chart,
             color: Colors.black54,
           ),
-          label: 'ISA Results',
+          label: 'ISA RESULTS',
           activeIcon: Icon(
             Icons.add_chart,
             color: appThemeColor,
@@ -89,19 +91,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Icons.access_time,
             color: Colors.black54,
           ),
-          label: 'Attendance',
+          label: 'ATTENDANCE',
           activeIcon: Icon(
             Icons.access_time,
             color: appThemeColor,
           )),
       BottomNavigationBarItem(
         icon: Icon(
-          Icons.notifications_none,
+          Icons.menu,
           color: Colors.black54,
         ),
-        label: 'Notifications',
+        label: 'MENU',
         activeIcon: Icon(
-          Icons.notifications_none,
+          Icons.menu,
           color: appThemeColor,
         ),
       ),
