@@ -65,7 +65,14 @@ class _ISAResultsState extends State<ISAResults> {
             SizedBox(
               height: 15,
             ),
-            assignment()
+            Container(
+              height: MediaQuery.of(context).size.height * 0.78,
+              child: ListView.builder(
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return assignment();
+                  }),
+            )
           ],
         ),
       ),

@@ -19,7 +19,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
     return Scaffold(
       appBar: sideNavAppBar("My Courses"),
       body: Container(
-        padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 8),
+        padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 3),
         child: Column(
           children: [
             InkWell(
@@ -67,104 +67,107 @@ class _CourseDashboardState extends State<CourseDashboard> {
             ),
             Container(
               color: Colors.white,
+              height: MediaQuery.of(context).size.height * 0.78,
               padding: EdgeInsets.only(top: 8, bottom: 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(top: 5),
-                      width: 40,
-                      child: Icon(Icons.ac_unit)),
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("UE20CS251"),
-                            PopupMenuButton(
-                              child: Icon(Icons.more_vert),
-                              itemBuilder: (context) {
-                                return List.generate(1, (index) {
-                                  return PopupMenuItem(
-                                    padding: EdgeInsets.only(
-                                        top: 0, bottom: 0, right: 0, left: 0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, AppRoutes.individualSub);
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            top: 20,
-                                            bottom: 20,
-                                            right: 10,
-                                            left: 15),
-                                        child: Text(
-                                          'View Details',
-                                          style: TextStyle(fontSize: 14),
+              child: ListView.builder(itemBuilder: (context, index) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(top: 5),
+                        width: 40,
+                        child: Icon(Icons.ac_unit)),
+                    Container(
+                      padding: EdgeInsets.only(left: 10),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("UE20CS251"),
+                              PopupMenuButton(
+                                child: Icon(Icons.more_vert),
+                                itemBuilder: (context) {
+                                  return List.generate(1, (index) {
+                                    return PopupMenuItem(
+                                      padding: EdgeInsets.only(
+                                          top: 0, bottom: 0, right: 0, left: 0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                              context, AppRoutes.individualSub);
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.only(
+                                              top: 20,
+                                              bottom: 20,
+                                              right: 10,
+                                              left: 15),
+                                          child: Text(
+                                            'View Details',
+                                            style: TextStyle(fontSize: 14),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        Text("Design and analysis of algorithms"),
-                        Divider(
-                          color: Colors.grey,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: 'Type:',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 14,
-                                          color: Colors.grey)),
-                                  TextSpan(
-                                      text: ' CC',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          color: Colors.blueGrey)),
-                                ],
+                                    );
+                                  });
+                                },
                               ),
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: 'Credits:',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 14,
-                                          color: Colors.grey)),
-                                  TextSpan(
-                                      text: ' 4',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          color: Colors.blueGrey)),
-                                ],
+                            ],
+                          ),
+                          Text("Design and analysis of algorithms"),
+                          Divider(
+                            color: Colors.grey,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'Type:',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 14,
+                                            color: Colors.grey)),
+                                    TextSpan(
+                                        text: ' CC',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            color: Colors.blueGrey)),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'Credits:',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 14,
+                                            color: Colors.grey)),
+                                    TextSpan(
+                                        text: ' 4',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
+                                            color: Colors.blueGrey)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              }),
             )
           ],
         ),

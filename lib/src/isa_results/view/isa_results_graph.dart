@@ -31,7 +31,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
               height: MediaQuery.of(context).size.height * 0.5,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
               child: Text("Summary"),
             ),
             Row(
