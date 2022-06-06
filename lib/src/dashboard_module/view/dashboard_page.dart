@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
-import 'package:pesu/src/dashboard_module/view/settings_page.dart';
+import 'package:pesu/src/dashboard_module/view/menu_page.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
@@ -34,7 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             case 3:
               return AttendanceDashboard();
             case 4:
-              return ChangeNotifierProvider(create: (_)=>DashboardViewModel(),child: SettingsPage(),);
+              return ChangeNotifierProvider(create: (_)=>DashboardViewModel(),child: MenuPage(),);
 
             default:
               return Container();
