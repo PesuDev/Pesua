@@ -68,7 +68,8 @@ class _MenuPageState extends State<MenuPage> {
               return InkWell(
                 onTap: () {
                   if (index == 0) {
-                    //login
+                    Navigator.pushNamed(context, AppRoutes.login);
+
 
                   } else if (index == 1) {
                     //courses
@@ -85,6 +86,8 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 7) {
                     Navigator.pushNamed(context, AppRoutes.seatingInfo);
                   } else if (index == 8) {
+                    Navigator.pushNamed(context, AppRoutes.sessionEffectiveness);
+
                     //session effectiveness
                   } else if (index == 9) {
                     //class room videos
@@ -97,8 +100,11 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 13) {
                     //calender
                   } else if (index == 14) {
+                    Navigator.pushNamed(context, AppRoutes.announcements);
+
                     //Announcements
                   } else if (index == 15) {
+
                     //Library
                   } else if (index == 16) {
                     Navigator.pushNamed(context, AppRoutes.transport);
