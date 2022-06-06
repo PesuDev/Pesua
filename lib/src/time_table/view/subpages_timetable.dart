@@ -1134,39 +1134,39 @@ class _SundayState extends State<Sunday> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 160,
-          ),
-          Container(
-            width: 380,
-            height: 35,
-            margin: const EdgeInsets.all(19.0),
-            padding: EdgeInsets.only(left: 95, top: 5),
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.grey.shade300)),
-            child: Text('NO CLASSES AVAILABLE ',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff717171),
-                    fontWeight: FontWeight.w600)),
-          ),
-          CircleAvatar(
-            radius: 23,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.refresh,
-              color: Color(0xff0091cd),
-              size: 30.0,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 380,
+              margin: const EdgeInsets.all(19.0),
+               padding: EdgeInsets.only(left: 50, top: 5),
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.grey.shade300)),
+              child: Text('NO CLASSES AVAILABLE ',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xff717171),
+                      fontWeight: FontWeight.w600)),
             ),
-          ),
-          Text("Refresh",
-              style: TextStyle(
-                fontSize: 18,
+            CircleAvatar(
+              radius: 23,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.refresh,
                 color: Color(0xff0091cd),
-              )),
-        ],
+                size: 30.0,
+              ),
+            ),
+            Text("Refresh",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xff0091cd),
+                )),
+          ],
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class _TimeTableState extends State<TimeTable> {
               Container(
                 color: Colors.cyan,
                 width: double.infinity,
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 9),
                 child: TabBar(
                   isScrollable: true,
                   indicatorColor: Colors.orange,

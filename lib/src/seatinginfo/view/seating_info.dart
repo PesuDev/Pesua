@@ -18,18 +18,19 @@ class _SeatingInfoState extends State<SeatingInfo> {
       appBar: sideNavAppBar("Seating Info"),
       backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
-        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      //  margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ListView.builder(
             itemCount: 2,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10, 3, 10, 0),
-                    child: Container(
-                      color: Colors.cyan,
+                  Container(
+                    margin: EdgeInsets.only(left: 10,right: 10,top: 5),
+                    color: Colors.cyan,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0,),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -100,14 +101,13 @@ class _SeatingInfoState extends State<SeatingInfo> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-
+                    margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
                     color: Color(0xffFFFFFF),
                     child: ListTileTheme.merge(
                       dense: true,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Column(
