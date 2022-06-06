@@ -80,9 +80,11 @@ class _MenuPageState extends State<MenuPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        data.name ?? '',
-                        textAlign: TextAlign.center,
+                      Flexible(
+                        child: Text(
+                          data.name ?? '',
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ],
                   ),
