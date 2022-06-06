@@ -110,10 +110,16 @@ class _HomePageState extends State<HomePage> {
                                     bottomRight: Radius.circular(5)),
                               ),
                               height: 30,
-                              child: Text(
-                                "Invitation to Participate in an Event",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Invitation to Participate from dated - 07 June 2022",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
+                                  ),
+                                ),
                               )),
                         )
                       ],
