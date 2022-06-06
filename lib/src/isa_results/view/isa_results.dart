@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class ISAResults extends StatefulWidget {
@@ -160,10 +161,7 @@ class _ISAResultsState extends State<ISAResults> {
                     child: Text("A", textAlign: TextAlign.left)),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => IsaResultGraph()),
-                    );
+                    Navigator.pushNamed(context, AppRoutes.isaResultsGraph);
                   },
                   child: Container(
                       width: MediaQuery.of(context).size.width / 6.5,

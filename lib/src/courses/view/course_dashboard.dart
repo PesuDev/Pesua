@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class CourseDashboard extends StatefulWidget {
@@ -93,12 +94,8 @@ class _CourseDashboardState extends State<CourseDashboard> {
                                         top: 0, bottom: 0, right: 0, left: 0),
                                     child: InkWell(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  IndividualSubScreen()),
-                                        );
+                                        Navigator.pushNamed(
+                                            context, AppRoutes.individualSub);
                                       },
                                       child: Container(
                                         padding: EdgeInsets.only(

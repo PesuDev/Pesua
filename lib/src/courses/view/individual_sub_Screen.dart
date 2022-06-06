@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class IndividualSubScreen extends StatefulWidget {
@@ -90,11 +91,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => IndividualUnitScreen()),
-                      );
+                      Navigator.pushNamed(context, AppRoutes.individualUnit);
                     },
                     child: Container(
                       padding: EdgeInsets.only(left: 10),
