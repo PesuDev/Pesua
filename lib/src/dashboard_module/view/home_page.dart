@@ -16,8 +16,10 @@ class _HomePageState extends State<HomePage> {
   var _mainWidth;
 
   List<String> imageList = [
-    'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg',
-    'https://insideclimatenews.org/wp-content/uploads/2021/09/whanganui-river_matthew-lovette-education-images-universal-images-group-getty-scaled.jpg'
+    'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
+    'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
+    'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
+    'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
   ];
 
   @override
@@ -43,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                 height: _mainHeight * 0.01,
               ),
               Container(
-                color: Colors.blueGrey.shade50,
+                color: Color(0xffFAFAFA),
                 padding: EdgeInsets.only(
                     left: _mainWidth * 0.05,
                     right: _mainWidth * 0.05,
@@ -81,7 +83,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 height: _mainHeight * 0.2,
-                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return Stack(
@@ -125,25 +127,25 @@ class _HomePageState extends State<HomePage> {
                 height: _mainHeight * 0.03,
               ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
+                  padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.035),
                   child: Text(
                     'Important (4 Unread)',
                     style: TextStyle(
                         color: appThemeContrastColor,
                         fontSize: 18,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.bold),
                   )),
               SizedBox(height: 10,),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
-                height: _mainHeight * 0.11,
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                height: _mainHeight * 0.12,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: (){},
                       child: Container(
                         padding: EdgeInsets.only(
-                            top: _mainHeight * 0.01, bottom: _mainHeight * 0.005),
+                            top: _mainHeight * 0.02, bottom: _mainHeight * 0.018),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade300),
                             borderRadius: BorderRadius.circular(5)),
@@ -151,14 +153,10 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.ac_unit,
-                              size: 40,
-                              color: headingColor,
-                            ),
+                            Image.asset('assets/images/pesu_logo.png',
+                            height: 40,),
                             Container(
-
-                              padding: EdgeInsets.only(left: _mainWidth * 0.05),
+                              padding: EdgeInsets.only(left: _mainWidth * 0.03),
                               width: _mainWidth * 0.73,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                               margin: EdgeInsets.only(left: _mainWidth*0.02),
                               width: _mainWidth * 0.025,
                               decoration: BoxDecoration(
-                                  color: index % 2==0?Color(0xff7ab02a):Color(0xffff0000),
+                                  color: appThemeContrastColor,
                                   shape: BoxShape.circle),
                             ),
                           ],
@@ -202,7 +200,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 15,),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.035),
                 alignment: Alignment.centerLeft,
                 height: _mainHeight * 0.04,
                 //color: Colors.grey.shade200,
@@ -211,19 +209,19 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       color: headingColor,
                       fontSize: 18,
-                      fontWeight: FontWeight.w700),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
-                height: _mainHeight * 0.11,
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                height: _mainHeight * 0.12,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: (){},
                       child: Container(
                         padding: EdgeInsets.only(
-                            top: _mainHeight * 0.01, bottom: _mainHeight * 0.005),
+                            top: _mainHeight * 0.02, bottom: _mainHeight * 0.018),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade300),
                             borderRadius: BorderRadius.circular(5)),
@@ -231,14 +229,11 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.ac_unit,
-                              size: 40,
-                              color: headingColor,
-                            ),
+                            Image.asset('assets/images/pesu_logo.png',
+                              height: 40,),
                             Container(
 
-                              padding: EdgeInsets.only(left: _mainWidth * 0.05),
+                              padding: EdgeInsets.only(left: _mainWidth * 0.03),
                               width: _mainWidth * 0.73,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,7 +263,8 @@ class _HomePageState extends State<HomePage> {
                               margin: EdgeInsets.only(left: _mainWidth*0.02),
                               width: _mainWidth * 0.025,
                               decoration: BoxDecoration(
-                                  color: index % 2==0?Color(0xff7ab02a):Color(0xffff0000),
+                                  color: headingColor,
+                                  /*index % 2==0?Color(0xff7ab02a):Color(0xffff0000)*/
                                   shape: BoxShape.circle),
                             ),
                           ],
@@ -323,7 +319,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget getDrawerDetails({required BuildContext context}) {
     return Container(
-      height: _mainHeight * 0.05,
+      height: _mainHeight * 0.060,
       color: Colors.white,
       margin: EdgeInsets.only(
           left: _mainWidth * 0.05,
@@ -335,17 +331,17 @@ class _HomePageState extends State<HomePage> {
           CircleAvatar(
             radius: MediaQuery.of(context).size.height * 0.025,
             backgroundImage: NetworkImage(
-                'https://media.springernature.com/full/springer-cms/rest/v1/img/18893370/v1/height/320'),
+                'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
           ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.03),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.02),
           Container(
-            width: _mainWidth * 0.72,
+            width: _mainWidth * 0.75,
             child: Column(
               //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Deepak Kr',
+                  'Student Name',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
