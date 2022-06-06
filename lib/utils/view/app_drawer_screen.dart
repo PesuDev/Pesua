@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
-import 'package:pesu/utils/services/app_routes.dart';
 
 class AppDrawerScreen extends StatefulWidget {
   const AppDrawerScreen({Key? key}) : super(key: key);
@@ -64,18 +63,12 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.wysiwyg_outlined,
                 title: 'Attendance',
-                callback: () {
-Navigator.pushNamed(context, AppRoutes.attendance);
-
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Assignments',
-                callback: () {
-                  Navigator.pushNamed(context, AppRoutes.assignment);
-
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -105,9 +98,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Backlog Registration',
-                callback: () {
-                  Navigator.pushNamed(context, AppRoutes.backLog);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -117,9 +108,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Placements',
-                callback: () {
-                  Navigator.pushNamed(context, AppRoutes.placement);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -134,10 +123,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Notification',
-                callback: () {
-
-                  Navigator.pushNamed(context, AppRoutes.notification);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -169,10 +155,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Transport',
-                callback: () {
-
-                  Navigator.pushNamed(context, AppRoutes.transport);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -182,18 +165,12 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Setting',
-                callback: () {
-
-                  Navigator.pushNamed(context, AppRoutes.settings);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Help',
-                callback: () {
-
-                  Navigator.pushNamed(context, AppRoutes.help);
-                }),
+                callback: () {}),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,

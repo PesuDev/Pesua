@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
 import 'package:pesu/utils/view/widget.dart';
 
@@ -50,34 +51,36 @@ class _HomePageState extends State<HomePage> {
               height: _mainHeight*0.01,
             ),
             Container(
-              color: Colors.blueGrey.shade50,
-              padding: EdgeInsets.only(left:_mainWidth*0.02,right:_mainWidth*0.02,top: _mainHeight*0.01),
-              margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
-              height: _mainHeight*0.1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  getStudentLinks(
-                      icon: Icon(Icons.wysiwyg),
-                      color: Colors.blueAccent.shade100,
-                      text: 'My Courses',
-                      callback: () {}),
-                  getStudentLinks(
-                      icon: Icon(Icons.archive),
-                      color: Colors.orange.shade100,
-                      text: 'ISA Results',
-                      callback: () {}),
-                  getStudentLinks(
-                      icon: Icon(Icons.date_range),
-                      color: Colors.lightGreen.shade100,
-                      text: 'Attendance',
-                      callback: () {}),
-                  getStudentLinks(
-                      icon: Icon(Icons.view_week),
-                      color: Colors.lightBlueAccent.shade100,
-                      text: 'Seating Info',
-                      callback: () {})
-                ],
+              color: Color(0xffFAFAFA),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    getStudentLinks(
+                        icon: Icon(Icons.wysiwyg),
+                        color: Colors.blueAccent.shade100,
+                        text: 'My Courses',
+                        callback: () {}),
+                    getStudentLinks(
+                        icon: Icon(Icons.archive),
+                        color: Colors.orange.shade100,
+                        text: 'ISA Results',
+                        callback: () {}),
+                    getStudentLinks(
+                        icon: Icon(Icons.date_range),
+                        color: Colors.lightGreen.shade100,
+                        text: 'Attendance',
+                        callback: () {}),
+                    getStudentLinks(
+                        icon: Icon(Icons.view_week),
+                        color: Colors.lightBlueAccent.shade100,
+                        text: 'Seating Info',
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                        })
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -86,14 +89,14 @@ class _HomePageState extends State<HomePage> {
 
             Container(
               height: _mainHeight * 0.2,
-              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
+              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
               child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
                   return Stack(
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(
                               image: NetworkImage(
                                 imageList[index],
@@ -109,9 +112,9 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                               color: Colors.black54,
                               borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20)),
-                            ),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5),
+                            )),
                             height: 30,
                             child: Text(
                               "Invitation to Participate in an Event",
@@ -132,8 +135,9 @@ class _HomePageState extends State<HomePage> {
             Container(
                 padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
                 child: Text(
-                  'Important Announcements (2/4)',
-                  style: TextStyle(color: appThemeContrastColor),
+                  'Important(4 Unread)',
+                  style: TextStyle(color: headingHome,
+                  fontSize: 18,fontWeight: FontWeight.bold),
                 )),
             Container(
               padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
@@ -174,9 +178,9 @@ class _HomePageState extends State<HomePage> {
               height: _mainHeight * 0.04,
               color: Colors.grey.shade200,
               child: Text(
-                'Announcements (1)',
+                'Announcements (1 Unread)',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xff191D6E),
                     fontSize: 18,
                     fontWeight: FontWeight.w700),
               ),

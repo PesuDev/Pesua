@@ -17,7 +17,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 decoration: BoxDecoration(
                   color: Colors.cyanAccent,
                   border: Border.all(
@@ -101,7 +101,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                       thickness: 3,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

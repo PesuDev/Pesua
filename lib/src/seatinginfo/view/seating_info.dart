@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pesu/utils/view/widget.dart';
 
 class SeatingInfo extends StatefulWidget {
   const SeatingInfo({Key? key}) : super(key: key);
@@ -14,27 +15,22 @@ class _SeatingInfoState extends State<SeatingInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Seating Info",style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Color(0xffFFFFFF)
-        ),),
-      ),
+      appBar: sideNavAppBar("Seating Info"),
+      backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
-        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      //  margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ListView.builder(
             itemCount: 2,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10, 3, 10, 0),
-                    child: Container(
-                      color: Colors.cyan,
+                  Container(
+                    margin: EdgeInsets.only(left: 10,right: 10,top: 5),
+                    color: Colors.cyan,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0,),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -105,14 +101,13 @@ class _SeatingInfoState extends State<SeatingInfo> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-
+                    margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
                     color: Color(0xffFFFFFF),
                     child: ListTileTheme.merge(
                       dense: true,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
+                        physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: 2,
                         itemBuilder: (context, index) {
                           return Column(
