@@ -59,8 +59,8 @@ class _MenuPageState extends State<MenuPage> {
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1.1,
+                crossAxisSpacing: _mainHeight*0.01,
+                childAspectRatio: 1,
                 mainAxisSpacing: _mainHeight * 0.05),
             itemBuilder: (_, index) {
               var data = _viewModel.getSettingsList()[index];
@@ -81,10 +81,10 @@ class _MenuPageState extends State<MenuPage> {
                       Icon(
                         data.icon,
                         color: Colors.grey.shade400,
-                        size: 30,
+                        size: _mainHeight*0.04,
                       ),
                       SizedBox(
-                        height: 10,
+                        height: _mainHeight*0.01,
                       ),
                       Text(
                         data.name ?? '',
