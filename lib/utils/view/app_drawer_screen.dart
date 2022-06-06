@@ -157,7 +157,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'CIE',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.cieDashboard);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
