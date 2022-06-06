@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pesu/utils/view/widget.dart';
 
 class BootStrap extends StatefulWidget {
   const BootStrap({Key? key}) : super(key: key);
@@ -12,9 +13,8 @@ class _BootStrapState extends State<BootStrap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("BootStrap"),
-      ),
+      appBar: sideNavAppBar("BootStrap"),
+      backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
         margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
         child: Column(
@@ -29,7 +29,11 @@ class _BootStrapState extends State<BootStrap> {
                     borderRadius: BorderRadius.circular(5)),
                 child: Padding(
                     padding: EdgeInsets.fromLTRB(10, 5, 10, 3),
-                    child: Text("Your Group: GREEN"))),
+                    child: Text("Your Group: GREEN", style: TextStyle(
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xffFFFFFF)
+                    ),))),
             Container(
               height: 30,
               margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
@@ -46,9 +50,21 @@ class _BootStrapState extends State<BootStrap> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("DATE"),
-                        Text("ACTIVITY"),
-                        Text("SUBGROUP"),
+                        Text("DATE", style: TextStyle(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffFFFFFF)
+                        ),),
+                        Text("ACTIVITY", style: TextStyle(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffFFFFFF)
+                        ),),
+                        Text("SUBGROUP", style: TextStyle(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffFFFFFF)
+                        ),),
                       ],
                     ),
                   ),
@@ -79,7 +95,12 @@ class _BootStrapState extends State<BootStrap> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("UE21EC141B",maxLines: 5,textAlign: TextAlign.start,),
+                                    Text("UE21EC141B",maxLines: 5,textAlign: TextAlign.start, style: TextStyle(
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                        color: Color(0xff000000)
+                                    ),),
                                   ],
                                 ),
                               ),
@@ -88,7 +109,12 @@ class _BootStrapState extends State<BootStrap> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("UE21EC141B",maxLines: 5,textAlign: TextAlign.start,),
+                                    Text("UE21EC141B",maxLines: 5,textAlign: TextAlign.start, style: TextStyle(
+                                        fontFamily: 'Open Sans',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff000000)
+                                    ),),
                                   ],
                                 ),
                               ),
@@ -97,7 +123,12 @@ class _BootStrapState extends State<BootStrap> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text("4"),
+                                    Text("4", style: TextStyle(
+                                        fontFamily: 'Open Sans',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff000000)
+                                    ),),
                                   ],
                                 ),
                               ),

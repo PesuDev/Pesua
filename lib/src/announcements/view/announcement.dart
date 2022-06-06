@@ -17,7 +17,7 @@ class _AnnouncementState extends State<Announcement> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: sideNavAppBar("Announcement"),
-        drawer: Container(),
+        //drawer: Container(),
         backgroundColor:        Colors.white.withOpacity(0.9),
       body: Container(
         width: double.infinity,

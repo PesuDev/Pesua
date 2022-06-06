@@ -10,6 +10,7 @@ import 'package:pesu/src/my_profile/view/my_profile.dart';
 import 'package:pesu/src/settings/view/settings.dart';
 import 'package:pesu/src/transport/view/rr_campus.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,12 +29,13 @@ class MyApp extends StatelessWidget {
           ),
         ],
       child: MaterialApp(
-        title: 'Pesu app',
+        title: 'PESU',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),
         debugShowCheckedModeBanner: false,
-        home: Login(),
+        home: DashboardScreen(),
+        onGenerateRoute: AppRouteGenerator.generateRoute,
       ),
 
     );

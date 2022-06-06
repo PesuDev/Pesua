@@ -45,11 +45,6 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
             getDrawerDetails(context: context),
             getDrawerTiles(
                 context: context,
-                icon: Icons.settings,
-                title: 'Login',
-                callback: () {}),
-            getDrawerTiles(
-                context: context,
                 icon: Icons.assessment,
                 title: 'My Courses',
                 callback: () {}),
@@ -137,7 +132,7 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
-                title: 'Transport',
+                title: 'PES University',
                 callback: () {}),
             getDrawerTiles(
                 context: context,
@@ -167,7 +162,12 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
-                title: 'Settings',
+                title: 'Setting',
+                callback: () {}),
+            getDrawerTiles(
+                context: context,
+                icon: Icons.weekend_outlined,
+                title: 'Help',
                 callback: () {}),
             getDrawerTiles(
                 context: context,
