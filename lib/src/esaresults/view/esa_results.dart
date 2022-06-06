@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/utils/view/widget.dart';
 
 import 'Previous_semester.dart';
 import 'Provisional_page.dart';
@@ -18,9 +19,8 @@ class _ESAResultsState extends State<ESAResults> {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
-            appBar: AppBar(
-              title: Text("ESA Results",style: TextStyle(color: Color(0xffFFFFFF),fontFamily: 'Open Sans'),),
-            ),
+            appBar: sideNavAppBar("ESA Results"),
+            backgroundColor:Colors.white.withOpacity(0.9),
             body: SingleChildScrollView(
               child: Column(children: [
                 Padding(

@@ -54,12 +54,16 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.all_inclusive,
                 title: 'Examination Grievance Redressal System',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.examination);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.addchart_sharp,
                 title: 'Timetable',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.timeTable);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.wysiwyg_outlined,
@@ -85,7 +89,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'ESA Results',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.esaresults);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -95,7 +101,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Seating Info',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -112,7 +120,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Online Payments',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.onlinePayments);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -162,7 +172,9 @@ Navigator.pushNamed(context, AppRoutes.attendance);
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Bootstrap',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.bootStrap);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,

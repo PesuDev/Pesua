@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pesu/utils/view/widget.dart';
 
 class SeatingInfo extends StatefulWidget {
   const SeatingInfo({Key? key}) : super(key: key);
@@ -14,14 +15,8 @@ class _SeatingInfoState extends State<SeatingInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Seating Info",style: TextStyle(
-            fontFamily: 'Open Sans',
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: Color(0xffFFFFFF)
-        ),),
-      ),
+      appBar: sideNavAppBar("Seating Info"),
+      backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
         margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: ListView.builder(
