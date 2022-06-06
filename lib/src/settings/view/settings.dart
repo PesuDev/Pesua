@@ -16,7 +16,7 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
 appBar: sideNavAppBar("Settings"),
 
-      drawer: Container(),
+    //  drawer: Container(),
       backgroundColor:        Colors.white.withOpacity(0.9),
       body: Container(
         color: Colors.white,
