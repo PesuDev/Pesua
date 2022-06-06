@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pesu">
    <application
-        android:label="pesu"
-        android:icon="@mipmap/ic_launcher">
+        android:label="PESU"
+        android:icon="@mipmap/pesu_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
