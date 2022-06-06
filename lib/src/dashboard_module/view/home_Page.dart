@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
 import 'package:pesu/utils/view/widget.dart';
 
@@ -75,7 +76,9 @@ class _HomePageState extends State<HomePage> {
                         icon: Icon(Icons.view_week),
                         color: Colors.lightBlueAccent.shade100,
                         text: 'Seating Info',
-                        callback: () {})
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                        })
                   ],
                 ),
               ),

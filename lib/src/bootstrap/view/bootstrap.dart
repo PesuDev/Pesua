@@ -16,7 +16,7 @@ class _BootStrapState extends State<BootStrap> {
       appBar: sideNavAppBar("BootStrap"),
       backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
-        margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+        margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,7 +36,7 @@ class _BootStrapState extends State<BootStrap> {
                     ),))),
             Container(
               height: 30,
-              margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
+              margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
               width: double.infinity,
               decoration: BoxDecoration(
                   color: Colors.blueAccent,
@@ -72,7 +72,7 @@ class _BootStrapState extends State<BootStrap> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+           //   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
 
               color: Color(0xffFFFFFF),
               child: ListTileTheme.merge(
@@ -119,7 +119,7 @@ class _BootStrapState extends State<BootStrap> {
                                 ),
                               ),
                               Container(
-                                width: 100,
+                                width: 50,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
