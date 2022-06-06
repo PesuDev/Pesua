@@ -290,7 +290,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
           CircleAvatar(
             radius: MediaQuery.of(context).size.height * 0.04,
             backgroundImage: NetworkImage(
-                'https://media.springernature.com/full/springer-cms/rest/v1/img/18893370/v1/height/320'),
+                'https://pes.edu/wp-content/uploads/2018/08/PROF.-AJOY-KUMAR-960X960-v1-800x800.jpg'),
           ),
           SizedBox(width: MediaQuery.of(context).size.width * 0.02),
           Container(
@@ -299,7 +299,7 @@ Navigator.pushNamed(context, AppRoutes.attendance);
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Deepak Kr',
+                  'AJOY KUMAR',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
