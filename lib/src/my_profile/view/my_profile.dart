@@ -13,6 +13,7 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  bool edit = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,22 +94,37 @@ class _MyProfileState extends State<MyProfile> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: 2, bottom: 2, left: 10, right: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.blueGrey,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.blueGrey, spreadRadius: 3),
-                                ],
-                              ),
-                              child: Text(
-                                "Edit",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  if (edit == false) {
+                                    edit = true;
+                                  } else if (edit == true) {
+                                    edit = false;
+                                  }
+                                  print('$edit');
+                                });
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 5, bottom: 5, left: 12, right: 12),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: (edit == false)
+                                      ? Colors.blueGrey
+                                      : Colors.orangeAccent,
+                                  /*    boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.blueGrey, spreadRadius: 3),
+                                  ],*/
+                                ),
+                                child: Text(
+                                  (edit == false) ? "Edit" : "Cancel",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ],
@@ -119,79 +135,86 @@ class _MyProfileState extends State<MyProfile> {
                               "Email ID",
                               style: TextStyle(color: Colors.black45),
                             )),
-                        Text('priyahcbhdbc@gmail.com'),
-                        //ON CLICK OF EDIT
-                        Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 6,
-                                    color: Colors.blue)
-                              ],
-                              border: Border.all(color: Colors.blueAccent),
-                            ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                            )),
+                        (edit == false)
+                            ? Text('priyahcbhdbc@gmail.com')
+                            //ON CLICK OF EDIT
+                            : Container(
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: Offset(2, 2),
+                                        blurRadius: 6,
+                                        color: Colors.blue)
+                                  ],
+                                  border: Border.all(color: Colors.blueAccent),
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
+                                )),
                         Container(
                             padding: EdgeInsets.only(top: 20, bottom: 10),
                             child: Text(
                               "Contact No",
                               style: TextStyle(color: Colors.black45),
                             )),
-                        Text('9876543210'),
-                        //ON CLICK OF DELETE
-                        Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(0),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 6,
-                                    color: Colors.blue)
-                              ],
-                              border: Border.all(color: Colors.blueAccent),
-                            ),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
+                        (edit == false)
+                            ? Text('9876543210')
+                            //ON CLICK OF EDIT
+                            : Container(
+                                height: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        offset: Offset(2, 2),
+                                        blurRadius: 6,
+                                        color: Colors.blue)
+                                  ],
+                                  border: Border.all(color: Colors.blueAccent),
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                  ),
+                                )),
+                        (edit == true)
+                            ? Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 8.0, bottom: 15, top: 25),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.blue,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.blue, spreadRadius: 3),
+                                    ],
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      _updateBottomSheet();
+                                    },
+                                    child: Text(
+                                      "Update",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                height: 10,
                               ),
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, right: 8.0, bottom: 15, top: 25),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.blue,
-                              boxShadow: [
-                                BoxShadow(color: Colors.blue, spreadRadius: 3),
-                              ],
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                _updateBottomSheet();
-                              },
-                              child: Text(
-                                "Update",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
                         Container(
                           padding: EdgeInsets.only(left: 5, bottom: 20),
                           child: Column(
