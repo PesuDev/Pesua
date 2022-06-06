@@ -65,7 +65,13 @@ class _MenuPageState extends State<MenuPage> {
             itemBuilder: (_, index) {
               var data = _viewModel.getSettingsList()[index];
               return InkWell(
-                onTap: () => data.callback != null ? data.callback : () {},
+                onTap: () {
+                  if(index == 0){
+                    // Navigate
+                  }else if (index==1){
+                    // Navigate
+                  }
+                },
                 child: Container(
                   //color: Colors.amber,
                   //height: _mainHeight*0.05,
