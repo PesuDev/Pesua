@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
       child: MaterialApp(
-        title: 'Pesu app',
+        title: 'PESU',
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),

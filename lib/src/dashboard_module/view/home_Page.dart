@@ -16,8 +16,10 @@ class _HomePageState extends State<HomePage> {
   var _mainWidth;
 
   List<String> imageList = [
-    'https://scx2.b-cdn.net/gfx/news/2019/2-nature.jpg',
-    'https://insideclimatenews.org/wp-content/uploads/2021/09/whanganui-river_matthew-lovette-education-images-universal-images-group-getty-scaled.jpg'
+    'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
+    'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
+    'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
+    'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
   ];
 
   @override
@@ -235,7 +237,7 @@ class _HomePageState extends State<HomePage> {
   Widget getDrawerDetails({required BuildContext context}) {
     return Container(
 
-      height: _mainHeight * 0.05,
+      height: _mainHeight * 0.065,
       color: Colors.white,
       margin: EdgeInsets.only(left: _mainWidth * 0.05,right: _mainWidth*0.05,top: _mainHeight*0.02),
       child: Row(
@@ -244,7 +246,7 @@ class _HomePageState extends State<HomePage> {
           CircleAvatar(
             radius: MediaQuery.of(context).size.height * 0.025,
             backgroundImage: NetworkImage(
-                'https://media.springernature.com/full/springer-cms/rest/v1/img/18893370/v1/height/320'),
+                'https://pes.edu/wp-content/uploads/2018/08/PROF.-AJOY-KUMAR-960X960-v1-800x800.jpg'),
           ),
           SizedBox(width: MediaQuery.of(context).size.width * 0.02),
           Container(
@@ -254,7 +256,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Deepak Kr',
+                  'AJOY KUMAR',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
