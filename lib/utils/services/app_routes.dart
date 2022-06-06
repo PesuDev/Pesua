@@ -5,6 +5,7 @@ import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
+import 'package:pesu/src/cie/view/cie_dashboard.dart';
 import 'package:pesu/src/bootstrap/view/bootstrap.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
@@ -49,6 +50,9 @@ data(RouteSettings settings) {
     case AppRoutes.placement: return MaterialPageRoute(
         builder: (_) =>PlacementDashboard()
     );
+    case AppRoutes.cieDashboard: return MaterialPageRoute(
+        builder: (_) =>CieDashboard()
+    );
     case AppRoutes.detailedAttendance: return MaterialPageRoute(
         builder: (_) =>DetailedAttendance()
     );
@@ -86,6 +90,7 @@ class AppRoutes {
   static const String notification="notification";
   static const String placement="placement";
   static const String detailedAssignment="detailedAssignment";
+  static const String cieDashboard ="cieDashboard";
   static const String esaresults="esaresults";
   static const String seatingInfo="seatingInfo";
   static const String bootStrap="bootStrap";

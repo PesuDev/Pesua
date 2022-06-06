@@ -34,6 +34,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         debugShowCheckedModeBanner: false,
+        builder: (BuildContext? context, Widget? child) {
+          return MediaQuery(
+            data: MediaQuery.of(context!).copyWith(textScaleFactor: 0.9, ), //set desired text scale factor here
+            child: child!,
+          );
+        },
         home: DashboardScreen(),
         onGenerateRoute: AppRouteGenerator.generateRoute,
       ),

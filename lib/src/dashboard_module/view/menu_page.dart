@@ -3,14 +3,14 @@ import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+class MenuPage extends StatefulWidget {
+  const MenuPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
+  State<MenuPage> createState() => _MenuPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _MenuPageState extends State<MenuPage> {
   late DashboardViewModel _viewModel;
   var _mainHeight;
   var _mainWidth;
