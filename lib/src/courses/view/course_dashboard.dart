@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class CourseDashboard extends StatefulWidget {
@@ -10,6 +11,7 @@ class CourseDashboard extends StatefulWidget {
 }
 
 class _CourseDashboardState extends State<CourseDashboard> {
+  final GlobalKey _menuKey = GlobalKey();
   bool isSemSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -74,13 +76,47 @@ class _CourseDashboardState extends State<CourseDashboard> {
                       child: Icon(Icons.ac_unit)),
                   Container(
                     padding: EdgeInsets.only(left: 10),
-                    width: MediaQuery.of(context).size.width / 1.24,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text("UE20CS251"), Icon(Icons.more_vert)],
+                          children: [
+                            Text("UE20CS251"),
+                            PopupMenuButton(
+                              child: Icon(Icons.more_vert),
+                              itemBuilder: (context) {
+                                return List.generate(1, (index) {
+                                  return PopupMenuItem(
+                                    padding: EdgeInsets.only(
+                                        top: 0, bottom: 0, right: 0, left: 0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  IndividualSubScreen()),
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            top: 20,
+                                            bottom: 20,
+                                            right: 10,
+                                            left: 15),
+                                        child: Text(
+                                          'View Details',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                              },
+                            ),
+                          ],
                         ),
                         Text("Design and analysis of algorithms"),
                         Divider(
