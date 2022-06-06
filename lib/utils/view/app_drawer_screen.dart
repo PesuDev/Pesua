@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 
 class AppDrawerScreen extends StatefulWidget {
   const AppDrawerScreen({Key? key}) : super(key: key);
@@ -63,12 +64,18 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.wysiwyg_outlined,
                 title: 'Attendance',
-                callback: () {}),
+                callback: () {
+Navigator.pushNamed(context, AppRoutes.attendance);
+
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Assignments',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.assignment);
+
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -98,7 +105,9 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Backlog Registration',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.backLog);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -108,7 +117,9 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Placements',
-                callback: () {}),
+                callback: () {
+                  Navigator.pushNamed(context, AppRoutes.placement);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -123,7 +134,10 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Notification',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.notification);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -153,7 +167,10 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Transport',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.transport);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -163,12 +180,18 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Setting',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.settings);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
                 title: 'Help',
-                callback: () {}),
+                callback: () {
+
+                  Navigator.pushNamed(context, AppRoutes.help);
+                }),
             getDrawerTiles(
                 context: context,
                 icon: Icons.weekend_outlined,
@@ -185,35 +208,38 @@ class _AppDrawerScreenState extends State<AppDrawerScreen> {
       required IconData icon,
       required String title,
       required Function callback}) {
-    return Container(
-      padding: EdgeInsets.only(
-        left: _mainWidth * 0.02,
-        right: _mainWidth * 0.02,
-        bottom: _mainHeight*0.01,
-          top:  _mainHeight*0.01,
-      ),
+    return GestureDetector(
+      onTap:()=> callback(),
+      child: Container(
+        padding: EdgeInsets.only(
+          left: _mainWidth * 0.02,
+          right: _mainWidth * 0.02,
+          bottom: _mainHeight*0.01,
+            top:  _mainHeight*0.01,
+        ),
 
-      color: Colors.blue,
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 20,
-          ),
-          SizedBox(width: _mainWidth*0.02,),
-          Container(
-
-            width: _mainWidth*0.62,
-            child: Text(
-              title,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500),
+        color: Colors.blue,
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 20,
             ),
-          )
-        ],
+            SizedBox(width: _mainWidth*0.02,),
+            Container(
+
+              width: _mainWidth*0.62,
+              child: Text(
+                title,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
+            )
+          ],
+        ),
       ),
     );
     /*ListTile(

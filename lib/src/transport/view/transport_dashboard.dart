@@ -37,12 +37,13 @@ _tabController.addListener(() {
       child: Scaffold(
 
 appBar: AppBar(
-  title: Text("Settings"),
+  title: Text("Transport"),
+  backgroundColor:    Color(0xff0091CD),
   bottom:PreferredSize(
     preferredSize:
     new Size(MediaQuery.of(context).size.width, 50.0),
     child:Container(
-      color: Colors.blueAccent,
+      color: Color(0xff163269),
       child: TabBar(
 
         controller: _tabController,
@@ -57,7 +58,7 @@ indicatorColor: Colors.orangeAccent,
     ),
   ),
 ),
-        drawer: Container(),
+     //   drawer: Container(),
         body: Container(
 
 child: TabBarView(
