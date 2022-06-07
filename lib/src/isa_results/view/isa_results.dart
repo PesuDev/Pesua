@@ -173,7 +173,7 @@ class _ISAResultsState extends State<ISAResults> {
                   child: Container(
                       width: MediaQuery.of(context).size.width / 6.5,
                       child: Icon(
-                        Icons.waterfall_chart_outlined,
+                        Icons.assessment_outlined,
                       )),
                 )
               ],
