@@ -15,43 +15,48 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _mainHeight;
   var _mainWidth;
+
   List<String> imageList = [
     'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
     'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
     'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
     'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
     _mainWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        backgroundColor: appThemeColor,
-        title: Text(
-          'PES University',
-        ),
-      ),
-      body: Container(
-        height: _mainHeight,
-        width: _mainWidth,
-        color: Colors.white,
-        padding: EdgeInsets.only(
-          top: _mainHeight * 0.00,
-          bottom: _mainHeight * 0.015,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            getDrawerDetails(context: context),
-            SizedBox(
-              height: _mainHeight*0.01,
-            ),
-            Container(
-              color: Color(0xffFAFAFA),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+    return SafeArea(
+      child: Scaffold(
+        //appBar:getAppBar(context: context),
+        body: Container(
+          height: _mainHeight,
+          width: _mainWidth,
+          color: Colors.white,
+          padding: EdgeInsets.only(
+            top: _mainHeight * 0.00,
+            bottom: _mainHeight * 0.015,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.myProfile);
+                  },
+                  child: getDrawerDetails(context: context)),
+              SizedBox(
+                height: _mainHeight * 0.01,
+              ),
+              Container(
+                color: Color(0xffFAFAFA),
+                padding: EdgeInsets.only(
+                    left: _mainWidth * 0.05,
+                    right: _mainWidth * 0.05,
+                    top: _mainHeight * 0.01),
+                //  margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
+                height: _mainHeight * 0.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -59,17 +64,24 @@ class _HomePageState extends State<HomePage> {
                         icon: Icon(Icons.wysiwyg),
                         color: Colors.blueAccent.shade100,
                         text: 'My Courses',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.courseDashboard);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.archive),
                         color: Colors.orange.shade100,
                         text: 'ISA Results',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.isaResults);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.date_range),
                         color: Colors.lightGreen.shade100,
                         text: 'Attendance',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.attendance);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.view_week),
                         color: Colors.lightBlueAccent.shade100,
@@ -80,139 +92,232 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: _mainHeight*0.01,
-            ),
-
-            Container(
-              height: _mainHeight * 0.2,
-              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
-              child: Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                imageList[index],
+              SizedBox(
+                height: _mainHeight * 0.01,
+              ),
+              Container(
+                height: _mainHeight * 0.2,
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  imageList[index],
+                                ),
+                                fit: BoxFit.cover,
+                              )),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                              width: _mainWidth,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(5),
+                                    bottomRight: Radius.circular(5)),
                               ),
-                              fit: BoxFit.cover,
-                            )),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                            width: _mainWidth,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5),
-                            )),
-                            height: 30,
-                            child: Text(
-                              "Invitation to Participate in an Event",
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
-                            )),
-                      )
-                    ],
-                  );
-                },
-                autoplay: true,
-                itemCount: imageList.length,
+                              height: 30,
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Invitation to Participate from dated - 07 June 2022",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.white),
+                                  ),
+                                ),
+                              )),
+                        )
+                      ],
+                    );
+                  },
+                  autoplay: true,
+                  itemCount: imageList.length,
+                ),
               ),
-            ),
-            SizedBox(
-              height: _mainHeight * 0.03,
-            ),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
-                child: Text(
-                  'Important(4 Unread)',
-                  style: TextStyle(color: headingHome,
-                  fontSize: 18,fontWeight: FontWeight.bold),
-                )),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
-              height: _mainHeight * 0.1,
-              child: Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(
-                      Icons.ac_unit,
-                      size: 24,
-                      color: appThemeContrastColor,
-                    ),
-                    title: Text(
-                      'Department of Computer Science & Technology',
-                      style: TextStyle(
-                        color: headingColor,
+              SizedBox(
+                height: _mainHeight * 0.03,
+              ),
+              Container(
+                  padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.035),
+                  child: Text(
+                    'Important (4 Unread)',
+                    style: TextStyle(
+                        color: appThemeContrastColor,
                         fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                height: _mainHeight * 0.12,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            top: _mainHeight * 0.02,
+                            bottom: _mainHeight * 0.018),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/images/pesu_logo.png',
+                              height: 40,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: _mainWidth * 0.03),
+                              width: _mainWidth * 0.73,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Department of Computer Science & Technology ',
+                                    style: TextStyle(
+                                        color: headingColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    'Date : 24-May-2022',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: _mainHeight * 0.02,
+                              alignment: Alignment.topRight,
+                              margin: EdgeInsets.only(left: _mainWidth * 0.02),
+                              width: _mainWidth * 0.025,
+                              decoration: BoxDecoration(
+                                  color: appThemeContrastColor,
+                                  shape: BoxShape.circle),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    subtitle: Text(
-                      'Date : 24-May-2022',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
+                    );
+                  },
+                  autoplay: true,
+                  itemCount: 4,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.035),
+                alignment: Alignment.centerLeft,
+                height: _mainHeight * 0.04,
+                //color: Colors.grey.shade200,
+                child: Text(
+                  'Announcements (4 Unread)',
+                  style: TextStyle(
+                      color: headingColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                height: _mainHeight * 0.12,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            top: _mainHeight * 0.02,
+                            bottom: _mainHeight * 0.018),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/images/pesu_logo.png',
+                              height: 40,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: _mainWidth * 0.03),
+                              width: _mainWidth * 0.73,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Department of Computer Science & Technology ',
+                                    style: TextStyle(
+                                        color: headingColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    'Date : 24-May-2022',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: _mainHeight * 0.02,
+                              alignment: Alignment.topRight,
+                              margin: EdgeInsets.only(left: _mainWidth * 0.02),
+                              width: _mainWidth * 0.025,
+                              decoration: BoxDecoration(
+                                  color: headingColor,
+                                  /*index % 2==0?Color(0xff7ab02a):Color(0xffff0000)*/
+                                  shape: BoxShape.circle),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    trailing: Icon(Icons.arrow_forward_ios_rounded),
-                  );
-                },
-                autoplay: true,
-                itemCount: 4,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
-              alignment: Alignment.centerLeft,
-              height: _mainHeight * 0.04,
-              color: Colors.grey.shade200,
-              child: Text(
-                'Announcements (1 Unread)',
-                style: TextStyle(
-                    color: Color(0xff191D6E),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.05),
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(
-                  Icons.ac_unit,
-                  size: 24,
-                  color: appThemeContrastColor,
+                    );
+                  },
+                  autoplay: true,
+                  itemCount: 4,
                 ),
-                title: Text(
-                  'Department of Computer Science & Technology',
-                  style: TextStyle(
-                    color: headingColor,
-                    fontSize: 18,
-                  ),
-                ),
-                subtitle: Text(
-                  'Date : 24-May-2022',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                  ),
-                ),
-                trailing: Icon(Icons.arrow_forward_ios_rounded),
               ),
-            )
-          ],
+            ],
+          ),
         ),
+        //drawer: AppDrawerScreen(),
       ),
-      drawer: AppDrawerScreen(),
+    );
+  }
+
+  AppBar getAppBar({required BuildContext context}) {
+    return AppBar(
+      titleSpacing: 0,
+      backgroundColor: appThemeColor,
+      title: Text(
+        'PES University',
+      ),
     );
   }
 
@@ -230,41 +335,48 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: color,
             child: icon,
           ),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Text(text)
         ],
       ),
     );
   }
+
   Widget getDrawerDetails({required BuildContext context}) {
     return Container(
-
-      height: _mainHeight * 0.065,
+      height: _mainHeight * 0.060,
       color: Colors.white,
-      margin: EdgeInsets.only(left: _mainWidth * 0.05,right: _mainWidth*0.05,top: _mainHeight*0.02),
+      margin: EdgeInsets.only(
+          left: _mainWidth * 0.05,
+          right: _mainWidth * 0.05,
+          top: _mainHeight * 0.02),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
             radius: MediaQuery.of(context).size.height * 0.025,
             backgroundImage: NetworkImage(
-                'https://pes.edu/wp-content/uploads/2018/08/PROF.-AJOY-KUMAR-960X960-v1-800x800.jpg'),
+                'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
           ),
           SizedBox(width: MediaQuery.of(context).size.width * 0.02),
           Container(
             width: _mainWidth * 0.75,
             child: Column(
-            //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //  mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'AJOY KUMAR',
+                  'Student Name',
                   style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                       color: Colors.black),
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 Text('SRN : PES12345678', style: getTextStyle),
               ],
             ),
@@ -273,6 +385,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   TextStyle get getTextStyle => TextStyle(
       fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w400);
 }

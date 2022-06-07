@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class ISAResults extends StatefulWidget {
@@ -63,7 +65,14 @@ class _ISAResultsState extends State<ISAResults> {
             SizedBox(
               height: 15,
             ),
-            assignment()
+            Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: ListView.builder(
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return assignment();
+                  }),
+            )
           ],
         ),
       ),
@@ -155,13 +164,18 @@ class _ISAResultsState extends State<ISAResults> {
                       textAlign: TextAlign.left,
                     )),
                 Container(
-                    width: MediaQuery.of(context).size.width / 6.2,
+                    width: MediaQuery.of(context).size.width / 6.5,
                     child: Text("A", textAlign: TextAlign.left)),
-                Container(
-                    width: MediaQuery.of(context).size.width / 6.2,
-                    child: Icon(
-                      Icons.waterfall_chart_outlined,
-                    ))
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.isaResultsGraph);
+                  },
+                  child: Container(
+                      width: MediaQuery.of(context).size.width / 6.5,
+                      child: Icon(
+                        Icons.waterfall_chart_outlined,
+                      )),
+                )
               ],
             ),
           ),
