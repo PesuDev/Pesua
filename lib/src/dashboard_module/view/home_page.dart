@@ -15,21 +15,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _mainHeight;
   var _mainWidth;
-
   List<String> imageList = [
     'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
     'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
     'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
     'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
   ];
-
   @override
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
     _mainWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        //appBar:getAppBar(context: context),
         body: Container(
           height: _mainHeight,
           width: _mainWidth,
@@ -310,7 +307,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   AppBar getAppBar({required BuildContext context}) {
     return AppBar(
       titleSpacing: 0,
@@ -320,7 +316,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   Widget getStudentLinks(
       {required Icon icon,
       required Color color,
