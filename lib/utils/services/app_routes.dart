@@ -11,6 +11,7 @@ import 'package:pesu/src/bootstrap/view/bootstrap.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
@@ -87,6 +88,8 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => IndividualSubScreen());
     case AppRoutes.individualUnit:
       return MaterialPageRoute(builder: (_) => IndividualUnitScreen());
+    case AppRoutes.esaGraph:
+      return MaterialPageRoute(builder: (_) => EsaGraph());
   }
 }
 
@@ -117,4 +120,5 @@ class AppRoutes {
   static const String courseDashboard = "courseDashboard";
   static const String individualSub = "individualSub";
   static const String individualUnit = "individualUnit";
+  static const String esaGraph = "esaGraph";
 }

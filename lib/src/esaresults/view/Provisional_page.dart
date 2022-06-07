@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 
 class ProvisionalPage extends StatefulWidget {
   const ProvisionalPage({Key? key}) : super(key: key);
@@ -216,7 +217,9 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                         ],
                                       ),
                                       TextButton.icon(
-                                        onPressed: null,
+                                        onPressed:   () {
+                                          Navigator.pushNamed(context, AppRoutes.esaGraph);
+                                        },
                                         icon: const Icon(Icons.bar_chart),
                                         label: Text(""),
                                       ),
