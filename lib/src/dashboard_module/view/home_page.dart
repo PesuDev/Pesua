@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
 import 'package:pesu/utils/view/widget.dart';
 
@@ -40,7 +41,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              getDrawerDetails(context: context),
+              InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.myProfile);
+                  },
+                  child: getDrawerDetails(context: context)),
               SizedBox(
                 height: _mainHeight * 0.01,
               ),
@@ -59,22 +64,31 @@ class _HomePageState extends State<HomePage> {
                         icon: Icon(Icons.wysiwyg),
                         color: Colors.blueAccent.shade100,
                         text: 'My Courses',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(
+                              context, AppRoutes.courseDashboard);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.archive),
                         color: Colors.orange.shade100,
                         text: 'ISA Results',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.isaResults);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.date_range),
                         color: Colors.lightGreen.shade100,
                         text: 'Attendance',
-                        callback: () {}),
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.attendance);
+                        }),
                     getStudentLinks(
                         icon: Icon(Icons.view_week),
                         color: Colors.lightBlueAccent.shade100,
                         text: 'Seating Info',
-                        callback: () {})
+                        callback: () {
+                          Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                        })
                   ],
                 ),
               ),
@@ -141,17 +155,20 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
                 height: _mainHeight * 0.12,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: (){},
+                      onTap: () {},
                       child: Container(
                         padding: EdgeInsets.only(
-                            top: _mainHeight * 0.02, bottom: _mainHeight * 0.018),
+                            top: _mainHeight * 0.02,
+                            bottom: _mainHeight * 0.018),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade300),
                             borderRadius: BorderRadius.circular(5)),
@@ -159,8 +176,10 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset('assets/images/pesu_logo.png',
-                            height: 40,),
+                            Image.asset(
+                              'assets/images/pesu_logo.png',
+                              height: 40,
+                            ),
                             Container(
                               padding: EdgeInsets.only(left: _mainWidth * 0.03),
                               width: _mainWidth * 0.73,
@@ -170,10 +189,9 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     'Department of Computer Science & Technology ',
                                     style: TextStyle(
-                                      color: headingColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500
-                                    ),
+                                        color: headingColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   Spacer(),
                                   Text(
@@ -187,9 +205,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Container(
-                              height: _mainHeight*0.02,
+                              height: _mainHeight * 0.02,
                               alignment: Alignment.topRight,
-                              margin: EdgeInsets.only(left: _mainWidth*0.02),
+                              margin: EdgeInsets.only(left: _mainWidth * 0.02),
                               width: _mainWidth * 0.025,
                               decoration: BoxDecoration(
                                   color: appThemeContrastColor,
@@ -204,7 +222,9 @@ class _HomePageState extends State<HomePage> {
                   itemCount: 4,
                 ),
               ),
-              SizedBox(height: 15,),
+              SizedBox(
+                height: 15,
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.035),
                 alignment: Alignment.centerLeft,
@@ -224,10 +244,11 @@ class _HomePageState extends State<HomePage> {
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: (){},
+                      onTap: () {},
                       child: Container(
                         padding: EdgeInsets.only(
-                            top: _mainHeight * 0.02, bottom: _mainHeight * 0.018),
+                            top: _mainHeight * 0.02,
+                            bottom: _mainHeight * 0.018),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade300),
                             borderRadius: BorderRadius.circular(5)),
@@ -235,10 +256,11 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset('assets/images/pesu_logo.png',
-                              height: 40,),
+                            Image.asset(
+                              'assets/images/pesu_logo.png',
+                              height: 40,
+                            ),
                             Container(
-
                               padding: EdgeInsets.only(left: _mainWidth * 0.03),
                               width: _mainWidth * 0.73,
                               child: Column(
@@ -249,8 +271,7 @@ class _HomePageState extends State<HomePage> {
                                     style: TextStyle(
                                         color: headingColor,
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500
-                                    ),
+                                        fontWeight: FontWeight.w500),
                                   ),
                                   Spacer(),
                                   Text(
@@ -264,9 +285,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Container(
-                              height: _mainHeight*0.02,
+                              height: _mainHeight * 0.02,
                               alignment: Alignment.topRight,
-                              margin: EdgeInsets.only(left: _mainWidth*0.02),
+                              margin: EdgeInsets.only(left: _mainWidth * 0.02),
                               width: _mainWidth * 0.025,
                               decoration: BoxDecoration(
                                   color: headingColor,

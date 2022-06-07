@@ -245,7 +245,7 @@ class _MyProfileState extends State<MyProfile> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  _updateBottomSheet();
+                                  _logOutBottomSheet();
                                 },
                                 child: Row(
                                   children: [
@@ -292,6 +292,7 @@ class _MyProfileState extends State<MyProfile> {
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 3,
+                          physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             int? itemCount = 3;
                             return Row(
@@ -315,7 +316,6 @@ class _MyProfileState extends State<MyProfile> {
                             );
                           }),
                     ),
-                    Text("Parent Details")
                   ],
                 ),
               ),
@@ -547,15 +547,15 @@ class _MyProfileState extends State<MyProfile> {
             //could change this to Color(0xFF737373),
             //so you don't have to change MaterialApp canvasColor
             child: new Container(
-                padding: EdgeInsets.only(
-                  top: 15,
-                ),
+                padding: EdgeInsets.only(top: 20, left: 20),
                 decoration: new BoxDecoration(
                     color: Colors.white,
                     borderRadius: new BorderRadius.only(
                         topLeft: const Radius.circular(30.0),
                         topRight: const Radius.circular(30.0))),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     new Text(
                       "Update Details",
@@ -568,7 +568,84 @@ class _MyProfileState extends State<MyProfile> {
                       height: 20,
                     ),
                     new Text(
-                      "Are you sure you want update details?",
+                      "Are you sure you want to update details?",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.only(
+                                top: 8.0, bottom: 8.0, left: 18, right: 18),
+                            child: Text(
+                              "No",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                        VerticalDivider(
+                          color: Colors.grey[500],
+                          thickness: 2,
+                          width: 2,
+                        ),
+                        Container(
+                          color: Colors.white,
+                          padding: EdgeInsets.only(
+                              top: 8.0, bottom: 8.0, left: 18, right: 18),
+                          child: Text(
+                            "yes",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )),
+          );
+        });
+  }
+
+  void _logOutBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return new Container(
+            height: MediaQuery.of(context).size.height * 0.20,
+            color: Color(0xFF737373),
+            child: new Container(
+                padding: EdgeInsets.only(top: 20, left: 20),
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(30.0),
+                        topRight: const Radius.circular(30.0))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    new Text(
+                      "Log Out",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    new Text(
+                      "Are you sure you want to logout?",
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.black,

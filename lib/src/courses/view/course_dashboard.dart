@@ -67,7 +67,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
             ),
             Container(
               color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.78,
+              height: MediaQuery.of(context).size.height * 0.7,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(itemBuilder: (context, index) {
                 return Row(

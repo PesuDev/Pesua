@@ -81,13 +81,23 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   InkWell(
                     onTap: () {
                       print("jjjjjj $expand");
-                      expand = true;
+                      setState(() {
+                        if (expand == false) {
+                          expand = true;
+                        } else if (expand == true) {
+                          expand = false;
+                        }
+                      });
                       print("jjjjjj $expand");
                     },
                     child: Container(
-                        color: Colors.blue,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(80))),
                         width: MediaQuery.of(context).size.width * 0.1,
-                        child: Icon(Icons.add)),
+                        child:
+                            Icon((expand == false) ? Icons.add : Icons.remove)),
                   ),
                   InkWell(
                     onTap: () {
@@ -109,8 +119,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
               ),
               (expand == true)
                   ? Container(
-                      height: 100,
-                      color: Colors.blueGrey,
+                      padding: EdgeInsets.only(top: 10, left: 15),
+                      child: Text(
+                          "cjdcjdcb hcjkhckjzxhcnjdc jchkjxhdcxhdcjhsc kchjkzxhckxshckjxhdcjxd kch zxjcdhkzshckch kjshzshxhjhcjzhxdkshckxhnckhnxdkchnkzxnhc"),
                     )
                   : Container(),
             ],
@@ -152,7 +163,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                 trailing: const SizedBox(
                   width: 0,
                 ),
-                */ /* trailing: Container(
+                */
+          /* trailing: Container(
                   color: Colors.blueGrey,
                   padding:
                       EdgeInsets.only(top: 8, bottom: 8, left: 0, right: 8),
@@ -165,7 +177,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         );
                       },
                       child: Icon(Icons.arrow_forward_ios)),
-                ),*/ /*
+                ),*/
+          /*
                 children: [
                   ListTile(
                     title: Text("Helooo"),

@@ -66,7 +66,7 @@ class _ISAResultsState extends State<ISAResults> {
               height: 15,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.78,
+              height: MediaQuery.of(context).size.height * 0.7,
               child: ListView.builder(
                   itemCount: 20,
                   itemBuilder: (context, index) {
