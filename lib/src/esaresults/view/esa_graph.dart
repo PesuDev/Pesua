@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:pesu/utils/constants/color_consts.dart';
 
 
 class EsaGraph extends StatefulWidget {
@@ -63,8 +64,8 @@ class _EsaGraphState extends State<EsaGraph> {
     return Scaffold(
       appBar: AppBar(
         title:  Text("ESA Graph"),
-        centerTitle: true,
-        backgroundColor: Colors.green[700],
+        titleSpacing: 0,
+        backgroundColor: appThemeColor,
       ),
       body: Container(
         margin: EdgeInsets.fromLTRB(15, 8, 15, 0),
