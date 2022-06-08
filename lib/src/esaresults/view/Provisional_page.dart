@@ -20,7 +20,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
               Container(
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 decoration: BoxDecoration(
-                  color: Colors.cyanAccent,
+                  color: Colors.cyan[100],
                   border: Border.all(
                     color: Color(0xffFFFFFF),
                     width: 8,
