@@ -1133,8 +1133,9 @@ class Sunday extends StatefulWidget {
 class _SundayState extends State<Sunday> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -1142,14 +1143,17 @@ class _SundayState extends State<Sunday> {
             Container(
               width: 380,
               margin: const EdgeInsets.all(19.0),
-               padding: EdgeInsets.only(left: 50, top: 5),
+              // padding: EdgeInsets.only(left: 50, top: 5),
               decoration:
                   BoxDecoration(border: Border.all(color: Colors.grey.shade300)),
-              child: Text('NO CLASSES AVAILABLE ',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xff717171),
-                      fontWeight: FontWeight.w600)),
+              child:
+              Center(
+                child: Text('NO CLASSES AVAILABLE ',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xff717171),
+                        fontWeight: FontWeight.w600)),
+              ),
             ),
             CircleAvatar(
               radius: 23,

@@ -90,14 +90,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                       });
                       print("jjjjjj $expand");
                     },
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(80))),
-                        width: MediaQuery.of(context).size.width * 0.1,
-                        child:
-                            Icon((expand == false) ? Icons.add : Icons.remove)),
+                    child:
+                    Icon((expand == false) ? Icons.add_circle : Icons.remove_circle_rounded,color: Colors.blue,),
                   ),
                   InkWell(
                     onTap: () {
@@ -110,7 +104,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Unit 1"),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.chevron_right,color: Colors.grey,)
                         ],
                       ),
                     ),
