@@ -41,10 +41,9 @@ class _AnnouncementsState extends State<Announcements> {
               child:
               GestureDetector(
                 onTap: (){
-                  MaterialPageRoute(builder: (context) => const Announcement());
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Announcement()));
                 },
                 child: ListView.builder(
-
                     itemCount: 15,
                     itemBuilder: (BuildContext context,int index){
                      return
