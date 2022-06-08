@@ -27,12 +27,12 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           RichText(
@@ -75,21 +75,18 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                           ),
                         ],
                       ),
-                    ),
-                    Text(
-                      "Sem 1",
-                      style: TextStyle(
-                          fontFamily: 'Open Sans',
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                          color: Color(0xff9B9B9B)),
-                    ),
-                    Divider(
-                      thickness: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
+                      Text(
+                        "Sem 1",
+                        style: TextStyle(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                            color: Color(0xff9B9B9B)),
+                      ),
+                      Divider(
+                        thickness: 3,
+                      ),
+                      Text(
                         "Provisional Results of B.Tech - All: 1st Semester(Assesment-Aug.to Dec.2022",
                         style: TextStyle(
                             fontFamily: 'Open Sans',
@@ -97,14 +94,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                             fontSize: 15,
                             color: Color(0xff666666)),
                       ),
-                    ),
-                    Divider(
-                      thickness: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Divider(
+                        thickness: 3,
+                      ),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           RichText(
                             text: TextSpan(
@@ -124,6 +118,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                               ],
                             ),
                           ),
+                          Spacer(),
                           RichText(
                             text: TextSpan(
                               children: <TextSpan>[
@@ -144,8 +139,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -200,8 +195,9 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             "Grade",
                                             style: TextStyle(
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff000000),
+                                              fontWeight: FontWeight.normal,
+                                              color: Color(0xff666666),
+
                                               fontFamily: 'Open Sans',
                                             ),
                                           ),
@@ -209,8 +205,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             "A",
                                             style: TextStyle(
                                               fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              color: Color(0xff666666),
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
                                               fontFamily: 'Open Sans',
                                             ),
                                           ),

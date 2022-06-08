@@ -30,7 +30,7 @@ class _MondayState extends State<Monday> {
                           margin: EdgeInsets.only(left: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
-                              border: Border.all(color: Colors.black)),
+                              border: Border.all(color: Colors.grey)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -217,7 +217,7 @@ class _TuesdayState extends State<Tuesday> {
                           margin: EdgeInsets.only(left: 10, right: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0),
-                              border: Border.all(color: Colors.black)),
+                              border: Border.all(color: Colors.grey)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
