@@ -115,7 +115,7 @@ class _SessionEffectState extends State<SessionEffect> {
                 },
               ),
 
-              Container(
+             Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
