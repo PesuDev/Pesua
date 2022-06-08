@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/utils/view/widget.dart';
 
+import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/color_consts.dart';
+
 class SeatingInfo extends StatefulWidget {
   const SeatingInfo({Key? key}) : super(key: key);
 
@@ -18,7 +21,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
       appBar: sideNavAppBar("Seating Info"),
       backgroundColor:Colors.white.withOpacity(0.9),
       body: Container(
-      //  margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+       margin: EdgeInsets.only(top: 10),
         child: ListView.builder(
             itemCount: 2,
             physics: const AlwaysScrollableScrollPhysics(),
@@ -28,7 +31,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                 children: [
                   Container(
                     margin: EdgeInsets.only(left: 10,right: 10,top: 5),
-                    color: Colors.cyan,
+                    color: headingColor,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8.0,),
                       child: Column(
@@ -38,7 +41,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                               fontFamily: 'Open Sans',
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              color: Colors.blue
                           ),),
                           SizedBox(
                             height: 5,
@@ -58,7 +61,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                               fontFamily: 'Open Sans',
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              color: Colors.blue
                           ),),
                           SizedBox(
                             height: 5,
@@ -74,6 +77,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                     ),
                   ),
                   Container(
+                    height: 30,
                     color: Colors.blueAccent,
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Row(

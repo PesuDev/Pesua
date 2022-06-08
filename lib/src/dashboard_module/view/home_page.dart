@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
@@ -54,39 +55,75 @@ class _HomePageState extends State<HomePage> {
                     top: _mainHeight * 0.01),
                 //  margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
                 height: _mainHeight * 0.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    getStudentLinks(
-                        icon: Icon(Icons.wysiwyg),
-                        color: Colors.blueAccent.shade100,
-                        text: 'My Courses',
-                        callback: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.courseDashboard);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.archive),
-                        color: Colors.orange.shade100,
-                        text: 'ISA Results',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.isaResults);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.date_range),
-                        color: Colors.lightGreen.shade100,
-                        text: 'Attendance',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.attendance);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.view_week),
-                        color: Colors.lightBlueAccent.shade100,
-                        text: 'Seating Info',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.seatingInfo);
-                        })
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getStudentLinks(
+                          icon: Icon(Icons.wysiwyg),
+                          color: Color(0xffE3E7FD),
+                          text: 'My Courses',
+                          callback: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.courseDashboard);
+                          }),
+                      SizedBox(width: 30,),
+                      getStudentLinks(
+                          icon: Icon(Icons.archive),
+                          color: Color(0xffFDECE3),
+                          text: 'ISA Results',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.isaResults);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.date_range),
+                          color: Color(0xffE3FDE3),
+                          text: 'Attendance',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.attendance);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.view_week),
+                          color: Color(0xffE3F4FD),
+                          text: 'Seating Info',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.calendar_today_sharp),
+                          color: Color(0xffFDECE3),
+                          text: 'Calender',
+                          callback: () {
+                          //  Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.menu_book),
+                          color: Color(0xffF3E3FD),
+                          text: 'ESA Result',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.esaresults);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.speaker_notes_outlined),
+                          color: Color(0xffE3F4FD),
+                          text: 'Time Table',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.timeTable);
+                          }),
+                      SizedBox(width: 20,)
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
