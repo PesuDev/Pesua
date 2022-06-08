@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/view/widget.dart';
+
 class SessionEffect extends StatefulWidget {
   const SessionEffect({Key? key}) : super(key: key);
 
@@ -31,9 +33,8 @@ class _SessionEffectState extends State<SessionEffect> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      appBar: AppBar(
-        title: Text("Session Effectiveness"),
-      ),
+      appBar: sideNavAppBar("Session Effectiveness"),
+
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(10.0),
