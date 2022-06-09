@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
+import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/view/widget.dart';
 
 class TimeTable extends StatefulWidget {
@@ -21,13 +22,18 @@ class _TimeTableState extends State<TimeTable> {
             backgroundColor:Colors.white.withOpacity(0.9),
             body: Column(children: [
               Container(
-                color: Colors.cyan,
+                color: headingColor,
                 width: double.infinity,
                 margin: EdgeInsets.only(left: 10, right: 10, top: 9),
                 child: TabBar(
+                  labelColor: Colors.white,
                   isScrollable: true,
-                  indicatorColor: Colors.orange,
-                  indicatorWeight: 6,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+
+                      borderRadius: BorderRadius.circular(0),
+                      color: Colors.blue),
+
                   tabs: [
                     Tab(
                       child: Container(

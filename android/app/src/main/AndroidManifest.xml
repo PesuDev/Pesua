@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pesu">
-   <application
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="PESU"
         android:icon="@mipmap/pesu_logo">
         <activity

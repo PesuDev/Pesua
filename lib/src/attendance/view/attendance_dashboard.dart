@@ -33,7 +33,7 @@ child: SingleChildScrollView(
           children: [
             Text("Sem-3",
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.black87,
             ),
             ),
             Icon(Icons.arrow_drop_down_outlined,
@@ -70,14 +70,14 @@ child: SingleChildScrollView(
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16
+                      fontSize: 18
                   ),
                 ),
                 Text("ATTENDANCE  %" ,
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16
+                      fontSize: 18
                   ),
                 ),
               ],
@@ -125,7 +125,7 @@ physics: NeverScrollableScrollPhysics(),
                         SizedBox(width: 5,),
                         Expanded(child: IconButton(
                           icon:      Icon(Icons.keyboard_arrow_right,
-                            size: 15,
+                            size: 30,
                             color: Color(0xff999999),
                           ),
                           onPressed: (){
@@ -135,7 +135,7 @@ physics: NeverScrollableScrollPhysics(),
                       ],
                     ),
                     SizedBox(height: 10,),
-                    Divider(),
+                    Divider(color: Colors.grey,thickness: 0.5,),
                   ],
                 ),
 

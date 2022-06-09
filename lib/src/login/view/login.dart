@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
                 child: Text("Sign in",style: TextStyle(
                   fontSize: 62,
                   color: Color(0xffFFFFFF),
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w300,
                   fontFamily: 'Source Sans Pro'
                 ),),
               ),
@@ -174,7 +174,7 @@ class _LoginState extends State<Login> {
                     onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
                     },
-                    child: Text("Sign",style: TextStyle(
+                    child: Text("Sign in",style: TextStyle(
                         color: Color(0xffFFFFFF),
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Source Sans Pro',

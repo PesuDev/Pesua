@@ -29,20 +29,21 @@ class _MyProfileState extends State<MyProfile> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.blue,
+                    color: Colors.white,
                     child: Row(
                       children: [
                         Container(
                           padding: EdgeInsets.only(
                               left: 15, top: 20, right: 35, bottom: 20),
-                          child: CircleAvatar(
-                              radius: 50,
-                              backgroundColor: Colors.white,
+                          child:
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[200],
+                              radius: 60,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
                                 child: Icon(
                                   Icons.perm_identity_rounded,
-                                  size: 100,
+                                  size: 80,
                                 ),
                               )),
                         ),
@@ -53,24 +54,44 @@ class _MyProfileState extends State<MyProfile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Student401 Student402 student403 student405 student406",
-                                style: TextStyle(color: Colors.white60),
+                                "Student401",
+                                style: TextStyle(color: Color(0xff163269), fontSize: 18),
                               ),
-                              Text(
-                                "PESU ID:S401",
-                                style: TextStyle(color: Colors.white60),
+                              Row(
+                                children: [
+                                  Text('PESU ID : ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                  Text(
+                                    "S401",
+                                    style: TextStyle(color: Color(0xff333333),fontSize: 16),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "SRN: S401",
-                                style: TextStyle(color: Colors.white60),
+                              Row(
+                                children: [
+                                  Text('SRN: ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                  Text(
+                                    "S401",
+                                    style: TextStyle(color: Color(0xff333333),fontSize: 16),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "B.TECH. | BRANCH:CSE",
-                                style: TextStyle(color: Colors.white60),
+                              Row(
+                                children: [
+                                  Text('B.TECH. | BRANCH: ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                  Text(
+                                    "CSE",
+                                    style: TextStyle(color: Color(0xff333333),fontSize: 16),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                "SEM-4, SECTION A",
-                                style: TextStyle(color: Colors.white60),
+                              Row(
+                                children: [
+                                  Text('SEM-4: ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                  Text(
+                                    "SECTION A",
+                                    style: TextStyle(color: Color(0xff333333),fontSize: 16),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -133,10 +154,10 @@ class _MyProfileState extends State<MyProfile> {
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: Text(
                               "Email ID",
-                              style: TextStyle(color: Colors.black45),
+                              style: TextStyle(color: Colors.black45,fontSize: 18),
                             )),
                         (edit == false)
-                            ? Text('priyahcbhdbc@gmail.com')
+                            ? Text('priyahcbhdbc@gmail.com',style: TextStyle(fontSize: 18),)
                             //ON CLICK OF EDIT
                             : Container(
                                 height: 30,
@@ -160,10 +181,10 @@ class _MyProfileState extends State<MyProfile> {
                             padding: EdgeInsets.only(top: 20, bottom: 10),
                             child: Text(
                               "Contact No",
-                              style: TextStyle(color: Colors.black45),
+                              style: TextStyle(color: Colors.black45,fontSize: 18),
                             )),
                         (edit == false)
-                            ? Text('9876543210')
+                            ? Text('9876543210',style: TextStyle(fontSize: 18),)
                             //ON CLICK OF EDIT
                             : Container(
                                 height: 30,
@@ -231,11 +252,11 @@ class _MyProfileState extends State<MyProfile> {
                                   children: [
                                     Icon(
                                       Icons.vpn_key_outlined,
-                                      size: 16,
+                                      size: 18,
                                     ),
                                     Container(
                                         padding: EdgeInsets.only(left: 8),
-                                        child: Text("Change Password")),
+                                        child: Text("Change Password",style: TextStyle(fontSize: 18),)),
                                   ],
                                 ),
                               ),
@@ -251,11 +272,11 @@ class _MyProfileState extends State<MyProfile> {
                                   children: [
                                     Icon(
                                       Icons.logout,
-                                      size: 16,
+                                      size: 18,
                                     ),
                                     Container(
                                         padding: EdgeInsets.only(left: 8),
-                                        child: Text("Logout")),
+                                        child: Text("Logout",style: TextStyle(fontSize: 18))),
                                   ],
                                 ),
                               ),
@@ -273,7 +294,7 @@ class _MyProfileState extends State<MyProfile> {
                   child: Text(
                     "Qualifying Examination",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   )),
@@ -325,7 +346,7 @@ class _MyProfileState extends State<MyProfile> {
                   child: Text(
                     "Parents Details",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   )),

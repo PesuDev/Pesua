@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
@@ -15,21 +16,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _mainHeight;
   var _mainWidth;
-
   List<String> imageList = [
     'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
     'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
     'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
     'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
   ];
-
   @override
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
     _mainWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        //appBar:getAppBar(context: context),
         body: Container(
           height: _mainHeight,
           width: _mainWidth,
@@ -57,39 +55,75 @@ class _HomePageState extends State<HomePage> {
                     top: _mainHeight * 0.01),
                 //  margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
                 height: _mainHeight * 0.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    getStudentLinks(
-                        icon: Icon(Icons.wysiwyg),
-                        color: Colors.blueAccent.shade100,
-                        text: 'My Courses',
-                        callback: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.courseDashboard);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.archive),
-                        color: Colors.orange.shade100,
-                        text: 'ISA Results',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.isaResults);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.date_range),
-                        color: Colors.lightGreen.shade100,
-                        text: 'Attendance',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.attendance);
-                        }),
-                    getStudentLinks(
-                        icon: Icon(Icons.view_week),
-                        color: Colors.lightBlueAccent.shade100,
-                        text: 'Seating Info',
-                        callback: () {
-                          Navigator.pushNamed(context, AppRoutes.seatingInfo);
-                        })
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getStudentLinks(
+                          icon: Icon(Icons.wysiwyg),
+                          color: Color(0xffE3E7FD),
+                          text: 'My Courses',
+                          callback: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.courseDashboard);
+                          }),
+                      SizedBox(width: 30,),
+                      getStudentLinks(
+                          icon: Icon(Icons.archive),
+                          color: Color(0xffFDECE3),
+                          text: 'ISA Results',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.isaResults);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.date_range),
+                          color: Color(0xffE3FDE3),
+                          text: 'Attendance',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.attendance);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.view_week),
+                          color: Color(0xffE3F4FD),
+                          text: 'Seating Info',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.calendar_today_sharp),
+                          color: Color(0xffFDECE3),
+                          text: 'Calender',
+                          callback: () {
+                          //  Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.menu_book),
+                          color: Color(0xffF3E3FD),
+                          text: 'ESA Result',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.esaresults);
+                          }),
+                      SizedBox(width: 30,),
+
+                      getStudentLinks(
+                          icon: Icon(Icons.speaker_notes_outlined),
+                          color: Color(0xffE3F4FD),
+                          text: 'Time Table',
+                          callback: () {
+                            Navigator.pushNamed(context, AppRoutes.timeTable);
+                          }),
+                      SizedBox(width: 20,)
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -310,7 +344,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   AppBar getAppBar({required BuildContext context}) {
     return AppBar(
       titleSpacing: 0,
@@ -320,7 +353,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
   Widget getStudentLinks(
       {required Icon icon,
       required Color color,
