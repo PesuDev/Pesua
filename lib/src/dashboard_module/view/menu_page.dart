@@ -97,7 +97,7 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 12) {
                     Navigator.pushNamed(context, AppRoutes.placement);
                   } else if (index == 13) {
-                    //calender
+                    Navigator.pushNamed(context, AppRoutes.calendarDashboard);
                   } else if (index == 14) {
                     Navigator.pushNamed(context, AppRoutes.announcements);
 

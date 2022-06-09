@@ -6,6 +6,7 @@ import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
+import 'package:pesu/src/calendar/view/calendar_dashboard.dart';
 import 'package:pesu/src/cie/view/cie_dashboard.dart';
 import 'package:pesu/src/bootstrap/view/bootstrap.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
@@ -90,6 +91,8 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => IndividualUnitScreen());
     case AppRoutes.esaGraph:
       return MaterialPageRoute(builder: (_) => EsaGraph());
+    case AppRoutes.calendarDashboard:
+      return MaterialPageRoute(builder: (_) => CalendarDashboard());
   }
 }
 
@@ -121,4 +124,5 @@ class AppRoutes {
   static const String individualSub = "individualSub";
   static const String individualUnit = "individualUnit";
   static const String esaGraph = "esaGraph";
+  static const String calendarDashboard = "calendarDashboard";
 }
