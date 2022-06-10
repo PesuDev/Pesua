@@ -29,6 +29,8 @@ import 'package:pesu/src/settings/view/settings.dart';
 import 'package:pesu/src/time_table/view/time_table_dashboard.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 
+import '../../src/announcements/view/announcement.dart';
+
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     return data(settings);
@@ -71,8 +73,8 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
-    case AppRoutes.announcements:
-      return MaterialPageRoute(builder: (_) => Announcements());
+    case AppRoutes.announcement:
+      return MaterialPageRoute(builder: (_) => Announcement());
     case AppRoutes.login:
       return MaterialPageRoute(builder: (_) => Login());
     case AppRoutes.sessionEffectiveness:
@@ -114,7 +116,7 @@ class AppRoutes {
   static const String timeTable = "timeTable";
   static const String onlinePayments = "onlinePayments";
   static const String examination = "examination";
-  static const String announcements = "announcements";
+  static const String announcement = "announcement";
   static const String login = "login";
   static const String sessionEffectiveness = "sessionEffectiveness";
   static const String isaResults = "isaResults";

@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xffFDECE3),
                           text: 'Calender',
                           callback: () {
-                          //  Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                            Navigator.pushNamed(context, AppRoutes.calendarDashboard);
                           }),
                       SizedBox(width: 30,),
 
