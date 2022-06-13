@@ -143,11 +143,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
               Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
                 color: Color(0xffFFFFFF),
                 child: Column(
                   children: [
@@ -232,7 +232,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                      margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
