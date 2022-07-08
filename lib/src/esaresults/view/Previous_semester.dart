@@ -163,7 +163,7 @@ Container(
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                color: Colors.cyanAccent,
+                color: Colors.cyan[100],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -310,7 +310,7 @@ Container(
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                      margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

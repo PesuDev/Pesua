@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        home: DashboardScreen(),
+        home: Login(),
         onGenerateRoute: AppRouteGenerator.generateRoute,
       ),
 

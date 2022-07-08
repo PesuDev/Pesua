@@ -69,10 +69,8 @@ class _MenuPageState extends State<MenuPage> {
                 onTap: () {
                   if (index == 0) {
                     Navigator.pushNamed(context, AppRoutes.login);
-
-
                   } else if (index == 1) {
-                    //courses
+                    Navigator.pushNamed(context, AppRoutes.courseDashboard);
                   } else if (index == 2) {
                     Navigator.pushNamed(context, AppRoutes.examination);
                   } else if (index == 3) {
@@ -82,11 +80,12 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 5) {
                     Navigator.pushNamed(context, AppRoutes.assignment);
                   } else if (index == 6) {
-                    //ISA result
+                    Navigator.pushNamed(context, AppRoutes.isaResults);
                   } else if (index == 7) {
                     Navigator.pushNamed(context, AppRoutes.seatingInfo);
                   } else if (index == 8) {
-                    Navigator.pushNamed(context, AppRoutes.sessionEffectiveness);
+                    Navigator.pushNamed(
+                        context, AppRoutes.sessionEffectiveness);
 
                     //session effectiveness
                   } else if (index == 9) {
@@ -98,20 +97,19 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 12) {
                     Navigator.pushNamed(context, AppRoutes.placement);
                   } else if (index == 13) {
-                    //calender
+                    Navigator.pushNamed(context, AppRoutes.calendarDashboard);
                   } else if (index == 14) {
-                    Navigator.pushNamed(context, AppRoutes.announcements);
+                    Navigator.pushNamed(context, AppRoutes.announcement);
 
                     //Announcements
                   } else if (index == 15) {
-
                     //Library
                   } else if (index == 16) {
                     Navigator.pushNamed(context, AppRoutes.transport);
                   } else if (index == 17) {
                     //PESU Forms
                   } else if (index == 18) {
-                    //my profile
+                    Navigator.pushNamed(context, AppRoutes.myProfile);
                   } else if (index == 19) {
                     Navigator.pushNamed(context, AppRoutes.esaresults);
                   }

@@ -6,6 +6,7 @@ import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/dashboard_module/view/menu_page.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
+import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
@@ -30,11 +31,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
             case 1:
               return CourseDashboard();
             case 2:
-              return HomePage();
+              return ISAResults();
             case 3:
               return AttendanceDashboard();
             case 4:
-              return ChangeNotifierProvider(create: (_)=>DashboardViewModel(),child: MenuPage(),);
+              return ChangeNotifierProvider(
+                create: (_) => DashboardViewModel(),
+                child: MenuPage(),
+              );
 
             default:
               return Container();
@@ -46,7 +50,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return BottomNavigationBar(
             currentIndex: value.selectedIndex,
             fixedColor: appThemeColor,
-            items: getNavBarItems(),type: BottomNavigationBarType.fixed,
+            items: getNavBarItems(),
+            type: BottomNavigationBarType.fixed,
             onTap: (index) => value.selectBottomIndex(bottomIndex: index),
           );
         },

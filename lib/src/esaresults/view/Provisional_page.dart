@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 
 class ProvisionalPage extends StatefulWidget {
   const ProvisionalPage({Key? key}) : super(key: key);
@@ -19,19 +20,19 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
               Container(
                 margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 decoration: BoxDecoration(
-                  color: Colors.cyanAccent,
+                  color: Colors.cyan[100],
                   border: Border.all(
                     color: Color(0xffFFFFFF),
                     width: 8,
                   ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           RichText(
@@ -74,21 +75,18 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                           ),
                         ],
                       ),
-                    ),
-                    Text(
-                      "Sem 1",
-                      style: TextStyle(
-                          fontFamily: 'Open Sans',
-                          fontWeight: FontWeight.normal,
-                          fontSize: 15,
-                          color: Color(0xff9B9B9B)),
-                    ),
-                    Divider(
-                      thickness: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
+                      Text(
+                        "Sem 1",
+                        style: TextStyle(
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                            color: Color(0xff9B9B9B)),
+                      ),
+                      Divider(
+                        thickness: 3,
+                      ),
+                      Text(
                         "Provisional Results of B.Tech - All: 1st Semester(Assesment-Aug.to Dec.2022",
                         style: TextStyle(
                             fontFamily: 'Open Sans',
@@ -96,14 +94,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                             fontSize: 15,
                             color: Color(0xff666666)),
                       ),
-                    ),
-                    Divider(
-                      thickness: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      Divider(
+                        thickness: 3,
+                      ),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           RichText(
                             text: TextSpan(
@@ -123,6 +118,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                               ],
                             ),
                           ),
+                          Spacer(),
                           RichText(
                             text: TextSpan(
                               children: <TextSpan>[
@@ -143,15 +139,15 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              // SizedBox(
+              //   height: 10,
+              // ),
               Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
+                margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
                 color: Color(0xffFFFFFF),
                 child: Column(
                   children: [
@@ -199,8 +195,9 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             "Grade",
                                             style: TextStyle(
                                               fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xff000000),
+                                              fontWeight: FontWeight.normal,
+                                              color: Color(0xff666666),
+
                                               fontFamily: 'Open Sans',
                                             ),
                                           ),
@@ -208,15 +205,17 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             "A",
                                             style: TextStyle(
                                               fontSize: 14,
-                                              fontWeight: FontWeight.normal,
-                                              color: Color(0xff666666),
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
                                               fontFamily: 'Open Sans',
                                             ),
                                           ),
                                         ],
                                       ),
                                       TextButton.icon(
-                                        onPressed: null,
+                                        onPressed:   () {
+                                          Navigator.pushNamed(context, AppRoutes.esaGraph);
+                                        },
                                         icon: const Icon(Icons.bar_chart),
                                         label: Text(""),
                                       ),
@@ -233,7 +232,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                      margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
