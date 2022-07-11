@@ -183,12 +183,20 @@ class _LoginState extends State<Login> {
                     ),)),
               ),
               SizedBox(height: 40,),
-              Text("Forgot Password?",style: TextStyle(
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Source Sans Pro',
-                fontSize: 16,
-              ),),
+              InkWell(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => _buildPopupDialog(context),
+                  );
+                },
+                child: Text("Forgot Password?",style: TextStyle(
+                  color: Color(0xffFFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 16,
+                ),),
+              ),
               SizedBox(height: 40,),
 
               Text("For all login issue, please send an email to ",style: TextStyle(
@@ -210,4 +218,112 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    contentPadding: EdgeInsets.all(0),
+
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 50,
+          color: Colors.blue,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Icon(Icons.lock_outline_rounded,color: Colors.white,),
+                SizedBox(width: 10,),
+                Text("Forget your Password?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+              ],
+            ),
+          )
+        ),
+        Padding(
+          padding:EdgeInsets.only(left: 10,right: 10,top: 10),
+
+         child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: TextFormField(
+
+                    decoration: InputDecoration(
+                      hintText: "Enter Login ID/ SRN",
+                      hintStyle: TextStyle(  fontSize: 18,
+                          color: Color(0xff999999),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Source Sans Pro'),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 40,bottom: 10),
+                height: 35,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Colors.blueAccent,
+
+                ),
+                child:
+                TextButton(
+
+                    onPressed: (){
+                    },
+                    child: Text("CONTINUE",style: TextStyle(
+                      color: Color(0xffFFFFFF),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+
+                    ),)),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top:10,bottom: 20),
+                height: 35,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey)
+
+                ),
+                child:
+                TextButton(
+
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: Text("CANCEL",style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+
+                    ),)),
+              ),
+            ],
+          ),
+        ),
+
+
+      ],
+    ),
+
+  );
 }
