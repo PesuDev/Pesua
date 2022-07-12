@@ -4,7 +4,6 @@ import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class Login extends StatefulWidget {
