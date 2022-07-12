@@ -4,6 +4,7 @@ import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Login extends StatefulWidget {
@@ -205,12 +206,16 @@ class _LoginState extends State<Login> {
                 fontFamily: 'Source Sans Pro',
                 fontSize: 16,
               ),),
-              Text("support@pesuacademy.com",style: TextStyle(
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Source Sans Pro',
-                fontSize: 16,
-              ),),
+              InkWell(
+                onTap: (){
+                    },
+                child: Text("support@pesuacademy.com",style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 16,
+                ),),
+              ),
             ],
 
           ),
@@ -219,6 +224,10 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
+
+
+
 Widget _buildPopupDialog(BuildContext context) {
   return new AlertDialog(
     contentPadding: EdgeInsets.all(0),
@@ -326,4 +335,5 @@ Widget _buildPopupDialog(BuildContext context) {
     ),
 
   );
+
 }
