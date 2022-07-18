@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
        resizeToAvoidBottomInset:false,
       backgroundColor: Color(0xff191D6E),
       body: SafeArea(
@@ -40,6 +41,7 @@ class _LoginState extends State<Login> {
             Container(
               height: MediaQuery.of(context).size.height/10,
             ),
+
       Container(
         color: Color(0xff0091CD),
         width: double.infinity,
@@ -284,7 +286,7 @@ Widget _buildPopupDialog(BuildContext context) {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
-                  color: Colors.blueAccent,
+                  color: Color(0xff0091CD),
 
                 ),
                 child:
