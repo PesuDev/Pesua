@@ -4,6 +4,9 @@ import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
+import 'package:pesu/src/login/model/login_model.dart';
+import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 
 class Login extends StatefulWidget {
@@ -15,6 +18,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _isObscure = true;
+  late LoginViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel=Provider.of<LoginViewModel>(context,listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,8 +181,23 @@ class _LoginState extends State<Login> {
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xffED4700)
                   ),
-                    onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
+                    onPressed: ()async{
+                    LoginRequestModel model=LoginRequestModel(
+                       jUsername: 'pes1ug20cs216',
+                      jPassword: 'pea123',
+                      jMobile: 'MOBILE',
+                      jMobileApp: 'YES',
+                      jSocial: 'NO',
+                      jAppId: 1,
+                      action: 0,
+                      mode: 0,
+                      randomNum: 0.47610110526691063,
+                      whichObjectId: 'loginButtonClick',
+                      title: 'login'
+
+                    );
+                    await _viewModel.getLoginDetails(loginRequestModel: model);
+                    //Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
                     },
                     child: Text("Sign in",style: TextStyle(
                         color: Color(0xffFFFFFF),

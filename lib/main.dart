@@ -12,6 +12,7 @@ import 'package:pesu/src/transport/view/rr_campus.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
+import 'package:pesu/utils/view/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
             child: child!,
           );
         },
-        home: Login(),
+        home: SplashScreen(),
         onGenerateRoute: AppRouteGenerator.generateRoute,
       ),
 
