@@ -33,6 +33,7 @@ dependencies:
   provider: ^6.0.2
   flutter_swiper_null_safety: ^1.0.2
   webview_flutter:
+  url_launcher: 6.1.5
 
 
 dev_dependencies:

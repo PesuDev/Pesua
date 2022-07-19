@@ -7,6 +7,7 @@ import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/login/model/login_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Login extends StatefulWidget {
@@ -234,6 +235,7 @@ class _LoginState extends State<Login> {
               ),),
               InkWell(
                 onTap: (){
+                  _SendEmail();
                     },
                 child: Text("support@pesuacademy.com",style: TextStyle(
                   color: Colors.blueAccent,
@@ -362,4 +364,17 @@ Widget _buildPopupDialog(BuildContext context) {
 
   );
 
+
+
+
+}
+
+_SendEmail(){
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'support@pesuacademy.com',
+
+  );
+
+  launch(emailLaunchUri.toString());
 }
