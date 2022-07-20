@@ -4,6 +4,10 @@ import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
+import 'package:pesu/src/login/model/login_model.dart';
+import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Login extends StatefulWidget {
@@ -15,10 +19,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool _isObscure = true;
+  late LoginViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel=Provider.of<LoginViewModel>(context,listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
        resizeToAvoidBottomInset:false,
       backgroundColor: Color(0xff191D6E),
       body: SafeArea(
@@ -40,6 +52,7 @@ class _LoginState extends State<Login> {
             Container(
               height: MediaQuery.of(context).size.height/10,
             ),
+
       Container(
         color: Color(0xff0091CD),
         width: double.infinity,
@@ -171,8 +184,23 @@ class _LoginState extends State<Login> {
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xffED4700)
                   ),
-                    onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
+                    onPressed: ()async{
+                    LoginRequestModel model=LoginRequestModel(
+                       jUsername: 'pes1ug20cs216',
+                      jPassword: 'pea123',
+                      jMobile: 'MOBILE',
+                      jMobileApp: 'YES',
+                      jSocial: 'NO',
+                      jAppId: 1,
+                      action: 0,
+                      mode: 0,
+                      randomNum: 0.47610110526691063,
+                      whichObjectId: 'loginButtonClick',
+                      title: 'login'
+
+                    );
+                    await _viewModel.getLoginDetails(loginRequestModel: model);
+                    //Navigator.push(context, MaterialPageRoute(builder: (_)=>DashboardScreen()));
                     },
                     child: Text("Sign in",style: TextStyle(
                         color: Color(0xffFFFFFF),
@@ -183,12 +211,20 @@ class _LoginState extends State<Login> {
                     ),)),
               ),
               SizedBox(height: 40,),
-              Text("Forgot Password?",style: TextStyle(
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Source Sans Pro',
-                fontSize: 16,
-              ),),
+              InkWell(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => _buildPopupDialog(context),
+                  );
+                },
+                child: Text("Forgot Password?",style: TextStyle(
+                  color: Color(0xffFFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 16,
+                ),),
+              ),
               SizedBox(height: 40,),
 
               Text("For all login issue, please send an email to ",style: TextStyle(
@@ -197,12 +233,17 @@ class _LoginState extends State<Login> {
                 fontFamily: 'Source Sans Pro',
                 fontSize: 16,
               ),),
-              Text("support@pesuacademy.com",style: TextStyle(
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Source Sans Pro',
-                fontSize: 16,
-              ),),
+              InkWell(
+                onTap: (){
+                  _SendEmail();
+                    },
+                child: Text("support@pesuacademy.com",style: TextStyle(
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 16,
+                ),),
+              ),
             ],
 
           ),
@@ -210,4 +251,130 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+}
+
+
+
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    contentPadding: EdgeInsets.all(0),
+
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 50,
+          color: Colors.blue,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                Icon(Icons.lock_outline_rounded,color: Colors.white,),
+                SizedBox(width: 10,),
+                Text("Forget your Password?",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+              ],
+            ),
+          )
+        ),
+        Padding(
+          padding:EdgeInsets.only(left: 10,right: 10,top: 10),
+
+         child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: TextFormField(
+
+                    decoration: InputDecoration(
+                      hintText: "Enter Login ID/ SRN",
+                      hintStyle: TextStyle(  fontSize: 18,
+                          color: Color(0xff999999),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Source Sans Pro'),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      errorBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 40,bottom: 10),
+                height: 35,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Color(0xff0091CD),
+
+                ),
+                child:
+                TextButton(
+
+                    onPressed: (){
+                    },
+                    child: Text("CONTINUE",style: TextStyle(
+                      color: Color(0xffFFFFFF),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+
+                    ),)),
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top:10,bottom: 20),
+                height: 35,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey)
+
+                ),
+                child:
+                TextButton(
+
+                    onPressed: (){
+                     Navigator.pop(context);
+                    },
+                    child: Text("CANCEL",style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+
+                    ),)),
+              ),
+            ],
+          ),
+        ),
+
+
+      ],
+    ),
+
+  );
+
+
+
+
+}
+
+_SendEmail(){
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'support@pesuacademy.com',
+
+  );
+
+  launch(emailLaunchUri.toString());
 }
