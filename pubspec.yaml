@@ -25,15 +25,15 @@ dependencies:
     sdk: flutter
   flutter_switch: ^0.3.2
   syncfusion_flutter_charts: 19.4.38
-  charts_flutter: 0.12.0
-  shared_preferences: ^2.0.15
-  http: ^0.13.4
+  charts_flutter:
+  shared_preferences:
+  http:
   dio: ^4.0.6
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
   flutter_swiper_null_safety: ^1.0.2
   webview_flutter:
-  url_launcher: 6.1.5
+  url_launcher:
 
 
 dev_dependencies:
