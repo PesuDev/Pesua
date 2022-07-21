@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcement.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
@@ -16,6 +17,8 @@ import 'package:pesu/utils/view/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -29,20 +32,23 @@ class MyApp extends StatelessWidget {
             create: (_)=>BottomNavigationProvider(),
           ),
         ],
-      child: MaterialApp(
-        title: 'PESU',
-        theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
+      child: ChangeNotifierProvider(
+        create: (context)=>GoogleSignInProvider(),
+        child: MaterialApp(
+          title: 'PESU',
+          theme: ThemeData(
+            primarySwatch: Colors.blueGrey,
+          ),
+          debugShowCheckedModeBanner: false,
+          builder: (BuildContext? context, Widget? child) {
+            return MediaQuery(
+              data: MediaQuery.of(context!).copyWith(textScaleFactor: 0.9, ), //set desired text scale factor here
+              child: child!,
+            );
+          },
+          home: SplashScreen(),
+          onGenerateRoute: AppRouteGenerator.generateRoute,
         ),
-        debugShowCheckedModeBanner: false,
-        builder: (BuildContext? context, Widget? child) {
-          return MediaQuery(
-            data: MediaQuery.of(context!).copyWith(textScaleFactor: 0.9, ), //set desired text scale factor here
-            child: child!,
-          );
-        },
-        home: SplashScreen(),
-        onGenerateRoute: AppRouteGenerator.generateRoute,
       ),
 
     );
