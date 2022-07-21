@@ -13,6 +13,15 @@ import 'dart:async';
 
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
+  late Dio _dio = Dio();
+ /* PesuApiService(){
+   this._dio.interceptors.add(InterceptorsWrapper(
+     onRequest: (options, handler) {
+     log('xyz :: ${options.uri}');
+
+     },
+   ));
+  }*/
 
   SharedPreferenceUtil sharedPref = SharedPreferenceUtil();
 
@@ -45,25 +54,52 @@ class PesuApiService {
     FormData formData = FormData.fromMap(params);
 
     try {
-      log('${ Uri.https(
-        _baseURL,endPoint,
+      log('${Uri.https(
+        _baseURL,
+        endPoint,
       ).toString()}');
       log(params.toString());
-      final response = await http.post(
-        Uri.https(
-          _baseURL,endPoint,
-        ),
-        //headers: await getHeaders(),
-        body: formData,
-      );
-      responseJson = _response(response);
+      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
+          data: formData);
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
+        log('Response :: ${response.data}');
+        return response.data;
+      }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
       log(e.toString());
     }
 
-    return responseJson;
+    return null;
+  }
+
+  Future<dynamic> postApiCallWithQueryParams(
+      {required String endPoint,
+      required Map<String, dynamic> queryParams}) async {
+    try {
+      log('${Uri.https(
+        _baseURL,
+        endPoint,
+      ).toString()}');
+      log(queryParams.toString());
+      final response = await _dio.post(
+        Uri.https(_baseURL, endPoint).toString(),
+       // queryParameters: queryParams,
+
+      );
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200 ) {
+        return response.statusCode;
+      }
+    } on SocketException {
+      log('Socket Exception');
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return null;
   }
 
   Future<dynamic> putApiCall(

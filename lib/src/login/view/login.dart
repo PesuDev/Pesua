@@ -183,17 +183,16 @@ class _LoginState extends State<Login> {
                   ),
                     onPressed: ()async{
                     LoginRequestModel model=LoginRequestModel(
-                       jUsername: 'pes1ug20cs216',
-                      jPassword: 'pea123',
+                       jUsername: 'PES1202001748',
+                      jPassword: 'pes123',
                       jMobile: 'MOBILE',
                       jMobileApp: 'YES',
                       jSocial: 'NO',
                       jAppId: 1,
-                      action: 0,
+                      //action: 0,
                       mode: 0,
-                      randomNum: 0.47610110526691063,
+                      randomNum: 0.12717280495076144,
                       whichObjectId: 'loginButtonClick',
-                      title: 'login'
 
                     );
                     await _viewModel.getLoginDetails(loginRequestModel: model);
