@@ -86,7 +86,7 @@ class PesuApiService {
       log(queryParams.toString());
       final response = await _dio.post(
         Uri.https(_baseURL, endPoint).toString(),
-       // queryParameters: queryParams,
+       queryParameters: queryParams,
 
       );
       log('Status Code :: ${response.statusCode}');
