@@ -13,6 +13,7 @@ import 'dart:async';
 
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
+  late Dio _dio=Dio();
 
   SharedPreferenceUtil sharedPref = SharedPreferenceUtil();
 
@@ -45,25 +46,26 @@ class PesuApiService {
     FormData formData = FormData.fromMap(params);
 
     try {
-      log('${ Uri.https(
+      log('url ${ Uri.https(
         _baseURL,endPoint,
       ).toString()}');
-      log(params.toString());
-      final response = await http.post(
-        Uri.https(
-          _baseURL,endPoint,
-        ),
-        //headers: await getHeaders(),
-        body: formData,
-      );
-      responseJson = _response(response);
+      log("model "+params.toString());
+      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),options: Options(headers: {
+        "mobileAppAuthenticationToken" : "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+      }),
+          data: formData);
+      log("code ${response.statusCode}");
+      if(response.statusCode == 200 && response.data.toString().isNotEmpty){
+        log("message ${response.data}" );
+        return response.data;
+      }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
       log(e.toString());
     }
 
-    return responseJson;
+    return null;
   }
 
   Future<dynamic> putApiCall(
