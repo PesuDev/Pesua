@@ -128,25 +128,25 @@ class _MondayState extends State<Monday> {
                                 ),
                               ),
                             ),
-                            // Container(
-                            //   width: double.infinity,
-                            //   margin: EdgeInsets.only(left: 10, right: 10),
-                            //   color: Color(0xff9E9E9E80),
-                            //   height: MediaQuery.of(context).size.height / 17,
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(top: 10),
-                            //     child: Text(
-                            //       "BREAK",
-                            //       textAlign: TextAlign.center,
-                            //       style: TextStyle(
-                            //           color: Color(0xff333333),
-                            //           fontFamily: 'Open Sans',
-                            //           fontSize: 18,
-                            //           fontWeight: FontWeight.normal
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            Container(
+                              width: double.infinity,
+                              margin: EdgeInsets.only(left: 10, right: 10),
+                              color: Color(0xff9E9E9E80),
+                              height: MediaQuery.of(context).size.height / 17,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  "BREAK",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Color(0xff333333),
+                                      fontFamily: 'Open Sans',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.normal
+                                  ),
+                                ),
+                              ),
+                            ),
 
                           ],
                         ):Container();
