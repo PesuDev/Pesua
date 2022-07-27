@@ -10,8 +10,8 @@ class LoginApiService {
       {required LoginRequestModel loginRequestModel}) async {
     String url = AppUrls.loginUrl;
 
-    final data = await _pesuApiService.postApiCall(
-        endPoint: url, params: loginRequestModel.toJson());
+    final data = await _pesuApiService.postApiCallWithQueryParams(
+        endPoint: url, queryParams: loginRequestModel.toJson());
     return data;
   }
 }

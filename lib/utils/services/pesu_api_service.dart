@@ -13,7 +13,15 @@ import 'dart:async';
 
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
-  late Dio _dio=Dio();
+  late Dio _dio = Dio();
+ /* PesuApiService(){
+   this._dio.interceptors.add(InterceptorsWrapper(
+     onRequest: (options, handler) {
+     log('xyz :: ${options.uri}');
+
+     },
+   ));
+  }*/
 
   SharedPreferenceUtil sharedPref = SharedPreferenceUtil();
 
@@ -46,18 +54,44 @@ class PesuApiService {
     FormData formData = FormData.fromMap(params);
 
     try {
-      log('url ${ Uri.https(
-        _baseURL,endPoint,
+      log('${Uri.https(
+        _baseURL,
+        endPoint,
       ).toString()}');
-      log("model "+params.toString());
-      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),options: Options(headers: {
-        "mobileAppAuthenticationToken" : "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-      }),
+      log(params.toString());
+      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
           data: formData);
-      log("code ${response.statusCode}");
-      if(response.statusCode == 200 && response.data.toString().isNotEmpty){
-        log("message ${response.data}" );
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
+        log('Response :: ${response.data}');
         return response.data;
+      }
+    } on SocketException {
+      log('Socket Exception');
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return null;
+  }
+
+  Future<dynamic> postApiCallWithQueryParams(
+      {required String endPoint,
+      required Map<String, dynamic> queryParams}) async {
+    try {
+      log('${Uri.https(
+        _baseURL,
+        endPoint,
+      ).toString()}');
+      log(queryParams.toString());
+      final response = await _dio.post(
+        Uri.https(_baseURL, endPoint).toString(),
+       queryParameters: queryParams,
+
+      );
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200 ) {
+        return response.statusCode;
       }
     } on SocketException {
       log('Socket Exception');
