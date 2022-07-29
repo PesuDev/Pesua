@@ -70,7 +70,8 @@ class _MondayState extends State<Monday> {
                                           .size
                                           .width / 3,
                                       child: Text(
-                                        "${model.startTime} - ${model.endTime}"?? "",
+
+                                        ("${model.startTime}-${model.endTime}"),
                                         // data.timeTableModel?.startTime ?? "",
                                         style: TextStyle(
                                             color: Color(0xff000000),
@@ -128,7 +129,7 @@ class _MondayState extends State<Monday> {
                                 ),
                               ),
                             ),
-                            Container(
+                        Container(
                               width: double.infinity,
                               margin: EdgeInsets.only(left: 10, right: 10),
                               color: Color(0xff9E9E9E80),

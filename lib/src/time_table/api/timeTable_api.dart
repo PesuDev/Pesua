@@ -26,7 +26,7 @@ class TimeTableApi {
       'callMethod': callMethod
     });
     if (data != null) {
-      Iterable iterable = data;
+      Iterable  iterable = data;
       return iterable.map((e) => TimeTableModel.fromJson(e)).toList();
 
     }
