@@ -36,7 +36,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
 
     print("lala ${date.weekday}");
-    print("lala ${tabController.index}");
+    print("loo ${tabController.index}");
 
     return DefaultTabController(
         length: 7,
@@ -163,9 +163,10 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                   height: MediaQuery.of(context).size.height / 1.36,
                   child:
                   TabBarView(
-                   // controller: tabController,
+                   //controller: tabController,
+
                       children: [
-                        ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child: Monday(
                     )),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
@@ -174,7 +175,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                         child:Wednesday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Thursday()),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Friday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Saturday()),
