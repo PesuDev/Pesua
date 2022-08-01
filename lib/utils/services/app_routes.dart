@@ -18,6 +18,7 @@ import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
+import 'package:pesu/src/isa_results/viewmodel/isa_dropdown_viewModel.dart';
 import 'package:pesu/src/login/view/login.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
@@ -37,7 +38,7 @@ import '../../src/announcements/view/announcement.dart';
 
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    return data( settings);
+    return data(settings);
   }
 }
 
@@ -71,13 +72,13 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => SeatingInfo());
     case AppRoutes.bootStrap:
       return MaterialPageRoute(builder: (_) => BootStrap());
-      case AppRoutes.timeTable:
+    case AppRoutes.timeTable:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-            create: (_) => TimeTableViewmodel(),
-            child: TimeTable(),
-          ));
-      case AppRoutes.onlinePayments:
+                create: (_) => TimeTableViewmodel(),
+                child: TimeTable(),
+              ));
+    case AppRoutes.onlinePayments:
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
@@ -92,7 +93,11 @@ data(RouteSettings settings) {
     case AppRoutes.sessionEffectiveness:
       return MaterialPageRoute(builder: (_) => SessionEffect());
     case AppRoutes.isaResults:
-      return MaterialPageRoute(builder: (_) => ISAResults());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => IsaDropDownViewModel(),
+                child: ISAResults(),
+              ));
     case AppRoutes.isaResultsGraph:
       return MaterialPageRoute(builder: (_) => IsaResultGraph());
     case AppRoutes.myProfile:
