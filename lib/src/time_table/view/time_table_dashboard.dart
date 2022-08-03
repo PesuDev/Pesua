@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
+import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/view/widget.dart';
+import 'package:provider/provider.dart';
 
 class TimeTable extends StatefulWidget {
   const TimeTable({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class TimeTable extends StatefulWidget {
 
 class _TimeTableState extends State<TimeTable> {
   late TabController tabController;
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,13 +142,20 @@ class _TimeTableState extends State<TimeTable> {
               Container(
                   height: MediaQuery.of(context).size.height / 1.36,
                   child: TabBarView(children: [
-                    Monday(),
-                    Tuesday(),
-                    Wednesday(),
-                    Thursday(),
-                    Friday(),
-                    Saturday(),
-                    Sunday(),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                    child: Monday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child: Tuesday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child:Wednesday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child:Thursday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child:Friday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child:Saturday()),
+                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child:Sunday()),
                   ])),
             ])));
   }
