@@ -9,9 +9,13 @@ import 'package:pesu/src/attendance/view/detailed_attendance.dart';
 import 'package:pesu/src/calendar/view/calendar_dashboard.dart';
 import 'package:pesu/src/cie/view/cie_dashboard.dart';
 import 'package:pesu/src/bootstrap/view/bootstrap.dart';
+import 'package:pesu/src/courses/model/courseModel.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/src/courses/viewModel/courseDropDownViewModel.dart';
+import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
+import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
@@ -35,6 +39,7 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
+import '../../src/courses/viewModel/subjectViewModel.dart';
 
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -103,9 +108,29 @@ data(RouteSettings settings) {
     case AppRoutes.myProfile:
       return MaterialPageRoute(builder: (_) => MyProfile());
     case AppRoutes.courseDashboard:
-      return MaterialPageRoute(builder: (_) => CourseDashboard());
+      return MaterialPageRoute(
+          builder: (_) =>
+              /*     ChangeNotifierProvider(
+                create: (_) => CourseDropDownViewModel(),
+                child: CourseDashboard(),
+              )*/
+              MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(
+                      value: CourseDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: CourseViewModel()),
+                ],
+                child: CourseDashboard(),
+              ));
     case AppRoutes.individualSub:
-      return MaterialPageRoute(builder: (_) => IndividualSubScreen());
+      return MaterialPageRoute(
+          builder: (_) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(value: SubjectViewModel()),
+                  ChangeNotifierProvider.value(value: UnitViewModel()),
+                ],
+                child: IndividualSubScreen(),
+              ));
     case AppRoutes.individualUnit:
       return MaterialPageRoute(builder: (_) => IndividualUnitScreen());
     case AppRoutes.esaGraph:

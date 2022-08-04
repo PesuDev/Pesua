@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
+import 'package:pesu/src/courses/api/courseDropDownApiService.dart';
 
-import '../api/isa_dropdown_api_service.dart';
+import '../model/courseDropDownModel.dart';
 
-class IsaDropDownViewModel extends ChangeNotifier {
-  final IsaDropDownApiService _isaDropDownApiService = IsaDropDownApiService();
-  List<Isa_downdown_model>? isaDropDownModel;
+class CourseDropDownViewModel extends ChangeNotifier {
+  final CourseDropDownApiService _courseDropDownApiService =
+      CourseDropDownApiService();
+  List<CourseDropDownModel>? courseDropDownModel;
 
-  void getIsaDropDownDetails(
+  void getCourseDropDownDetails(
       {required int action,
       required int mode,
       required String whichObjectId,
@@ -15,9 +16,10 @@ class IsaDropDownViewModel extends ChangeNotifier {
       required String userId,
       required int deviceType,
       required int serverMode,
+      required int programId,
       required String redirectValue,
       required double randomNum}) async {
-    final data = await _isaDropDownApiService.fetchIsaDropDwnDetails(
+    final data = await _courseDropDownApiService.fetchCourseDDDetails(
         action: action,
         mode: mode,
         whichObjectId: whichObjectId,
@@ -25,9 +27,10 @@ class IsaDropDownViewModel extends ChangeNotifier {
         userId: userId,
         deviceType: deviceType,
         serverMode: serverMode,
+        programId: programId,
         redirectValue: redirectValue,
         randomNum: randomNum);
-    isaDropDownModel = data;
+    courseDropDownModel = data;
 
     notifyListeners();
   }
