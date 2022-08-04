@@ -133,7 +133,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                       InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, AppRoutes.individualUnit,
-                              arguments: CourseArguments("hhjhj"));
+                              arguments: CourseArguments(
+                                  data.unitModel?[i].topicTitle ?? ''));
                         },
                         child: Container(
                           padding: EdgeInsets.only(left: 10),

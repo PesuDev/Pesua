@@ -18,8 +18,15 @@ class _IndividualUnitScreenState extends State<IndividualUnitScreen> {
       appBar: sideNavAppBar(widget.title ?? ''),
       body: Container(
         padding: EdgeInsets.only(top: 150, left: 20, right: 20, bottom: 8),
-        child: Text(
-            "ccccccc cccccccccccc cccccccccccc cccccccccccc ccccccccccccc ccccccccccc cccccccc"),
+        child: Column(
+          children: [
+            Text("E-Learning content is available only on student web portal"),
+            Text(
+              "click here to visit PesuAcademy web portal",
+              style: TextStyle(color: Colors.blue),
+            )
+          ],
+        ),
       ),
     );
   }
