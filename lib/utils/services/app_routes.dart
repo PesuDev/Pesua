@@ -20,6 +20,7 @@ import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
 import 'package:pesu/src/login/view/login.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
 import 'package:pesu/src/notification/view/notification.dart';
 import 'package:pesu/src/online_payments/view/online_payments.dart';
@@ -105,8 +106,11 @@ data(RouteSettings settings) {
     case AppRoutes.isaResultsGraph:
       return MaterialPageRoute(builder: (_) => IsaResultGraph());
     case AppRoutes.myProfile:
-      return MaterialPageRoute(builder: (_) => MyProfile());
-    case AppRoutes.courseDashboard:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => ProfileViewmodel(),
+            child: MyProfile(),
+          ));    case AppRoutes.courseDashboard:
       return MaterialPageRoute(builder: (_) => CourseDashboard());
     case AppRoutes.individualSub:
       return MaterialPageRoute(builder: (_) => IndividualSubScreen());
