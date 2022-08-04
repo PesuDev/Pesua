@@ -1,22 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/login/model/login_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+   Login({Key? key}) : super(key: key);
+
+
+
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+
   bool _isObscure = true;
   late LoginViewModel _viewModel;
 
@@ -29,6 +37,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
        resizeToAvoidBottomInset:false,
       backgroundColor: Color(0xff191D6E),
       body: SafeArea(
@@ -50,33 +59,40 @@ class _LoginState extends State<Login> {
             Container(
               height: MediaQuery.of(context).size.height/10,
             ),
-      Container(
-        color: Color(0xff0091CD),
-        width: double.infinity,
-        child:  Row(
 
-          children: [
-            Container(
-              height: 50.0,
-              width: 50.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image:
-                    AssetImage('assets/images/google_logo.png'),
-                    fit: BoxFit.fitWidth),
-                // shape: BoxShape.circle,
+      InkWell(
+        onTap: (){
+          final provider=Provider.of<GoogleSignInProvider>(context,listen: false);
+          provider.googleLogin();
+        },
+        child: Container(
+          color: Color(0xff0091CD),
+          width: double.infinity,
+          child:  Row(
+
+            children: [
+              Container(
+                height: 50.0,
+                width: 50.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image:
+                      AssetImage('assets/images/google_logo.png'),
+                      fit: BoxFit.fitWidth),
+                  // shape: BoxShape.circle,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Text("Sign In with Google",style: TextStyle(
-                fontSize: 18,
-                color: Color(0xffFFFFFF),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Source Sans Pro'
-            ),)
-          ],
+              SizedBox(
+                width: 20,
+              ),
+              Text("Sign In with Google",style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xffFFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Source Sans Pro'
+              ),)
+            ],
+          ),
         ),
       ),
 
@@ -183,17 +199,16 @@ class _LoginState extends State<Login> {
                   ),
                     onPressed: ()async{
                     LoginRequestModel model=LoginRequestModel(
-                       jUsername: 'pes1ug20cs216',
-                      jPassword: 'pea123',
+                       jUsername: 'PES1202001748',
+                      jPassword: 'pes123',
                       jMobile: 'MOBILE',
                       jMobileApp: 'YES',
                       jSocial: 'NO',
                       jAppId: 1,
-                      action: 0,
+                      //action: 0,
                       mode: 0,
-                      randomNum: 0.47610110526691063,
+                      randomNum: 0.12717280495076144,
                       whichObjectId: 'loginButtonClick',
-                      title: 'login'
 
                     );
                     await _viewModel.getLoginDetails(loginRequestModel: model);
@@ -232,6 +247,7 @@ class _LoginState extends State<Login> {
               ),),
               InkWell(
                 onTap: (){
+                  _SendEmail();
                     },
                 child: Text("support@pesuacademy.com",style: TextStyle(
                   color: Colors.blueAccent,
@@ -309,7 +325,7 @@ Widget _buildPopupDialog(BuildContext context) {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
-                  color: Colors.blueAccent,
+                  color: Color(0xff0091CD),
 
                 ),
                 child:
@@ -360,4 +376,50 @@ Widget _buildPopupDialog(BuildContext context) {
 
   );
 
+
+
+
 }
+
+_SendEmail(){
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'support@pesuacademy.com',
+
+  );
+
+  launch(emailLaunchUri.toString());
+}
+
+
+class GoogleSignInProvider extends ChangeNotifier{
+  final googleSignIn=GoogleSignIn();
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user=>_user!;
+
+  Future googleLogin()async{
+    final googleUser= await googleSignIn.signIn();
+    if(googleUser==null)return;
+    _user=googleUser;
+
+    final googleAuth=await googleUser.authentication;
+    final credential= GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    await FirebaseAuth.instance.signInWithCredential(credential);
+    notifyListeners();
+    print(googleUser.displayName);
+    print(googleUser.email);
+  }
+
+
+  Future logout()async{
+    await googleSignIn.disconnect();
+    FirebaseAuth.instance.signOut();
+  }
+}
+
+
+
+

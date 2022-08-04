@@ -28,7 +28,9 @@ import 'package:pesu/src/seatinginfo/view/seating_info.dart';
 import 'package:pesu/src/seatinginfo/viewmodel/seating_info_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/src/settings/view/settings.dart';
+import 'package:pesu/src/time_table/view/subpages_timetable.dart';
 import 'package:pesu/src/time_table/view/time_table_dashboard.dart';
+import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +39,7 @@ import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    return data(settings);
+    return data( settings);
   }
 }
 
@@ -78,9 +80,13 @@ data(RouteSettings settings) {
           ));
     case AppRoutes.bootStrap:
       return MaterialPageRoute(builder: (_) => BootStrap());
-    case AppRoutes.timeTable:
-      return MaterialPageRoute(builder: (_) => TimeTable());
-    case AppRoutes.onlinePayments:
+      case AppRoutes.timeTable:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => TimeTableViewmodel(),
+            child: TimeTable(),
+          ));
+      case AppRoutes.onlinePayments:
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
