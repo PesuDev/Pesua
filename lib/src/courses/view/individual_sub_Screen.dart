@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/src/courses/viewModel/subjectViewModel.dart';
 import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/utils/services/app_routes.dart';
@@ -131,8 +132,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(
-                              context, AppRoutes.individualUnit);
+                          Navigator.pushNamed(context, AppRoutes.individualUnit,
+                              arguments: CourseArguments("hhjhj"));
                         },
                         child: Container(
                           padding: EdgeInsets.only(left: 10),

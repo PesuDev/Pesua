@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
@@ -13,6 +14,7 @@ import 'package:pesu/src/courses/model/courseModel.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/src/courses/viewModel/courseDropDownViewModel.dart';
 import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
 import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
@@ -75,16 +77,17 @@ data(RouteSettings settings) {
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
-      return MaterialPageRoute(builder: (_) => ChangeNotifierProvider(
-        create: (_) => EsaViewModel(),
-        child: ESAResults(),
-      ));
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => EsaViewModel(),
+                child: ESAResults(),
+              ));
     case AppRoutes.seatingInfo:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-            create: (_) => SeatingInfoViewModel(),
-            child: SeatingInfo(),
-          ));
+                create: (_) => SeatingInfoViewModel(),
+                child: SeatingInfo(),
+              ));
     case AppRoutes.bootStrap:
       return MaterialPageRoute(builder: (_) => BootStrap());
     case AppRoutes.timeTable:
@@ -118,9 +121,10 @@ data(RouteSettings settings) {
     case AppRoutes.myProfile:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-            create: (_) => ProfileViewmodel(),
-            child: MyProfile(),
-          ));    case AppRoutes.courseDashboard:
+                create: (_) => ProfileViewmodel(),
+                child: MyProfile(),
+              ));
+    case AppRoutes.courseDashboard:
       return MaterialPageRoute(
           builder: (_) =>
               /*     ChangeNotifierProvider(
@@ -145,7 +149,9 @@ data(RouteSettings settings) {
                 child: IndividualSubScreen(),
               ));
     case AppRoutes.individualUnit:
-      return MaterialPageRoute(builder: (_) => IndividualUnitScreen());
+      final CourseArguments? args = settings.arguments as CourseArguments?;
+      return MaterialPageRoute(
+          builder: (_) => IndividualUnitScreen(title: args?.title));
     case AppRoutes.esaGraph:
       return MaterialPageRoute(builder: (_) => EsaGraph());
     case AppRoutes.calendarDashboard:

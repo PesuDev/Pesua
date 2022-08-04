@@ -37,110 +37,113 @@ class _ISAResultsState extends State<ISAResults> {
   }
 
   Widget build(BuildContext context) {
-    return Consumer<IsaDropDownViewModel>(builder: (context, model, child) {
-      return Scaffold(
+    return Scaffold(
         appBar: sideNavAppBar("ISA Results"),
-        body: model.isaDropDownModel != null &&
-                model.isaDropDownModel!.length != 0
-            ? Container(
-                padding:
-                    EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("set $isSemSelected");
-                        isSemSelected = true;
-                        print("reset $isSemSelected");
-                        // _semBottomSheet();
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Dialog(
-                              backgroundColor: Colors.black45,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              elevation: 16,
-                              child: Container(
-                                child: ListView.separated(
-                                  itemCount:
-                                      model.isaDropDownModel?.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    print("bbbbbb $dropDownTitle");
-                                    return Column(
-                                      children: [
-                                        _buildRow(model.isaDropDownModel?[index]
-                                                .className ??
-                                            ""),
-                                      ],
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return Divider(
-                                      color: Colors.white60,
-                                      endIndent: 5.0,
-                                      indent: 5.0,
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                ),
-                              ),
+        body: Consumer<IsaDropDownViewModel>(builder: (context, model, child) {
+          return Container(
+            child: model.isaDropDownModel != null &&
+                    model.isaDropDownModel!.length != 0
+                ? Container(
+                    padding: EdgeInsets.only(
+                        top: 15, left: 15, right: 15, bottom: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            print("set $isSemSelected");
+                            isSemSelected = true;
+                            print("reset $isSemSelected");
+                            // _semBottomSheet();
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  backgroundColor: Colors.black45,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  elevation: 16,
+                                  child: Container(
+                                    child: ListView.separated(
+                                      itemCount:
+                                          model.isaDropDownModel?.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        print("bbbbbb $dropDownTitle");
+                                        return Column(
+                                          children: [
+                                            _buildRow(model
+                                                    .isaDropDownModel?[index]
+                                                    .className ??
+                                                ""),
+                                          ],
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return Divider(
+                                          color: Colors.white60,
+                                          endIndent: 5.0,
+                                          indent: 5.0,
+                                        );
+                                      },
+                                      shrinkWrap: true,
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(2, 2),
-                                blurRadius: 8,
-                                color: (isSemSelected == true)
-                                    ? Colors.blue
-                                    : Colors.white)
-                          ],
-                          border: Border.all(
-                              color: (isSemSelected == true)
-                                  ? Colors.blueAccent
-                                  : Colors.grey),
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                        child: Container(
-                          color: Colors.white,
-                          padding: EdgeInsets.only(
-                              left: 5, right: 5, top: 5, bottom: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                dropDownTitle ??
-                                    "${model.isaDropDownModel![0].className}",
-                                style: TextStyle(fontSize: 18),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(2, 2),
+                                    blurRadius: 8,
+                                    color: (isSemSelected == true)
+                                        ? Colors.blue
+                                        : Colors.white)
+                              ],
+                              border: Border.all(
+                                  color: (isSemSelected == true)
+                                      ? Colors.blueAccent
+                                      : Colors.grey),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                            child: Container(
+                              color: Colors.white,
+                              padding: EdgeInsets.only(
+                                  left: 5, right: 5, top: 5, bottom: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    dropDownTitle ??
+                                        "${model.isaDropDownModel![0].className}",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Icon(Icons.arrow_drop_down),
+                                ],
                               ),
-                              Icon(Icons.arrow_drop_down),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.7,
+                          child: ListView.builder(
+                              itemCount: 20,
+                              itemBuilder: (context, index) {
+                                return resultDetails();
+                              }),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      child: ListView.builder(
-                          itemCount: 20,
-                          itemBuilder: (context, index) {
-                            return resultDetails();
-                          }),
-                    )
-                  ],
-                ),
-              )
-            : Center(child: CircularProgressIndicator()),
-      );
-    });
+                  )
+                : Center(child: CircularProgressIndicator()),
+          );
+        }));
   }
 
   void _semBottomSheet() {
