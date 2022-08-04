@@ -60,9 +60,6 @@ class PesuApiService {
       ).toString()}');
       log(params.toString());
       final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
-          options: Options(headers: {
-            "mobileAppAuthenticationToken" : "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-          }),
           data: formData);
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {

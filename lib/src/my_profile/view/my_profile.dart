@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -17,17 +20,25 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  ProfileViewmodel? profileViewmodel;
+  var uInt8list;
 
-  late ProfileViewmodel profileViewmodel;
+
+
+
+
+
+
+
+
 
   @override
   void initState() {
-
     super.initState();
     profileViewmodel=Provider.of<ProfileViewmodel>(context,listen: false);
-    profileViewmodel.getProfileDetails(action: 4,mode: 7,userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
+    profileViewmodel!.getProfileDetails(action: 4,mode: 7,userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
         randomNum:0.824022142978994,callMethod:'background', isProfileRequest: true);
-    profileViewmodel.getProfileDetailsData(action: 27, mode: 1, userId: "PES1202002878", randomNum: 0.5799475622899326, callMethod: 'background', loginId: "PES1202002878",
+    profileViewmodel!.getProfileDetailsData(action: 27, mode: 1, userId: "PES1202002878", randomNum: 0.5799475622899326, callMethod: 'background', loginId: "PES1202002878",
         searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f", userType: 1, userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760');
 
 
@@ -55,6 +66,7 @@ class _MyProfileState extends State<MyProfile> {
 
             return data.profileModel!=null && data.profileDetailModel!=null?
 
+
            SingleChildScrollView(
              child: Container(
                color: Colors.grey[200],
@@ -72,30 +84,28 @@ class _MyProfileState extends State<MyProfile> {
                                padding: EdgeInsets.only(
                                    left: 15, top: 20, right: 35, bottom: 20),
                                child:
-                               CircleAvatar(
-                                 backgroundImage: NetworkImage(
 
-
-                                   data.profileModel?.photo !=
-                                 null
-                                 ? "${data.profileModel?.photo}"
-                                 : ""
-                                 ),
-                                 backgroundColor: Colors.white,
-                                 radius: 30,
-                               ),
-
-
-                               // CircleAvatar(
-                               //     backgroundColor: Colors.grey[200],
-                               //     radius: 60,
-                               //     child: ClipRRect(
-                               //       borderRadius: BorderRadius.circular(10.0),
-                               //       child: Icon(
-                               //         Icons.perm_identity_rounded,
-                               //         size: 80,
-                               //       ),
-                               //     )),
+                                   data.profileModel!.photo!=null ?
+                                   CircleAvatar(
+                                     backgroundImage: NetworkImage(data
+                                         .profileModel!.photo !=
+                                         null
+                                         ? "${data
+                                         .profileModel!.photo }"
+                                         : ""),
+                                    // backgroundColor: Colors.white,
+                                     radius: 50,
+                                   ):
+                                   CircleAvatar(
+                                   backgroundColor: Colors.grey[200],
+                                   radius: 60,
+                                   child: ClipRRect(
+                                     borderRadius: BorderRadius.circular(10.0),
+                                     child: Icon(
+                                       Icons.perm_identity_rounded,
+                                       size: 80,
+                                     ),
+                                   )),
                              ),
                              Container(
                                width: MediaQuery.of(context).size.width / 1.8,
@@ -207,17 +217,18 @@ class _MyProfileState extends State<MyProfile> {
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(0),
                                    color: Colors.white,
-                                   boxShadow: [
-                                     BoxShadow(
-                                         offset: Offset(2, 2),
-                                         blurRadius: 6,
-                                         color: Colors.blue)
-                                   ],
+                                   // boxShadow: [
+                                   //   BoxShadow(
+                                   //       offset: Offset(2, 2),
+                                   //       blurRadius: 6,
+                                   //       color: Colors.blue)
+                                   // ],
                                    border: Border.all(color: Colors.blueAccent),
                                  ),
                                  child: TextFormField(
                                    decoration: InputDecoration(
                                      border: InputBorder.none,
+                                     hintText: data.profileModel!.email,
                                    ),
                                  )),
                              Container(
@@ -235,17 +246,18 @@ class _MyProfileState extends State<MyProfile> {
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(0),
                                    color: Colors.white,
-                                   boxShadow: [
-                                     BoxShadow(
-                                         offset: Offset(2, 2),
-                                         blurRadius: 6,
-                                         color: Colors.blue)
-                                   ],
+                                   // boxShadow: [
+                                   //   BoxShadow(
+                                   //       offset: Offset(2, 2),
+                                   //       blurRadius: 6,
+                                   //       color: Colors.blue)
+                                   // ],
                                    border: Border.all(color: Colors.blueAccent),
                                  ),
                                  child: TextFormField(
                                    decoration: InputDecoration(
                                      border: InputBorder.none,
+                                     hintText: data.profileModel!.phone,
                                    ),
                                  )),
                              (edit == true)
@@ -736,7 +748,7 @@ class _MyProfileState extends State<MyProfile> {
                          color: Colors.white,
                          width: double.infinity,
                          child: Padding(
-                           padding: const EdgeInsets.only(left: 16,top: 10,bottom: 10),
+                           padding: const EdgeInsets.only(left: 16,top: 10,bottom: 20),
                            child: Column(
                              crossAxisAlignment: CrossAxisAlignment.start,
                              children: [
