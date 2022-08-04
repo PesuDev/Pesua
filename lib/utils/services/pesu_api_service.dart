@@ -60,6 +60,7 @@ class PesuApiService {
       ).toString()}');
       log(params.toString());
       final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
+
           data: formData);
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
