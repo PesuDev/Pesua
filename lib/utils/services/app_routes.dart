@@ -25,11 +25,13 @@ import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
 import 'package:pesu/src/isa_results/viewmodel/isa_dropdown_viewModel.dart';
 import 'package:pesu/src/login/view/login.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
 import 'package:pesu/src/notification/view/notification.dart';
 import 'package:pesu/src/online_payments/view/online_payments.dart';
 import 'package:pesu/src/placement/view/placement_dashboard.dart';
 import 'package:pesu/src/seatinginfo/view/seating_info.dart';
+import 'package:pesu/src/seatinginfo/viewmodel/seating_info_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/src/settings/view/settings.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
@@ -40,6 +42,7 @@ import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
 import '../../src/courses/viewModel/subjectViewModel.dart';
+import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -72,9 +75,16 @@ data(RouteSettings settings) {
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
-      return MaterialPageRoute(builder: (_) => ESAResults());
+      return MaterialPageRoute(builder: (_) => ChangeNotifierProvider(
+        create: (_) => EsaViewModel(),
+        child: ESAResults(),
+      ));
     case AppRoutes.seatingInfo:
-      return MaterialPageRoute(builder: (_) => SeatingInfo());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => SeatingInfoViewModel(),
+            child: SeatingInfo(),
+          ));
     case AppRoutes.bootStrap:
       return MaterialPageRoute(builder: (_) => BootStrap());
     case AppRoutes.timeTable:
@@ -106,8 +116,11 @@ data(RouteSettings settings) {
     case AppRoutes.isaResultsGraph:
       return MaterialPageRoute(builder: (_) => IsaResultGraph());
     case AppRoutes.myProfile:
-      return MaterialPageRoute(builder: (_) => MyProfile());
-    case AppRoutes.courseDashboard:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => ProfileViewmodel(),
+            child: MyProfile(),
+          ));    case AppRoutes.courseDashboard:
       return MaterialPageRoute(
           builder: (_) =>
               /*     ChangeNotifierProvider(

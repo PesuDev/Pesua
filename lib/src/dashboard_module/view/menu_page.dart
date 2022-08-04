@@ -4,6 +4,9 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../time_table/model/time_table_model.dart';
+import '../../time_table/viewmodel/timetable_viewmodel.dart';
+
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
@@ -15,6 +18,7 @@ class _MenuPageState extends State<MenuPage> {
   late DashboardViewModel _viewModel;
   var _mainHeight;
   var _mainWidth;
+
 
   @override
   void initState() {
@@ -74,7 +78,9 @@ class _MenuPageState extends State<MenuPage> {
                   } else if (index == 2) {
                     Navigator.pushNamed(context, AppRoutes.examination);
                   } else if (index == 3) {
+
                     Navigator.pushNamed(context, AppRoutes.timeTable);
+
                   } else if (index == 4) {
                     Navigator.pushNamed(context, AppRoutes.attendance);
                   } else if (index == 5) {

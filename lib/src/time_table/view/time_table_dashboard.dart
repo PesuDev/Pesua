@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer';
+
 
 class TimeTable extends StatefulWidget {
   const TimeTable({Key? key}) : super(key: key);
@@ -12,12 +15,29 @@ class TimeTable extends StatefulWidget {
   _TimeTableState createState() => _TimeTableState();
 }
 
-class _TimeTableState extends State<TimeTable> {
+class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMixin{
   late TabController tabController;
 
 
-  @override
+   DateTime date = DateTime.now();
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabController=TabController(length: 7, vsync: this);
+    tabController.addListener(() {
+
+    });
+  }
+
+
+
+   @override
   Widget build(BuildContext context) {
+
+    print("lala ${date.weekday}");
+    print("loo ${tabController.index}");
+
     return DefaultTabController(
         length: 7,
         child: Scaffold(
@@ -141,22 +161,33 @@ class _TimeTableState extends State<TimeTable> {
               ),
               Container(
                   height: MediaQuery.of(context).size.height / 1.36,
-                  child: TabBarView(children: [
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                    child: Monday()),
+                  child:
+                  TabBarView(
+                   //controller: tabController,
+
+                      children: [
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child: Monday(
+                    )),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child: Tuesday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Wednesday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Thursday()),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Friday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Saturday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Sunday()),
-                  ])),
+                  ])
+              ),
+
             ])));
   }
-}
+
+  }
+
+
+

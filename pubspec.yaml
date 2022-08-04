@@ -33,10 +33,13 @@ dependencies:
   provider: ^6.0.2
   flutter_swiper_null_safety: ^1.0.2
   webview_flutter:
+  cloud_firestore: ^3.4.1
   url_launcher: 6.1.5
   firebase_auth: 3.4.2
   google_sign_in: 5.4.0
   firebase_core: ^1.19.2
+  intl: 0.17.0
+
 
 
 dev_dependencies:
