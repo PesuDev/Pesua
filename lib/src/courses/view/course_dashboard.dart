@@ -366,6 +366,17 @@ class _CourseDashboardState extends State<CourseDashboard> {
                   dropDownTitle = name;
                 });
                 Navigator.of(context).pop();
+                _courseDropDownViewModel.getCourseDropDownDetails(
+                    action: 18,
+                    mode: 1,
+                    whichObjectId: "clickHome_pesuacademy_mycourses",
+                    title: "My Courses",
+                    userId: "e157111c-3591-4826-a1da-3b5d20db14df",
+                    deviceType: 1,
+                    serverMode: 0,
+                    programId: 1,
+                    redirectValue: "redirect:/a/ad",
+                    randomNum: 0.3376470323389076);
               },
               child: Container(
                 padding:
