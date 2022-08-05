@@ -21,13 +21,6 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   ProfileViewmodel? profileViewmodel;
-  var uInt8list;
-
-
-
-
-
-
 
 
 
@@ -40,34 +33,23 @@ class _MyProfileState extends State<MyProfile> {
         randomNum:0.824022142978994,callMethod:'background', isProfileRequest: true);
     profileViewmodel!.getProfileDetailsData(action: 27, mode: 1, userId: "PES1202002878", randomNum: 0.5799475622899326, callMethod: 'background', loginId: "PES1202002878",
         searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f", userType: 1, userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760');
-
-
-
   }
-
-
-
-
-
-
-
-
   bool edit = false;
   @override
   Widget build(BuildContext context) {
 
-
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: sideNavAppBar("My Profile"),
-      body:Consumer<ProfileViewmodel>(
+      body:
+      Consumer<ProfileViewmodel>(
           builder: (context, data, child) {
+            String? base64Image = (data.profileModel?.photo);
+            final UriData? mydata = Uri.parse(base64Image.toString()).data;
+            Uint8List? myImage = mydata?.contentAsBytes();
+            return  data.profileModel  !=null   && data.profileDetailModel !=null ?
 
-
-            return data.profileModel!=null && data.profileDetailModel!=null?
-
-
-           SingleChildScrollView(
+            SingleChildScrollView(
              child: Container(
                color: Colors.grey[200],
                child: Column(
@@ -77,78 +59,66 @@ class _MyProfileState extends State<MyProfile> {
                      children: [
                        Container(
                          width: MediaQuery.of(context).size.width,
-                         color: Colors.white,
-                         child: Row(
-                           children: [
-                             Container(
-                               padding: EdgeInsets.only(
-                                   left: 15, top: 20, right: 35, bottom: 20),
-                               child:
+                         color: Color(0xff0091CD),
+                         child: Padding(
+                           padding: const EdgeInsets.only(bottom: 20,top: 20,left: 16),
+                           child: Row(
+                             children: [
+                               myImage !=null?
+                               Container(
+                             width: 110,
+                             height: 110,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(100),
+                               image: new DecorationImage(
 
-                                   data.profileModel!.photo!=null ?
-                                   CircleAvatar(
-                                     backgroundImage: NetworkImage(data
-                                         .profileModel!.photo !=
-                                         null
-                                         ? "${data
-                                         .profileModel!.photo }"
-                                         : ""),
-                                    // backgroundColor: Colors.white,
-                                     radius: 50,
-                                   ):
-                                   CircleAvatar(
-                                   backgroundColor: Colors.grey[200],
-                                   radius: 60,
-                                   child: ClipRRect(
-                                     borderRadius: BorderRadius.circular(10.0),
-                                     child: Icon(
-                                       Icons.perm_identity_rounded,
-                                       size: 80,
-                                     ),
-                                   )),
+                                   fit: BoxFit.fill, image: MemoryImage(myImage, scale: 0.5)),
                              ),
-                             Container(
-                               width: MediaQuery.of(context).size.width / 1.8,
-                               padding: EdgeInsets.only(top: 8, right: 8, bottom: 8),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text(
-                                     data.profileModel?.name??"",
+                           ):Container(),
+                               SizedBox(width: 20,),
+                               Container(
+                                 width: MediaQuery.of(context).size.width / 1.8,
+                                 padding: EdgeInsets.only(top: 8, right: 8, bottom: 8),
+                                 child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text(
+                                       data.profileModel?.name??"",
 
-                                     //"Student401",
-                                     style: TextStyle(color: Color(0xff163269), fontSize: 18),
-                                   ),
-                                   Row(
-                                     children: [
-                                       Text('PESU ID : ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
-                                       Text(
-                                         data.profileModel?.loginId??"",
-                                         style: TextStyle(color: Color(0xff333333),fontSize: 16),
-                                       ),
-                                     ],
-                                   ),
-                                   Row(
-                                     children: [
-                                       Text('SRN: ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
-                                       Text(
-                                         data.profileModel?.departmentId??"",
-                                         style: TextStyle(color: Color(0xff333333),fontSize: 16),
-                                       ),
-                                     ],
-                                   ),
+                                       //"Student401",
+                                       style: TextStyle(color:Colors.white, fontSize: 18),
+                                     ),
+                                     Row(
+                                       children: [
+                                         Text('PESU ID : ',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
+                                         Text(
+                                           data.profileModel?.loginId??"",
+                                           style: TextStyle(color:Colors.white,fontSize: 16),
+                                         ),
+                                       ],
+                                     ),
+                                     Row(
+                                       children: [
+                                         Text('SRN: ',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
+                                         Text(
+                                           data.profileModel?.departmentId??"",
+                                           style: TextStyle(color: Colors.white,fontSize: 16),
+                                         ),
+                                       ],
+                                     ),
 
-                                   Text("${data.profileModel?.program??""} | ${data.profileModel?.branch??""}",
-                                     style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                     Text("${data.profileModel?.program??""} | ${data.profileModel?.branch??""}",
+                                       style: TextStyle(color:Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
 
-                                   Text(data.profileModel?.className??"",
+                                     Text(data.profileModel?.className??"",
 
-                                       style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                         style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
 
-                                 ],
-                               ),
-                             )
-                           ],
+                                   ],
+                                 ),
+                               )
+                             ],
+                           ),
                          ),
                        ),
                        SizedBox(
@@ -788,7 +758,7 @@ class _MyProfileState extends State<MyProfile> {
                  ],
                ),
              ),
-           ):CircularProgressIndicator();
+           ):Center(child: CircularProgressIndicator());
 
           }
       )
@@ -878,7 +848,7 @@ class _MyProfileState extends State<MyProfile> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text("Current Password"),
+                          Text("New Password"),
                           SizedBox(
                             height: 10,
                           ),
@@ -900,13 +870,13 @@ class _MyProfileState extends State<MyProfile> {
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Enter Your Current Password",
+                                    hintText: "Enter Your New Password",
                                     hintStyle: TextStyle(fontSize: 13)),
                               )),
                           SizedBox(
                             height: 20,
                           ),
-                          Text("Current Password"),
+                          Text("Confirm Password"),
                           SizedBox(
                             height: 10,
                           ),
@@ -928,7 +898,7 @@ class _MyProfileState extends State<MyProfile> {
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "Enter Your Current Password",
+                                    hintText: "Enter Your Confirm Password",
                                     hintStyle: TextStyle(fontSize: 13)),
                               )),
                           SizedBox(
