@@ -6,6 +6,7 @@ import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
+import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/src/calendar/view/calendar_dashboard.dart';
 import 'package:pesu/src/cie/view/cie_dashboard.dart';
 import 'package:pesu/src/bootstrap/view/bootstrap.dart';
@@ -49,7 +50,8 @@ data(RouteSettings settings) {
     case AppRoutes.transport:
       return MaterialPageRoute(builder: (_) => TransportDashboard());
     case AppRoutes.attendance:
-      return MaterialPageRoute(builder: (_) => AttendanceDashboard());
+      return MaterialPageRoute(builder: (_) => ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
+      child: AttendanceDashboard()));
     case AppRoutes.settings:
       return MaterialPageRoute(builder: (_) => Settings());
     case AppRoutes.backLog:
@@ -65,7 +67,9 @@ data(RouteSettings settings) {
     case AppRoutes.cieDashboard:
       return MaterialPageRoute(builder: (_) => CieDashboard());
     case AppRoutes.detailedAttendance:
-      return MaterialPageRoute(builder: (_) => DetailedAttendance());
+      return MaterialPageRoute(builder: (_) =>
+       ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
+       child: DetailedAttendance()));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:

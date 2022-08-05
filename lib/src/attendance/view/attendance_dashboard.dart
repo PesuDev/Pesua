@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
+import 'package:provider/provider.dart';
 
 class AttendanceDashboard extends StatefulWidget {
   const AttendanceDashboard({Key? key}) : super(key: key);
@@ -9,7 +11,17 @@ class AttendanceDashboard extends StatefulWidget {
   _AttendanceDashboardState createState() => _AttendanceDashboardState();
 }
 
+
 class _AttendanceDashboardState extends State<AttendanceDashboard> {
+  late AttendanceViewModel _viewModel;
+  void initState() {
+    super.initState();
+    _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
+    _viewModel.getAttendanceDropDown(
+    );
+    _viewModel.getAttendanceListInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
