@@ -14,7 +14,7 @@ class AttendanceApiServices {
   Future fetchAttendanceDropDownInfo(
   ) async {
     String url = AppUrls.commonUrl;
-    final data = await _pesuApiService.postApiCall(endPoint: url,
+    final data = await _pesuApiService.getApiCall(endPoint: url,
         params: {
         "action":18,
         "mode":1,
@@ -38,7 +38,7 @@ class AttendanceApiServices {
   Future fetchAttendanceListInfo(
       ) async {
     String url = AppUrls.commonUrl;
-    final data = await _pesuApiService.postApiCall(endPoint: url,
+    final data = await _pesuApiService.getApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":6,
