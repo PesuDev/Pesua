@@ -24,19 +24,13 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController=TabController(length: 7, vsync: this);
-    tabController.addListener(() {
 
-    });
   }
 
 
 
    @override
   Widget build(BuildContext context) {
-
-    print("lala ${date.weekday}");
-    print("loo ${tabController.index}");
 
     return DefaultTabController(
         length: 7,
