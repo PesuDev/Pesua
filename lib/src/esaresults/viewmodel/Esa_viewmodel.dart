@@ -47,7 +47,7 @@ class EsaViewModel extends ChangeNotifier {
       {required int action,
         required int mode,
         required String UserId,
-        required double randomNum, required int BatchClassId, required int ClassBatchSectionId, required int ClassessId, required String usn, required int isFinalised, required String ClassName,}) async {
+        required double randomNum, required int? BatchClassId, required int ClassBatchSectionId, required int ClassessId, required String usn, required int isFinalised, required String ClassName,}) async {
     final data = await _apiService.fetchSubjectInfo(
       action: action,
       mode: mode,
@@ -62,5 +62,4 @@ class EsaViewModel extends ChangeNotifier {
     esaModel4 = data;
     notifyListeners();
   }
-
 }
