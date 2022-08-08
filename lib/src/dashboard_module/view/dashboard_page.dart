@@ -11,6 +11,10 @@ import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../courses/viewModel/courseDropDownViewModel.dart';
+import '../../courses/viewModel/courseViewModel.dart';
+import '../../isa_results/viewmodel/isa_dropdown_viewModel.dart';
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
@@ -29,9 +33,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
             case 0:
               return HomePage();
             case 1:
-              return CourseDashboard();
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(
+                      value: CourseDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: CourseViewModel()),
+                ],
+                child: CourseDashboard(),
+              );
             case 2:
-              return ISAResults();
+              return ChangeNotifierProvider(
+                create: (_) => IsaDropDownViewModel(),
+                child: ISAResults(),
+              );
             case 3:
               return AttendanceDashboard();
             case 4:

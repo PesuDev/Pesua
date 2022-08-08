@@ -14,7 +14,7 @@ import 'dart:async';
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
   late Dio _dio = Dio();
- /* PesuApiService(){
+  /* PesuApiService(){
    this._dio.interceptors.add(InterceptorsWrapper(
      onRequest: (options, handler) {
      log('xyz :: ${options.uri}');
@@ -59,9 +59,11 @@ class PesuApiService {
         endPoint,
       ).toString()}');
       log(params.toString());
-      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),options: Options(headers: {
-        "mobileAppAuthenticationToken" : "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-      }),
+      final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
+          options: Options(headers: {
+            "mobileAppAuthenticationToken":
+                "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+          }),
           data: formData);
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
@@ -88,11 +90,10 @@ class PesuApiService {
       log(queryParams.toString());
       final response = await _dio.post(
         Uri.https(_baseURL, endPoint).toString(),
-       queryParameters: queryParams,
-
+        queryParameters: queryParams,
       );
       log('Status Code :: ${response.statusCode}');
-      if (response.statusCode == 200 ) {
+      if (response.statusCode == 200) {
         return response.statusCode;
       }
     } on SocketException {

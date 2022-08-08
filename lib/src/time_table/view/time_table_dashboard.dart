@@ -9,14 +9,22 @@ import 'dart:developer';
 
 
 class TimeTable extends StatefulWidget {
-  const TimeTable({Key? key}) : super(key: key);
+   TimeTable({this.indexvalue});
 
   @override
   _TimeTableState createState() => _TimeTableState();
+
+  int? indexvalue;
+
 }
+
 
 class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMixin{
   late TabController tabController;
+
+
+
+
 
 
    DateTime date = DateTime.now();
@@ -24,10 +32,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   void initState() {
     // TODO: implement initState
     super.initState();
-    tabController=TabController(length: 7, vsync: this);
-    tabController.addListener(() {
 
-    });
   }
 
 
@@ -35,13 +40,19 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
    @override
   Widget build(BuildContext context) {
 
-    print("lala ${date.weekday}");
-    print("loo ${tabController.index}");
-
-    return DefaultTabController(
+    return
+      DefaultTabController(
+        initialIndex: DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?0:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?1:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="wednesday"?2:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="thursday"?3:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="friday"?4:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="saturday"?5:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?6:0,
         length: 7,
         child: Scaffold(
             appBar: sideNavAppBar("TimeTable"),
+
             backgroundColor:Colors.white.withOpacity(0.9),
             body: Column(children: [
               Container(
@@ -61,6 +72,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                     Tab(
                       child: Container(
                         child: Text(
+
                           "MON",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
@@ -163,7 +175,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                   height: MediaQuery.of(context).size.height / 1.36,
                   child:
                   TabBarView(
-                   //controller: tabController,
+                   //controller:tabController,
 
                       children: [
                        ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
@@ -189,5 +201,6 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
 
   }
 
+//DateFormat('EEEE').format(DateTime.now())
 
 

@@ -1,12 +1,16 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pesu/src/my_profile/model/profile_detail/-model.dart';
+import 'package:pesu/src/my_profile/model/update_password_model.dart';
 
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
@@ -21,11 +25,11 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   ProfileViewmodel? profileViewmodel;
-  var uInt8list;
-
-
-
-
+  TextEditingController newPasswordController=TextEditingController();
+  TextEditingController confirmPasswordController=TextEditingController();
+  TextEditingController currentPasswordController=TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _newPassKey = GlobalKey<FormFieldState<String>>();
 
 
 
@@ -41,33 +45,24 @@ class _MyProfileState extends State<MyProfile> {
     profileViewmodel!.getProfileDetailsData(action: 27, mode: 1, userId: "PES1202002878", randomNum: 0.5799475622899326, callMethod: 'background', loginId: "PES1202002878",
         searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f", userType: 1, userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760');
 
-
-
   }
-
-
-
-
-
-
-
 
   bool edit = false;
   @override
   Widget build(BuildContext context) {
 
-
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: sideNavAppBar("My Profile"),
-      body:Consumer<ProfileViewmodel>(
+      body:
+      Consumer<ProfileViewmodel>(
           builder: (context, data, child) {
+            String? base64Image = (data.profileModel?.photo);
+            final UriData? mydata = Uri.parse(base64Image.toString()).data;
+            Uint8List? myImage = mydata?.contentAsBytes();
+            return  data.profileModel  !=null   && data.profileDetailModel !=null ?
 
-
-            return data.profileModel!=null && data.profileDetailModel!=null?
-
-
-           SingleChildScrollView(
+            SingleChildScrollView(
              child: Container(
                color: Colors.grey[200],
                child: Column(
@@ -77,78 +72,66 @@ class _MyProfileState extends State<MyProfile> {
                      children: [
                        Container(
                          width: MediaQuery.of(context).size.width,
-                         color: Colors.white,
-                         child: Row(
-                           children: [
-                             Container(
-                               padding: EdgeInsets.only(
-                                   left: 15, top: 20, right: 35, bottom: 20),
-                               child:
+                         color: Color(0xff0091CD),
+                         child: Padding(
+                           padding: const EdgeInsets.only(bottom: 20,top: 20,left: 16),
+                           child: Row(
+                             children: [
+                               myImage !=null?
+                               Container(
+                             width: 110,
+                             height: 110,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(100),
+                               image: new DecorationImage(
 
-                                   data.profileModel!.photo!=null ?
-                                   CircleAvatar(
-                                     backgroundImage: NetworkImage(data
-                                         .profileModel!.photo !=
-                                         null
-                                         ? "${data
-                                         .profileModel!.photo }"
-                                         : ""),
-                                    // backgroundColor: Colors.white,
-                                     radius: 50,
-                                   ):
-                                   CircleAvatar(
-                                   backgroundColor: Colors.grey[200],
-                                   radius: 60,
-                                   child: ClipRRect(
-                                     borderRadius: BorderRadius.circular(10.0),
-                                     child: Icon(
-                                       Icons.perm_identity_rounded,
-                                       size: 80,
-                                     ),
-                                   )),
+                                   fit: BoxFit.fill, image: MemoryImage(myImage, scale: 0.5)),
                              ),
-                             Container(
-                               width: MediaQuery.of(context).size.width / 1.8,
-                               padding: EdgeInsets.only(top: 8, right: 8, bottom: 8),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                 children: [
-                                   Text(
-                                     data.profileModel?.name??"",
+                           ):Container(),
+                               SizedBox(width: 20,),
+                               Container(
+                                 width: MediaQuery.of(context).size.width / 1.8,
+                                 padding: EdgeInsets.only(top: 8, right: 8, bottom: 8),
+                                 child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text(
+                                       data.profileModel?.name??"",
 
-                                     //"Student401",
-                                     style: TextStyle(color: Color(0xff163269), fontSize: 18),
-                                   ),
-                                   Row(
-                                     children: [
-                                       Text('PESU ID : ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
-                                       Text(
-                                         data.profileModel?.loginId??"",
-                                         style: TextStyle(color: Color(0xff333333),fontSize: 16),
-                                       ),
-                                     ],
-                                   ),
-                                   Row(
-                                     children: [
-                                       Text('SRN: ',style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
-                                       Text(
-                                         data.profileModel?.departmentId??"",
-                                         style: TextStyle(color: Color(0xff333333),fontSize: 16),
-                                       ),
-                                     ],
-                                   ),
+                                       //"Student401",
+                                       style: TextStyle(color:Colors.white, fontSize: 18),
+                                     ),
+                                     Row(
+                                       children: [
+                                         Text('PESU ID : ',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
+                                         Text(
+                                           data.profileModel?.loginId??"",
+                                           style: TextStyle(color:Colors.white,fontSize: 16),
+                                         ),
+                                       ],
+                                     ),
+                                     Row(
+                                       children: [
+                                         Text('SRN: ',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
+                                         Text(
+                                           data.profileModel?.departmentId??"",
+                                           style: TextStyle(color: Colors.white,fontSize: 16),
+                                         ),
+                                       ],
+                                     ),
 
-                                   Text("${data.profileModel?.program??""} | ${data.profileModel?.branch??""}",
-                                     style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                     Text("${data.profileModel?.program??""} | ${data.profileModel?.branch??""}",
+                                       style: TextStyle(color:Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
 
-                                   Text(data.profileModel?.className??"",
+                                     Text(data.profileModel?.className??"",
 
-                                       style: TextStyle(color: Color(0xff999999),fontSize: 16,fontWeight: FontWeight.w400),),
+                                         style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w400),),
 
-                                 ],
-                               ),
-                             )
-                           ],
+                                   ],
+                                 ),
+                               )
+                             ],
+                           ),
                          ),
                        ),
                        SizedBox(
@@ -788,7 +771,7 @@ class _MyProfileState extends State<MyProfile> {
                  ],
                ),
              ),
-           ):CircularProgressIndicator();
+           ):Center(child: CircularProgressIndicator());
 
           }
       )
@@ -798,199 +781,269 @@ class _MyProfileState extends State<MyProfile> {
 
 
   void changePasswordPopUp() {
+
     showDialog(
         context: context,
         barrierDismissible: true,
         builder: (BuildContext context) {
-          return AlertDialog(
-              contentPadding: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              content: Container(
-                height: MediaQuery.of(context).size.height / 1.8,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(7.0),
-                          topRight: const Radius.circular(7.0),
+          return Form(
+            key: _formKey,
+            child: AlertDialog(
+                contentPadding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                content: Container(
+                  height: MediaQuery.of(context).size.height / 1.8,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          borderRadius: new BorderRadius.only(
+                            topLeft: const Radius.circular(7.0),
+                            topRight: const Radius.circular(7.0),
+                          ),
+                          color: Colors.blue,
                         ),
-                        color: Colors.blue,
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.vpn_key_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(left: 8),
-                              child: Text(
-                                "Change Password",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Current Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(
-                                  left: 8, top: 0, bottom: 0, right: 8),
-                              height: 30,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                /* boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 6,
-                                      color: Colors.grey)
-                                ],*/
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "Enter Your Current Password",
-                                    hintStyle: TextStyle(fontSize: 13)),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text("Current Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(
-                                  left: 8, top: 0, bottom: 0, right: 8),
-                              height: 30,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                /* boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 6,
-                                      color: Colors.grey)
-                                ],*/
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "Enter Your Current Password",
-                                    hintStyle: TextStyle(fontSize: 13)),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text("Current Password"),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              padding: EdgeInsets.only(
-                                  left: 8, top: 0, bottom: 0, right: 8),
-                              height: 30,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                /* boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 6,
-                                      color: Colors.grey)
-                                ],*/
-                                border: Border.all(color: Colors.grey),
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "Enter Your Current Password",
-                                    hintStyle: TextStyle(fontSize: 13)),
-                              )),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.grey[500],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                top: 2, bottom: 2, left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Colors.grey),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.vpn_key_outlined,
+                              size: 20,
                               color: Colors.white,
                             ),
-                            child: Text(
-                              "Cancel",
-                              style: TextStyle(
-                                  color: Colors.grey[500],
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
+                            Container(
+                                padding: EdgeInsets.only(left: 8),
+                                child: Text(
+                                  "Change Password",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                          ],
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5, right: 8),
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                top: 2, bottom: 2, left: 10, right: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Colors.blue),
-                              color: Colors.blue,
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Current Password"),
+                            Container(
+                              margin: EdgeInsets.only(top: 3, bottom: 15),
+                              child: TextFormField(
+                                validator: ( String? value) {
+                                  if (value!.trim().isEmpty) {
+                                    return "Please Enter Current Password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                autofocus: true,
+                                controller:currentPasswordController,
+                                decoration: new InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      top: 1, left: 4, bottom: 1, right: 4),
+                                  hintText:"Enter Your New Password",
+                                  hintStyle: TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                  border: new OutlineInputBorder(
+                                    borderRadius: new BorderRadius.circular(5.0),
+                                    borderSide: new BorderSide(
+                                      color: Color(0xffCFD8DC),
+                                    ),
+                                  ),
+                                ),
+                                onChanged: (text) {
+                                  setState(() {});
+                                },
+                              ),
                             ),
-                            child: Text(
-                              "Save Changes",
-                              style: TextStyle(
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("New Password"),
+                            Container(
+                              margin: EdgeInsets.only(top: 3, bottom: 15),
+                              child: TextFormField(
+                                validator: ( String? value) {
+                                  if (value!.trim().isEmpty) {
+                                    return "Please Enter New Password";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                autofocus: true,
+                                controller: newPasswordController,
+                                decoration: new InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      top: 1, left: 4, bottom: 1, right: 4),
+                                  hintText:"Enter Your New Password",
+                                  hintStyle: TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                  border: new OutlineInputBorder(
+                                    borderRadius: new BorderRadius.circular(5.0),
+                                    borderSide: new BorderSide(
+                                      color: Color(0xffCFD8DC),
+                                    ),
+                                  ),
+                                ),
+                                onChanged: (text) {
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("Confirm Password"),
+
+                            Container(
+                              margin: EdgeInsets.only(top: 3, bottom: 15),
+                              child: TextFormField(
+                                validator: ( String? value) {
+                                  if(value!.isEmpty)
+                                  {
+                                    return 'Please Re-enter Confirm Password';
+                                  }else if(value.trim() !=newPasswordController.text){
+                                    return 'Password Does not match';
+
+                                  }
+                                },
+                                autofocus: true,
+                                controller: confirmPasswordController,
+                                decoration: new InputDecoration(
+                                  contentPadding: EdgeInsets.only(
+                                      top: 1, left: 4, bottom: 1, right: 4),
+                                  hintText:"Enter Your Confirm Password",
+                                  hintStyle: TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                  border: new OutlineInputBorder(
+                                    borderRadius: new BorderRadius.circular(5.0),
+                                    borderSide: new BorderSide(
+                                      color: Color(0xffCFD8DC),
+                                    ),
+                                  ),
+                                ),
+                                onChanged: (text) {
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.grey[500],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 7, bottom: 7, left: 10, right: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.grey),
                                   color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                                ),
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      color: Colors.grey[500],
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: ()async {
+                                if (_formKey.currentState != null) {
+                                  _formKey.currentState?.validate();
+                                  UpdatePasswordModel model = UpdatePasswordModel(
+                                    action: 10,
+                                    mode: 1,
+                                    oldPass: 'pes1234',
+                                    newPass: newPasswordController.text,
+                                    newPass1: confirmPasswordController.text,
+                                    userId: 1604,
+                                    loginId: 'PES1201900270',
+                                    randomNum: 0.47685889613355137,
+                                  );
+                                  var response = await profileViewmodel
+                                      ?.getUpdatePasswordDetails(
+                                      updatePasswordModel: model);
+                                  log("latika $response");
+                                  if (response == 200) {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text('password updated'),
+                                      backgroundColor: Colors.red,
+                                    ));
+
+                                    //getToast("password updated", Colors.orange);
+                                    Navigator.pushReplacementNamed(
+                                        context, AppRoutes.myProfile);
+                                  } else {
+                                    getToast("wrong updated", Colors.orange);
+                                    Navigator.pop(context);
+                                  }
+                                }
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    top: 7, bottom: 7, left: 10, right: 10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.blue),
+                                  color: Colors.blue,
+                                ),
+                                child:
+                                Text(
+                                  "Save Changes",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ));
+                      ),
+                    ],
+                  ),
+                )),
+          );
         });
   }
 
@@ -1137,9 +1190,15 @@ class _MyProfileState extends State<MyProfile> {
                           color: Colors.white,
                           padding: EdgeInsets.only(
                               top: 8.0, bottom: 8.0, left: 18, right: 18),
-                          child: Text(
-                            "yes",
-                            style: TextStyle(color: Colors.black),
+                          child: InkWell(
+                            onTap: (){
+
+                            },
+
+                            child: Text(
+                              "yes",
+                              style: TextStyle(color: Colors.black),
+                            ),
                           ),
                         ),
                       ],
@@ -1149,4 +1208,18 @@ class _MyProfileState extends State<MyProfile> {
           );
         });
   }
+
+  getToast(String message, Color color) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 5,
+        backgroundColor: color,
+        textColor: Colors.white,
+        fontSize: 14.0);
+  }
+
+
+
 }
