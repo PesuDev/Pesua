@@ -23,23 +23,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   ProfileViewmodel? profileViewmodel;
 
-
-
   @override
   void initState() {
     super.initState();
     profileViewmodel=Provider.of<ProfileViewmodel>(context,listen: false);
-    profileViewmodel!.getProfileDetails(action: 4,mode: 7,userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
+    profileViewmodel?.getProfileDetails(action: 4,mode: 7,userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
         randomNum:0.824022142978994,callMethod:'background', isProfileRequest: true);
 
 
   }
-
-
-
-
-
-
 
   var _mainHeight;
   var _mainWidth;
@@ -55,7 +47,8 @@ class _HomePageState extends State<HomePage> {
     _mainWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        body: Container(
+        body:
+        Container(
           height: _mainHeight,
           width: _mainWidth,
           color: Colors.white,
@@ -403,59 +396,78 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+
   Widget getDrawerDetails({required BuildContext context}) {
-    String? base64Image = (profileViewmodel?.profileModel?.photo);
+    String? base64Image = profileViewmodel?.profileModel?.photo;
     final UriData? mydata = Uri.parse(base64Image.toString()).data;
     Uint8List? myImage = mydata?.contentAsBytes();
-
-    return Container(
-      height: _mainHeight * 0.060,
-      color: Colors.white,
-      margin: EdgeInsets.only(
-          left: _mainWidth * 0.05,
-          right: _mainWidth * 0.05,
-          top: _mainHeight * 0.02),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          myImage !=null?
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              image: new DecorationImage(
-                  fit: BoxFit.fill, image: MemoryImage(myImage, scale: 0.5)),
-            ),
-          ):Container(
-            color: Colors.lightBlue,
-          ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-          Container(
-            width: _mainWidth * 0.75,
-            child: Column(
-              //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  profileViewmodel?.profileModel?.name??"",
-                  // 'Student Name',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                      color: Colors.black),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("SRN :${profileViewmodel?.profileModel?.departmentId??""}",
-                    style: getTextStyle),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return
+      Consumer<ProfileViewmodel>(
+          builder: (context, data, child) {
+            String? base64Image = (data.profileModel?.photo);
+            final UriData? mydata = Uri
+                .parse(base64Image.toString())
+                .data;
+            Uint8List? myImage = mydata?.contentAsBytes();
+            return data.profileModel != null
+                ?
+            Container(
+              height: _mainHeight * 0.060,
+              color: Colors.white,
+              margin: EdgeInsets.only(
+                  left: _mainWidth * 0.05,
+                  right: _mainWidth * 0.05,
+                  top: _mainHeight * 0.02),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  myImage != null ?
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      image: new DecorationImage(
+                          fit: BoxFit.fill,
+                          image: MemoryImage(myImage, scale: 0.5)),
+                    ),
+                  ) : Container(
+                    color: Colors.lightBlue,
+                  ),
+                  SizedBox(width: MediaQuery
+                      .of(context)
+                      .size
+                      .width * 0.02),
+                  Container(
+                    width: _mainWidth * 0.75,
+                    child: Column(
+                      //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data.profileModel?.name ?? "",
+                          // 'Student Name',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text("SRN :${data.profileModel
+                            ?.departmentId ?? ""}",
+                            style: getTextStyle),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+                : Center(child: CircularProgressIndicator());
+          }
+            );
   }
 
   TextStyle get getTextStyle => TextStyle(
