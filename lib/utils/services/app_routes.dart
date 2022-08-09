@@ -17,9 +17,7 @@ import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
 import 'package:pesu/src/courses/viewModel/courseArgument.dart';
-import 'package:pesu/src/courses/viewModel/courseDropDownViewModel.dart';
 import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
-import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
 import 'package:pesu/src/esaresults/viewmodel/graph_viewmodel.dart';
@@ -27,7 +25,7 @@ import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
-import 'package:pesu/src/isa_results/viewmodel/isa_dropdown_viewModel.dart';
+import 'package:pesu/src/isa_results/viewmodel/isaViewModel.dart';
 import 'package:pesu/src/login/view/login.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
@@ -46,7 +44,6 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
-import '../../src/courses/viewModel/subjectViewModel.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
@@ -84,11 +81,11 @@ data(RouteSettings settings) {
           builder: (_) => ChangeNotifierProvider(
               create: (_) => AttendanceViewModel(),
               child: DetailedAttendance(
-         subjectCode: args.subjectCode,
-         subjectName: args.subjectName,
-         attendance: args.attendance,
-           percentage: args.percentage,
-       )));
+                subjectCode: args.subjectCode,
+                subjectName: args.subjectName,
+                attendance: args.attendance,
+                percentage: args.percentage,
+              )));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
@@ -127,11 +124,8 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => SessionEffect());
     case AppRoutes.isaResults:
       return MaterialPageRoute(
-          builder: (_) => MultiProvider(
-                providers: [
-                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
-                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
-                ],
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => IsaViewModel(),
                 child: ISAResults(),
               ));
     case AppRoutes.isaResultsGraph:
@@ -144,26 +138,14 @@ data(RouteSettings settings) {
               ));
     case AppRoutes.courseDashboard:
       return MaterialPageRoute(
-          builder: (_) =>
-              /*     ChangeNotifierProvider(
-                create: (_) => CourseDropDownViewModel(),
-                child: CourseDashboard(),
-              )*/
-              MultiProvider(
-                providers: [
-                  ChangeNotifierProvider.value(
-                      value: CourseDropDownViewModel()),
-                  ChangeNotifierProvider.value(value: CourseViewModel()),
-                ],
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
                 child: CourseDashboard(),
               ));
     case AppRoutes.individualSub:
       return MaterialPageRoute(
-          builder: (_) => MultiProvider(
-                providers: [
-                  ChangeNotifierProvider.value(value: SubjectViewModel()),
-                  ChangeNotifierProvider.value(value: UnitViewModel()),
-                ],
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
                 child: IndividualSubScreen(),
               ));
     case AppRoutes.individualUnit:

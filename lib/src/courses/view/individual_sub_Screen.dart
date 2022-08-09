@@ -4,15 +4,11 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pesu/src/courses/view/course_dashboard.dart';
-import 'package:pesu/src/courses/view/individual_unit_screen.dart';
 import 'package:pesu/src/courses/viewModel/courseArgument.dart';
-import 'package:pesu/src/courses/viewModel/subjectViewModel.dart';
-import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/utils/services/app_routes.dart';
-import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert' show utf8;
+
+import '../viewModel/courseViewModel.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   const IndividualSubScreen({Key? key}) : super(key: key);
@@ -23,8 +19,8 @@ class IndividualSubScreen extends StatefulWidget {
 
 class _IndividualSubScreenState extends State<IndividualSubScreen>
     with SingleTickerProviderStateMixin {
-  SubjectViewModel _subjectViewModel = SubjectViewModel();
-  UnitViewModel _unitViewModel = UnitViewModel();
+  CourseViewModel _subjectViewModel = CourseViewModel();
+  CourseViewModel _unitViewModel = CourseViewModel();
   late final _tabController =
       TabController(length: 4, initialIndex: 0, vsync: this);
   bool expand = false;
@@ -32,14 +28,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   @override
   void initState() {
     super.initState();
-    _subjectViewModel = Provider.of<SubjectViewModel>(context, listen: false);
+    _subjectViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _subjectViewModel.getSubjectContentDetails(
         action: 18,
         mode: 11,
         subjectId: 3830,
         subjectName: "Electromagnetic Field & Transmission Lines",
         randomNum: 0.9969186291364449);
-    _unitViewModel = Provider.of<UnitViewModel>(context, listen: false);
+    _unitViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _unitViewModel.getUnitDetails(
         action: 18,
         mode: 14,
@@ -49,7 +45,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget build(BuildContext context) {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -100,8 +96,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget? content() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
-      return Consumer<UnitViewModel>(builder: (context, data, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
+      return Consumer<CourseViewModel>(builder: (context, data, child) {
         return Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: ListView.separated(
@@ -154,7 +150,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     ],
                   ),
                   (expand == true)
-                      ? Consumer<SubjectViewModel>(
+                      ? Consumer<CourseViewModel>(
                           builder: (context, model, child) {
                           print(
                               "nnnn ${model.subjectModel?.cOURSECONTENT?[i].courseContentTypeId == 3 ? {
@@ -247,7 +243,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget? objectives() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: ListView.builder(
@@ -276,7 +272,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget? outcomes() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: ListView.builder(
@@ -306,7 +302,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   Widget? references() {
     return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
-        child: Consumer<SubjectViewModel>(builder: (context, model, child) {
+        child: Consumer<CourseViewModel>(builder: (context, model, child) {
           return ListView.separated(
             itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
             itemBuilder: (context, int i) {

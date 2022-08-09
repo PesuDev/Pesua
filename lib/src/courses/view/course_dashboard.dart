@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
-import 'package:pesu/src/courses/viewModel/courseDropDownViewModel.dart';
+
 import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
@@ -18,13 +18,13 @@ class _CourseDashboardState extends State<CourseDashboard> {
   final GlobalKey _menuKey = GlobalKey();
   bool isSemSelected = false;
   String? dropDownTitle;
-  late CourseDropDownViewModel _courseDropDownViewModel;
+  late CourseViewModel _courseDropDownViewModel;
   late CourseViewModel _courseViewModel;
 
   void initState() {
     super.initState();
     _courseDropDownViewModel =
-        Provider.of<CourseDropDownViewModel>(context, listen: false);
+        Provider.of<CourseViewModel>(context, listen: false);
     _courseDropDownViewModel.getCourseDropDownDetails(
         action: 18,
         mode: 1,
@@ -55,8 +55,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: sideNavAppBar("My Courses"),
-        body:
-            Consumer<CourseDropDownViewModel>(builder: (context, model, child) {
+        body: Consumer<CourseViewModel>(builder: (context, model, child) {
           return Container(
             child:
                 model.courseDropDownModel != null &&

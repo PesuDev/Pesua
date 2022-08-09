@@ -1,5 +1,4 @@
 import 'package:pesu/src/courses/model/unitModel.dart';
-import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/utils/constants/app_urls.dart';
 import 'package:pesu/utils/services/pesu_api_service.dart';
 
