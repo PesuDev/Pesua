@@ -166,9 +166,9 @@ data(RouteSettings settings) {
     case AppRoutes.esaGraph:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-            create: (_) => GraphViewModel(),
-            child: EsaGraph(),
-          ));
+                create: (_) => GraphViewModel(),
+                child: EsaGraph(),
+              ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
   }
