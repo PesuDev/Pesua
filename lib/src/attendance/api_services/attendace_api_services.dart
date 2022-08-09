@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:pesu/src/attendance/model/attendance_list_model.dart';
 
 import '../../../utils/constants/app_urls.dart';
 import '../../../utils/services/pesu_api_service.dart';
+import '../model/attendance_dropdown_model.dart';
 
 class AttendanceApiServices {
   late final PesuApiService _pesuApiService = PesuApiService();
@@ -11,10 +13,10 @@ class AttendanceApiServices {
 
 
 
-  Future fetchAttendanceDropDownInfo(
+  Future <AttendanceDropDownModel?>fetchAttendanceDropDownInfo(
   ) async {
     String url = AppUrls.commonUrl;
-    final data = await _pesuApiService.getApiCall(endPoint: url,
+    final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
         "action":18,
         "mode":1,
@@ -30,15 +32,16 @@ class AttendanceApiServices {
 
     }
     );
+
     log("response:${data.toString()}");
     if (data != null) {
-     // return ESAModel4.fromJson(data);
+      return AttendanceDropDownModel.fromJson(data[0]);
     }
   }
-  Future fetchAttendanceListInfo(
+  Future<AttendanceListModel?> fetchAttendanceListInfo(
       ) async {
     String url = AppUrls.commonUrl;
-    final data = await _pesuApiService.getApiCall(endPoint: url,
+    final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":6,
@@ -50,7 +53,7 @@ class AttendanceApiServices {
     );
     log("response:${data.toString()}");
     if (data != null) {
-      // return ESAModel4.fromJson(data);
+       return AttendanceListModel.fromJson(data);
     }
   }
 }
