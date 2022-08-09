@@ -17,8 +17,8 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   void initState() {
     super.initState();
     _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
-    _viewModel.getAttendanceDropDown(
-    );
+    // _viewModel.getAttendanceDropDown(
+    // );
     _viewModel.getAttendanceListInfo();
   }
 
@@ -28,7 +28,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
       appBar: sideNavAppBar("Attendance"),
      // drawer: Container(),
       body: Consumer<AttendanceViewModel>(builder: (context,value,child){
-        return Container(
+        return value.attendanceListModel?.aTTENDANCELIST !=null?Container(
           margin: EdgeInsets.only(top: 15,left: 15,right: 15,bottom: 15),
           child: SingleChildScrollView(
             child:   Column(
@@ -153,7 +153,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
 
             ),
           ),
-        );
+        ):Center(child: CircularProgressIndicator(),);
       },
 
       ),
