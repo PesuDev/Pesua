@@ -52,17 +52,17 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
                           SizedBox(height: 15,),
                           Row(
                             children: [
-                              Text('UF17C5253 ', style: TextStyle(fontSize: 14,
+                              Text('${widget.subjectCode} ', style: TextStyle(fontSize: 14,
                                 color: Color.fromRGBO(255, 255, 255, 0.6),),),
                               Expanded(child: Text(
-                                '- Microprocessors & Architecture',
+                                '- ${widget.subjectName}',
                                 style: TextStyle(
                                   fontSize: 14, color: Colors.white,),)),
                             ],
                           ),
                           Row(
                             children: [
-                              Text('Last updated on : 29-Apr-2021 08:54 AM',
+                              Text('Last updated on : ',
                                 style: TextStyle(
                                   fontSize: 14, color: Colors.white,),),
 
@@ -72,12 +72,12 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
                             children: [
                               Text('Attendance ', style: TextStyle(fontSize: 14,
                                 color: Color.fromRGBO(255, 255, 255, 0.6),),),
-                              Text('36/40', style: TextStyle(
+                              Text('${widget.attendance}', style: TextStyle(
                                 fontSize: 14, color: Colors.white,),),
                               SizedBox(width: 15,),
                               Text('Percentage ', style: TextStyle(fontSize: 14,
                                 color: Color.fromRGBO(255, 255, 255, 0.6),),),
-                              Text('88.02 %', style: TextStyle(
+                              Text('${widget.percentage} %', style: TextStyle(
                                 fontSize: 14, color: Colors.white,),),
                             ],
                           ),
@@ -126,7 +126,7 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
                                                         0xff9B9B9B),))),
 
                                           Icon(
-                                            Icons.check,
+                                            value.detailedAttendanceModel?[index].status==1?  Icons.check:Icons.clear,
                                             color:  value.detailedAttendanceModel?[index].status==1?Colors.green:Colors.red,
                                             size: 30.0,
                                           ),
