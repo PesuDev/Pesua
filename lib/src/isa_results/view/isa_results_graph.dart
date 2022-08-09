@@ -34,11 +34,11 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
               child: Text("UE20CS251 - Design and Analysis of Algorithms"),
             ),
             //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
-            /*   Container(
+            Container(
               color: Colors.white,
               height: MediaQuery.of(context).size.height * 0.5,
-            ),*/
-            SfCartesianChart(
+            ),
+            /* SfCartesianChart(
                 backgroundColor: Colors.white,
                 primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Students')),
                 primaryYAxis: NumericAxis(
@@ -60,7 +60,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
                       name: 'Sales',
                       // Enable data label
                       dataLabelSettings: DataLabelSettings(isVisible: true))
-                ]),
+                ]),*/
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
               child: Text("Summary"),
