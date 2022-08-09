@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
@@ -78,10 +79,16 @@ data(RouteSettings settings) {
     case AppRoutes.cieDashboard:
       return MaterialPageRoute(builder: (_) => CieDashboard());
     case AppRoutes.detailedAttendance:
+      final args = settings.arguments as DetailedArguments;
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
               create: (_) => AttendanceViewModel(),
-              child: DetailedAttendance()));
+              child: DetailedAttendance(
+         subjectCode: args.subjectCode,
+         subjectName: args.subjectName,
+         attendance: args.attendance,
+           percentage: args.percentage,
+       )));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
