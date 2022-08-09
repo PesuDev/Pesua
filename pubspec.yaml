@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_switch: ^0.3.2
-  syncfusion_flutter_charts: 19.4.38
+  syncfusion_flutter_charts:  ^20.2.40
   charts_flutter: 0.12.0
   shared_preferences: ^2.0.15
   http: ^0.13.4

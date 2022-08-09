@@ -58,8 +58,10 @@ data(RouteSettings settings) {
     case AppRoutes.transport:
       return MaterialPageRoute(builder: (_) => TransportDashboard());
     case AppRoutes.attendance:
-      return MaterialPageRoute(builder: (_) => ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
-      child: AttendanceDashboard()));
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: AttendanceDashboard()));
     case AppRoutes.settings:
       return MaterialPageRoute(builder: (_) => Settings());
     case AppRoutes.backLog:
@@ -75,9 +77,10 @@ data(RouteSettings settings) {
     case AppRoutes.cieDashboard:
       return MaterialPageRoute(builder: (_) => CieDashboard());
     case AppRoutes.detailedAttendance:
-      return MaterialPageRoute(builder: (_) =>
-       ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
-       child: DetailedAttendance()));
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: DetailedAttendance()));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
@@ -116,8 +119,11 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => SessionEffect());
     case AppRoutes.isaResults:
       return MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider(
-                create: (_) => IsaDropDownViewModel(),
+          builder: (_) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
+                ],
                 child: ISAResults(),
               ));
     case AppRoutes.isaResultsGraph:
