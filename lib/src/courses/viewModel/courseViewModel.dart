@@ -1,26 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pesu/src/courses/api/courseApiService.dart';
-import 'package:pesu/src/courses/api/courseDropDownApiService.dart';
 
 import 'package:pesu/src/courses/model/courseModel.dart';
 
-import '../api/subjectApiService.dart';
-import '../api/unitApiService.dart';
 import '../model/courseDropDownModel.dart';
 import '../model/subjectModel.dart';
 import '../model/unitModel.dart';
 
 class CourseViewModel extends ChangeNotifier {
-  final CourseDropDownApiService _courseDropDownApiService =
-      CourseDropDownApiService();
-  List<CourseDropDownModel>? courseDropDownModel;
+  final CourseApiService _courseDropDownApiService = CourseApiService();
   final CourseApiService _courseApiService = CourseApiService();
+  final CourseApiService _subjectAPiService = CourseApiService();
+  final CourseApiService _unitApiService = CourseApiService();
+  List<CourseDropDownModel>? courseDropDownModel;
   CourseModel? courseModel;
   List<STUDENTSUBJECTS>? studentSubjects;
-  final SubjectAPiService _subjectAPiService = SubjectAPiService();
   SubjectModel? subjectModel;
   List<COURSECONTENT>? courseContent;
-  final UnitApiService _unitApiService = UnitApiService();
+
   List<UnitModel>? unitModel;
 
   void getCourseDropDownDetails(
