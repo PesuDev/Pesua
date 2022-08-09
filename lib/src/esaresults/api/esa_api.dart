@@ -49,7 +49,7 @@ class EsaApi {
     required int mode,
     required double randomNum,
     required String userId,
-    required int batchClassId,
+    required int? batchClassId,
     required int classBatchSectionId,
     required int classessId,
     required String className,
