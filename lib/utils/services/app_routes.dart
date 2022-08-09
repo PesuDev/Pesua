@@ -21,6 +21,7 @@ import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
 import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
+import 'package:pesu/src/esaresults/viewmodel/graph_viewmodel.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
@@ -157,7 +158,11 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => IndividualUnitScreen(title: args?.title));
     case AppRoutes.esaGraph:
-      return MaterialPageRoute(builder: (_) => EsaGraph());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => GraphViewModel(),
+            child: EsaGraph(),
+          ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
   }
