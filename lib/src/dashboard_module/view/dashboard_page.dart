@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 create: (_) => ProfileViewmodel(),
                 child: HomePage(),
               );
-              case 1:
+            case 1:
               return MultiProvider(
                 providers: [
                   ChangeNotifierProvider.value(
@@ -47,12 +47,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: CourseDashboard(),
               );
             case 2:
-              return ChangeNotifierProvider(
-                create: (_) => IsaDropDownViewModel(),
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
+                ],
                 child: ISAResults(),
               );
             case 3:
-              return  ChangeNotifierProvider(
+              return ChangeNotifierProvider(
                 create: (_) => AttendanceViewModel(),
                 child: AttendanceDashboard(),
               );

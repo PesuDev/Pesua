@@ -194,7 +194,7 @@ class _ISAResultsState extends State<ISAResults> {
       return ListView.builder(
           itemCount: model.isaResultModel?.length,
           itemBuilder: (context, int i) {
-            /*   List<int> items = model.isaResultModel?[i].subjectId as List<int>;
+            /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
             return Container(
               padding: EdgeInsets.only(bottom: 8),
