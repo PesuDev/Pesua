@@ -14,6 +14,22 @@ class PreviousSem extends StatefulWidget {
 class _PreviousSemState extends State<PreviousSem> {
   late EsaViewModel _viewModel;
 
+  Future<void> _submittedRefreshList() async {
+    _viewModel.getSubjectData(
+      action: 7,
+      mode: 7,
+      BatchClassId: 484,
+      // _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
+      ClassBatchSectionId: 2,
+      ClassessId: 2,
+      UserId: 'acddb8cf-e8e4-40d7-9ee3-fea238994dcb',
+      usn: 'PES1UG19CS115',
+      ClassName: selectedItem.toString(),
+      isFinalised: 1,
+      randomNum: 0.2195043762231128,
+    );
+
+  }
   @override
   void initState() {
     super.initState();
@@ -27,16 +43,18 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getSubjectData(
       action: 7,
       mode: 7,
-      BatchClassId: 743,
+      BatchClassId: 484,
+    //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: 'e157111c-3591-4826-a1da-3b5d20db14df',
+      UserId: 'acddb8cf-e8e4-40d7-9ee3-fea238994dcb',
       usn: 'PES1UG19CS115',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
     );
   }
+
 
   List<SalesData> data = [
     SalesData('Jan', 34),
@@ -50,224 +68,252 @@ class _PreviousSemState extends State<PreviousSem> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<EsaViewModel>(builder: (context, data, child) {
-        return data.esaModel2 != null &&
-            data.esaModel2!.studentCGPAWISE!.isNotEmpty && data.esaModel4!=null && data.esaModel4!.rESULTS!.isNotEmpty
-            ? SafeArea(
-          child: SingleChildScrollView(
-            child: Column(children: [
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                decoration: BoxDecoration(
-                  color: Color(0xffFFFFFF),
-                  border: Border.all(
+    return RefreshIndicator(
+      onRefresh: _submittedRefreshList,
+      child: Scaffold(
+        body: Consumer<EsaViewModel>(builder: (context, data, child) {
+          return data.esaModel2 != null &&
+              data.esaModel2!.studentCGPAWISE!.isNotEmpty && data.esaModel4!=null && data.esaModel4!.rESULTS!.isNotEmpty
+              ? SafeArea(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
-                    width: 8,
+                    border: Border.all(
+                      color: Color(0xffFFFFFF),
+                      width: 8,
+                    ),
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          "Earned Credits",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff000000),
-                            fontFamily: 'Open Sans',
-                          ),
-                        ),
-                        Text(
-                          ("${data.esaModel2?.studentCGPAWISE?[0].earnedCredits.toString()}/${data.esaModel2?.studentCGPAWISE?[0].credits.toString()}") ??
-                              "116/116",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xff666666),
-                            fontFamily: 'Open Sans',
-                          ),
-                        ),
-                      ],
-                    ),
-                    const VerticalDivider(
-                      width: 20,
-                      thickness: 8,
-                      indent: 20,
-                      endIndent: 0,
-                      color: Colors.black,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          "Current CGPA",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff000000),
-                            fontFamily: 'Open Sans',
-                          ),
-                        ),
-                        Text(
-                          data.esaModel2?.studentCGPAWISE?[0].cGPA.toString() ??
-                              "116/116",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xff666666),
-                            fontFamily: 'Open Sans',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              // Container(
-              //   child: Padding(
-              //     padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
-              //     child: Column(
-              //       // mainAxisSize: MainAxisSize.min,
-              //       crossAxisAlignment: CrossAxisAlignment.center,
-              //       children: [
-              //         SfCartesianChart(
-              //             primaryXAxis: CategoryAxis(),
-              //             title: ChartTitle(text: "Students Marks Graph"),
-              //             legend: Legend(isVisible: true),
-              //             tooltipBehavior: TooltipBehavior(enable: true),
-              //             series: <ChartSeries<SalesData, String>>[
-              //               LineSeries <SalesData, String>(
-              //                   dataSource: data,
-              //                   xValueMapper: (SalesData sales, _) => sales.month,
-              //                   yValueMapper: (SalesData sales, _) => sales.sales,
-              //                //   dataLabelSettings: DataLabelSettings(isVisible: true)
-              //               )
-              //             ]),
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             TextButton.icon(
-              //               onPressed: null,
-              //               icon: const Icon(Icons.bar_chart),
-              //               label: Text(""),
-              //             ),
-              //             Text("CGPA",style: TextStyle(
-              //               fontSize: 12,
-              //               fontWeight: FontWeight.w500,
-              //               color: Color(0xff666666),
-              //               fontFamily: 'Open Sans',
-              //             ),),
-              //             SizedBox(
-              //               width: 20,
-              //             ),
-              //             TextButton.icon(
-              //               onPressed: null,
-              //               icon: const Icon(Icons.bar_chart),
-              //               label: Text(""),
-              //             ),
-              //             Text("CGPA",style: TextStyle(
-              //               fontSize: 12,
-              //               fontWeight: FontWeight.w500,
-              //               color: Color(0xff666666),
-              //               fontFamily: 'Open Sans',
-              //             ),)
-              //           ],
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
-                decoration: BoxDecoration(
-                  // color: const Color(0xff7c94b6),
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 8),
-                  child: DropdownButtonFormField<String>(
-                      value: selectedItem,
-                      items: data.items
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(item),
-                              ))
-                          .toList(),
-                      onChanged: (item) {
-                        setState(() => selectedItem = item);
-                        log("SEMMMMM${selectedItem}");
-                      }),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                color: Colors.cyan[100],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        data.esaModel4?.cGPASEMESTERWISE?[0].description ?? "Dec 2021",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff000000),
-                          fontFamily: 'Open Sans',
-                        ),
-                      ),
-                      Divider(
-                        thickness: 3,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "SGPA :",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff000000),
-                                        fontFamily: 'Open Sans',
-                                      ),
-                                    ),
-                                    Text(
-                                      data.esaModel4?.cGPASEMESTERWISE?[0].sGPA ?? "",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff000000),
-                                        fontFamily: 'Open Sans',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                              ],
+                          Text(
+                            "Earned Credits",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff000000),
+                              fontFamily: 'Open Sans',
                             ),
                           ),
-                          Column(
-                            children: [
+                          Text(
+                            ("${data.esaModel2?.studentCGPAWISE?[0].earnedCredits.toString()}/${data.esaModel2?.studentCGPAWISE?[0].credits.toString()}") ??
+                                "116/116",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: Color(0xff666666),
+                              fontFamily: 'Open Sans',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const VerticalDivider(
+                        width: 20,
+                        thickness: 8,
+                        indent: 20,
+                        endIndent: 0,
+                        color: Colors.black,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            "Current CGPA",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff000000),
+                              fontFamily: 'Open Sans',
+                            ),
+                          ),
+                          Text(
+                            data.esaModel2?.studentCGPAWISE?[0].cGPA.toString() ??
+                                "116/116",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: Color(0xff666666),
+                              fontFamily: 'Open Sans',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                // Container(
+                //   child: Padding(
+                //     padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+                //     child: Column(
+                //       // mainAxisSize: MainAxisSize.min,
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //         SfCartesianChart(
+                //             primaryXAxis: CategoryAxis(),
+                //             title: ChartTitle(text: "Students Marks Graph"),
+                //             legend: Legend(isVisible: true),
+                //             tooltipBehavior: TooltipBehavior(enable: true),
+                //             series: <ChartSeries<SalesData, String>>[
+                //               LineSeries <SalesData, String>(
+                //                   dataSource: data,
+                //                   xValueMapper: (SalesData sales, _) => sales.month,
+                //                   yValueMapper: (SalesData sales, _) => sales.sales,
+                //                //   dataLabelSettings: DataLabelSettings(isVisible: true)
+                //               )
+                //             ]),
+                //         Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             TextButton.icon(
+                //               onPressed: null,
+                //               icon: const Icon(Icons.bar_chart),
+                //               label: Text(""),
+                //             ),
+                //             Text("CGPA",style: TextStyle(
+                //               fontSize: 12,
+                //               fontWeight: FontWeight.w500,
+                //               color: Color(0xff666666),
+                //               fontFamily: 'Open Sans',
+                //             ),),
+                //             SizedBox(
+                //               width: 20,
+                //             ),
+                //             TextButton.icon(
+                //               onPressed: null,
+                //               icon: const Icon(Icons.bar_chart),
+                //               label: Text(""),
+                //             ),
+                //             Text("CGPA",style: TextStyle(
+                //               fontSize: 12,
+                //               fontWeight: FontWeight.w500,
+                //               color: Color(0xff666666),
+                //               fontFamily: 'Open Sans',
+                //             ),)
+                //           ],
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
+                  decoration: BoxDecoration(
+                    // color: const Color(0xff7c94b6),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 8),
+                    child: DropdownButtonFormField<String>(
+                        value: selectedItem,
+                        items: data.items
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Text(item),
+                                ))
+                            .toList(),
+                        onChanged: (item) {
+                          setState(() => selectedItem = item);
+                          log("SEMMMMM${selectedItem}");
+                         _submittedRefreshList();
+                        }),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  color: Colors.cyan[100],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data.esaModel4?.cGPASEMESTERWISE?[0].description ?? "Dec 2021",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff000000),
+                            fontFamily: 'Open Sans',
+                          ),
+                        ),
+                        Divider(
+                          thickness: 3,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "SGPA :",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff000000),
+                                          fontFamily: 'Open Sans',
+                                        ),
+                                      ),
+                                      Text(
+                                        data.esaModel4?.cGPASEMESTERWISE?[0].sGPA ?? "",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff000000),
+                                          fontFamily: 'Open Sans',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Credits :",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff000000),
+                                          fontFamily: 'Open Sans',
+                                        ),
+                                      ),
+                                      Text(
+                                        ("${data.esaModel4?.cGPASEMESTERWISE?[0].earnedCredits.toString()}/${data.esaModel4?.cGPASEMESTERWISE?[0].credits.toString()}") ??   "SGPA",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff000000),
+                                          fontFamily: 'Open Sans',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
+                              ),
                               Row(
                                 children: [
                                   Text(
-                                    "Credits :",
+                                    "CGPA :",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -276,7 +322,7 @@ class _PreviousSemState extends State<PreviousSem> {
                                     ),
                                   ),
                                   Text(
-                                    ("${data.esaModel4?.cGPASEMESTERWISE?[0].earnedCredits.toString()}/${data.esaModel4?.cGPASEMESTERWISE?[0].credits.toString()}") ??   "SGPA",
+                                    data.esaModel4?.cGPASEMESTERWISE?[0].cGPA ?? "",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -286,150 +332,128 @@ class _PreviousSemState extends State<PreviousSem> {
                                   ),
                                 ],
                               ),
-
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "CGPA :",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff000000),
-                                  fontFamily: 'Open Sans',
-                                ),
-                              ),
-                              Text(
-                                data.esaModel4?.cGPASEMESTERWISE?[0].cGPA ?? "",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff000000),
-                                  fontFamily: 'Open Sans',
-                                ),
-                              ),
                             ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
-                color: Color(0xffFFFFFF),
-                child: Column(
-                  children: [
-                    ListTileTheme.merge(
-                      dense: true,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: data.esaModel4!.rESULTS!.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${data.esaModel4?.rESULTS?[index].subjectCode ??""} : ${data.esaModel4?.rESULTS?[index].subjectName ??""}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14,
-                                        fontFamily: 'Open Sans',
-                                        color: Color(0xff000000))),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
+                    color: Color(0xffFFFFFF),
+                    child: Column(
+                      children: [
+                        ListTileTheme.merge(
+                          dense: true,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: data.esaModel4!.rESULTS!.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
+                                    Text("${data.esaModel4?.rESULTS?[index].subjectCode ??""} : ${data.esaModel4?.rESULTS?[index].subjectName ??""}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 14,
+                                            fontFamily: 'Open Sans',
+                                            color: Color(0xff000000))),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: [
-                                        Text(
-                                          "Credits",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Credits",
+                                              style: TextStyle(
+                                                  color: Color(0xff9B9B9B),
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16),
+                                            ),
+                                            Text(
+                                              ("${data.esaModel4?.rESULTS?[index].earnedCredit.toString()}/${data.esaModel4?.rESULTS?[index].credits.toString()}") ??   "SGPA",
+                                              style: TextStyle(
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          ("${data.esaModel4?.rESULTS?[index].earnedCredit.toString()}/${data.esaModel4?.rESULTS?[index].credits.toString()}") ??   "SGPA",
-                                          style: TextStyle(
-                                              color: Color(0xff9B9B9B),
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14),
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "Grade",
+                                              style: TextStyle(
+                                                  color: Color(0xff9B9B9B),
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16),
+                                            ),
+                                            Text(
+                                            data.esaModel4?.rESULTS?[index].grade ??  "A",
+                                              style: TextStyle(
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                        TextButton.icon(
+                                          onPressed: null,
+                                          icon: const Icon(Icons.bar_chart),
+                                          label: Text(""),
                                         ),
                                       ],
                                     ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "Grade",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16),
-                                        ),
-                                        Text(
-                                        data.esaModel4?.rESULTS?[index].grade ??  "A",
-                                          style: TextStyle(
-                                              color: Color(0xff9B9B9B),
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14),
-                                        ),
-                                      ],
-                                    ),
-                                    TextButton.icon(
-                                      onPressed: null,
-                                      icon: const Icon(Icons.bar_chart),
-                                      label: Text(""),
+                                    Divider(
+                                      thickness: 3,
                                     ),
                                   ],
                                 ),
-                                Divider(
-                                  thickness: 3,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "*TAL-To be announced later",
-                            style: TextStyle(
-                                color: Color(0xff000000),
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14),
+                              );
+                            },
                           ),
-                          Text(
-                            "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",
-                            style: TextStyle(
-                                color: Color(0xff000000),
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ]),
-          ),
-            ):Container();
-      }),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "*TAL-To be announced later",
+                                style: TextStyle(
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Open Sans',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14),
+                              ),
+                              Text(
+                                "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",
+                                style: TextStyle(
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Open Sans',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ]),
+              ),
+                ):Center(
+            child: CircularProgressIndicator(),
+          );
+          }),
+        ),
     );
   }
 }
