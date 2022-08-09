@@ -7,6 +7,7 @@ import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/dashboard_module/view/menu_page.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
+import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           log(value.selectedIndex.toString());
           switch (value.selectedIndex) {
             case 0:
-              return HomePage();
-            case 1:
+              return ChangeNotifierProvider(
+                create: (_) => ProfileViewmodel(),
+                child: HomePage(),
+              );
+              case 1:
               return MultiProvider(
                 providers: [
                   ChangeNotifierProvider.value(
