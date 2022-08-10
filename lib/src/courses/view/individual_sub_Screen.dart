@@ -8,6 +8,7 @@ import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
 
 class IndividualSubScreen extends StatefulWidget {
@@ -95,14 +96,25 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     });
   }
 
+  /* void getContentDescp() {
+    List<String> SubjjectIdList;
+    int? i;
+    if(i ==)
+
+    }
+    // print('NEWD123333333333 -- --- ${closedTime[0]}');
+    return AllContent;
+  }*/
+
   Widget? content() {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Consumer<CourseViewModel>(builder: (context, data, child) {
         return Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: ListView.separated(
-            itemCount: data.unitModel?.length ?? 0,
+            itemCount: data.subjectModel?.cOURSECONTENT?.length ?? 0,
             itemBuilder: (context, i) {
+              print("length------ ${data.subjectModel?.cOURSECONTENT?.length}");
               return Column(
                 children: [
                   Row(
@@ -139,6 +151,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(data.unitModel?[i].topicTitle ?? ""),
+                              /*  Text(data.subjectModel?.cOURSECONTENT?[i]
+                                      .subjectName ??
+                                  ""),*/
                               Icon(
                                 Icons.chevron_right,
                                 color: Colors.grey,
@@ -152,11 +167,22 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   (expand == true)
                       ? Consumer<CourseViewModel>(
                           builder: (context, model, child) {
-                          print(
-                              "nnnn ${model.subjectModel?.cOURSECONTENT?[i].courseContentTypeId == 3 ? {
-                                  model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContent
-                                } : 'h'}");
+                          /*  var c1 = 3;
+                          List c4 = [];
+                          var c3;
+                          for (var c2 = model.subjectModel?.cOURSECONTENT?[i]
+                                      .courseContentTypeId ??
+                                  0;
+                              c2 == c1;
+                              c2++) {
+                            print("kkkkkkkkkkklllllll $c2");
+                            c3 = c2;
+                            c4.addAll(model.subjectModel?.cOURSECONTENT!!?[i]);
+                            print("tttttttt $c4");
+                          }
+                          log("${c4.length}");
+                          print("kkkkkkkkkk $c3");
+*/
                           return Container(
                             padding: EdgeInsets.only(top: 10, left: 15),
                             child: Text((model.subjectModel?.cOURSECONTENT?[i]
