@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:pesu/src/my_profile/model/update_detail_model.dart';
 import 'package:pesu/src/my_profile/model/update_password_model.dart';
 import 'package:pesu/src/time_table/model/time_table_model.dart';
 
@@ -85,6 +86,18 @@ class UpdatePasswordApi {
 
     final data = await _pesuApiService.postApiCallWithQueryParams(
         endPoint: url, queryParams: updatePasswordModel.toJson());
+    return data;
+  }
+}
+class UpdateDetailApi {
+  late final PesuApiService _pesuApiService = PesuApiService();
+
+  dynamic updateDetails(
+      {required UpdateDetailModel updateDetailModel}) async {
+    String url = AppUrls.commonUrl;
+
+    final data = await _pesuApiService.postApiCallWithQueryParams(
+        endPoint: url, queryParams: updateDetailModel.toJson());
     return data;
   }
 }
