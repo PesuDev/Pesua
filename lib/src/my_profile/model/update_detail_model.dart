@@ -2,7 +2,7 @@ class UpdateDetailModel {
   int? action;
   int? mode;
   String? email;
-  int? phone;
+  String? phone;
   String? userId;
   double? randomNum;
 
