@@ -12,6 +12,7 @@ import 'package:pesu/src/my_profile/model/update_password_model.dart';
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../../utils/services/app_routes.dart';
 
@@ -339,6 +340,8 @@ class _MyProfileState extends State<MyProfile> {
                                                   fontSize: 16,
                                                   color: Colors.black,
                                                 ),
+                                                counterText: "",
+
                                                 border: new OutlineInputBorder(
                                                   borderRadius:
                                                   new BorderRadius.circular(5.0),
@@ -408,10 +411,11 @@ class _MyProfileState extends State<MyProfile> {
                                           EdgeInsets.only(left: 5, bottom: 20),
                                       child: Column(
                                         children: [
+                                          (edit==false)?
                                           Divider(
                                             color: Colors.grey[450],
                                             thickness: 1,
-                                          ),
+                                          ):Container(),
                                           InkWell(
                                             onTap: () {
                                               changePasswordPopUp();
@@ -712,6 +716,11 @@ class _MyProfileState extends State<MyProfile> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      "Father",
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 18),
+                                    ),
                                     Row(
                                       children: [
                                         Text(
@@ -741,15 +750,20 @@ class _MyProfileState extends State<MyProfile> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 18),
                                         ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherMobileNo ??
-                                              "",
+                                        InkWell(
+                                          onTap: (){
+                                            UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.fatherMobileNo.toString()}');
+                                          },
+                                          child: Text(
+                                            data.profileDetailModel?.sTUDENTINFO
+                                                    ?.fatherMobileNo ??
+                                                "",
 
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
+                                            //"Student401",
+                                            style: TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -763,15 +777,21 @@ class _MyProfileState extends State<MyProfile> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 18),
                                         ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherEmail ??
-                                              "",
+                                        InkWell(
+                                          onTap: (){
+                                            UrlLauncher.launch('mailto:${data.profileDetailModel?.sTUDENTINFO?.fatherEmail}');
 
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
+                                          },
+                                          child: Text(
+                                            data.profileDetailModel?.sTUDENTINFO
+                                                    ?.fatherEmail ??
+                                                "",
+
+                                            //"Student401",
+                                            style: TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -907,15 +927,21 @@ class _MyProfileState extends State<MyProfile> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 18),
                                         ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherMobileNo ??
-                                              "",
+                                        InkWell(
+                                          onTap: (){
+                                            UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.motherMobileNo.toString()}');
 
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
+                                          },
+                                          child: Text(
+                                            data.profileDetailModel?.sTUDENTINFO
+                                                    ?.motherMobileNo ??
+                                                "",
+
+                                            //"Student401",
+                                            style: TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -929,15 +955,21 @@ class _MyProfileState extends State<MyProfile> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 18),
                                         ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherEmail ??
-                                              "",
+                                        InkWell(
+                                          onTap: (){
+                                            UrlLauncher.launch('mailto:+${data.profileDetailModel?.sTUDENTINFO?.motherEmail.toString()}');
 
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
+                                          },
+                                          child: Text(
+                                            data.profileDetailModel?.sTUDENTINFO
+                                                    ?.motherEmail ??
+                                                "",
+
+                                            //"Student401",
+                                            style: TextStyle(
+                                                color: Colors.blue,
+                                                fontSize: 18),
+                                          ),
                                         ),
                                       ],
                                     ),
