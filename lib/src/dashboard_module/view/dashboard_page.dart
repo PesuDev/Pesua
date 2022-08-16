@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
+import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/dashboard_module/view/menu_page.dart';
@@ -36,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 create: (_) => ProfileViewmodel(),
                 child: HomePage(),
               );
-              case 1:
+            case 1:
               return MultiProvider(
                 providers: [
                   ChangeNotifierProvider.value(
@@ -46,12 +47,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: CourseDashboard(),
               );
             case 2:
-              return ChangeNotifierProvider(
-                create: (_) => IsaDropDownViewModel(),
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
+                ],
                 child: ISAResults(),
               );
             case 3:
-              return AttendanceDashboard();
+              return ChangeNotifierProvider(
+                create: (_) => AttendanceViewModel(),
+                child: AttendanceDashboard(),
+              );
             case 4:
               return ChangeNotifierProvider(
                 create: (_) => DashboardViewModel(),

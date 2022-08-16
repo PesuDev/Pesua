@@ -44,7 +44,7 @@ class _PreviousSemState extends State<PreviousSem> {
       action: 7,
       mode: 7,
       BatchClassId: 484,
-     // _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
+    //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
       UserId: 'acddb8cf-e8e4-40d7-9ee3-fea238994dcb',
@@ -449,7 +449,9 @@ class _PreviousSemState extends State<PreviousSem> {
                   )
                 ]),
               ),
-                ):Container();
+                ):Center(
+            child: CircularProgressIndicator(),
+          );
           }),
         ),
     );

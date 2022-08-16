@@ -17,14 +17,14 @@ class ISAResults extends StatefulWidget {
 class _ISAResultsState extends State<ISAResults> {
   bool isSemSelected = false;
   String? dropDownTitle;
-  late IsaDropDownViewModel isaResultsViewModel;
-  Isa_downdown_model? isaDropDownModel;
+  late IsaDropDownViewModel isaDropDownViewModel;
+  late IsaResultViewModel isaResultViewModel;
   @override
   void initState() {
     super.initState();
-    isaResultsViewModel =
+    isaDropDownViewModel =
         Provider.of<IsaDropDownViewModel>(context, listen: false);
-    isaResultsViewModel.getIsaDropDownDetails(
+    isaDropDownViewModel.getIsaDropDownDetails(
         action: 6,
         mode: 5,
         whichObjectId: "clickHome_pesuacademy_myresults",
@@ -34,6 +34,16 @@ class _ISAResultsState extends State<ISAResults> {
         serverMode: 0,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.1629756694316884);
+    isaResultViewModel =
+        Provider.of<IsaResultViewModel>(context, listen: false);
+    isaResultViewModel.getIsaResultDetails(
+        action: 6,
+        mode: 10,
+        batchClassId: 1400,
+        classBatchSectionId: 4164,
+        fetchId: "1400-4164",
+        userId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
+        randomNum: 0.4054309131337863);
   }
 
   Widget build(BuildContext context) {
@@ -132,11 +142,7 @@ class _ISAResultsState extends State<ISAResults> {
                         ),
                         Container(
                           height: MediaQuery.of(context).size.height * 0.7,
-                          child: ListView.builder(
-                              itemCount: 20,
-                              itemBuilder: (context, index) {
-                                return resultDetails();
-                              }),
+                          child: resultDetails(),
                         )
                       ],
                     ),
@@ -184,70 +190,84 @@ class _ISAResultsState extends State<ISAResults> {
   }
 
   Widget resultDetails() {
-    return Container(
-      padding: EdgeInsets.only(bottom: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.centerLeft,
-            color: Colors.blue,
-            padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
-            child: RichText(
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'UE20CS251',
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 16,
-                          color: Colors.white60)),
-                  TextSpan(
-                      text: '- Design and Analysis of Algorithm ',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white)),
+    return Consumer<IsaResultViewModel>(builder: (context, model, child) {
+      return ListView.builder(
+          itemCount: model.isaResultModel?.length,
+          itemBuilder: (context, int i) {
+            /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
+            print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
+            return Container(
+              padding: EdgeInsets.only(bottom: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.centerLeft,
+                    color: Colors.blue,
+                    padding:
+                        EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+                    child: RichText(
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: model.isaResultModel?[i].subjectCode,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 16,
+                                  color: Colors.white60)),
+                          TextSpan(
+                              text: ' - ' +
+                                  (model.isaResultModel?[i].subjectName ??
+                                      'Design and Analysis of Algorithm '),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.white)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 3, top: 7),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            width: MediaQuery.of(context).size.width / 1.7,
+                            padding: EdgeInsets.only(right: 5),
+                            child: Text(
+                              model.isaResultModel?[i].iSAMaster ?? "",
+                              textAlign: TextAlign.left,
+                            )),
+                        Container(
+                            width: MediaQuery.of(context).size.width / 6.5,
+                            child: Text(
+                                "${model.isaResultModel?[i].marks}/${model.isaResultModel?[i].maxISAMarks}",
+                                textAlign: TextAlign.left)),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.isaResultsGraph);
+                          },
+                          child: Container(
+                              width: MediaQuery.of(context).size.width / 6.5,
+                              child: Icon(
+                                Icons.bar_chart,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1.0,
+                  ),
                 ],
               ),
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(left: 3, top: 7),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width / 1.7,
-                    padding: EdgeInsets.only(right: 5),
-                    child: Text(
-                      'Assignment',
-                      textAlign: TextAlign.left,
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width / 6.5,
-                    child: Text("A", textAlign: TextAlign.left)),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.isaResultsGraph);
-                  },
-                  child: Container(
-                      width: MediaQuery.of(context).size.width / 6.5,
-                      child: Icon(
-                        Icons.bar_chart,
-                      )),
-                )
-              ],
-            ),
-          ),
-          Divider(
-            color: Colors.grey,
-            thickness: 1.0,
-          ),
-        ],
-      ),
-    );
+            );
+          });
+    });
   }
 
   Widget _buildRow(

@@ -273,9 +273,9 @@ class _SeatingInfoState extends State<SeatingInfo> {
                         );
                       }),
                 )
-              : Container(
-                  child: Text("Welcome"),
-                );
+              : Center(
+            child: CircularProgressIndicator(),
+          );
         }));
   }
 }

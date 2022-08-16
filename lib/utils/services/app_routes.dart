@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
@@ -21,6 +22,7 @@ import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
 import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
+import 'package:pesu/src/esaresults/viewmodel/graph_viewmodel.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
@@ -58,8 +60,10 @@ data(RouteSettings settings) {
     case AppRoutes.transport:
       return MaterialPageRoute(builder: (_) => TransportDashboard());
     case AppRoutes.attendance:
-      return MaterialPageRoute(builder: (_) => ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
-      child: AttendanceDashboard()));
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: AttendanceDashboard()));
     case AppRoutes.settings:
       return MaterialPageRoute(builder: (_) => Settings());
     case AppRoutes.backLog:
@@ -75,9 +79,16 @@ data(RouteSettings settings) {
     case AppRoutes.cieDashboard:
       return MaterialPageRoute(builder: (_) => CieDashboard());
     case AppRoutes.detailedAttendance:
-      return MaterialPageRoute(builder: (_) =>
-       ChangeNotifierProvider(create:(_)=>AttendanceViewModel(),
-       child: DetailedAttendance()));
+      final args = settings.arguments as DetailedArguments;
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: DetailedAttendance(
+         subjectCode: args.subjectCode,
+         subjectName: args.subjectName,
+         attendance: args.attendance,
+           percentage: args.percentage,
+       )));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
@@ -116,8 +127,11 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => SessionEffect());
     case AppRoutes.isaResults:
       return MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider(
-                create: (_) => IsaDropDownViewModel(),
+          builder: (_) => MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
+                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
+                ],
                 child: ISAResults(),
               ));
     case AppRoutes.isaResultsGraph:
@@ -157,7 +171,11 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => IndividualUnitScreen(title: args?.title));
     case AppRoutes.esaGraph:
-      return MaterialPageRoute(builder: (_) => EsaGraph());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+            create: (_) => GraphViewModel(),
+            child: EsaGraph(),
+          ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
   }

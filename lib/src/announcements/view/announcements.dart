@@ -18,7 +18,7 @@ class _AnnouncementsState extends State<Announcements> {
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
 
-        title: Text("Announcements"),
+        title: Text("Announcents"),
       ),
       body: 
       Column(
