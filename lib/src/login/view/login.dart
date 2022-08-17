@@ -134,8 +134,6 @@ class _LoginState extends State<Login> {
                 ],
               ),
               SizedBox(height: 20,),
-
-
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white
@@ -387,7 +385,6 @@ _SendEmail(){
     path: 'support@pesuacademy.com',
 
   );
-
   launch(emailLaunchUri.toString());
 }
 

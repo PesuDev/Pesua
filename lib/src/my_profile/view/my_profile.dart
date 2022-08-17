@@ -14,6 +14,7 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 
 
@@ -1211,6 +1212,7 @@ class _MyProfileState extends State<MyProfile> {
                                   top: 3,
                                 ),
                                 child: TextFormField(
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
                                   validator: (String? value) {
                                     if (value!.trim().isEmpty) {
                                       return "Please Enter Current Password";
@@ -1249,6 +1251,8 @@ class _MyProfileState extends State<MyProfile> {
                               Container(
                                 margin: EdgeInsets.only(top: 3),
                                 child: TextFormField(
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+
                                   validator: (String? value) {
                                     if (value!.trim().isEmpty) {
                                       return "Please Enter New Password";
@@ -1288,6 +1292,8 @@ class _MyProfileState extends State<MyProfile> {
                                 margin: EdgeInsets.only(top: 3),
                                 child:
                                 TextFormField(
+                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+
                                   validator: (String? value) {
                                     if (value!.isEmpty) {
                                       return 'Please Re-enter Confirm Password';
@@ -1377,6 +1383,8 @@ class _MyProfileState extends State<MyProfile> {
                                         ?.getUpdatePasswordDetails(
                                             updatePasswordModel: model);
                                     log("latika $response");
+                                    CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
+
                                     // if (model.oldPass ==
                                     //     currentPasswordController) {
                                     //   ScaffoldMessenger.of(context)
@@ -1504,14 +1512,7 @@ class _MyProfileState extends State<MyProfile> {
                             var response =
                                 await profileViewmodel?.getUpdateDetails(
                                 updateDetailModel: model);
-                            ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(
-                                  'Password updated',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: Colors.green,
-                              ));
+                            CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
                               Navigator.pushReplacementNamed(
                                   context, AppRoutes.myProfile);
                           },
@@ -1611,17 +1612,6 @@ class _MyProfileState extends State<MyProfile> {
                 )),
           );
         });
-  }
-
-  getToast(String message, Color color) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 5,
-        backgroundColor: color,
-        textColor: Colors.white,
-        fontSize: 14.0);
   }
 
 

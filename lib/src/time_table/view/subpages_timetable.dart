@@ -351,7 +351,7 @@ class _TableDetailsState extends State<TableDetails> {
                           )
                               : Container();
                         })
-                        : Container();
+                        : Center(child: CircularProgressIndicator());
                   },
                 ),
               ),

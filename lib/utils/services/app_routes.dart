@@ -115,8 +115,8 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
-    case AppRoutes.announcement:
-      return MaterialPageRoute(builder: (_) => Announcement());
+    case AppRoutes.announcements:
+      return MaterialPageRoute(builder: (_) => Announcements());
     case AppRoutes.login:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
@@ -199,7 +199,7 @@ class AppRoutes {
   static const String timeTable = "timeTable";
   static const String onlinePayments = "onlinePayments";
   static const String examination = "examination";
-  static const String announcement = "announcement";
+  static const String announcements = "announcements";
   static const String login = "login";
   static const String sessionEffectiveness = "sessionEffectiveness";
   static const String isaResults = "isaResults";
