@@ -4,9 +4,11 @@ import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 
 import '../api/isa_dropdown_api_service.dart';
 
-class IsaDropDownViewModel extends ChangeNotifier {
-  final IsaDropDownApiService _isaDropDownApiService = IsaDropDownApiService();
+class IsaViewModel extends ChangeNotifier {
+  // final IsaDropDownApiService _isaDropDownApiService = IsaDropDownApiService();
   List<Isa_downdown_model>? isaDropDownModel;
+  final IsaResultApiService _isaResultApiService = IsaResultApiService();
+  List<IsaResultModel>? isaResultModel;
 
   void getIsaDropDownDetails(
       {required int action,
@@ -18,7 +20,7 @@ class IsaDropDownViewModel extends ChangeNotifier {
       required int serverMode,
       required String redirectValue,
       required double randomNum}) async {
-    final data = await _isaDropDownApiService.fetchIsaDropDwnDetails(
+    final data = await _isaResultApiService.fetchIsaDropDwnDetails(
         action: action,
         mode: mode,
         whichObjectId: whichObjectId,
@@ -32,11 +34,6 @@ class IsaDropDownViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
-}
-
-class IsaResultViewModel extends ChangeNotifier {
-  final IsaResultApiService _isaResultApiService = IsaResultApiService();
-  List<IsaResultModel>? isaResultModel;
 
   void getIsaResultDetails(
       {required int action,

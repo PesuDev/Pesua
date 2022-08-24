@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:pesu/src/isa_results/model/isaResultModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 
 import '../../../utils/constants/app_urls.dart';
 import '../../../utils/services/app_routes.dart';
 import '../../../utils/services/pesu_api_service.dart';
+import '../model/isaResultModel.dart';
 
-class IsaDropDownApiService {
+class IsaResultApiService {
   late final PesuApiService _pesuApiService = PesuApiService();
 
   Future<List<Isa_downdown_model>?> fetchIsaDropDwnDetails(
@@ -39,10 +39,6 @@ class IsaDropDownApiService {
     log("IsaResultsLog $data");
     // return data;
   }
-}
-
-class IsaResultApiService {
-  late final PesuApiService _pesuApiService = PesuApiService();
 
   Future<List<IsaResultModel>?> fetchIsaResultDetails(
       {required int action,
