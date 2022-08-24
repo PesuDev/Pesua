@@ -34,11 +34,11 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
               child: Text("UE20CS251 - Design and Analysis of Algorithms"),
             ),
             //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
-            Container(
+            /*   Container(
               color: Colors.white,
               height: MediaQuery.of(context).size.height * 0.5,
-            ),
-            /* SfCartesianChart(
+            ),*/
+            SfCartesianChart(
                 backgroundColor: Colors.white,
                 primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Students')),
                 primaryYAxis: NumericAxis(
@@ -60,7 +60,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
                       name: 'Sales',
                       // Enable data label
                       dataLabelSettings: DataLabelSettings(isVisible: true))
-                ]),*/
+                ]),
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
               child: Text("Summary"),
@@ -142,25 +142,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     // Enable data label
                     dataLabelSettings: DataLabelSettings(isVisible: true))
               ]),
-          /*   Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              //Initialize the spark charts widget
-              child: SfSparkLineChart.custom(
-                //Enable the trackball
-                trackball: SparkChartTrackball(
-                    activationMode: SparkChartActivationMode.tap),
-                //Enable marker
-                marker: SparkChartMarker(
-                    displayMode: SparkChartMarkerDisplayMode.all),
-                //Enable data label
-                labelDisplayMode: SparkChartLabelDisplayMode.all,
-                xValueMapper: (int index) => data[index].year,
-                yValueMapper: (int index) => data[index].sales,
-                dataCount: 5,
-              ),
-            ),
-          )*/
         ]));
   }
 }

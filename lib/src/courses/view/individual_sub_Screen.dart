@@ -4,15 +4,13 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pesu/src/courses/view/course_dashboard.dart';
-import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:pesu/src/courses/viewModel/courseArgument.dart';
-import 'package:pesu/src/courses/viewModel/subjectViewModel.dart';
-import 'package:pesu/src/courses/viewModel/unitViewModel.dart';
 import 'package:pesu/utils/services/app_routes.dart';
-import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert' show utf8;
+
+import '../model/subjectModel.dart';
+import '../viewModel/courseViewModel.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   const IndividualSubScreen({Key? key}) : super(key: key);
@@ -23,8 +21,8 @@ class IndividualSubScreen extends StatefulWidget {
 
 class _IndividualSubScreenState extends State<IndividualSubScreen>
     with SingleTickerProviderStateMixin {
-  SubjectViewModel _subjectViewModel = SubjectViewModel();
-  UnitViewModel _unitViewModel = UnitViewModel();
+  CourseViewModel _subjectViewModel = CourseViewModel();
+  CourseViewModel _unitViewModel = CourseViewModel();
   late final _tabController =
       TabController(length: 4, initialIndex: 0, vsync: this);
   bool expand = false;
@@ -32,14 +30,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   @override
   void initState() {
     super.initState();
-    _subjectViewModel = Provider.of<SubjectViewModel>(context, listen: false);
+    _subjectViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _subjectViewModel.getSubjectContentDetails(
         action: 18,
         mode: 11,
         subjectId: 3830,
         subjectName: "Electromagnetic Field & Transmission Lines",
         randomNum: 0.9969186291364449);
-    _unitViewModel = Provider.of<UnitViewModel>(context, listen: false);
+    _unitViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _unitViewModel.getUnitDetails(
         action: 18,
         mode: 14,
@@ -49,7 +47,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget build(BuildContext context) {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -99,14 +97,29 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     });
   }
 
+  /* void getContentDescp() {
+    List<String> SubjjectIdList;
+    int? i;
+    if(i ==)
+
+    }
+    // print('NEWD123333333333 -- --- ${closedTime[0]}');
+    return AllContent;
+  }*/
+
   Widget? content() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
-      return Consumer<UnitViewModel>(builder: (context, data, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
+      return Consumer<CourseViewModel>(builder: (context, data, child) {
         return Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: ListView.separated(
-            itemCount: data.unitModel?.length ?? 0,
+            itemCount: data.subjectModel?.cOURSECONTENT?.length ?? 0,
             itemBuilder: (context, i) {
+              print("length------ ${data.subjectModel?.cOURSECONTENT?.length}");
+              String? uriString =
+                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
+              String uriDecode = Uri.decodeFull(uriString!);
+              String htmlCode = uriDecode;
               return Column(
                 children: [
                   Row(
@@ -143,6 +156,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(data.unitModel?[i].topicTitle ?? ""),
+                              /*  Text(data.subjectModel?.cOURSECONTENT?[i]
+                                      .subjectName ??
+                                  ""),*/
                               Icon(
                                 Icons.chevron_right,
                                 color: Colors.grey,
@@ -154,22 +170,30 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     ],
                   ),
                   (expand == true)
-                      ? Consumer<SubjectViewModel>(
+                      ? Consumer<CourseViewModel>(
                           builder: (context, model, child) {
-                          print(
-                              "nnnn ${model.subjectModel?.cOURSECONTENT?[i].courseContentTypeId == 3 ? {
-                                  model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContent
-                                } : 'h'}");
+                          var c1 = 3;
+                          List c4 = [];
+                          var c3;
+                          for (var c2 = model.subjectModel?.cOURSECONTENT?[i]
+                                      .courseContentTypeId ??
+                                  0;
+                              c2 == c1;
+                              c2++) {
+                            print("kkkkkkkkkkklllllll $c2");
+                            c3 = c2;
+
+                            print("tttttttt $c4");
+                          }
+                          log("${c4.length}");
+                          print("kkkkkkkkkk $c3");
                           return Container(
                             padding: EdgeInsets.only(top: 10, left: 15),
-                            child: Text((model.subjectModel?.cOURSECONTENT?[i]
+                            child: (model.subjectModel?.cOURSECONTENT?[i]
                                         .courseContentTypeId ==
                                     3)
-                                ? (model.subjectModel?.cOURSECONTENT?[i]
-                                        .courseContent ??
-                                    "")
-                                : ""),
+                                ? HtmlWidget(htmlCode)
+                                : Container(),
                           );
                         })
                       : Container(),
@@ -247,12 +271,16 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget? objectives() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: ListView.builder(
             itemCount: model.subjectModel?.cOURSECONTENT?.length,
             itemBuilder: (context, int i) {
+              String? uriString =
+                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
+              String uriDecode = Uri.decodeFull(uriString!);
+              String htmlCode = uriDecode;
               return (model.subjectModel?.cOURSECONTENT?[i]
                           .courseContentTypeId ==
                       1)
@@ -263,9 +291,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         Container(
                           width: MediaQuery.of(context).size.width * 0.85,
                           padding: EdgeInsets.only(left: 5, top: 5),
-                          child: Text(model.subjectModel?.cOURSECONTENT?[i]
-                                  .courseContent ??
-                              ""),
+                          child: HtmlWidget(
+                            htmlCode,
+                          ),
                         )
                       ],
                     )
@@ -276,12 +304,16 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   }
 
   Widget? outcomes() {
-    return Consumer<SubjectViewModel>(builder: (context, model, child) {
+    return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: ListView.builder(
             itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
             itemBuilder: (context, int i) {
+              String? uriString =
+                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
+              String uriDecode = Uri.decodeFull(uriString!);
+              String htmlCode = uriDecode;
               return (model.subjectModel?.cOURSECONTENT?[i]
                           .courseContentTypeId ==
                       2)
@@ -290,11 +322,10 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                       children: [
                         Icon(Icons.ac_unit_outlined),
                         Container(
-                            width: MediaQuery.of(context).size.width * 0.85,
-                            padding: EdgeInsets.only(left: 5, top: 5),
-                            child: Text(model.subjectModel?.cOURSECONTENT?[i]
-                                    .courseContent ??
-                                "")),
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          padding: EdgeInsets.only(left: 5, top: 5),
+                          child: HtmlWidget(htmlCode),
+                        )
                       ],
                     )
                   : Container();
@@ -306,24 +337,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   Widget? references() {
     return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
-        child: Consumer<SubjectViewModel>(builder: (context, model, child) {
+        child: Consumer<CourseViewModel>(builder: (context, model, child) {
           return ListView.separated(
             itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
             itemBuilder: (context, int i) {
-              /*     var LATIN1 = const Latin1Codec();
-          var BASE64 = const Base64Codec();
-          var bytesInLatin1 = LATIN1.encode(
-              model.subjectModel?.cOURSECONTENT?[i].courseContent ?? "");
-          var base64encoded = BASE64.encode(bytesInLatin1);
-          var bytesInLatin1_decoded = BASE64.decode(base64encoded);
-          var initialValue = LATIN1.decode(bytesInLatin1_decoded);
-          String decoded = utf8.decode(base64.decode(
-              model.subjectModel?.cOURSECONTENT?[i].courseContent ?? ""));*/
-              // var data = model.subjectModel?.cOURSECONTENT?[i].courseContent
-              //     ?.replaceAll('%', '');
-              // var dat = data?.replaceAll('', '');
-              // print("daaata $data");
-              // String decoded = utf8.decode(base64.decode(data!));
+              String? uriString =
+                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
+              String uriDecode = Uri.decodeFull(uriString!);
+              String htmlCode = uriDecode;
               return (model.subjectModel?.cOURSECONTENT?[i]
                           .courseContentTypeId ==
                       5)
@@ -335,12 +356,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                           size: 100,
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          padding: EdgeInsets.only(left: 10, top: 5),
-                          child: Text(model.subjectModel?.cOURSECONTENT?[i]
-                                  .courseContent ??
-                              ""),
-                        ),
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            padding: EdgeInsets.only(left: 10, top: 5),
+                            child: HtmlWidget(htmlCode)),
                       ],
                     )
                   : Container();
