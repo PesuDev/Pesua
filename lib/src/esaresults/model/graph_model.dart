@@ -28,26 +28,26 @@ class GraphModel {
 }
 
 class Data {
-  int? x;
+  double? x;
   int? y;
   String? usn;
   String? color;
   int? avg;
-  int? tolal;
-  int? total;
+  double? tolal;
+  double? total;
   String? grade;
   String? subjectName;
 
   Data(
       {this.x,
-        this.y,
-        this.usn,
-        this.color,
-        this.avg,
-        this.tolal,
-        this.total,
-        this.grade,
-        this.subjectName});
+      this.y,
+      this.usn,
+      this.color,
+      this.avg,
+      this.tolal,
+      this.total,
+      this.grade,
+      this.subjectName});
 
   Data.fromJson(Map<String, dynamic> json) {
     x = json['x'];
