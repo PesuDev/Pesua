@@ -70,7 +70,7 @@ class _MondayState extends State<Monday> {
                                           .size
                                           .width / 3,
                                       child: Text(
-                                        "${model.startTime} - ${model.endTime}"?? "",
+                                        "${model.startTime} - ${model.endTime}",
                                         // data.timeTableModel?.startTime ?? "",
                                         style: TextStyle(
                                             color: Color(0xff000000),

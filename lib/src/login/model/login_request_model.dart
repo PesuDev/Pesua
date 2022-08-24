@@ -4,12 +4,12 @@ class LoginRequestModel {
   String? jMobile;
   String? jMobileApp;
   String? jSocial;
-  int? jAppId;
- // int? action;
-  int? mode;
+  String? jAppId;
+ String? action;
+  String? mode;
   String? whichObjectId;
-  String? title;
-  double? randomNum;
+ // String? title;
+  String? randomNum;
 
   LoginRequestModel(
       {this.jUsername,
@@ -18,11 +18,12 @@ class LoginRequestModel {
         this.jMobileApp,
         this.jSocial,
         this.jAppId,
-      //  this.action,
+        this.action,
         this.mode,
         this.whichObjectId,
         this.randomNum,
-        this.title});
+       // this.title
+      });
 
   LoginRequestModel.fromJson(Map<String, dynamic> json) {
     jUsername = json['j_username'];
@@ -32,10 +33,10 @@ class LoginRequestModel {
     jMobileApp = json['j_mobileApp'];
     jSocial = json['j_social'];
     jAppId = json['j_appId'];
-   // action = json['action'];
+   action = json['action'];
     mode = json['mode'];
     whichObjectId = json['whichObjectId'];
-    title = json['title'];
+   // title = json['title'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,10 +47,10 @@ class LoginRequestModel {
     data['j_mobileApp'] = this.jMobileApp;
     data['j_social'] = this.jSocial;
     data['j_appId'] = this.jAppId;
-   // data['action'] = this.action;
+    data['action'] = this.action;
     data['mode'] = this.mode;
     data['whichObjectId'] = this.whichObjectId;
-    data['title'] = this.title;
+   // data['title'] = this.title;
     data['randomNum']=this.randomNum;
     return data;
   }

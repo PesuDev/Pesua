@@ -21,14 +21,14 @@ class PesuApiService {
 
      },
    ));
-  }*/
+  }
 
   SharedPreferenceUtil sharedPref = SharedPreferenceUtil();
 
   Future<Map<String, String>> getHeaders() async {
     Map<String, String> header = new Map();
     return header;
-  }
+  }*/
 
   Future<dynamic> getApiCall(
       {required String endPoint, required Map<String, dynamic> params}) async {
@@ -37,7 +37,7 @@ class PesuApiService {
     try {
       final response = await http.get(
         Uri.https(_baseURL, endPoint),
-        headers: await getHeaders(),
+       // headers: await getHeaders(),
       );
       responseJson = _response(response);
     } on SocketException {
@@ -63,13 +63,12 @@ class PesuApiService {
           data: formData);
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
-        log('Response :: ${response.data}');
         return response.data;
       }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
-      log(e.toString());
+      log("ERROR :: "+e.toString());
     }
 
     return null;
@@ -83,20 +82,20 @@ class PesuApiService {
         _baseURL,
         endPoint,
       ).toString()}');
-      log(queryParams.toString());
+      log("RequestParams : "+queryParams.toString());
       final response = await _dio.post(
         Uri.https(_baseURL, endPoint).toString(),
        queryParameters: queryParams,
 
       );
-      log('Status Code :: ${response.statusCode}');
-      if (response.statusCode == 200 ) {
+      log('Status Code :: ${response.statusCode.toString()}');
+      if (response.statusCode == 200 && response.data.toString().isNotEmpty ) {
         return response.statusCode;
       }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
-      log(e.toString());
+      log("ERROR :: "+e.toString());
     }
 
     return null;
@@ -109,7 +108,7 @@ class PesuApiService {
     try {
       final response = await http.put(
         Uri.https(_baseURL, endPoint),
-        headers: await getHeaders(),
+      //  headers: await getHeaders(),
         body: formData,
       );
       responseJson = _response(response);
@@ -128,7 +127,7 @@ class PesuApiService {
     try {
       final response = await http.delete(
         Uri.https(_baseURL, endPoint),
-        headers: await getHeaders(),
+        //headers: await getHeaders(),
         body: formData,
       );
       responseJson = _response(response);
