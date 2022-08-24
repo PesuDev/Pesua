@@ -2,14 +2,18 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
+import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/dashboard_module/view/menu_page.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
+import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
+import '../../courses/viewModel/courseViewModel.dart';
+import '../../isa_results/viewmodel/isaViewModel.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -27,13 +31,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
           log(value.selectedIndex.toString());
           switch (value.selectedIndex) {
             case 0:
-              return HomePage();
+              return ChangeNotifierProvider(
+                create: (_) => ProfileViewmodel(),
+                child: HomePage(),
+              );
             case 1:
-              return CourseDashboard();
+              return ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
+                child: CourseDashboard(),
+              );
             case 2:
-              return ISAResults();
+              return ChangeNotifierProvider(
+                create: (_) => IsaViewModel(),
+                child: ISAResults(),
+              );
             case 3:
-              return AttendanceDashboard();
+              return ChangeNotifierProvider(
+                create: (_) => AttendanceViewModel(),
+                child: AttendanceDashboard(),
+              );
             case 4:
               return ChangeNotifierProvider(
                 create: (_) => DashboardViewModel(),

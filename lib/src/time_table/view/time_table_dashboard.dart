@@ -1,27 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer';
+
 
 class TimeTable extends StatefulWidget {
-  const TimeTable({Key? key}) : super(key: key);
+   TimeTable({this.indexvalue});
 
   @override
   _TimeTableState createState() => _TimeTableState();
+
+  int? indexvalue;
+
 }
 
-class _TimeTableState extends State<TimeTable> {
+
+class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMixin{
   late TabController tabController;
 
 
-  @override
+
+
+
+
+   DateTime date = DateTime.now();
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+
+
+   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+
+    return
+      DefaultTabController(
+        initialIndex: DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?0:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?1:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="wednesday"?2:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="thursday"?3:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="friday"?4:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="saturday"?5:
+        DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?6:0,
         length: 7,
         child: Scaffold(
             appBar: sideNavAppBar("TimeTable"),
+
             backgroundColor:Colors.white.withOpacity(0.9),
             body: Column(children: [
               Container(
@@ -41,6 +72,7 @@ class _TimeTableState extends State<TimeTable> {
                     Tab(
                       child: Container(
                         child: Text(
+
                           "MON",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
@@ -141,22 +173,34 @@ class _TimeTableState extends State<TimeTable> {
               ),
               Container(
                   height: MediaQuery.of(context).size.height / 1.36,
-                  child: TabBarView(children: [
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                    child: Monday()),
+                  child:
+                  TabBarView(
+                   //controller:tabController,
+
+                      children: [
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                        child: Monday(
+                    )),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child: Tuesday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Wednesday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Thursday()),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Friday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Saturday()),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
                         child:Sunday()),
-                  ])),
+                  ])
+              ),
+
             ])));
   }
-}
+
+  }
+
+//DateFormat('EEEE').format(DateTime.now())
+
+

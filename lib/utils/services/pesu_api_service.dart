@@ -14,21 +14,21 @@ import 'dart:async';
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
   late Dio _dio = Dio();
- /* PesuApiService(){
+  /* PesuApiService(){
    this._dio.interceptors.add(InterceptorsWrapper(
      onRequest: (options, handler) {
      log('xyz :: ${options.uri}');
 
      },
    ));
-  }
+  }*/
 
   SharedPreferenceUtil sharedPref = SharedPreferenceUtil();
 
   Future<Map<String, String>> getHeaders() async {
     Map<String, String> header = new Map();
     return header;
-  }*/
+  }
 
   Future<dynamic> getApiCall(
       {required String endPoint, required Map<String, dynamic> params}) async {
@@ -37,7 +37,7 @@ class PesuApiService {
     try {
       final response = await http.get(
         Uri.https(_baseURL, endPoint),
-       // headers: await getHeaders(),
+        headers: await getHeaders(),
       );
       responseJson = _response(response);
     } on SocketException {
@@ -60,15 +60,20 @@ class PesuApiService {
       ).toString()}');
       log(params.toString());
       final response = await _dio.post(Uri.https(_baseURL, endPoint).toString(),
+          options: Options(headers: {
+            "mobileAppAuthenticationToken":
+                "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+          }),
           data: formData);
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
+        log('Response :: ${response.data.toString()}');
         return response.data;
       }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
-      log("ERROR :: "+e.toString());
+      log(e.toString());
     }
 
     return null;
@@ -82,20 +87,19 @@ class PesuApiService {
         _baseURL,
         endPoint,
       ).toString()}');
-      log("RequestParams : "+queryParams.toString());
+      log(queryParams.toString());
       final response = await _dio.post(
         Uri.https(_baseURL, endPoint).toString(),
-       queryParameters: queryParams,
-
+        queryParameters: queryParams,
       );
-      log('Status Code :: ${response.statusCode.toString()}');
-      if (response.statusCode == 200 && response.data.toString().isNotEmpty ) {
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200) {
         return response.statusCode;
       }
     } on SocketException {
       log('Socket Exception');
     } catch (e) {
-      log("ERROR :: "+e.toString());
+      log(e.toString());
     }
 
     return null;
@@ -108,7 +112,7 @@ class PesuApiService {
     try {
       final response = await http.put(
         Uri.https(_baseURL, endPoint),
-      //  headers: await getHeaders(),
+        headers: await getHeaders(),
         body: formData,
       );
       responseJson = _response(response);
@@ -127,7 +131,7 @@ class PesuApiService {
     try {
       final response = await http.delete(
         Uri.https(_baseURL, endPoint),
-        //headers: await getHeaders(),
+        headers: await getHeaders(),
         body: formData,
       );
       responseJson = _response(response);

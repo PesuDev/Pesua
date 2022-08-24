@@ -1,30 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view/back_log_registration.dart';
 import 'package:pesu/src/attendance/view/detailed_attendance.dart';
+import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/src/calendar/view/calendar_dashboard.dart';
 import 'package:pesu/src/cie/view/cie_dashboard.dart';
 import 'package:pesu/src/bootstrap/view/bootstrap.dart';
+import 'package:pesu/src/courses/model/courseModel.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 import 'package:pesu/src/courses/view/individual_unit_screen.dart';
+import 'package:pesu/src/courses/viewModel/courseArgument.dart';
+import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
 import 'package:pesu/src/esaresults/view/esa_graph.dart';
 import 'package:pesu/src/esaresults/view/esa_results.dart';
+import 'package:pesu/src/esaresults/viewmodel/graph_viewmodel.dart';
 import 'package:pesu/src/examination_grievance/view/examination_grievance.dart';
 import 'package:pesu/src/help/view/help_dashboard.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/src/isa_results/view/isa_results_graph.dart';
+import 'package:pesu/src/isa_results/viewmodel/isaViewModel.dart';
 import 'package:pesu/src/login/view/login.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
+import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/src/my_profile/view/my_profile.dart';
 import 'package:pesu/src/notification/view/notification.dart';
 import 'package:pesu/src/online_payments/view/online_payments.dart';
 import 'package:pesu/src/placement/view/placement_dashboard.dart';
 import 'package:pesu/src/seatinginfo/view/seating_info.dart';
+import 'package:pesu/src/seatinginfo/viewmodel/seating_info_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/src/settings/view/settings.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
@@ -34,10 +44,11 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
+import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    return data( settings);
+    return data(settings);
   }
 }
 
@@ -46,7 +57,10 @@ data(RouteSettings settings) {
     case AppRoutes.transport:
       return MaterialPageRoute(builder: (_) => TransportDashboard());
     case AppRoutes.attendance:
-      return MaterialPageRoute(builder: (_) => AttendanceDashboard());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: AttendanceDashboard()));
     case AppRoutes.settings:
       return MaterialPageRoute(builder: (_) => Settings());
     case AppRoutes.backLog:
@@ -62,22 +76,39 @@ data(RouteSettings settings) {
     case AppRoutes.cieDashboard:
       return MaterialPageRoute(builder: (_) => CieDashboard());
     case AppRoutes.detailedAttendance:
-      return MaterialPageRoute(builder: (_) => DetailedAttendance());
+      final args = settings.arguments as DetailedArguments;
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => AttendanceViewModel(),
+              child: DetailedAttendance(
+                subjectCode: args.subjectCode,
+                subjectName: args.subjectName,
+                attendance: args.attendance,
+                percentage: args.percentage,
+              )));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
     case AppRoutes.esaresults:
-      return MaterialPageRoute(builder: (_) => ESAResults());
-    case AppRoutes.seatingInfo:
-      return MaterialPageRoute(builder: (_) => SeatingInfo());
-    case AppRoutes.bootStrap:
-      return MaterialPageRoute(builder: (_) => BootStrap());
-      case AppRoutes.timeTable:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-            create: (_) => TimeTableViewmodel(),
-            child: TimeTable(),
-          ));
-      case AppRoutes.onlinePayments:
+                create: (_) => EsaViewModel(),
+                child: ESAResults(),
+              ));
+    case AppRoutes.seatingInfo:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => SeatingInfoViewModel(),
+                child: SeatingInfo(),
+              ));
+    case AppRoutes.bootStrap:
+      return MaterialPageRoute(builder: (_) => BootStrap());
+    case AppRoutes.timeTable:
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => TimeTableViewmodel(),
+                child: TimeTable(),
+              ));
+    case AppRoutes.onlinePayments:
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
@@ -92,19 +123,41 @@ data(RouteSettings settings) {
     case AppRoutes.sessionEffectiveness:
       return MaterialPageRoute(builder: (_) => SessionEffect());
     case AppRoutes.isaResults:
-      return MaterialPageRoute(builder: (_) => ISAResults());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => IsaViewModel(),
+                child: ISAResults(),
+              ));
     case AppRoutes.isaResultsGraph:
       return MaterialPageRoute(builder: (_) => IsaResultGraph());
     case AppRoutes.myProfile:
-      return MaterialPageRoute(builder: (_) => MyProfile());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => ProfileViewmodel(),
+                child: MyProfile(),
+              ));
     case AppRoutes.courseDashboard:
-      return MaterialPageRoute(builder: (_) => CourseDashboard());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
+                child: CourseDashboard(),
+              ));
     case AppRoutes.individualSub:
-      return MaterialPageRoute(builder: (_) => IndividualSubScreen());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
+                child: IndividualSubScreen(),
+              ));
     case AppRoutes.individualUnit:
-      return MaterialPageRoute(builder: (_) => IndividualUnitScreen());
+      final CourseArguments? args = settings.arguments as CourseArguments?;
+      return MaterialPageRoute(
+          builder: (_) => IndividualUnitScreen(title: args?.title));
     case AppRoutes.esaGraph:
-      return MaterialPageRoute(builder: (_) => EsaGraph());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+                create: (_) => GraphViewModel(),
+                child: EsaGraph(),
+              ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
   }

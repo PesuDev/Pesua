@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_switch: ^0.3.2
-  syncfusion_flutter_charts: 19.4.38
+  syncfusion_flutter_charts:  ^20.2.40
   charts_flutter: 0.12.0
   shared_preferences: ^2.0.15
   http: ^0.13.4
@@ -33,10 +33,15 @@ dependencies:
   provider: ^6.0.2
   flutter_swiper_null_safety: ^1.0.2
   webview_flutter:
+  cloud_firestore:
   url_launcher: 6.1.5
   firebase_auth: 3.4.2
   google_sign_in: 5.4.0
-  firebase_core: ^1.19.2
+  firebase_core: ^1.20.0
+  intl: 0.17.0
+  fluttertoast: ^8.0.8
+  flutter_widget_from_html:
+
 
 
 dev_dependencies:

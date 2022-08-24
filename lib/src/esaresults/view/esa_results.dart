@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/utils/view/widget.dart';
+import 'package:provider/provider.dart';
 
+import '../viewmodel/Esa_viewmodel.dart';
 import 'Previous_semester.dart';
 import 'Provisional_page.dart';
 
@@ -68,8 +70,10 @@ class _ESAResultsState extends State<ESAResults> {
                   height: MediaQuery.of(context).size.height/1.29,
                   child: TabBarView(
                     children: [
-                      ProvisionalPage(),
-                      PreviousSem(),
+                      ChangeNotifierProvider.value(value : Provider.of<EsaViewModel>(context),
+                      child: ProvisionalPage()),
+                      ChangeNotifierProvider.value(value : Provider.of<EsaViewModel>(context),
+                          child: PreviousSem()),
                     ],
                   )
                 ),
