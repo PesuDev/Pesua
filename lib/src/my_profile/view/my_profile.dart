@@ -1,19 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pesu/src/my_profile/model/update_detail_model.dart';
 import 'package:pesu/src/my_profile/model/update_password_model.dart';
-
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
-
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 
@@ -60,8 +56,7 @@ class _MyProfileState extends State<MyProfile> {
         searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
         userType: 1,
         userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760');
-    // emailController.text=(profileViewmodel?.profileModel?.email)!;
-    // phoneController.text=(profileViewmodel?.profileModel?.phone)!;
+
 
 
   }
@@ -90,385 +85,381 @@ class _MyProfileState extends State<MyProfile> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              color: Color(0xff0091CD),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    bottom: 20, top: 20, left: 16),
-                                child:
-                                Row(
-                                  children: [
-                                    myImage != null
-                                        ? Container(
-                                            width: 110,
-                                            height: 110,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              image: new DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: MemoryImage(myImage,
-                                                      scale: 0.5)),
-                                            ),
-                                          )
-                                        : Container(
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.8,
-                                      padding: EdgeInsets.only(
-                                          top: 8, right: 8, bottom: 8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          color: Color(0xff0091CD),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 20, top: 20, left: 16),
+                            child:
+                            Row(
+                              children: [
+                                myImage != null && myImage.isNotEmpty
+                                    ? Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          image: new DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: MemoryImage(myImage,
+                                                  scale: 0.5)),
+                                        ),
+                                      )
+                                    : Container(
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width /
+                                      1.8,
+                                  padding: EdgeInsets.only(
+                                      top: 8, right: 8, bottom: 8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data.profileModel?.name ?? "",
+
+                                        //"Student401",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18),
+                                      ),
+                                      Row(
                                         children: [
                                           Text(
-                                            data.profileModel?.name ?? "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'PESU ID : ',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                data.profileModel?.loginId ??
-                                                    "",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'SRN: ',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Text(
-                                                data.profileModel
-                                                        ?.departmentId ??
-                                                    "",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            "${data.profileModel?.program ?? ""} | ${data.profileModel?.branch ?? ""}",
+                                            'PESU ID : ',
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w400),
+                                                fontWeight:
+                                                    FontWeight.w400),
                                           ),
                                           Text(
-                                            data.profileModel?.className ?? "",
+                                            data.profileModel?.loginId ??
+                                                "",
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400),
+                                                fontSize: 16),
                                           ),
                                         ],
                                       ),
-                                    )
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'SRN: ',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight:
+                                                    FontWeight.w400),
+                                          ),
+                                          Text(
+                                            data.profileModel
+                                                    ?.departmentId ??
+                                                "",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        "${data.profileModel?.program ?? ""} | ${data.profileModel?.branch ?? ""}",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      Text(
+                                        data.profileModel?.className ?? "",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Form(
+                          key: _formKey1,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.only(
+                              top: 12,
+                              right: 12,
+                              left: 16,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        emailController.text=data.profileModel?.email ??"";
+                                        phoneController.text=data.profileModel?.phone ??"";
+                                        setState(() {
+                                          if (edit == false) {
+                                            edit = true;
+                                          } else if (edit == true) {
+                                            edit = false;
+                                          }
+                                          print('$edit');
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            top: 5,
+                                            bottom: 5,
+                                            left: 12,
+                                            right: 12),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          color: (edit == false)
+                                              ? Colors.blueGrey
+                                              : Colors.orangeAccent,
+                                          /*    boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.blueGrey, spreadRadius: 3),
+                                ],*/
+                                        ),
+                                        child: Text(
+                                          (edit == false) ? "Edit" : "Cancel",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Form(
-                              key: _formKey1,
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              child: Container(
-                                color: Colors.white,
-                                padding: EdgeInsets.only(
-                                  top: 12,
-                                  right: 12,
-                                  left: 16,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            emailController.text=data.profileModel?.email ??"";
-                                            phoneController.text=data.profileModel?.phone ??"";
+                                Container(
+                                    padding:
+                                        EdgeInsets.only(top: 10, bottom: 10),
+                                    child: Text(
+                                      "Email ID",
+                                      style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 18),
+                                    )),
+                                (edit == false)
+                                    ? Text(
+                                        data.profileModel?.email ?? "",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+                                      :  TextFormField(
+
+                                           validator: (String? value) {
+                                            if (value!.isEmpty) {
+                                              return 'Please Enter Valid Email-id';
+                                            }
+                                          },
+                                          autofocus: true,
+                                          controller: emailController,
+                                          decoration: new InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 1, left: 4, bottom: 1, right: 4),
+                                           // hintText: data.profileModel?.email,
+                                            hintStyle: TextStyle(
+                                              fontFamily: "Nunito",
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                            ),
+                                            border: new OutlineInputBorder(
+                                              borderRadius:
+                                              new BorderRadius.circular(5.0),
+                                              borderSide: new BorderSide(
+                                                color: Color(0xffCFD8DC),
+                                              ),
+                                            ),
+                                          ),
+                                          onChanged: (text) {
                                             setState(() {
-                                              if (edit == false) {
-                                                edit = true;
-                                              } else if (edit == true) {
-                                                edit = false;
-                                              }
-                                              print('$edit');
+
                                             });
                                           },
-                                          child: Container(
-                                            padding: EdgeInsets.only(
-                                                top: 5,
-                                                bottom: 5,
-                                                left: 12,
-                                                right: 12),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              color: (edit == false)
-                                                  ? Colors.blueGrey
-                                                  : Colors.orangeAccent,
-                                              /*    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.blueGrey, spreadRadius: 3),
-                                    ],*/
+                                        ),
+
+                                Container(
+                                    padding:
+                                        EdgeInsets.only(top: 20, bottom: 10),
+                                    child: Text(
+                                      "Contact No",
+                                      style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 18),
+                                    )),
+                                (edit == false)
+                                    ? Text(
+                                        data.profileModel?.phone ?? "",
+                                        style: TextStyle(fontSize: 18),
+                                      )
+
+                                      :  TextFormField(
+                                          validator: (String? value) {
+                                            if (value!.length<10) {
+                                              return 'Please Enter Valid Number';
+                                            }
+                                            else if(value .length==10){
+                                              _formKey1.currentState?.deactivate();
+                                            }
+                                          },
+                                          keyboardType: TextInputType.number,
+                                          maxLength: 10,
+                                          autofocus: true,
+                                          controller: phoneController,
+                                          decoration: new InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 1, left: 4, bottom: 1, right: 4),
+                                           // hintText: data.profileModel?.phone,
+                                            hintStyle: TextStyle(
+                                              fontFamily: "Nunito",
+                                              fontSize: 16,
+                                              color: Colors.black,
                                             ),
+                                            counterText: "",
+
+                                            border: new OutlineInputBorder(
+                                              borderRadius:
+                                              new BorderRadius.circular(5.0),
+                                              borderSide: new BorderSide(
+                                                color: Colors.blueAccent,
+                                              ),
+                                            ),
+                                          ),
+                                          onChanged: (text) {
+                                            setState(() {
+                                              if(phoneController.text.length==10){
+                                                FocusScope.of(context).requestFocus(new FocusNode());
+                                              }
+                                            });
+                                          },
+                                        ),
+
+                                (edit == true)
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0,
+                                            right: 8.0,
+                                            bottom: 15,
+                                            top: 25),
+                                        child: Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width,
+                                          padding: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: Colors.blue,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.blue,
+                                                  spreadRadius: 3),
+                                            ],
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                           if (_formKey1.currentState != null) {
+                                            _formKey1.currentState?.validate();
+                                            if(emailController.value.text.isNotEmpty &&phoneController.text.length==10){
+                                             // updateDetailPopUp();
+                                              _updateBottomSheet();
+                                            }
+                                           }
+
+                                            },
                                             child: Text(
-                                              (edit == false) ? "Edit" : "Cancel",
+                                              "Update",
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold),
+                                                  fontWeight:
+                                                      FontWeight.bold),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Container(
-                                        padding:
-                                            EdgeInsets.only(top: 10, bottom: 10),
-                                        child: Text(
-                                          "Email ID",
-                                          style: TextStyle(
-                                              color: Colors.black45,
-                                              fontSize: 18),
-                                        )),
-                                    (edit == false)
-                                        ? Text(
-                                            data.profileModel?.email ?? "",
-                                            style: TextStyle(fontSize: 18),
-                                          )
-                                          :  TextFormField(
-
-                                               validator: (String? value) {
-                                                if (value!.isEmpty) {
-                                                  return 'Please Enter Valid Email-id';
-                                                }
-                                              },
-                                              autofocus: true,
-                                              controller: emailController,
-                                              decoration: new InputDecoration(
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 1, left: 4, bottom: 1, right: 4),
-                                               // hintText: data.profileModel?.email,
-                                                hintStyle: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                ),
-                                                border: new OutlineInputBorder(
-                                                  borderRadius:
-                                                  new BorderRadius.circular(5.0),
-                                                  borderSide: new BorderSide(
-                                                    color: Color(0xffCFD8DC),
-                                                  ),
-                                                ),
-                                              ),
-                                              onChanged: (text) {
-                                                setState(() {
-
-                                                });
-                                              },
-                                            ),
-
-                                    Container(
-                                        padding:
-                                            EdgeInsets.only(top: 20, bottom: 10),
-                                        child: Text(
-                                          "Contact No",
-                                          style: TextStyle(
-                                              color: Colors.black45,
-                                              fontSize: 18),
-                                        )),
-                                    (edit == false)
-                                        ? Text(
-                                            data.profileModel?.phone ?? "",
-                                            style: TextStyle(fontSize: 18),
-                                          )
-
-                                          :  TextFormField(
-                                              validator: (String? value) {
-                                                if (value!.length<10) {
-                                                  return 'Please Enter Valid Number';
-                                                }
-                                                else if(value .length==10){
-                                                  _formKey1.currentState?.deactivate();
-                                                }
-                                              },
-                                              keyboardType: TextInputType.number,
-                                              maxLength: 10,
-                                              autofocus: true,
-                                              controller: phoneController,
-                                              decoration: new InputDecoration(
-                                                contentPadding: EdgeInsets.only(
-                                                    top: 1, left: 4, bottom: 1, right: 4),
-                                               // hintText: data.profileModel?.phone,
-                                                hintStyle: TextStyle(
-                                                  fontFamily: "Nunito",
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                ),
-                                                counterText: "",
-
-                                                border: new OutlineInputBorder(
-                                                  borderRadius:
-                                                  new BorderRadius.circular(5.0),
-                                                  borderSide: new BorderSide(
-                                                    color: Colors.blueAccent,
-                                                  ),
-                                                ),
-                                              ),
-                                              onChanged: (text) {
-                                                setState(() {
-                                                  if(phoneController.text.length==10){
-                                                    FocusScope.of(context).requestFocus(new FocusNode());
-                                                  }
-                                                });
-                                              },
-                                            ),
-
-                                    (edit == true)
-                                        ? Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0,
-                                                right: 8.0,
-                                                bottom: 15,
-                                                top: 25),
-                                            child: Container(
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                color: Colors.blue,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.blue,
-                                                      spreadRadius: 3),
-                                                ],
-                                              ),
-                                              child: InkWell(
-                                                onTap: () {
-                                               if (_formKey1.currentState != null) {
-                                                _formKey1.currentState?.validate();
-                                                if(emailController.value.text.isNotEmpty &&phoneController.text.length==10){
-                                                 // updateDetailPopUp();
-                                                  _updateBottomSheet();
-                                                }
-                                               }
-
-                                                },
-                                                child: Text(
-                                                  "Update",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            height: 10,
-                                          ),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.only(left: 5, bottom: 20),
-                                      child: Column(
-                                        children: [
-                                          (edit==false)?
-                                          Divider(
-                                            color: Colors.grey[450],
-                                            thickness: 1,
-                                          ):Container(),
-                                          InkWell(
-                                            onTap: () {
-                                              changePasswordPopUp();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.vpn_key_outlined,
-                                                  size: 18,
-                                                ),
-                                                Container(
-                                                    padding:
-                                                        EdgeInsets.only(left: 8),
-                                                    child: Text(
-                                                      "Change Password",
-                                                      style:
-                                                          TextStyle(fontSize: 18),
-                                                    )),
-                                              ],
-                                            ),
-                                          ),
-                                          Divider(
-                                            color: Colors.grey[450],
-                                            thickness: 1,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              _logOutBottomSheet();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.logout,
-                                                  size: 18,
-                                                ),
-                                                Container(
-                                                    padding:
-                                                        EdgeInsets.only(left: 8),
-                                                    child: Text("Logout",
-                                                        style: TextStyle(
-                                                            fontSize: 18))),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                      )
+                                    : Container(
+                                        height: 10,
                                       ),
-                                    ),
-                                  ],
+                                Container(
+                                  padding:
+                                      EdgeInsets.only(left: 5, bottom: 20),
+                                  child: Column(
+                                    children: [
+                                      (edit==false)?
+                                      Divider(
+                                        color: Colors.grey[450],
+                                        thickness: 1,
+                                      ):Container(),
+                                      InkWell(
+                                        onTap: () {
+                                          changePasswordPopUp();
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.vpn_key_outlined,
+                                              size: 18,
+                                            ),
+                                            Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text(
+                                                  "Change Password",
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: Colors.grey[450],
+                                        thickness: 1,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          _logOutBottomSheet();
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.logout,
+                                              size: 18,
+                                            ),
+                                            Container(
+                                                padding:
+                                                    EdgeInsets.only(left: 8),
+                                                child: Text("Logout",
+                                                    style: TextStyle(
+                                                        fontSize: 18))),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1372,7 +1363,7 @@ class _MyProfileState extends State<MyProfile> {
                                         UpdatePasswordModel(
                                       action: 10,
                                       mode: 1,
-                                      oldPass: '2',
+                                      oldPass: '0',
                                       newPass: newPasswordController.text,
                                       newPass1: confirmPasswordController.text,
                                       userId: 1604,
@@ -1383,28 +1374,15 @@ class _MyProfileState extends State<MyProfile> {
                                         ?.getUpdatePasswordDetails(
                                             updatePasswordModel: model);
                                     log("latika $response");
-                                    CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
 
-                                    // if (model.oldPass ==
-                                    //     currentPasswordController) {
-                                    //   ScaffoldMessenger.of(context)
-                                    //       .showSnackBar(SnackBar(
-                                    //     content: Text(
-                                    //       'Password updated',
-                                    //       style: TextStyle(color: Colors.white),
-                                    //     ),
-                                    //     backgroundColor: Colors.green,
-                                    //   ));
-                                    //   Navigator.pushReplacementNamed(
-                                    //       context, AppRoutes.myProfile);
-                                    // } else {
-                                    //   ScaffoldMessenger.of(context)
-                                    //       .showSnackBar(SnackBar(
-                                    //     content: Text("Passeord not  updated"),
-                                    //     backgroundColor: Colors.red,
-                                    //   ));
-                                    //   Navigator.pop(context);
+                                    // if(response==200){
+                                    //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
+                                    //  // Navigator.pushReplacementNamed(context, AppRoutes.myProfile);
+                                    // }else{
+                                    //   //Navigator.pop(context);
+                                    //   CustomWidgets.getToast(message: "Could not Update the Password ", color:  Colors.red);
                                     // }
+
                                   }
                                 },
                                 child: Container(
@@ -1512,9 +1490,16 @@ class _MyProfileState extends State<MyProfile> {
                             var response =
                                 await profileViewmodel?.getUpdateDetails(
                                 updateDetailModel: model);
-                            CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
+                            if(response){
+                              CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
                               Navigator.pushReplacementNamed(
                                   context, AppRoutes.myProfile);
+                            }else{
+                              CustomWidgets.getToast(message: "Could not Update the Detail", color:  Colors.green);
+                              Navigator.pushReplacementNamed(
+                                  context, AppRoutes.myProfile);
+                            }
+
                           },
                           child: Container(
                             color: Colors.white,
