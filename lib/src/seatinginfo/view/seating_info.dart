@@ -146,7 +146,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: data.seatingInfoModel!.length ?? 0,
+                                  itemCount: data.seatingInfoModel?.length ?? 0,
                                   itemBuilder: (context, index) {
                                     SeatingInfoModel model =
                                         data.seatingInfoModel![index];
@@ -206,7 +206,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ??
+                                                      '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' 
                                                           "",
                                                       maxLines: 5,
                                                       textAlign:
