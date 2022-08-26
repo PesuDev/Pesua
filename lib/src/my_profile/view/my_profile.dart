@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 
 
 class MyProfile extends StatefulWidget {
@@ -107,8 +108,11 @@ class _MyProfileState extends State<MyProfile> {
                                                   scale: 0.5)),
                                         ),
                                       )
-                                    : Container(
-                                  color: Colors.white,
+                                    :
+                                CircleAvatar(
+                                  radius: MediaQuery.of(context).size.height * 0.025,
+                                  backgroundImage: NetworkImage(
+                                      'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
                                 ),
                                 SizedBox(
                                   width: 20,
@@ -1584,7 +1588,18 @@ class _MyProfileState extends State<MyProfile> {
                           padding: EdgeInsets.only(
                               top: 8.0, bottom: 8.0, left: 18, right: 18),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () async{
+                              CustomWidgets.showLoaderDialog(context: context,message: 'Logging out....');
+                              CustomWidgets.getToast(message: "Logged out successfully", color:  Color(0xff464646));
+                              Navigator.pop(context);
+
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  AppRoutes.Dashboard,
+                                      (route) => false);
+                              await SharedPreferenceUtil()
+                                  .clearAll();
+                            },
                             child: Text(
                               "yes",
                               style: TextStyle(color: Colors.black),

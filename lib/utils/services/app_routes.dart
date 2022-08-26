@@ -44,6 +44,7 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
+import '../../src/dashboard_module/view/dashboard_page.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
@@ -160,6 +161,8 @@ data(RouteSettings settings) {
               ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
+      case AppRoutes.Dashboard:
+      return MaterialPageRoute(builder: (_) => DashboardScreen());
   }
 }
 
@@ -192,4 +195,5 @@ class AppRoutes {
   static const String individualUnit = "individualUnit";
   static const String esaGraph = "esaGraph";
   static const String calendarDashboard = "calendarDashboard";
+  static const String Dashboard = "Dashboard";
 }
