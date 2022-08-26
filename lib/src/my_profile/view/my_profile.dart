@@ -1495,7 +1495,7 @@ class _MyProfileState extends State<MyProfile> {
                             var response =
                                 await profileViewmodel?.getUpdateDetails(
                                 updateDetailModel: model);
-                            if(response){
+                            if(response!=null){
                               CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
                               Navigator.pushReplacementNamed(
                                   context, AppRoutes.myProfile);
