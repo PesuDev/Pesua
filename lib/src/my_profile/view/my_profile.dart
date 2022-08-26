@@ -13,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
+import '../../login/view/login.dart';
 
 
 class MyProfile extends StatefulWidget {
@@ -1589,6 +1590,9 @@ class _MyProfileState extends State<MyProfile> {
                               top: 8.0, bottom: 8.0, left: 18, right: 18),
                           child: InkWell(
                             onTap: () async{
+                              final provider =
+                              Provider.of<GoogleSignInProvider>(context, listen: false);
+                              provider.logout();
                               CustomWidgets.showLoaderDialog(context: context,message: 'Logging out....');
                               CustomWidgets.getToast(message: "Logged out successfully", color:  Color(0xff464646));
                               Navigator.pop(context);
