@@ -1490,7 +1490,7 @@ class _MyProfileState extends State<MyProfile> {
                                 email: emailController.text,
                                 phone: phoneController.text,
                                 userId:
-                                'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
+                                '0163f09a-84d8-43c0-b853-b9846c0e1799',
                                 randomNum: 0.03338104178082224);
                             await profileViewmodel?.getUpdateDetails1(
                                 action: 12,
@@ -1498,10 +1498,12 @@ class _MyProfileState extends State<MyProfile> {
                                 email: emailController.text,
                                 phone: phoneController.text,
                                 userId:
-                                'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
+                                '0163f09a-84d8-43c0-b853-b9846c0e1799',
                                 randomNum: 0.03338104178082224
                             );
-                            Navigator.pop(context);
+                            Navigator.pushReplacementNamed(
+                                      context, AppRoutes.myProfile);
+
                             // if(response=='1001'){
                             //   CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
                             //   Navigator.pushReplacementNamed(
