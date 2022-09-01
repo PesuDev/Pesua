@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:developer';
 
@@ -18,7 +19,7 @@ class LoginApiService {
     final data = await _pesuApiService.postApiCallWithQueryParams(
         endPoint: url, queryParams: loginRequestModel.toJson());
     if(data != null){
-    return LoginResponseModel.fromJson(data);
+      return LoginResponseModel.fromJson(data);
     }
 
   }

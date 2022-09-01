@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
@@ -83,1066 +84,1066 @@ class _MyProfileState extends State<MyProfile> {
           return data.profileModel != null && data.profileDetailModel != null
 
               ? SingleChildScrollView(
-                  child: Container(
-                    color: Colors.grey[200],
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          color: Color(0xff0091CD),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 20, top: 20, left: 16),
-                            child:
-                            Row(
+            child: Container(
+              color: Colors.grey[200],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    color: Color(0xff0091CD),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 20, top: 20, left: 16),
+                      child:
+                      Row(
+                        children: [
+                          myImage != null && myImage.isNotEmpty
+                              ? Container(
+                            width: 110,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(100),
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: MemoryImage(myImage,
+                                      scale: 0.5)),
+                            ),
+                          )
+                              :
+                          CircleAvatar(
+                            radius: MediaQuery.of(context).size.height * 0.025,
+                            backgroundImage: NetworkImage(
+                                'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width /
+                                1.8,
+                            padding: EdgeInsets.only(
+                                top: 8, right: 8, bottom: 8),
+                            child: Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
                               children: [
-                                myImage != null && myImage.isNotEmpty
-                                    ? Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          image: new DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: MemoryImage(myImage,
-                                                  scale: 0.5)),
-                                        ),
-                                      )
-                                    :
-                                CircleAvatar(
-                                  radius: MediaQuery.of(context).size.height * 0.025,
-                                  backgroundImage: NetworkImage(
-                                      'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width /
-                                      1.8,
-                                  padding: EdgeInsets.only(
-                                      top: 8, right: 8, bottom: 8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        data.profileModel?.name ?? "",
+                                Text(
+                                  data.profileModel?.name ?? "",
 
-                                        //"Student401",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'PESU ID : ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.w400),
-                                          ),
-                                          Text(
-                                            data.profileModel?.loginId ??
-                                                "",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'SRN: ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight:
-                                                    FontWeight.w400),
-                                          ),
-                                          Text(
-                                            data.profileModel
-                                                    ?.departmentId ??
-                                                "",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        "${data.profileModel?.program ?? ""} | ${data.profileModel?.branch ?? ""}",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      Text(
-                                        data.profileModel?.className ?? "",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                  //"Student401",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'PESU ID : ',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight:
+                                          FontWeight.w400),
+                                    ),
+                                    Text(
+                                      data.profileModel?.loginId ??
+                                          "",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'SRN: ',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight:
+                                          FontWeight.w400),
+                                    ),
+                                    Text(
+                                      data.profileModel
+                                          ?.departmentId ??
+                                          "",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  "${data.profileModel?.program ?? ""} | ${data.profileModel?.branch ?? ""}",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  data.profileModel?.className ?? "",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ],
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Form(
-                          key: _formKey1,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          child: Container(
-                            color: Colors.white,
-                            padding: EdgeInsets.only(
-                              top: 12,
-                              right: 12,
-                              left: 16,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        emailController.text=data.profileModel?.email ??"";
-                                        phoneController.text=data.profileModel?.phone ??"";
-                                        setState(() {
-                                          if (edit == false) {
-                                            edit = true;
-                                          } else if (edit == true) {
-                                            edit = false;
-                                          }
-                                          print('$edit');
-                                        });
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            top: 5,
-                                            bottom: 5,
-                                            left: 12,
-                                            right: 12),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          color: (edit == false)
-                                              ? Colors.blueGrey
-                                              : Colors.orangeAccent,
-                                          /*    boxShadow: [
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Form(
+                    key: _formKey1,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.only(
+                        top: 12,
+                        right: 12,
+                        left: 16,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  emailController.text=data.profileModel?.email ??"";
+                                  phoneController.text=data.profileModel?.phone ??"";
+                                  setState(() {
+                                    if (edit == false) {
+                                      edit = true;
+                                    } else if (edit == true) {
+                                      edit = false;
+                                    }
+                                    print('$edit');
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      top: 5,
+                                      bottom: 5,
+                                      left: 12,
+                                      right: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(12),
+                                    color: (edit == false)
+                                        ? Colors.blueGrey
+                                        : Colors.orangeAccent,
+                                    /*    boxShadow: [
                                   BoxShadow(
                                       color: Colors.blueGrey, spreadRadius: 3),
                                 ],*/
-                                        ),
-                                        child: Text(
-                                          (edit == false) ? "Edit" : "Cancel",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                  child: Text(
+                                    (edit == false) ? "Edit" : "Cancel",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                                Container(
-                                    padding:
-                                        EdgeInsets.only(top: 10, bottom: 10),
-                                    child: Text(
-                                      "Email ID",
-                                      style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 18),
-                                    )),
-                                (edit == false)
-                                    ? Text(
-                                        data.profileModel?.email ?? "",
-                                        style: TextStyle(fontSize: 18),
-                                      )
-                                      :  TextFormField(
+                              ),
+                            ],
+                          ),
+                          Container(
+                              padding:
+                              EdgeInsets.only(top: 10, bottom: 10),
+                              child: Text(
+                                "Email ID",
+                                style: TextStyle(
+                                    color: Colors.black45,
+                                    fontSize: 18),
+                              )),
+                          (edit == false)
+                              ? Text(
+                            data.profileModel?.email ?? "",
+                            style: TextStyle(fontSize: 18),
+                          )
+                              :  TextFormField(
 
-                                           validator: (String? value) {
-                                            if (value!.isEmpty) {
-                                              return 'Please Enter Valid Email-id';
-                                            }
-                                          },
-                                          // autofocus: true,
-                                          controller: emailController,
-                                          decoration: new InputDecoration(
-                                            contentPadding: EdgeInsets.only(
-                                                top: 1, left: 4, bottom: 1, right: 4),
-                                           // hintText: data.profileModel?.email,
-                                            hintStyle: TextStyle(
-                                              fontFamily: "Nunito",
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                            ),
-                                            border: new OutlineInputBorder(
-                                              borderRadius:
-                                              new BorderRadius.circular(5.0),
-                                              borderSide: new BorderSide(
-                                                color: Color(0xffCFD8DC),
-                                              ),
-                                            ),
-                                          ),
-                                          onChanged: (text) {
-                                            setState(() {
+                            validator: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'Please Enter Valid Email-id';
+                              }
+                            },
+                            // autofocus: true,
+                            controller: emailController,
+                            decoration: new InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 1, left: 4, bottom: 1, right: 4),
+                              // hintText: data.profileModel?.email,
+                              hintStyle: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              border: new OutlineInputBorder(
+                                borderRadius:
+                                new BorderRadius.circular(5.0),
+                                borderSide: new BorderSide(
+                                  color: Color(0xffCFD8DC),
+                                ),
+                              ),
+                            ),
+                            onChanged: (text) {
+                              setState(() {
 
-                                            });
-                                          },
-                                        ),
+                              });
+                            },
+                          ),
 
-                                Container(
-                                    padding:
-                                        EdgeInsets.only(top: 20, bottom: 10),
-                                    child: Text(
-                                      "Contact No",
-                                      style: TextStyle(
-                                          color: Colors.black45,
-                                          fontSize: 18),
-                                    )),
-                                (edit == false)
-                                    ? Text(
-                                        data.profileModel?.phone ?? "",
-                                        style: TextStyle(fontSize: 18),
-                                      )
+                          Container(
+                              padding:
+                              EdgeInsets.only(top: 20, bottom: 10),
+                              child: Text(
+                                "Contact No",
+                                style: TextStyle(
+                                    color: Colors.black45,
+                                    fontSize: 18),
+                              )),
+                          (edit == false)
+                              ? Text(
+                            data.profileModel?.phone ?? "",
+                            style: TextStyle(fontSize: 18),
+                          )
 
-                                      :  TextFormField(
-                                          validator: (String? value) {
-                                            if (value!.length<10) {
-                                              return 'Please Enter Valid Number';
-                                            }
-                                            else if(value .length==10){
-                                              _formKey1.currentState?.deactivate();
-                                            }
-                                          },
-                                          keyboardType: TextInputType.number,
-                                          maxLength: 10,
-                                          autofocus: true,
-                                          controller: phoneController,
-                                          decoration: new InputDecoration(
-                                            contentPadding: EdgeInsets.only(
-                                                top: 1, left: 4, bottom: 1, right: 4),
-                                           // hintText: data.profileModel?.phone,
-                                            hintStyle: TextStyle(
-                                              fontFamily: "Nunito",
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                            ),
-                                            counterText: "",
+                              :  TextFormField(
+                            validator: (String? value) {
+                              if (value!.length<10) {
+                                return 'Please Enter Valid Number';
+                              }
+                              else if(value .length==10){
+                                _formKey1.currentState?.deactivate();
+                              }
+                            },
+                            keyboardType: TextInputType.number,
+                            maxLength: 10,
+                            autofocus: true,
+                            controller: phoneController,
+                            decoration: new InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 1, left: 4, bottom: 1, right: 4),
+                              // hintText: data.profileModel?.phone,
+                              hintStyle: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              counterText: "",
 
-                                            border: new OutlineInputBorder(
-                                              borderRadius:
-                                              new BorderRadius.circular(5.0),
-                                              borderSide: new BorderSide(
-                                                color: Colors.blueAccent,
-                                              ),
-                                            ),
-                                          ),
-                                          onChanged: (text) {
-                                            setState(() {
-                                              if(phoneController.text.length==10){
-                                                FocusScope.of(context).requestFocus(new FocusNode());
-                                              }
-                                            });
-                                          },
-                                        ),
+                              border: new OutlineInputBorder(
+                                borderRadius:
+                                new BorderRadius.circular(5.0),
+                                borderSide: new BorderSide(
+                                  color: Colors.blueAccent,
+                                ),
+                              ),
+                            ),
+                            onChanged: (text) {
+                              setState(() {
+                                if(phoneController.text.length==10){
+                                  FocusScope.of(context).requestFocus(new FocusNode());
+                                }
+                              });
+                            },
+                          ),
 
-                                (edit == true)
-                                    ? Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8.0,
-                                            right: 8.0,
-                                            bottom: 15,
-                                            top: 25),
-                                        child: Container(
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width,
-                                          padding: EdgeInsets.all(5),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            color: Colors.blue,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.blue,
-                                                  spreadRadius: 3),
-                                            ],
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {
-                                           if (_formKey1.currentState != null) {
-                                            _formKey1.currentState?.validate();
-                                            if(emailController.value.text.isNotEmpty &&phoneController.text.length==10){
-                                             // updateDetailPopUp();
-                                              _updateBottomSheet();
-                                            }
-                                           }
+                          (edit == true)
+                              ? Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 15,
+                                top: 25),
+                            child: Container(
+                              width: MediaQuery.of(context)
+                                  .size
+                                  .width,
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.circular(15),
+                                color: Colors.blue,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.blue,
+                                      spreadRadius: 3),
+                                ],
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  if (_formKey1.currentState != null) {
+                                    _formKey1.currentState?.validate();
+                                    if(emailController.value.text.isNotEmpty &&phoneController.text.length==10){
+                                      // updateDetailPopUp();
+                                      _updateBottomSheet();
+                                    }
+                                  }
 
-                                            },
-                                            child: Text(
-                                              "Update",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                      FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : Container(
-                                        height: 10,
-                                      ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.only(left: 5, bottom: 20),
-                                  child: Column(
+                                },
+                                child: Text(
+                                  "Update",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight:
+                                      FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          )
+                              : Container(
+                            height: 10,
+                          ),
+                          Container(
+                            padding:
+                            EdgeInsets.only(left: 5, bottom: 20),
+                            child: Column(
+                              children: [
+                                (edit==false)?
+                                Divider(
+                                  color: Colors.grey[450],
+                                  thickness: 1,
+                                ):Container(),
+                                InkWell(
+                                  onTap: () {
+                                    changePasswordPopUp();
+                                  },
+                                  child: Row(
                                     children: [
-                                      (edit==false)?
-                                      Divider(
-                                        color: Colors.grey[450],
-                                        thickness: 1,
-                                      ):Container(),
-                                      InkWell(
-                                        onTap: () {
-                                          changePasswordPopUp();
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.vpn_key_outlined,
-                                              size: 18,
-                                            ),
-                                            Container(
-                                                padding:
-                                                    EdgeInsets.only(left: 8),
-                                                child: Text(
-                                                  "Change Password",
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                )),
-                                          ],
-                                        ),
+                                      Icon(
+                                        Icons.vpn_key_outlined,
+                                        size: 18,
                                       ),
-                                      Divider(
-                                        color: Colors.grey[450],
-                                        thickness: 1,
+                                      Container(
+                                          padding:
+                                          EdgeInsets.only(left: 8),
+                                          child: Text(
+                                            "Change Password",
+                                            style:
+                                            TextStyle(fontSize: 18),
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.grey[450],
+                                  thickness: 1,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    _logOutBottomSheet();
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout,
+                                        size: 18,
                                       ),
-                                      InkWell(
-                                        onTap: () {
-                                          _logOutBottomSheet();
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.logout,
-                                              size: 18,
-                                            ),
-                                            Container(
-                                                padding:
-                                                    EdgeInsets.only(left: 8),
-                                                child: Text("Logout",
-                                                    style: TextStyle(
-                                                        fontSize: 18))),
-                                          ],
-                                        ),
-                                      ),
+                                      Container(
+                                          padding:
+                                          EdgeInsets.only(left: 8),
+                                          child: Text("Logout",
+                                              style: TextStyle(
+                                                  fontSize: 18))),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(
-                                  top: 12,
-                                  right: 12,
-                                  left: 16,
-                                ),
-                                child: Text(
-                                  "OtherInformation",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                )),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              width: double.infinity,
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 12,
-                                  left: 16,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "SSLC Marks :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.sSLCMarksObtained ??
-                                              "hhhh",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "PUC Marks :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.pUCMarksObtained ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Date Of Birth :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.dateOfBirth ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Blood Group:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.bloodGroup ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            //Qualifying Examination
-
-                            Container(
-                                padding: EdgeInsets.only(
-                                  top: 12,
-                                  right: 12,
-                                  left: 16,
-                                ),
-                                child: Text(
-                                  "Qualifying Examination",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                )),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              height: MediaQuery.of(context).size.height / 15,
-                              color: Colors.white,
-                              width: double.infinity,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 16),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "EXAM",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.entranceExam ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    VerticalDivider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "Rank",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.rank ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    VerticalDivider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 50),
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Score",
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 18),
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            data.profileDetailModel?.sTUDENTINFO
-                                                    ?.entranceExamScore ??
-                                                "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            // Parent Details
-
-                            Container(
-                                padding: EdgeInsets.only(
-                                  top: 12,
-                                  right: 12,
-                                  left: 16,
-                                ),
-                                child: Text(
-                                  "Parent Detail",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                )),
-
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              width: double.infinity,
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 12,
-                                  left: 16,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Father",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 18),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Name :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherName ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Mobile :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        InkWell(
-                                          onTap: (){
-                                            UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.fatherMobileNo.toString()}');
-                                          },
-                                          child: Text(
-                                            data.profileDetailModel?.sTUDENTINFO
-                                                    ?.fatherMobileNo ??
-                                                "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Email :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        InkWell(
-                                          onTap: (){
-                                            UrlLauncher.launch('mailto:${data.profileDetailModel?.sTUDENTINFO?.fatherEmail}');
-
-                                          },
-                                          child: Text(
-                                            data.profileDetailModel?.sTUDENTINFO
-                                                    ?.fatherEmail ??
-                                                "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Occupation:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherOccupation ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Qualification:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherQualification ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Designation:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherDesignation ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Employer:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.fatherEmployerDetails ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                    Text(
-                                      "Mother",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Name :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherName ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Mobile :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        InkWell(
-                                          onTap: (){
-                                            UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.motherMobileNo.toString()}');
-
-                                          },
-                                          child: Text(
-                                            data.profileDetailModel?.sTUDENTINFO
-                                                    ?.motherMobileNo ??
-                                                "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Email :",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        InkWell(
-                                          onTap: (){
-                                            UrlLauncher.launch('mailto:+${data.profileDetailModel?.sTUDENTINFO?.motherEmail.toString()}');
-
-                                          },
-                                          child: Text(
-                                            data.profileDetailModel?.sTUDENTINFO
-                                                    ?.motherEmail ??
-                                                "",
-
-                                            //"Student401",
-                                            style: TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 18),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Occupation:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherOccupation ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Qualification:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherQualification ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Designation:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherDesignation ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "Employer:",
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                        Text(
-                                          data.profileDetailModel?.sTUDENTINFO
-                                                  ?.motherEmployerDetails ??
-                                              "",
-
-                                          //"Student401",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            //Address
-
-                            Container(
-                                padding: EdgeInsets.only(
-                                  top: 12,
-                                  right: 12,
-                                  left: 16,
-                                ),
-                                child: Text(
-                                  "Address",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                )),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              color: Colors.white,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16, top: 10, bottom: 20),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Present Address",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      data.profileDetailModel?.sTUDENTINFO
-                                              ?.permanentAddress ??
-                                          "",
-
-                                      //"Student401",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                    Text(
-                                      "Permanent Address",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      data.profileDetailModel?.sTUDENTINFO
-                                              ?.localAddress ??
-                                          "",
-
-                                      //"Student401",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 18),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                )
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            right: 12,
+                            left: 16,
+                          ),
+                          child: Text(
+                            "OtherInformation",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 12,
+                            left: 16,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "SSLC Marks :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.sSLCMarksObtained ??
+                                        "hhhh",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "PUC Marks :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.pUCMarksObtained ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Date Of Birth :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.dateOfBirth ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Blood Group:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.bloodGroup ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      //Qualifying Examination
+
+                      Container(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            right: 12,
+                            left: 16,
+                          ),
+                          child: Text(
+                            "Qualifying Examination",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: MediaQuery.of(context).size.height / 15,
+                        color: Colors.white,
+                        width: double.infinity,
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.only(top: 5, left: 16),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    "EXAM",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.entranceExam ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              VerticalDivider(
+                                color: Colors.grey,
+                                thickness: 1,
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "Rank",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.rank ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              VerticalDivider(
+                                color: Colors.grey,
+                                thickness: 1,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 50),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Score",
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 18),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.entranceExamScore ??
+                                          "",
+
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      // Parent Details
+
+                      Container(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            right: 12,
+                            left: 16,
+                          ),
+                          child: Text(
+                            "Parent Detail",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 12,
+                            left: 16,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Father",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Name :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.fatherName ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Mobile :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.fatherMobileNo.toString()}');
+                                    },
+                                    child: Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.fatherMobileNo ??
+                                          "",
+
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Email :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      UrlLauncher.launch('mailto:${data.profileDetailModel?.sTUDENTINFO?.fatherEmail}');
+
+                                    },
+                                    child: Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.fatherEmail ??
+                                          "",
+
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Occupation:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.fatherOccupation ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Qualification:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.fatherQualification ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Designation:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.fatherDesignation ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Employer:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.fatherEmployerDetails ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(
+                                color: Colors.grey,
+                                thickness: 1,
+                              ),
+                              Text(
+                                "Mother",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Name :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.motherName ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Mobile :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      UrlLauncher.launch('tel:+${data.profileDetailModel?.sTUDENTINFO?.motherMobileNo.toString()}');
+
+                                    },
+                                    child: Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.motherMobileNo ??
+                                          "",
+
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Email :",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  InkWell(
+                                    onTap: (){
+                                      UrlLauncher.launch('mailto:+${data.profileDetailModel?.sTUDENTINFO?.motherEmail.toString()}');
+
+                                    },
+                                    child: Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.motherEmail ??
+                                          "",
+
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Occupation:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.motherOccupation ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Qualification:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.motherQualification ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Designation:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.motherDesignation ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Employer:",
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 18),
+                                  ),
+                                  Text(
+                                    data.profileDetailModel?.sTUDENTINFO
+                                        ?.motherEmployerDetails ??
+                                        "",
+
+                                    //"Student401",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      //Address
+
+                      Container(
+                          padding: EdgeInsets.only(
+                            top: 12,
+                            right: 12,
+                            left: 16,
+                          ),
+                          child: Text(
+                            "Address",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        color: Colors.white,
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, top: 10, bottom: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Present Address",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 18),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                data.profileDetailModel?.sTUDENTINFO
+                                    ?.permanentAddress ??
+                                    "",
+
+                                //"Student401",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Divider(
+                                color: Colors.grey,
+                                thickness: 1,
+                              ),
+                              Text(
+                                "Permanent Address",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 18),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                data.profileDetailModel?.sTUDENTINFO
+                                    ?.localAddress ??
+                                    "",
+
+                                //"Student401",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          )
               : Center(child: CircularProgressIndicator());
         }));
   }
@@ -1230,7 +1231,7 @@ class _MyProfileState extends State<MyProfile> {
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
-                                          new BorderRadius.circular(5.0),
+                                      new BorderRadius.circular(5.0),
                                       borderSide: new BorderSide(
                                         color: Color(0xffCFD8DC),
                                       ),
@@ -1270,7 +1271,7 @@ class _MyProfileState extends State<MyProfile> {
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
-                                          new BorderRadius.circular(5.0),
+                                      new BorderRadius.circular(5.0),
                                       borderSide: new BorderSide(
                                         color: Color(0xffCFD8DC),
                                       ),
@@ -1312,7 +1313,7 @@ class _MyProfileState extends State<MyProfile> {
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
-                                          new BorderRadius.circular(5.0),
+                                      new BorderRadius.circular(5.0),
                                       borderSide: new BorderSide(
                                         color: Color(0xffCFD8DC),
                                       ),
@@ -1366,7 +1367,7 @@ class _MyProfileState extends State<MyProfile> {
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
                                     UpdatePasswordModel model =
-                                        UpdatePasswordModel(
+                                    UpdatePasswordModel(
                                       action: 10,
                                       mode: 1,
                                       oldPass: currentPasswordController.text,
@@ -1376,7 +1377,7 @@ class _MyProfileState extends State<MyProfile> {
                                       loginId: 'PES1201900270',
                                       randomNum: 0.47685889613355137,
                                     );
-                                      await profileViewmodel
+                                    await profileViewmodel
                                         ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text, newPass1: confirmPasswordController.text, userId:'1604', loginId: 'PES1201900270');
                                     Navigator.pop(context);
                                     // if(response!=null){
@@ -1491,16 +1492,16 @@ class _MyProfileState extends State<MyProfile> {
                                 userId:
                                 'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
                                 randomNum: 0.03338104178082224);
-                                await profileViewmodel?.getUpdateDetails1(
-                                    action: 12,
-                                    mode: 2,
-                                    email: emailController.text,
-                                    phone: phoneController.text,
-                                    userId:
-                                    'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
-                                    randomNum: 0.03338104178082224
-                                );
-                                Navigator.pop(context);
+                            await profileViewmodel?.getUpdateDetails1(
+                                action: 12,
+                                mode: 2,
+                                email: emailController.text,
+                                phone: phoneController.text,
+                                userId:
+                                'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
+                                randomNum: 0.03338104178082224
+                            );
+                            Navigator.pop(context);
                             // if(response=='1001'){
                             //   CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
                             //   Navigator.pushReplacementNamed(
