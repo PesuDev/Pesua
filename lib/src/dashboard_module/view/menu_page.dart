@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
+import 'package:pesu/utils/view/webView_page.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../utils/services/web_url_link.dart';
 import '../../time_table/model/time_table_model.dart';
 import '../../time_table/viewmodel/timetable_viewmodel.dart';
 
@@ -73,15 +76,15 @@ class _MenuPageState extends State<MenuPage> {
                 onTap: () {
                   if (index == 0) {
                     Navigator.pushNamed(context, AppRoutes.login);
-                  } else if (index == 1) {
+                  }
+                  else if (index == 1) {
                     Navigator.pushNamed(context, AppRoutes.courseDashboard);
-                  } else if (index == 2) {
+                  }
+                  else if (index == 2) {
                     Navigator.pushNamed(context, AppRoutes.examination);
-                  } else if (index == 3) {
-
-
+                  }
+                  else if (index == 3) {
                     Navigator.pushNamed(context, AppRoutes.timeTable);
-
                   } else if (index == 4) {
                     Navigator.pushNamed(context, AppRoutes.attendance);
                   } else if (index == 5) {
@@ -110,7 +113,7 @@ class _MenuPageState extends State<MenuPage> {
 
                     //Announcements
                   } else if (index == 15) {
-                    //Library
+            WebViewPage(title: "Library",urlLink: libraryUrl,);
                   } else if (index == 16) {
                     Navigator.pushNamed(context, AppRoutes.transport);
                   } else if (index == 17) {
