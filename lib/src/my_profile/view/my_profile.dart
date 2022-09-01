@@ -30,6 +30,7 @@ class _MyProfileState extends State<MyProfile> {
   TextEditingController currentPasswordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  UpdatePasswordModel? updatePasswordModel;
 
 
   final _formKey = GlobalKey<FormState>();
@@ -276,7 +277,7 @@ class _MyProfileState extends State<MyProfile> {
                                               return 'Please Enter Valid Email-id';
                                             }
                                           },
-                                          autofocus: true,
+                                          // autofocus: true,
                                           controller: emailController,
                                           decoration: new InputDecoration(
                                             contentPadding: EdgeInsets.only(
@@ -1368,23 +1369,21 @@ class _MyProfileState extends State<MyProfile> {
                                         UpdatePasswordModel(
                                       action: 10,
                                       mode: 1,
-                                      oldPass: '0',
+                                      oldPass: currentPasswordController.text,
                                       newPass: newPasswordController.text,
                                       newPass1: confirmPasswordController.text,
                                       userId: 1604,
                                       loginId: 'PES1201900270',
                                       randomNum: 0.47685889613355137,
                                     );
-                                    var response = await profileViewmodel
-                                        ?.getUpdatePasswordDetails(
-                                            updatePasswordModel: model);
-                                    log("latika $response");
-
-                                    // if(response==200){
+                                      await profileViewmodel
+                                        ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text, newPass1: confirmPasswordController.text, userId:'1604', loginId: 'PES1201900270');
+                                    Navigator.pop(context);
+                                    // if(response!=null){
                                     //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
-                                    //  // Navigator.pushReplacementNamed(context, AppRoutes.myProfile);
+                                    //   Navigator.pushReplacementNamed(context, AppRoutes.myProfile);
                                     // }else{
-                                    //   //Navigator.pop(context);
+                                    //   Navigator.pop(context);
                                     //   CustomWidgets.getToast(message: "Could not Update the Password ", color:  Colors.red);
                                     // }
 
@@ -1492,18 +1491,25 @@ class _MyProfileState extends State<MyProfile> {
                                 userId:
                                 'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
                                 randomNum: 0.03338104178082224);
-                            var response =
-                                await profileViewmodel?.getUpdateDetails(
-                                updateDetailModel: model);
-                            if(response!=null){
-                              CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
-                              Navigator.pushReplacementNamed(
-                                  context, AppRoutes.myProfile);
-                            }else{
-                              CustomWidgets.getToast(message: "Could not Update the Detail", color:  Colors.green);
-                              Navigator.pushReplacementNamed(
-                                  context, AppRoutes.myProfile);
-                            }
+                                await profileViewmodel?.getUpdateDetails1(
+                                    action: 12,
+                                    mode: 2,
+                                    email: emailController.text,
+                                    phone: phoneController.text,
+                                    userId:
+                                    'a06596f1-5518-4f0c-b93a-1d302ccc6afe',
+                                    randomNum: 0.03338104178082224
+                                );
+                                Navigator.pop(context);
+                            // if(response=='1001'){
+                            //   CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
+                            //   Navigator.pushReplacementNamed(
+                            //       context, AppRoutes.myProfile);
+                            // }else{
+                            //   CustomWidgets.getToast(message: "Could not Update the Detail", color:  Colors.red);
+                            //   Navigator.pushReplacementNamed(
+                            //       context, AppRoutes.myProfile);
+                            // }
 
                           },
                           child: Container(
