@@ -8,6 +8,7 @@ import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
+import 'package:pesu/src/login/model/forget_password_model.dart';
 import 'package:pesu/src/login/model/login_request_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
@@ -15,6 +16,9 @@ import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../utils/constants/custom_widgets.dart';
+import '../../../utils/services/app_routes.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -28,6 +32,7 @@ class _LoginState extends State<Login> {
   late LoginViewModel _viewModel;
   late TextEditingController passwordController = TextEditingController();
   late TextEditingController usernameController = TextEditingController();
+  late TextEditingController forgetPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -207,7 +212,7 @@ class _LoginState extends State<Login> {
                         jMobileApp: 'YES',
                         jSocial: 'NO',
                         jAppId: '1',
-                        action: '0',
+                        action: ' 0',
                         mode: '0',
                         randomNum: '0.6181071537315856',
                         whichObjectId: 'loginSubmitButton',
@@ -215,6 +220,7 @@ class _LoginState extends State<Login> {
 
                       final responseModel = await _viewModel.getLoginDetails(
                           loginRequestModel: model);
+
                       if (responseModel != null &&
                           responseModel.uSERDETAILS?.userId != null &&
                           responseModel.mobileAppAuthenticationToken != null) {
@@ -251,11 +257,7 @@ class _LoginState extends State<Login> {
               ),
               InkWell(
                 onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        _buildPopupDialog(context),
-                  );
+               _buildPopupDialog();
                 },
                 child: Text(
                   "Forgot Password?",
@@ -299,114 +301,152 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-}
+  void _buildPopupDialog() {
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return
+            AlertDialog(
+              contentPadding: EdgeInsets.all(0),
+              content: new Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      color: Colors.blue,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.lock_outline_rounded,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Forget your Password?",
+                              style: TextStyle(
+                                  color: Colors.white, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      )),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              controller: forgetPasswordController,
+                              decoration: InputDecoration(
+                                hintText: "Enter Login ID/ SRN",
+                                hintStyle: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xff999999),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Source Sans Pro'),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 40, bottom: 10),
+                          height: 35,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(60),
+                            color: Color(0xff0091CD),
+                          ),
+                          child: TextButton(
+                            onPressed: () async{
+                              ForgetPasswordModel model=ForgetPasswordModel(
+                                  action: 11,
+                                  mode: 1,
+                                  loginid: forgetPasswordController.text,
+                                  appid: 1,
+                                  randomNum: 0.3145632102349487
+                              );
+                            await _viewModel.forgetPasswordDetails1(action: 11,
+                                mode: 1,
+                                loginId: forgetPasswordController.text,
+                                appId: 1,
+                                randomNum: 0.3145632102349487);
+                              // if(response=='1001'){
+                              //  CustomWidgets.getToast(message: "We have sent the password to ay****.s@gmail.com, You will receive your password in next 5 minute", color:  Colors.green);
+                              //
+                              //   Navigator.pushReplacementNamed(
+                              //       context, AppRoutes.login);
+                              // }else if(response=='1002'){
+                              //   CustomWidgets.getToast(message: "Please retry after 5 minute.", color:  Colors.grey);
+                              //   Navigator.pushReplacementNamed(
+                              //       context, AppRoutes.login);
+                              // }
+                              // else{
+                              //   Navigator.pushReplacementNamed(
+                              //       context, AppRoutes.login);
+                              // }
 
-Widget _buildPopupDialog(BuildContext context) {
-  return new AlertDialog(
-    contentPadding: EdgeInsets.all(0),
-    content: new Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            color: Colors.blue,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.lock_outline_rounded,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Forget your Password?",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                            },
+                            child: Text(
+                              "CONTINUE",
+                              style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Source Sans Pro',
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10, bottom: 20),
+                          height: 35,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(60),
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey)),
+                          child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "CANCEL",
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Source Sans Pro',
+                                  fontSize: 16,
+                                ),
+                              )),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            )),
-        Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter Login ID/ SRN",
-                      hintStyle: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xff999999),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Source Sans Pro'),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 40, bottom: 10),
-                height: 35,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60),
-                  color: Color(0xff0091CD),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "CONTINUE",
-                    style: TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10, bottom: 20),
-                height: 35,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(60),
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey)),
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "CANCEL",
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 16,
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
+            );
+
+        });
+  }
+
+
 }
+
 
 _SendEmail() {
   final Uri emailLaunchUri = Uri(
@@ -444,3 +484,5 @@ class GoogleSignInProvider extends ChangeNotifier {
     FirebaseAuth.instance.signOut();
   }
 }
+
+//pes1201800032
