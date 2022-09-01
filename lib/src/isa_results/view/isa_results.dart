@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
-import '../viewmodel/isa_dropdown_viewModel.dart';
+import '../viewmodel/isaViewModel.dart';
 
 class ISAResults extends StatefulWidget {
   const ISAResults({Key? key}) : super(key: key);
@@ -17,14 +16,13 @@ class ISAResults extends StatefulWidget {
 class _ISAResultsState extends State<ISAResults> {
   bool isSemSelected = false;
   String? dropDownTitle;
-  late IsaDropDownViewModel isaDropDownViewModel;
-  late IsaResultViewModel isaResultViewModel;
+  late IsaViewModel isaViewModel;
+  late IsaViewModel _isaViewModel;
   @override
   void initState() {
     super.initState();
-    isaDropDownViewModel =
-        Provider.of<IsaDropDownViewModel>(context, listen: false);
-    isaDropDownViewModel.getIsaDropDownDetails(
+    isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
+    isaViewModel.getIsaDropDownDetails(
         action: 6,
         mode: 5,
         whichObjectId: "clickHome_pesuacademy_myresults",
@@ -34,9 +32,8 @@ class _ISAResultsState extends State<ISAResults> {
         serverMode: 0,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.1629756694316884);
-    isaResultViewModel =
-        Provider.of<IsaResultViewModel>(context, listen: false);
-    isaResultViewModel.getIsaResultDetails(
+    _isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
+    _isaViewModel.getIsaResultDetails(
         action: 6,
         mode: 10,
         batchClassId: 1400,
@@ -49,7 +46,7 @@ class _ISAResultsState extends State<ISAResults> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: sideNavAppBar("ISA Results"),
-        body: Consumer<IsaDropDownViewModel>(builder: (context, model, child) {
+        body: Consumer<IsaViewModel>(builder: (context, model, child) {
           return Container(
             child: model.isaDropDownModel != null &&
                     model.isaDropDownModel!.length != 0
@@ -156,8 +153,7 @@ class _ISAResultsState extends State<ISAResults> {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          return Consumer<IsaDropDownViewModel>(
-              builder: (context, model, child) {
+          return Consumer<IsaViewModel>(builder: (context, model, child) {
             return new Container(
               color: Color(0xFF737373),
               //could change this to Color(0xFF737373),
@@ -190,7 +186,7 @@ class _ISAResultsState extends State<ISAResults> {
   }
 
   Widget resultDetails() {
-    return Consumer<IsaResultViewModel>(builder: (context, model, child) {
+    return Consumer<IsaViewModel>(builder: (context, model, child) {
       return ListView.builder(
           itemCount: model.isaResultModel?.length,
           itemBuilder: (context, int i) {

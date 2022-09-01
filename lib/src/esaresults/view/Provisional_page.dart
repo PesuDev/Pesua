@@ -40,7 +40,7 @@ ESAModel1 fetchdata = ESAModel1();
               ? Container(
             margin: EdgeInsets.only(top: 10),
             child: ListView.builder(
-                itemCount: data.esaModel1!.results!.length ?? 0,
+                itemCount: data.esaModel1?.results?.length ?? 0,
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   // ESAModel1 model = data.esaModel1;

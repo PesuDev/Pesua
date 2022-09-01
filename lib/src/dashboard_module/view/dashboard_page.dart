@@ -12,10 +12,8 @@ import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../../courses/viewModel/courseDropDownViewModel.dart';
 import '../../courses/viewModel/courseViewModel.dart';
-import '../../isa_results/viewmodel/isa_dropdown_viewModel.dart';
+import '../../isa_results/viewmodel/isaViewModel.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -38,20 +36,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: HomePage(),
               );
             case 1:
-              return MultiProvider(
-                providers: [
-                  ChangeNotifierProvider.value(
-                      value: CourseDropDownViewModel()),
-                  ChangeNotifierProvider.value(value: CourseViewModel()),
-                ],
+              return ChangeNotifierProvider(
+                create: (_) => CourseViewModel(),
                 child: CourseDashboard(),
               );
             case 2:
-              return MultiProvider(
-                providers: [
-                  ChangeNotifierProvider.value(value: IsaDropDownViewModel()),
-                  ChangeNotifierProvider.value(value: IsaResultViewModel()),
-                ],
+              return ChangeNotifierProvider(
+                create: (_) => IsaViewModel(),
                 child: ISAResults(),
               );
             case 3:

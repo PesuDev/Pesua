@@ -1,14 +1,14 @@
+import 'dart:developer';
 
 import 'package:pesu/src/esaresults/model/graph_model.dart';
 import 'package:pesu/utils/constants/app_urls.dart';
 import 'package:pesu/utils/services/pesu_api_service.dart';
 import '../model/esa_model.dart';
 
-
 class GraphApi {
   late final PesuApiService _pesuApiService = PesuApiService();
 
-  Future<List<GraphModel>?>  fetchGraphInfo({
+  Future<GraphModel?> fetchGraphInfo({
     required int action,
     required int mode,
     required double randomNum,
@@ -20,12 +20,13 @@ class GraphApi {
       'action': action,
       'mode': mode,
       'USN': usn,
-      'subjectCode' : subjectCode,
+      'subjectCode': subjectCode,
       'randomNum': randomNum,
     });
     if (data != null) {
-      Iterable iterable = data;
-      return iterable.map((e) => GraphModel.fromJson(e)).toList();
+      // Iterable iterable = data;
+      return GraphModel.fromJson(data);
     }
+    log("Graph Details $data");
   }
 }
