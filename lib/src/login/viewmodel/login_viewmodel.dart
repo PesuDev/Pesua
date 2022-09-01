@@ -17,12 +17,12 @@ class LoginViewModel extends ChangeNotifier {
     return data;
   }
 
-  // dynamic forgetPasswordDetails(
-  //     {required ForgetPasswordModel forgetPasswordModel}) async {
-  //   final data = await forgetPasswordApi.forgetPassword(
-  //       forgetPasswordModel: forgetPasswordModel);
-  //   return data;
-  // }
+  dynamic forgetPasswordDetails(
+      {required ForgetPasswordModel forgetPasswordModel}) async {
+    final data = await forgetPasswordApi.forgetPassword(
+        forgetPasswordModel: forgetPasswordModel);
+    return data;
+  }
 
   Future<void>forgetPasswordDetails1(
       {  required int action,
@@ -33,6 +33,8 @@ class LoginViewModel extends ChangeNotifier {
       })
   async {
     final data = await forgetPasswordApi1.forgetPassword1(action:action,mode:mode,appId:appId,loginId:loginId,randomNum:randomNum);
+
+
     notifyListeners();
 
   }

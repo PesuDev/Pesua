@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -69,7 +70,7 @@ class _LoginState extends State<Login> {
               InkWell(
                 onTap: () {
                   final provider =
-                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
                   provider.googleLogin();
                 },
                 child: Container(
@@ -83,7 +84,7 @@ class _LoginState extends State<Login> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image:
-                                  AssetImage('assets/images/google_logo.png'),
+                              AssetImage('assets/images/google_logo.png'),
                               fit: BoxFit.fitWidth),
                           // shape: BoxShape.circle,
                         ),
@@ -257,7 +258,7 @@ class _LoginState extends State<Login> {
               ),
               InkWell(
                 onTap: () {
-               _buildPopupDialog();
+                  _buildPopupDialog();
                 },
                 child: Text(
                   "Forgot Password?",
@@ -380,11 +381,13 @@ class _LoginState extends State<Login> {
                                   appid: 1,
                                   randomNum: 0.3145632102349487
                               );
-                            await _viewModel.forgetPasswordDetails1(action: 11,
-                                mode: 1,
-                                loginId: forgetPasswordController.text,
-                                appId: 1,
-                                randomNum: 0.3145632102349487);
+                              await _viewModel.forgetPasswordDetails1(action: 11,
+                                  mode: 1,
+                                  loginId: forgetPasswordController.text,
+                                  appId: 1,
+                                  randomNum: 0.3145632102349487);
+                              Navigator.pop(context);
+
                               // if(response=='1001'){
                               //  CustomWidgets.getToast(message: "We have sent the password to ay****.s@gmail.com, You will receive your password in next 5 minute", color:  Colors.green);
                               //

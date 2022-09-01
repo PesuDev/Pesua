@@ -1,5 +1,5 @@
 
-
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:pesu/src/my_profile/model/update_detail_model.dart';
@@ -77,28 +77,101 @@ class ProfileDetailApi {
   }
 }
 
-class UpdatePasswordApi {
+
+
+class UpdatePasswordApi1 {
   late final PesuApiService _pesuApiService = PesuApiService();
 
-  dynamic updatePasswordDetails(
-      {required UpdatePasswordModel updatePasswordModel}) async {
-    String url = AppUrls.commonUrl;
+  Future updatePasswordDetails1({
+    required int action,
+    required int mode,
+    required double randomNum,
+    required String oldPass,
+    required String newPass,
+    required String newPass1,
+    required String userId,
+    required String loginId,
 
-    final data = await _pesuApiService.postApiCallWithQueryParams(
-        endPoint: url, queryParams: updatePasswordModel.toJson());
-    return data;
+  }) async {
+    String url = AppUrls.commonUrl;
+    final data = await _pesuApiService.postApiCall(endPoint: url, params: {
+      'action': action,
+      'mode': mode,
+      'userId': userId,
+      'randomNum': randomNum,
+      'oldPass': oldPass,
+      'newPass':newPass,
+      'newPass1':newPass1,
+      'loginId':loginId
+    });
+    if (data != null) {
+
+      // return UpdatePasswordModel.fromJson(data);
+
+    }
+    log("msg$data");
+
+
   }
 }
-class UpdateDetailApi {
+
+
+// class UpdatePasswordApi {
+//   late final PesuApiService _pesuApiService = PesuApiService();
+//
+//   dynamic updatePasswordDetails(
+//       {required UpdatePasswordModel updatePasswordModel}) async {
+//     String url = AppUrls.commonUrl;
+//
+//     final data = await _pesuApiService.postApiCallWithQueryParams(
+//         endPoint: url, queryParams: updatePasswordModel.toJson());
+//     return data;
+//   }
+// }
+// class UpdateDetailApi {
+//   late final PesuApiService _pesuApiService = PesuApiService();
+//
+//   dynamic updateDetails(
+//       {required UpdateDetailModel updateDetailModel}) async {
+//     String url = AppUrls.commonUrl;
+//
+//     final data = await _pesuApiService.postApiCallWithQueryParams(
+//         endPoint: url, queryParams: updateDetailModel.toJson());
+//     return data;
+//   }
+// }
+
+class UpdateDetailApi1 {
   late final PesuApiService _pesuApiService = PesuApiService();
 
-  dynamic updateDetails(
-      {required UpdateDetailModel updateDetailModel}) async {
-    String url = AppUrls.commonUrl;
+  Future updateDetails1({
+    required int action,
+    required int mode,
+    required String phone,
+    required double randomNum,
+    required String userId,
+    required String email,
 
-    final data = await _pesuApiService.postApiCallWithQueryParams(
-        endPoint: url, queryParams: updateDetailModel.toJson());
-    return data;
+  }) async {
+    String url = AppUrls.commonUrl;
+    final data = await _pesuApiService.postApiCall(endPoint: url, params: {
+      'action': action,
+      'mode': mode,
+      'userId': userId,
+      'randomNum': randomNum,
+      'email':email,
+      'phone':phone
+
+
+    });
+    if (data != null) {
+
+      // return UpdatePasswordModel.fromJson(data);
+
+    }
+    log("msg$data");
+
+
   }
 }
 
