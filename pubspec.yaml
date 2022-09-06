@@ -32,6 +32,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
   flutter_swiper_null_safety: ^1.0.2
+
   webview_flutter:
   cloud_firestore:
   url_launcher: 6.1.5

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
+import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
@@ -114,7 +115,10 @@ data(RouteSettings settings) {
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
     case AppRoutes.announcements:
-      return MaterialPageRoute(builder: (_) => Announcements());
+      return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
+        create: (_) =>AnnouncementViewModel(),
+        child: Announcements(),
+      ));
     case AppRoutes.login:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
