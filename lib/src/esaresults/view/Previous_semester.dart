@@ -1,7 +1,11 @@
+import 'dart:math';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:developer';
+import '../model/esa_model.dart';
 import '../viewmodel/Esa_viewmodel.dart';
 
 class PreviousSem extends StatefulWidget {
@@ -19,13 +23,13 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getSubjectData(
       action: 7,
       mode: 7,
-      BatchClassId: 484,
+      BatchClassId: 744,
       //selectedBatch,
       //  _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: 'acddb8cf-e8e4-40d7-9ee3-fea238994dcb',
-      usn: 'PES1UG19CS115',
+      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
+      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
@@ -45,13 +49,13 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getSubjectData(
       action: 7,
       mode: 7,
-      BatchClassId: 484,
+      BatchClassId: 744,
       //selectedBatch,
       //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: 'acddb8cf-e8e4-40d7-9ee3-fea238994dcb',
-      usn: 'PES1UG19CS115',
+      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
+      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
@@ -59,7 +63,7 @@ class _PreviousSemState extends State<PreviousSem> {
   }
 
   List<SalesData> data1 = [
-    SalesData('Jan', 34),
+    SalesData('Jan', 400),
     SalesData('FEB', 43),
     SalesData('MAR', 134),
     SalesData('APR', 314),
@@ -79,8 +83,7 @@ class _PreviousSemState extends State<PreviousSem> {
           return data.esaModel2 != null &&
                   data.esaModel2!.studentCGPAWISE!.isNotEmpty &&
                   data.esaModel4 != null &&
-                  data.esaModel4!.rESULTS!.isNotEmpty
-              ? SafeArea(
+                  data.esaModel4!.rESULTS!.isNotEmpty ? SafeArea(
                   child: SingleChildScrollView(
                     child: Column(children: [
                       Container(
@@ -153,6 +156,37 @@ class _PreviousSemState extends State<PreviousSem> {
                           ],
                         ),
                       ),
+
+                      // Container(
+                      //   padding: const EdgeInsets.all(10),
+                      //   width: double.infinity,
+                      //   height: 200,
+                      //   child: LineChart(
+                      //     LineChartData(
+                      //       borderData: FlBorderData(show: false),
+                      //       lineBarsData: [
+                      //         LineChartBarData(
+                      //           spots: dummyData2,
+                      //           isCurved: true,
+                      //           barWidth: 3,
+                      //           colors: [
+                      //             Colors.orange,
+                      //           ],
+                      //         ),
+                      //         // The blue line
+                      //         LineChartBarData(
+                      //           spots: dummyData3,
+                      //           isCurved: false,
+                      //           barWidth: 3,
+                      //           colors: [
+                      //             Colors.blue,
+                      //           ],
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+
                       Container(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
@@ -162,15 +196,19 @@ class _PreviousSemState extends State<PreviousSem> {
                             children: [
                               SfCartesianChart(
                                   primaryXAxis: CategoryAxis(),
-                                  title: ChartTitle(text: "Students Marks Graph"),
-                                 // legend: Legend(isVisible: true),
-                                  tooltipBehavior: TooltipBehavior(enable: true),
-                                  series: <ChartSeries<SalesData, String>>[
-                                    LineSeries <SalesData, String>(
-                                        dataSource: data1,
-                                        xValueMapper: (SalesData sales, _) => sales.month,
-                                        yValueMapper: (SalesData sales, _) => sales.sales,
-                                     //   dataLabelSettings: DataLabelSettings(isVisible: true)
+                                  title:
+                                      ChartTitle(text: "Students Marks Graph"),
+                                  // legend: Legend(isVisible: true),
+                                  tooltipBehavior:
+                                      TooltipBehavior(enable: true),
+                                  series: <ChartSeries>[
+                                    LineSeries<StudentCGPAWISE, dynamic>(
+                                      dataSource: data.esaModel2?.studentCGPAWISE ?? [],
+                                      xValueMapper: (StudentCGPAWISE sales, _) =>
+                                          int.tryParse(sales.cGPA.toString()),
+                                      yValueMapper: (StudentCGPAWISE sales, _) =>
+                                          int.tryParse(sales.credits.toString()),
+                                         dataLabelSettings: DataLabelSettings(isVisible: true),
                                     )
                                   ]),
                               Row(
@@ -195,12 +233,16 @@ class _PreviousSemState extends State<PreviousSem> {
                                     icon: const Icon(Icons.bar_chart),
                                     label: Text(""),
                                   ),
-                                  Text("CGPA",style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff666666),
-                                    fontFamily: 'Open Sans',
-                                  ),)
+                                  Text(
+                                    "SGPA",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                    ),
+                                  ),
+
                                 ],
                               )
                             ],
@@ -220,7 +262,8 @@ class _PreviousSemState extends State<PreviousSem> {
                         child: Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: DropdownButtonFormField<String>(
-                              value: selectedItem,
+                              value: data
+                                  .esaModel2?.studentSemesterWise?[0].className,
                               items: data.items
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item,
@@ -234,8 +277,8 @@ class _PreviousSemState extends State<PreviousSem> {
                                       ?.cGPASEMESTERWISE?[0].batchClassId;
                                 });
                                 //setState(() => selectedItem = item,batch=data.esaModel2?.studentSemesterWise?[0].batchClassId.toString());
-                                log("SEMMMMM${selectedItem}");
-                                log("MMMM${selectedBatch}");
+                                // log("SEMMMMM${selectedItem}");
+                                // log("MMMM${selectedBatch}");
                                 _submittedRefreshList();
                               }),
                         ),
@@ -245,246 +288,220 @@ class _PreviousSemState extends State<PreviousSem> {
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                        color: Colors.cyan[100],
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: ListTileTheme.merge(
                           child: ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount:
-                                  data.esaModel4!.cGPASEMESTERWISE!.length ?? 0,
+                                  data.esaModel4?.cGPASEMESTERWISE?.length,
                               itemBuilder: (context, index) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data.esaModel4?.rESULTS?[index].description ?? "",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color(0xff000000),
-                                        fontFamily: 'Open Sans',
-                                      ),
-                                    ),
-                                    Divider(
-                                      thickness: 3,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "SGPA :",
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Color(0xff000000),
-                                                      fontFamily: 'Open Sans',
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    data
-                                                            .esaModel4
-                                                            ?.cGPASEMESTERWISE?[
-                                                                0]
-                                                            .sGPA ??
-                                                        "",
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Color(0xff000000),
-                                                      fontFamily: 'Open Sans',
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  "Credits :",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xff000000),
-                                                    fontFamily: 'Open Sans',
-                                                  ),
-                                                ),
-                                                Text(
-                                                  ("${data.esaModel4?.cGPASEMESTERWISE?[0].earnedCredits.toString()}/${data.esaModel4?.cGPASEMESTERWISE?[0].credits.toString()}") ??
-                                                      "SGPA",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color(0xff000000),
-                                                    fontFamily: 'Open Sans',
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "CGPA :",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff000000),
-                                                fontFamily: 'Open Sans',
-                                              ),
-                                            ),
-                                            Text(
-                                              data
-                                                      .esaModel4
-                                                      ?.cGPASEMESTERWISE?[0]
-                                                      .cGPA ??
-                                                  "",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff000000),
-                                                fontFamily: 'Open Sans',
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              }),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
-                        color: Color(0xffFFFFFF),
-                        child: Column(
-                          children: [
-                            ListTileTheme.merge(
-                              dense: true,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: data.esaModel4!.rESULTS!.length,
-                                itemBuilder: (context, index) {
-                                  return Container(
+                                return Column(children: [
+                                  Container(
+                                    color: Colors.cyan[400],
                                     child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                            "${data.esaModel4?.rESULTS?[index].subjectCode ?? ""} : ${data.esaModel4?.rESULTS?[index].subjectName ?? ""}",
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            data
+                                                    .esaModel4
+                                                    ?.cGPASEMESTERWISE?[index]
+                                                    .description ??
+                                                "",
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14,
-                                                fontFamily: 'Open Sans',
-                                                color: Color(0xff000000))),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  "Credits",
-                                                  style: TextStyle(
-                                                      color: Color(0xff9B9B9B),
-                                                      fontFamily: 'Open Sans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 16),
-                                                ),
-                                                Text(
-                                                  ("${data.esaModel4?.rESULTS?[index].earnedCredit.toString()}/${data.esaModel4?.rESULTS?[index].credits.toString()}") ??
-                                                      "SGPA",
-                                                  style: TextStyle(
-                                                      color: Color(0xff000000),
-                                                      fontFamily: 'Open Sans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 14),
-                                                ),
-                                              ],
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xff000000),
+                                              fontFamily: 'Open Sans',
                                             ),
-                                            Column(
-                                              children: [
-                                                Text(
-                                                  "Grade",
-                                                  style: TextStyle(
-                                                      color: Color(0xff9B9B9B),
-                                                      fontFamily: 'Open Sans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 16),
-                                                ),
-                                                Text(
-                                                  data
-                                                          .esaModel4
-                                                          ?.rESULTS?[index]
-                                                          .grade ??
-                                                      "A",
-                                                  style: TextStyle(
-                                                      color: Color(0xff000000),
-                                                      fontFamily: 'Open Sans',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 14),
-                                                ),
-                                              ],
-                                            ),
-                                            TextButton.icon(
-                                              onPressed: null,
-                                              icon: const Icon(Icons.bar_chart),
-                                              label: Text(""),
-                                            ),
-                                          ],
+                                          ),
                                         ),
                                         Divider(
                                           thickness: 3,
                                         ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "SGPA:",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                              Text(
+                                                (data
+                                                        .esaModel4
+                                                        ?.cGPASEMESTERWISE?[
+                                                            index]
+                                                        .sGPA
+                                                        .toString() ??
+                                                    ""),
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                "Credits :",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                              Text(
+                                                ("${data.esaModel4?.cGPASEMESTERWISE?[index].earnedCredits.toString()}/${data.esaModel4?.cGPASEMESTERWISE?[0].credits.toString()}") ??
+                                                    "SGPA",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              Text(
+                                                "CGPA :",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                              Text(
+                                                (data
+                                                        .esaModel4
+                                                        ?.cGPASEMESTERWISE?[0]
+                                                        .cGPA
+                                                        .toString() ??
+                                                    ""),
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Color(0xff000000),
+                                                  fontFamily: 'Open Sans',
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  );
-                                },
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "*TAL-To be announced later",
-                                    style: TextStyle(
-                                        color: Color(0xff000000),
-                                        fontFamily: 'Open Sans',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
                                   ),
-                                  Text(
-                                    "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",
-                                    style: TextStyle(
-                                        color: Color(0xff000000),
-                                        fontFamily: 'Open Sans',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14),
-                                  )
-                                ],
-                              ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                      // height: 120,
+                                      color: Colors.white,
+                                      child: ListTileTheme.merge(
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemCount: data
+                                                  .esaModel4?.rESULTS?.length,
+                                              itemBuilder: (context, index) {
+                                                return Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        "${data.esaModel4?.rESULTS?[index].subjectCode ?? ""} : ${data.esaModel4?.rESULTS?[index].subjectName ?? ""}",
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20),
+                                                      child: Row(
+                                                        children: [
+                                                          Column(
+                                                            children: [
+                                                              Text("Credits"),
+                                                              Text(
+                                                                ("${data.esaModel4?.rESULTS?[index].earnedCredit.toString()}/${data.esaModel4?.rESULTS?[index].credits.toString()}") ??
+                                                                    "SGPA",
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Spacer(),
+                                                          Column(
+                                                            children: [
+                                                              Text("Grade"),
+                                                              Text(data
+                                                                      .esaModel4
+                                                                      ?.rESULTS?[
+                                                                          index]
+                                                                      .grade ??
+                                                                  "data"),
+                                                            ],
+                                                          ),
+                                                          Spacer(),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 20),
+                                                            child:    TextButton.icon(
+                                                              onPressed: null,
+                                                              icon: const Icon(Icons.bar_chart),
+                                                              label: Text(""),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      thickness: 3,
+                                                    ),
+                                                  ],
+                                                );
+                                              }))),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                ]);
+                              }),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(15, 10, 15, 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "*TAL-To be announced later",
+                              style: TextStyle(
+                                  color: Color(0xff000000),
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14),
+                            ),
+                            Text(
+                              "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",
+                              style: TextStyle(
+                                  color: Color(0xff000000),
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14),
                             )
                           ],
                         ),
