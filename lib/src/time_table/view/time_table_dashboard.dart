@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
@@ -21,13 +22,15 @@ class TimeTable extends StatefulWidget {
 
 class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMixin{
   late TabController tabController;
+  late TimeTableViewmodel _viewModel;
 
 
 
 
 
 
-   DateTime date = DateTime.now();
+
+  DateTime date = DateTime.now();
    @override
   void initState() {
     // TODO: implement initState
@@ -179,20 +182,20 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
 
                       children: [
                        ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child: Monday(
+                        child: TableDetails(day: 'mon',
                     )),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child: Tuesday()),
+                        child: TableDetails(day: 'tuesday',)),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:Wednesday()),
+                        child:TableDetails(day: 'wednesday',)),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:Thursday()),
+                        child:TableDetails(day: 'thursday',)),
                        ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:Friday()),
+                        child:TableDetails(day: 'friday',)),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:Saturday()),
+                        child:TableDetails(day: 'saturday',)),
                     ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:Sunday()),
+                        child:TableDetails(day: 'sunday',)),
                   ])
               ),
 
@@ -202,5 +205,7 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   }
 
 //DateFormat('EEEE').format(DateTime.now())
+
+
 
 

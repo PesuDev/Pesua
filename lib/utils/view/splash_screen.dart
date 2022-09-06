@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
         () =>
             //  Navigator.of(context).pushNamed(AppRoutes.settings));
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => DashboardScreen())));
+                context, MaterialPageRoute(builder: (_) => DashboardScreen()))
+    );
   }
 
   @override
