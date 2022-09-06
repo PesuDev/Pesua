@@ -13,11 +13,12 @@ class AnnouncementViewModel extends ChangeNotifier {
 List<AnnouncementModel> ?announcementModel;
 
 
-  void  getAnnouncementListInfo(
+Future <List<AnnouncementModel>?>getAnnouncementListInfo(
 
       ) async {
     log("annuncement");
     final data = await _apiService.fetchAnnouncement();
+    log("hey i came");
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
    announcementModel= data;
    log("Announcement data: ${data}");

@@ -35,7 +35,7 @@ class _AnnouncementsState extends State<Announcements> {
       ),
       body: 
       Consumer<AnnouncementViewModel>(builder: (context,value,child) {
-        return value.announcementModel != null ?
+        return value.announcementModel != null  ?
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -135,6 +135,7 @@ class _AnnouncementsState extends State<Announcements> {
 
           ],
         ) : Container(
+          child: Center(child: Text("No Announcements available"),),
         );
       }
       )
