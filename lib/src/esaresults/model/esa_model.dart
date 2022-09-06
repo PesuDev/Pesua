@@ -284,8 +284,8 @@ class CGPASEMESTERWISE {
   final String? description;
   final dynamic? earnedCredits;
   final dynamic? credits;
-  final String? sGPA;
-  final String? cGPA;
+  final dynamic? sGPA;
+  final dynamic? cGPA;
 
   CGPASEMESTERWISE({
     this.studentId,
@@ -309,8 +309,8 @@ class CGPASEMESTERWISE {
         description = json['Description'] as String?,
         earnedCredits = json['EarnedCredits'] as dynamic?,
         credits = json['Credits'] as dynamic?,
-        sGPA = json['SGPA'] as String?,
-        cGPA = json['CGPA'] as String?;
+        sGPA = json['SGPA'] as dynamic?,
+        cGPA = json['CGPA'] as dynamic?;
 
   Map<String, dynamic> toJson() => {
     'StudentId' : studentId,
