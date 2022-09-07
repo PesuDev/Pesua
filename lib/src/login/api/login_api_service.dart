@@ -16,8 +16,19 @@ class LoginApiService {
       {required LoginRequestModel loginRequestModel}) async {
     String url = AppUrls.loginUrl;
 
-    final data = await _pesuApiService.postApiCallWithQueryParams(
-        endPoint: url, queryParams: loginRequestModel.toJson());
+    final data = await _pesuApiService.postApiCallForLogin(
+        endPoint: url, bodyParams: {
+      "j_mobile":"MOBILE",
+      "mode":"0",
+     "j_mobileApp":"YES",
+     " whichObjectId":"loginSubmitButton",
+    " j_social":"NO",
+     " j_password":"pes123",
+      "action":"0",
+     " j_appId":"1",
+      "j_username":"pes1ug20cs216",
+      "randomNum":"0.6181071537315856",
+    });
     if(data != null){
       return LoginResponseModel.fromJson(data);
     }

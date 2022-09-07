@@ -40,228 +40,262 @@ class _LoginState extends State<Login> {
     super.initState();
     _viewModel = Provider.of<LoginViewModel>(context, listen: false);
   }
-
+  final _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff191D6E),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 8,
-              ),
-              Center(
-                child: Text(
-                  "Sign in",
-                  style: TextStyle(
-                      fontSize: 62,
-                      color: Color(0xffFFFFFF),
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Source Sans Pro'),
+      body: Form(
+        key: _form,
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 8,
                 ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height / 10,
-              ),
-              InkWell(
-                onTap: () {
-                  final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-                  provider.googleLogin();
-                },
-                child: Container(
-                  color: Color(0xff0091CD),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 50.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image:
-                              AssetImage('assets/images/google_logo.png'),
-                              fit: BoxFit.fitWidth),
-                          // shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "Sign In with Google",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xffFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Source Sans Pro'),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 1.0,
-                      width: 80.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 1.0,
-                      width: 80.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "or",
+                Center(
+                  child: Text(
+                    "Sign in",
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 62,
                         color: Color(0xffFFFFFF),
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w300,
                         fontFamily: 'Source Sans Pro'),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 20),
-                    height: 1.0,
-                    width: 70.0,
-                    color: Colors.white,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height / 10,
+                ),
+                InkWell(
+                  onTap: () {
+                    final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                    provider.googleLogin();
+                  },
+                  child: Container(
+                    color: Color(0xff0091CD),
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 50.0,
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                AssetImage('assets/images/google_logo.png'),
+                                fit: BoxFit.fitWidth),
+                            // shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          "Sign In with Google",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xffFFFFFF),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Source Sans Pro'),
+                        )
+                      ],
+                    ),
                   ),
-                  Container(
-                    height: 1.0,
-                    width: 80.0,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(color: Colors.white),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: TextFormField(
-                    controller: usernameController,
-                    decoration: InputDecoration(
-                      hintText: "Username / SRN",
-                      hintStyle: TextStyle(
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 1.0,
+                        width: 80.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 1.0,
+                        width: 80.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "or",
+                      style: TextStyle(
                           fontSize: 18,
-                          color: Color(0xff999999),
+                          color: Color(0xffFFFFFF),
                           fontWeight: FontWeight.w400,
                           fontFamily: 'Source Sans Pro'),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      height: 1.0,
+                      width: 70.0,
+                      color: Colors.white,
+                    ),
+                    Container(
+                      height: 1.0,
+                      width: 80.0,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(color: Colors.white),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: TextFormField(
-                    controller: passwordController,
-                    obscureText: _isObscure,
-                    decoration: InputDecoration(
-                        hintText: "Password",
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: TextFormField(
+                      validator: (val){
+                        if(val !=null){
+                          return null;
+                        }
+                        else{
+                          return "Please Enter Valid User name/SRN";
+                        }
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        hintText: "Username / SRN",
                         hintStyle: TextStyle(
                             fontSize: 18,
                             color: Color(0xff999999),
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Source Sans Pro'),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _isObscure = !_isObscure;
-                            });
-                          },
-                          icon: Icon(
-                            _isObscure
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                        )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
-                    onPressed: () async {
-                      LoginRequestModel model = LoginRequestModel(
-                        jUsername: usernameController.text,
-                        jPassword: passwordController.text,
-                        jMobile: 'MOBILE',
-                        jMobileApp: 'YES',
-                        jSocial: 'NO',
-                        jAppId: '1',
-                        action: ' 0',
-                        mode: '0',
-                        randomNum: '0.6181071537315856',
-                        whichObjectId: 'loginSubmitButton',
-                      );
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: TextFormField(
+                      validator: (val){
+                        if(val !=null){
+                          return null;
+                        }
+                        else{
+                          return "Please Enter Valid Password";
+                        }
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: passwordController,
+                      obscureText: _isObscure,
+                      decoration: InputDecoration(
+                          hintText: "Password",
 
-                      final responseModel = await _viewModel.getLoginDetails(
-                          loginRequestModel: model);
+                          hintStyle: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xff999999),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Source Sans Pro'),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                          )),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
+                      onPressed: () async {
+                        LoginRequestModel model = LoginRequestModel(
+                          jUsername: usernameController.text,
+                          jPassword: passwordController.text,
+                          jMobile: 'MOBILE',
+                          jMobileApp: 'YES',
+                          jSocial: 'NO',
+                          jAppId: '1',
+                          action: ' 0',
+                          mode: '0',
+                          randomNum: '0.6181071537315856',
+                          whichObjectId: 'loginSubmitButton',
+                        );
 
-                      if (responseModel != null &&
-                          responseModel.uSERDETAILS?.userId != null &&
-                          responseModel.mobileAppAuthenticationToken != null) {
-                        SharedPreferenceUtil util = SharedPreferenceUtil();
-                        await util.setString(
-                            sp_userId, responseModel.uSERDETAILS?.userId ?? '');
-                        await util.setString(
-                            sp_password, passwordController.text);
-                        await util.setString(
-                            sp_userName, usernameController.text);
-                        await util.setString(sp_token,
-                            responseModel.mobileAppAuthenticationToken ?? '');
+                        final responseModel = await _viewModel.getLoginDetails(
+                            loginRequestModel: model);
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => DashboardScreen()));
-                      } else {
-                        log('Error while Login');
-                      }
-                    },
-                    child: Text(
-                      "Sign in",
-                      style: TextStyle(
-                        color: Color(0xffFFFFFF),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Source Sans Pro',
-                        fontSize: 16,
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              InkWell(
-                onTap: () {
-                  _buildPopupDialog();
-                },
-                child: Text(
-                  "Forgot Password?",
+                        if (responseModel != null &&
+                            responseModel.uSERDETAILS?.userId != null &&
+                            responseModel.mobileAppAuthenticationToken != null) {
+                          SharedPreferenceUtil util = SharedPreferenceUtil();
+                          await util.setString(
+                              sp_userId, responseModel.uSERDETAILS?.userId ?? '');
+                          await util.setString(
+                              sp_password, passwordController.text);
+                          await util.setString(
+                              sp_userName, usernameController.text);
+                          await util.setString(sp_token,
+                              responseModel.mobileAppAuthenticationToken ?? '');
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => DashboardScreen()));
+                        } else {
+                          log('Error while Login');
+                        }
+                      },
+                      child: Text(
+                        "Sign in",
+                        style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 16,
+                        ),
+                      )),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                InkWell(
+                  onTap: () {
+                    _buildPopupDialog();
+                  },
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: Color(0xffFFFFFF),
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Text(
+                  "For all login issue, please send an email to ",
                   style: TextStyle(
                     color: Color(0xffFFFFFF),
                     fontWeight: FontWeight.w400,
@@ -269,34 +303,22 @@ class _LoginState extends State<Login> {
                     fontSize: 16,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Text(
-                "For all login issue, please send an email to ",
-                style: TextStyle(
-                  color: Color(0xffFFFFFF),
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 16,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  _SendEmail();
-                },
-                child: Text(
-                  "support@pesuacademy.com",
-                  style: TextStyle(
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Source Sans Pro',
-                    fontSize: 16,
+                InkWell(
+                  onTap: () {
+                    _SendEmail();
+                  },
+                  child: Text(
+                    "support@pesuacademy.com",
+                    style: TextStyle(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

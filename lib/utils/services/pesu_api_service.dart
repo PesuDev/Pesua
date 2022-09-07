@@ -48,6 +48,32 @@ class PesuApiService {
     return responseJson;
   }
 
+
+  Future<dynamic> postApiCallForLogin(
+      {required String endPoint,
+        required Map<String, dynamic> bodyParams,
+
+      }) async {
+    var url=_baseURL+endPoint;
+    try {
+      final response = await http.post(    Uri.https(_baseURL,endPoint),body: bodyParams );
+
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 302 && response.body
+          .toString()
+          .isNotEmpty) {
+        log('Response :: ${response.body.toString()}');
+        return response.body;
+      }
+    } on SocketException {
+      log('Socket Exception');
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return null;
+  }
+
   Future<dynamic> postApiCall(
       {required String endPoint, required Map<String, dynamic> params}) async {
     var responseJson;
@@ -90,9 +116,17 @@ class PesuApiService {
         endPoint,
       ).toString()}');
       log(queryParams.toString());
-      final response = await _dio.post(
-        Uri.https(_baseURL, endPoint).toString(),
-        queryParameters: queryParams,
+      // final response = await _dio.post(
+      //   Uri.https(_baseURL, endPoint).toString(),
+      //   queryParameters: queryParams,
+      // );
+
+      var response = await Dio().post( Uri.https(_baseURL, endPoint).toString(),
+        data: queryParams,
+        options: Options(
+            followRedirects: true,
+            validateStatus: (status) { return status! < 500; }
+        ),
       );
       log('Status Code :: ${response.statusCode}');
       if (response.statusCode == 200) {
