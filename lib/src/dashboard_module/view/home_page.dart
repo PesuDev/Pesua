@@ -432,8 +432,11 @@ class _HomePageState extends State<HomePage> {
                           fit: BoxFit.fill,
                           image: MemoryImage(myImage, scale: 0.5)),
                     ),
-                  ) : Container(
-                    color: Colors.lightBlue,
+                  ) :
+                  CircleAvatar(
+                    radius: MediaQuery.of(context).size.height * 0.025,
+                    backgroundImage: NetworkImage(
+                        'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
                   ),
                   SizedBox(width: MediaQuery
                       .of(context)

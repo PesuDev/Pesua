@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
+import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
@@ -44,6 +45,7 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
+import '../../src/dashboard_module/view/dashboard_page.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
 class AppRouteGenerator {
@@ -112,8 +114,11 @@ data(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => OnlinePayments());
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
-    case AppRoutes.announcement:
-      return MaterialPageRoute(builder: (_) => Announcement());
+    case AppRoutes.announcements:
+      return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
+        create: (_) =>AnnouncementViewModel(),
+        child: Announcements(),
+      ));
     case AppRoutes.login:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
@@ -162,6 +167,8 @@ data(RouteSettings settings) {
               ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
+      case AppRoutes.Dashboard:
+      return MaterialPageRoute(builder: (_) => DashboardScreen());
   }
 }
 
@@ -183,7 +190,7 @@ class AppRoutes {
   static const String timeTable = "timeTable";
   static const String onlinePayments = "onlinePayments";
   static const String examination = "examination";
-  static const String announcement = "announcement";
+  static const String announcements = "announcements";
   static const String login = "login";
   static const String sessionEffectiveness = "sessionEffectiveness";
   static const String isaResults = "isaResults";
@@ -194,4 +201,5 @@ class AppRoutes {
   static const String individualUnit = "individualUnit";
   static const String esaGraph = "esaGraph";
   static const String calendarDashboard = "calendarDashboard";
+  static const String Dashboard = "Dashboard";
 }
