@@ -3,12 +3,14 @@ import 'package:pesu/src/isa_results/model/isaResultModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 
 import '../api/isa_dropdown_api_service.dart';
+import '../model/isaGraphModel.dart';
 
 class IsaViewModel extends ChangeNotifier {
   // final IsaDropDownApiService _isaDropDownApiService = IsaDropDownApiService();
   List<Isa_downdown_model>? isaDropDownModel;
   final IsaResultApiService _isaResultApiService = IsaResultApiService();
   List<IsaResultModel>? isaResultModel;
+  IsaGraphModel? isaGraphModel;
 
   void getIsaDropDownDetails(
       {required int action,
@@ -52,6 +54,31 @@ class IsaViewModel extends ChangeNotifier {
         userId: userId,
         randomNum: randomNum);
     isaResultModel = data;
+
+    notifyListeners();
+  }
+
+  void getIsaGraphDetails(
+      {required int action,
+      required int mode,
+      required int subjectId,
+      required String fetchId,
+      required String subjectCode,
+      required String subjectName,
+      required String userId,
+      required String loginId,
+      required double randomNum}) async {
+    final data = await _isaResultApiService.fetchIsaGraphDetails(
+        action: action,
+        mode: mode,
+        subjectId: subjectId,
+        fetchId: fetchId,
+        subjectCode: subjectCode,
+        subjectName: subjectName,
+        userId: userId,
+        loginId: loginId,
+        randomNum: randomNum);
+    isaGraphModel = data;
 
     notifyListeners();
   }

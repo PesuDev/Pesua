@@ -1,6 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/isa_results/model/isaGraphModel.dart';
+import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
+import 'package:pesu/src/isa_results/viewmodel/isaViewModel.dart';
 import 'package:pesu/utils/view/widget.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
@@ -12,6 +18,7 @@ class IsaResultGraph extends StatefulWidget {
 }
 
 class _IsaResultGraphState extends State<IsaResultGraph> {
+  late IsaViewModel? isaViewModel;
   List<_SalesData> data = [
     _SalesData('Jan', 35),
     _SalesData('Feb', 28),
@@ -19,69 +26,82 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     _SalesData('Apr', 32),
     _SalesData('May', 40)
   ];
+
   @override
+  void initState() {
+    super.initState();
+    isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
+    isaViewModel?.getIsaGraphDetails(
+        action: 6,
+        mode: 8,
+        subjectId: 13451,
+        fetchId: "1116-3385-2",
+        subjectCode: "UE19CS303",
+        subjectName: "Machine Intelligence",
+        userId: "e157111c-3591-4826-a1da-3b5d20db14df",
+        loginId: "PES1201900924",
+        randomNum: 0.5177486893384107);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: sideNavAppBar("ISA Results graph"),
-      body: Container(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text("UE20CS251 - Design and Analysis of Algorithms"),
-            ),
-            //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
-            /*   Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.5,
-            ),*/
-            SfCartesianChart(
-                backgroundColor: Colors.white,
-                primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Students')),
-                primaryYAxis: NumericAxis(
-                  title: AxisTitle(text: 'Marks'),
-                ),
-                // Chart title
-
-                // title: ChartTitle(text: 'Half yearly sales analysis'),
-                // Enable legend
-                // legend: Legend(isVisible: true),
-                // Enable tooltip
-                isTransposed: true,
-                tooltipBehavior: TooltipBehavior(enable: true),
-                series: <ChartSeries<_SalesData, String>>[
-                  BarSeries<_SalesData, String>(
-                      dataSource: data,
-                      xValueMapper: (_SalesData sales, _) => sales.year,
-                      yValueMapper: (_SalesData sales, _) => sales.sales,
-                      name: 'Sales',
-                      // Enable data label
-                      dataLabelSettings: DataLabelSettings(isVisible: true))
-                ]),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-              child: Text("Summary"),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  children: [Text("Your Score"), Text("-1")],
-                ),
-                SizedBox(
-                  width: 40,
-                ),
-                Column(
-                  children: [Text("Average"), Text("24")],
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+      body: Consumer<IsaViewModel>(builder: (context, model, child) {
+        return Container(
+          padding: EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text("UE20CS251 - Design and Analysis of Algorithms"),
+              ),
+              //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
+              /*   Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.5,
+              ),*/
+              SfCartesianChart(
+                  backgroundColor: Colors.white,
+                  primaryXAxis:
+                      CategoryAxis(title: AxisTitle(text: 'Students')),
+                  primaryYAxis: NumericAxis(
+                    title: AxisTitle(text: 'Marks'),
+                  ),
+                  isTransposed: true,
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  series: <ChartSeries<Data, int>>[
+                    BarSeries<Data, int>(
+                        dataSource: model.isaGraphModel?.data ?? [],
+                        xValueMapper: (Data isaGraph, _) => isaGraph.x,
+                        yValueMapper: (Data isaGraph, _) => isaGraph.y,
+                        name: 'Sales',
+                        // Enable data label
+                        dataLabelSettings: DataLabelSettings(isVisible: true))
+                  ]),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                child: Text("Summary"),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [Text("Your Score"), Text("-1")],
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Column(
+                    children: [Text("Average"), Text("24")],
+                  )
+                ],
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }

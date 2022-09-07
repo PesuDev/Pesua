@@ -134,7 +134,9 @@ data(RouteSettings settings) {
                 child: ISAResults(),
               ));
     case AppRoutes.isaResultsGraph:
-      return MaterialPageRoute(builder: (_) => IsaResultGraph());
+      return MaterialPageRoute(
+          builder: (_) => ChangeNotifierProvider(
+              create: (_) => IsaViewModel(), child: IsaResultGraph()));
     case AppRoutes.myProfile:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
