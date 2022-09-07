@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:pesu/src/isa_results/model/isaGraphModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 
 import '../../../utils/constants/app_urls.dart';
@@ -61,6 +62,35 @@ class IsaResultApiService {
     if (data != null) {
       Iterable iterable = data;
       return iterable.map((e) => IsaResultModel.fromJson(e)).toList();
+    }
+    log("IsaResultsLog $data");
+    // return data;
+  }
+
+  Future<IsaGraphModel?> fetchIsaGraphDetails(
+      {required int action,
+      required int mode,
+      required int subjectId,
+      required String fetchId,
+      required String subjectCode,
+      required String subjectName,
+      required String userId,
+      required String loginId,
+      required double randomNum}) async {
+    String url = AppUrls.commonUrl;
+    final data = await _pesuApiService.postApiCall(endPoint: url, params: {
+      'action': action,
+      'mode': mode,
+      'subjectId': subjectId,
+      'fetchId': fetchId,
+      'subjectCode': subjectCode,
+      'subjectName': subjectName,
+      'userId': userId,
+      'loginId': loginId,
+      'randomNum': randomNum
+    });
+    if (data != null) {
+      return IsaGraphModel.fromJson(data);
     }
     log("IsaResultsLog $data");
     // return data;
