@@ -29,7 +29,7 @@ class AnnouncementModel {
   int? reminderDate;
   String? pictureIconPath;
   int? isBannerImage;
-  List<String>? files;
+  List<dynamic>? files;
 
   AnnouncementModel(
       {this.announcementId,
@@ -95,7 +95,7 @@ class AnnouncementModel {
     reminderDate = json['reminderDate'];
     pictureIconPath = json['pictureIconPath'];
     isBannerImage = json['isBannerImage'];
-    files = json['files'].cast<String>();
+    files = json['files'];
   }
 
   Map<String, dynamic> toJson() {
