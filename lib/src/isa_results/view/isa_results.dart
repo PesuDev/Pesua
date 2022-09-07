@@ -192,8 +192,26 @@ class _ISAResultsState extends State<ISAResults> {
           itemBuilder: (context, int i) {
             /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
+            String? titleCode = model.isaResultModel?[i].subjectCode;
+            /*     var count = model.isaResultModel
+                ?.where((c) =>
+                    c.subjectCode == model.isaResultModel?[i].subjectCode)
+                .toList()
+                .length;
+            print(count);
+
+            var n = model.isaResultModel
+                ?.where((c) =>
+                    c.subjectCode == model.isaResultModel?[i].subjectCode)
+                .toSet()
+                .toList();
+            print(n);*/
+            /*     for (var x = model.isaResultModel?[i].subjectId;
+                x == model.isaResultModel?[i].subjectId;) {
+              print(x);
+            }*/
             return Container(
-              padding: EdgeInsets.only(bottom: 8),
+              padding: EdgeInsets.only(bottom: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -207,7 +225,7 @@ class _ISAResultsState extends State<ISAResults> {
                       text: TextSpan(
                         children: <TextSpan>[
                           TextSpan(
-                              text: model.isaResultModel?[i].subjectCode,
+                              text: titleCode,
                               style: TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 16,
@@ -224,41 +242,64 @@ class _ISAResultsState extends State<ISAResults> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(left: 3, top: 7),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                            width: MediaQuery.of(context).size.width / 1.7,
-                            padding: EdgeInsets.only(right: 5),
-                            child: Text(
-                              model.isaResultModel?[i].iSAMaster ?? "",
-                              textAlign: TextAlign.left,
-                            )),
-                        Container(
-                            width: MediaQuery.of(context).size.width / 6.5,
-                            child: Text(
-                                "${model.isaResultModel?[i].marks}/${model.isaResultModel?[i].maxISAMarks}",
-                                textAlign: TextAlign.left)),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.isaResultsGraph);
-                          },
-                          child: Container(
-                              width: MediaQuery.of(context).size.width / 6.5,
-                              child: Icon(
-                                Icons.bar_chart,
-                              )),
-                        )
-                      ],
-                    ),
-                  ),
-                  Divider(
+                  ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.black26,
+                          height: 0.05,
+                        );
+                      },
+                      itemCount: model.isaResultModel?.length ?? 0,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemBuilder: (context1, int j) {
+                        return (titleCode ==
+                                model.isaResultModel?[j].subjectCode)
+                            ? Container(
+                                padding: EdgeInsets.only(left: 4, top: 7),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.7,
+                                        padding: EdgeInsets.only(right: 5),
+                                        child: Text(
+                                          model.isaResultModel?[j].iSAMaster ??
+                                              "",
+                                          textAlign: TextAlign.left,
+                                        )),
+                                    Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                6.5,
+                                        child: Text(
+                                            "${model.isaResultModel?[j].marks}/${model.isaResultModel?[j].maxISAMarks}",
+                                            textAlign: TextAlign.left)),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, AppRoutes.isaResultsGraph);
+                                      },
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              6.5,
+                                          child: Icon(
+                                            Icons.bar_chart,
+                                          )),
+                                    )
+                                  ],
+                                ),
+                              )
+                            : Container();
+                      }),
+                  /*   Divider(
                     color: Colors.grey,
                     thickness: 1.0,
-                  ),
+                  ),*/
                 ],
               ),
             );

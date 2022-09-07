@@ -110,16 +110,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   Widget? content() {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Consumer<CourseViewModel>(builder: (context, data, child) {
+        String? htmlCode;
         return Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: ListView.separated(
-            itemCount: data.subjectModel?.cOURSECONTENT?.length ?? 0,
+            itemCount: data.unitModel?.length ?? 0,
             itemBuilder: (context, i) {
               print("length------ ${data.subjectModel?.cOURSECONTENT?.length}");
               String? uriString =
                   model.subjectModel?.cOURSECONTENT?[i].courseContent;
               String uriDecode = Uri.decodeFull(uriString!);
-              String htmlCode = uriDecode;
+              htmlCode = uriDecode;
+
               return Column(
                 children: [
                   Row(
@@ -156,9 +158,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(data.unitModel?[i].topicTitle ?? ""),
-                              /*  Text(data.subjectModel?.cOURSECONTENT?[i]
-                                      .subjectName ??
-                                  ""),*/
                               Icon(
                                 Icons.chevron_right,
                                 color: Colors.grey,
@@ -172,28 +171,15 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   (expand == true)
                       ? Consumer<CourseViewModel>(
                           builder: (context, model, child) {
-                          var c1 = 3;
-                          List c4 = [];
-                          var c3;
-                          for (var c2 = model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContentTypeId ??
-                                  0;
-                              c2 == c1;
-                              c2++) {
-                            print("kkkkkkkkkkklllllll $c2");
-                            c3 = c2;
-
-                            print("tttttttt $c4");
+                          String? val1;
+                          if (model.subjectModel?.cOURSECONTENT?[i]
+                                  .courseContentTypeId ==
+                              3) {
+                            val1 = htmlCode;
                           }
-                          log("${c4.length}");
-                          print("kkkkkkkkkk $c3");
                           return Container(
                             padding: EdgeInsets.only(top: 10, left: 15),
-                            child: (model.subjectModel?.cOURSECONTENT?[i]
-                                        .courseContentTypeId ==
-                                    3)
-                                ? HtmlWidget(htmlCode)
-                                : Container(),
+                            child: HtmlWidget(val1 != null ? val1 : ''),
                           );
                         })
                       : Container(),
