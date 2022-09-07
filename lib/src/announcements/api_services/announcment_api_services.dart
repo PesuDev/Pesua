@@ -11,7 +11,7 @@ class AnnouncementApiServices {
 
 
 
-  Future fetchAnnouncement(
+  Future <List<AnnouncementModel>?>fetchAnnouncement(
       ) async {
     String url = AppUrls.commonUrl;
     final data = await _pesuApiService.postApiCall(endPoint: url,
@@ -44,7 +44,7 @@ class AnnouncementApiServices {
     );
 
     log("response:${data.toString()}");
-    if (data != null ) {
+    if (data != null && data.toString().length>0) {
       log("hhhhh $data");
       final Iterable json = data;
       log("Am going");

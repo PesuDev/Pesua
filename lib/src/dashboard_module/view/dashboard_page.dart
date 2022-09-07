@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/src/attendance/view/attendance_dashboard.dart';
 import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
 import 'package:pesu/src/courses/view/course_dashboard.dart';
@@ -31,9 +32,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
           log(value.selectedIndex.toString());
           switch (value.selectedIndex) {
             case 0:
-              return ChangeNotifierProvider(
-                create: (_) => ProfileViewmodel(),
-                child: HomePage(),
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider(
+                  create: (_) => ProfileViewmodel(),),
+          ChangeNotifierProvider(
+          create: (_) => AnnouncementViewModel(),)
+                ],
+
+                  child: HomePage(),
+
               );
             case 1:
               return ChangeNotifierProvider(

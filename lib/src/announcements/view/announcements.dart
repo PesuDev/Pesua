@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
+import 'package:pesu/utils/services/date_time.dart';
 import 'package:provider/provider.dart';
 
 import 'announcement.dart';
@@ -60,7 +61,7 @@ class _AnnouncementsState extends State<Announcements> {
                         context) => Announcement()));
                   },
                   child: ListView.builder(
-                      itemCount: 15,
+                      itemCount: value.announcementModel?.length ,
                       itemBuilder: (BuildContext context, int index) {
                         return
                           Padding(
@@ -84,18 +85,18 @@ class _AnnouncementsState extends State<Announcements> {
                                           .width / 2,
 
                                       child: Text(
-                                          "Seatinginformation_24.05.2022"),
+                                      value.announcementModel?[index].announcementName??    "Seatinginformation_24.05.2022"),
                                     ),
-                                    Text("_AS_RRCampus"),
+                                    Text( value.announcementModel?[index].instituteName??"_AS_RRCampus"),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Row(
                                       children: [
-                                        Text("Date", style: TextStyle(
+                                        Text("${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ", style: TextStyle(
                                             color: Colors.grey
                                         ),),
-                                        Text("24-MAy-2022", style: TextStyle(
+                                        Text("to ${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].endDate}"))}", style: TextStyle(
                                             color: Colors.grey
                                         ),),
                                       ],
