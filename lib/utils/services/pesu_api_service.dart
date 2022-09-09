@@ -57,6 +57,7 @@ class PesuApiService {
     var url=_baseURL+endPoint;
     try {
       final response = await http.post(    Uri.https(_baseURL,endPoint),body: bodyParams,
+
           headers: {
           'Content-Type': 'application/json',
             "mobileAppAuthenticationToken":
@@ -102,6 +103,40 @@ class PesuApiService {
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
         log('Response :: ${response.data.toString()}');
         return response.data;
+      }
+    } on SocketException {
+      log('Socket Exception');
+    } catch (e) {
+      log(e.toString());
+    }
+
+    return null;
+  }
+
+  Future<dynamic> postApiCallWithQueryParamsLogin(
+      {required String url,
+        required Map<String, dynamic> queryParams}) async {
+    try {
+      log('${Uri.https(
+      url,
+        "",
+      ).toString()}');
+      log(queryParams.toString());
+      // final response = await _dio.post(
+      //   Uri.https(_baseURL, endPoint).toString(),
+      //   queryParameters: queryParams,
+      // );
+
+      var response = await Dio().post( Uri.https(" http://rr.pesuacademy.com/MAcademy/failLogin;jsessionid=3Uz0RK_rcucaUGpSIAzYgkTKJHhjAonPSHzv33c7.prod01","",).toString(),
+        data: queryParams,
+        options: Options(
+            followRedirects: true,
+            validateStatus: (status) { return status! < 500; }
+        ),
+      );
+      log('Status Code :: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        return response.statusCode;
       }
     } on SocketException {
       log('Socket Exception');
