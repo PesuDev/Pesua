@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:pesu/src/login/model/login_redircted_model.dart';
 import 'package:pesu/src/login/model/login_response_model.dart';
 import 'package:pesu/utils/constants/app_urls.dart';
 import 'package:pesu/utils/services/pesu_api_service.dart';
@@ -13,7 +14,7 @@ import '../model/login_request_model.dart';
 class LoginApiService {
   late final PesuApiService _pesuApiService = PesuApiService();
 
-  Future<LoginResponseModel?> fetchLoginDetails(
+  Future<ReDirectModel?> fetchLoginDetails(
       {required LoginRequestModel loginRequestModel}) async {
     String url = AppUrls.loginUrl;
 
@@ -35,7 +36,35 @@ class LoginApiService {
 
     );
     if(data != null){
-      return LoginResponseModel.fromJson(data);
+      return  ReDirectModel.fromJson(data);
+    }
+
+  }
+
+
+  Future<LoginResponseModel?> fetchLoginDetailsRedirect(
+      {required LoginRequestModel loginRequestModel,required String path}) async {
+    String url = AppUrls.loginUrl;
+
+    final data = await _pesuApiService.postApiCallWithQueryParamsLogin(
+        url:path,
+        queryParams: loginRequestModel.toJson()
+      //     bodyParams: {
+      //   "j_mobile":"MOBILE",
+      //   "mode":"0",
+      //  "j_mobileApp":"YES",
+      //  " whichObjectId":"loginSubmitButton",
+      // " j_social":"NO",
+      //  " j_password":"pes123",
+      //   "action":"0",
+      //  " j_appId":"1",
+      //   "j_username":"pes1ug20cs216",
+      //   "randomNum":"0.6181071537315856",
+      // }
+
+    );
+    if(data != null){
+      return  LoginResponseModel.fromJson(data);
     }
 
   }
