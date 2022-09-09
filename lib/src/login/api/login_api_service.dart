@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:pesu/src/login/model/login_response_model.dart';
@@ -17,18 +18,22 @@ class LoginApiService {
     String url = AppUrls.loginUrl;
 
     final data = await _pesuApiService.postApiCallForLogin(
-        endPoint: url, bodyParams: {
-      "j_mobile":"MOBILE",
-      "mode":"0",
-     "j_mobileApp":"YES",
-     " whichObjectId":"loginSubmitButton",
-    " j_social":"NO",
-     " j_password":"pes123",
-      "action":"0",
-     " j_appId":"1",
-      "j_username":"pes1ug20cs216",
-      "randomNum":"0.6181071537315856",
-    });
+        endPoint: url,
+    bodyParams: jsonEncode(loginRequestModel.toJson())
+    //     bodyParams: {
+    //   "j_mobile":"MOBILE",
+    //   "mode":"0",
+    //  "j_mobileApp":"YES",
+    //  " whichObjectId":"loginSubmitButton",
+    // " j_social":"NO",
+    //  " j_password":"pes123",
+    //   "action":"0",
+    //  " j_appId":"1",
+    //   "j_username":"pes1ug20cs216",
+    //   "randomNum":"0.6181071537315856",
+    // }
+
+    );
     if(data != null){
       return LoginResponseModel.fromJson(data);
     }

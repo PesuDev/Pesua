@@ -51,17 +51,21 @@ class PesuApiService {
 
   Future<dynamic> postApiCallForLogin(
       {required String endPoint,
-        required Map<String, dynamic> bodyParams,
+       bodyParams,
 
       }) async {
     var url=_baseURL+endPoint;
     try {
-      final response = await http.post(    Uri.https(_baseURL,endPoint),body: bodyParams );
+      final response = await http.post(    Uri.https(_baseURL,endPoint),body: bodyParams,
+          headers: {
+          'Content-Type': 'application/json',
+            "mobileAppAuthenticationToken":
+            "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+          }
+      );
 
       log('Status Code :: ${response.statusCode}');
-      if (response.statusCode == 302 && response.body
-          .toString()
-          .isNotEmpty) {
+      if (response.statusCode == 302 ) {
         log('Response :: ${response.body.toString()}');
         return response.body;
       }
