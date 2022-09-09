@@ -41,18 +41,18 @@ class LoginApiService {
   }
 }
 
-class ForgetPasswordApi {
-  late final PesuApiService _pesuApiService = PesuApiService();
-
-  dynamic forgetPassword(
-      {required ForgetPasswordModel forgetPasswordModel}) async {
-    String url = AppUrls.commonUrl;
-
-    final data = await _pesuApiService.postApiCallWithQueryParams(
-        endPoint: url, queryParams: forgetPasswordModel.toJson());
-    return data;
-  }
-}
+// class ForgetPasswordApi {
+//   late final PesuApiService _pesuApiService = PesuApiService();
+//
+//   dynamic forgetPassword(
+//       {required ForgetPasswordModel forgetPasswordModel}) async {
+//     String url = AppUrls.commonUrl;
+//
+//     final data = await _pesuApiService.postApiCallWithQueryParams(
+//         endPoint: url, queryParams: forgetPasswordModel.toJson());
+//     return data;
+//   }
+// }
 
 class ForgetPasswordApi1 {
   late final PesuApiService _pesuApiService = PesuApiService();

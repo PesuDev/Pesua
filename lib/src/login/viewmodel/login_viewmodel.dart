@@ -7,7 +7,7 @@ import '../model/login_response_model.dart';
 
 class LoginViewModel extends ChangeNotifier {
   late final LoginApiService _apiService = LoginApiService();
-  late final ForgetPasswordApi forgetPasswordApi = ForgetPasswordApi();
+ // late final ForgetPasswordApi forgetPasswordApi = ForgetPasswordApi();
   late final ForgetPasswordApi1 forgetPasswordApi1 = ForgetPasswordApi1();
 
   Future<LoginResponseModel?> getLoginDetails(
@@ -17,12 +17,12 @@ class LoginViewModel extends ChangeNotifier {
     return data;
   }
 
-  dynamic forgetPasswordDetails(
-      {required ForgetPasswordModel forgetPasswordModel}) async {
-    final data = await forgetPasswordApi.forgetPassword(
-        forgetPasswordModel: forgetPasswordModel);
-    return data;
-  }
+  // dynamic forgetPasswordDetails(
+  //     {required ForgetPasswordModel forgetPasswordModel}) async {
+  //   final data = await forgetPasswordApi.forgetPassword(
+  //       forgetPasswordModel: forgetPasswordModel);
+  //   return data;
+  // }
 
   Future<void>forgetPasswordDetails1(
       {  required int action,
