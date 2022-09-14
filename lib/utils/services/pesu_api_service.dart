@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/login/model/login_redircted_model.dart';
 import 'package:pesu/utils/constants/app_urls.dart';
 import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:provider/provider.dart';
@@ -54,15 +55,10 @@ class PesuApiService {
        bodyParams,
 
       }) async {
-    var url=_baseURL+endPoint;
+    var url="MAcademy/j_spring_security_check?j_mobile=MOBILE&mode=0&j_mobileApp=YES&whichObjectId=loginSubmitButton&j_social=NO&j_password=pes123&action=0&j_appId=1&j_username=pes1ug20cs216&randomNum=0.6181071537315856";
     try {
-      final response = await http.post(    Uri.https(_baseURL,endPoint),body: bodyParams,
+      final response = await http.post(    Uri.https(_baseURL,endPoint),body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
 
-          headers: {
-          'Content-Type': 'application/json',
-            "mobileAppAuthenticationToken":
-            "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-          }
       );
 
       log('Status Code :: ${response.statusCode}');
@@ -123,18 +119,60 @@ class PesuApiService {
       //   Uri.https(_baseURL, endPoint).toString(),
       //   queryParameters: queryParams,
       // );
+log("base url $_baseURL");
+      final response = await http.post(    Uri.https(_baseURL,
+       "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
 
-      var response = await Dio().post( Uri.https("https://rr.pesuacademy.com/MAcademy/failLogin;jsessionid=SIPSyWrVz2_gA4VMtL_r9Hn6DZNWPP9QMFSRE9q7.prod01","",).toString(),
-        data: queryParams,
-        options: Options(
-            followRedirects: true,
-            validateStatus: (status) { return status! < 500;
-            }
-        ),
       );
-      log('Status Code :: ${response.statusCode}');
-      if (response.statusCode == 200) {
-        return response.statusCode;
+      // var response = await Dio().post( Uri.https("$_baseURL","MAcademy/failLogin;jsessionid=SIPSyWrVz2_gA4VMtL_r9Hn6DZNWPP9QMFSRE9q7.prod01",).toString(),
+      //   data: queryParams,
+      //   options: Options(
+      //       followRedirects: true,
+      //       validateStatus: (status) { return status! < 500;
+      //       }
+      //   ),
+      // );
+      log('Status Code :: ???????${response.statusCode}');
+  //    List<ReDirectModel> responseModel=response.headers as List<ReDirectModel>;
+      log('Status Code :: ???????${response.headers}');
+  //    log('Status Code :: ???????$responseModel');
+      if (response.statusCode == 302) {
+        log("Wait");
+        final response = await http.post(    Uri.https(_baseURL,
+            "/MAcademy/;jsessionid=HsLN1_j6icXTa2LbmdJXzCkOxIEAFFgZHWVgg1zw.prod01")
+        );
+        log("${response.statusCode}");
+        log("${response.headers}");
+        if(response.statusCode==302){
+          // var urlData="localhost:8080";
+          // final response = await http.post(    Uri.http(_baseURL,
+          //     "Academy/login/forum?sso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"),body: queryParams,
+          //
+          //     headers: {
+          //
+          //       "mobileAppAuthenticationToken":
+          //       "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+          //     }
+          // );
+          // log("${response.statusCode}");
+          // log("${response.headers}");
+          // if(response.statusCode==301){
+          //   final response = await http.post(    Uri.http(_baseURL,
+          //
+          //       "Academy/login/forum%3Fsso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"
+          //
+          //
+          //   ),body: queryParams,
+          //
+          //       headers: {
+          //
+          //         "mobileAppAuthenticationToken":
+          //         "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+          //       }
+          //   );
+          // }
+        }
+     //   return response.headers;
       }
     } on SocketException {
       log('Socket Exception');
@@ -167,6 +205,7 @@ class PesuApiService {
         ),
       );
       log('Status Code :: ${response.statusCode}');
+      log('Status Code :: ${response.headers}');
       if (response.statusCode == 200) {
         return response.statusCode;
       }

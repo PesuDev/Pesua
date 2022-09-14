@@ -19,7 +19,7 @@ ReDirectModel? reDirectModel;
 
     if(data?.location !=null){
 final response=await _apiService.fetchLoginDetailsRedirect(loginRequestModel: loginRequestModel,path: data!.location.toString());
-loginResponseModel=response;
+//loginResponseModel=response;
     }
 
     notifyListeners();
