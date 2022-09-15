@@ -122,6 +122,7 @@ class PesuApiService {
 log("base url $_baseURL");
       final response = await http.post(    Uri.https(_baseURL,
        "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
+        body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
 
       );
       // var response = await Dio().post( Uri.https("$_baseURL","MAcademy/failLogin;jsessionid=SIPSyWrVz2_gA4VMtL_r9Hn6DZNWPP9QMFSRE9q7.prod01",).toString(),
@@ -154,23 +155,23 @@ log("base url $_baseURL");
           //       "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
           //     }
           // );
-          // log("${response.statusCode}");
-          // log("${response.headers}");
-          // if(response.statusCode==301){
-          //   final response = await http.post(    Uri.http(_baseURL,
-          //
-          //       "Academy/login/forum%3Fsso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"
-          //
-          //
-          //   ),body: queryParams,
-          //
-          //       headers: {
-          //
-          //         "mobileAppAuthenticationToken":
-          //         "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-          //       }
-          //   );
-          // }
+          log("${response.statusCode}");
+          log("${response.headers}");
+          if(response.statusCode==301){
+            // final response = await http.post(    Uri.http(_baseURL,
+            //
+            //     "Academy/login/forum%3Fsso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"
+            //
+            //
+            // ),body: queryParams,
+            //
+            //     headers: {
+            //
+            //       "mobileAppAuthenticationToken":
+            //       "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
+            //     }
+            // );
+          }
         }
      //   return response.headers;
       }
