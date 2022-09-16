@@ -71,8 +71,7 @@ class _SessionEffectState extends State<SessionEffect> {
         return data.sessionEffectivenessModel != null &&
         data.sessionEffectivenessModel?.stuentsubjectlist !=null &&
         data.sessionEffectivenessModel?.subjectlist !=null &&
-        data.sessionEffectivenessModel?.timetableList !=null &&
-        data.sessionEffectivenessModel?.timetableList?[0].timeTableTemplateDetailsId !=null
+        data.sessionEffectivenessModel?.timetableList !=null
             ?
 
         Container(
@@ -393,7 +392,7 @@ class _SessionEffectState extends State<SessionEffect> {
                   child: ElevatedButton(
                     onPressed: ()async{
                       await sessionEffectivenessViewmodel!.feedbackDetails(
-                          timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
+                          timeTableTemplateDetailsId: data.sessionEffectivenessModel?.timetableList?[0].timeTableTemplateDetailsId ??'',
                           BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
                           mode: 2,
                           subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',

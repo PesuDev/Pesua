@@ -188,11 +188,11 @@ class TimetableList {
 
 class Subjectlist {
   int? subjectId;
-  Null? timeTableTemplateDetailsId;
+  String? timeTableTemplateDetailsId;
   String? subjectCode;
   String? subjectName;
-  Null? feedbackSubmitedDate;
-  Null? feddbackStatus;
+  String? feedbackSubmitedDate;
+  int? feddbackStatus;
   String? currentDate;
   int? status;
   String? subjectStatusText;
