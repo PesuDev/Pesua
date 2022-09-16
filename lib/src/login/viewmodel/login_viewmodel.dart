@@ -26,12 +26,6 @@ loginResponseModel=response;
 
   }
 
-  // dynamic forgetPasswordDetails(
-  //     {required ForgetPasswordModel forgetPasswordModel}) async {
-  //   final data = await forgetPasswordApi.forgetPassword(
-  //       forgetPasswordModel: forgetPasswordModel);
-  //   return data;
-  // }
 
   Future<void>forgetPasswordDetails1(
       {  required int action,
