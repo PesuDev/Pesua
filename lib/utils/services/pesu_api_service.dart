@@ -121,7 +121,7 @@ class PesuApiService {
       // );
 log("base url $_baseURL");
 final urlString= Uri.parse(url);
-      final response = await http.post(urlString);
+      final response1 = await http.post(urlString);
       // http.post(    Uri.https(_baseURL,
       //  "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
       //   body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
@@ -135,45 +135,35 @@ final urlString= Uri.parse(url);
       //       }
       //   ),
       // );
-      log('Status Code :: ???????${response.statusCode}');
+      log('Status Code :: ???????${response1.statusCode}');
   //    List<ReDirectModel> responseModel=response.headers as List<ReDirectModel>;
-      log('Status Code :: ???????${response.headers}');
+      log('Status Code :: ???????${response1.headers}');
   //    log('Status Code :: ???????$responseModel');
-      if (response.statusCode == 302) {
+      if (response1.statusCode == 301) {
         log("Wait");
-        final response = await http.post(    Uri.https(_baseURL,
-            "/MAcademy/;jsessionid=HsLN1_j6icXTa2LbmdJXzCkOxIEAFFgZHWVgg1zw.prod01")
+   final urlString2=Uri.parse("${response1.headers["location"]}");
+        final response3 = await http.post(  urlString2
         );
-        log("${response.statusCode}");
-        log("${response.headers}");
-        if(response.statusCode==302){
-          // var urlData="localhost:8080";
-          // final response = await http.post(    Uri.http(_baseURL,
-          //     "Academy/login/forum?sso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"),body: queryParams,
-          //
-          //     headers: {
-          //
-          //       "mobileAppAuthenticationToken":
-          //       "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-          //     }
-          // );
-          log("${response.statusCode}");
-          log("${response.headers}");
-          if(response.statusCode==301){
-            // final response = await http.post(    Uri.http(_baseURL,
-            //
-            //     "Academy/login/forum%3Fsso=ZjM0MGU2NzJmOTIyNDc1YTllNWE1NzM2ZTExNzg4NzUmcmV0dXJuVXJsPWh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9NQWNhZGVteS9zc29fbG9naW4=&sig=185dae0c455ab6cb9b3c3f370c13e7e1e72a5a94082307c47403ecbbcff57e93&appId=4"
-            //
-            //
-            // ),body: queryParams,
-            //
-            //     headers: {
-            //
-            //       "mobileAppAuthenticationToken":
-            //       "D3iJWqENvrEQHQ6qxyUx9MgptxdTWxA3s2eDSHee4wMJqZs0NbTKaaF07hqWoE7lVtnymYMYcvCadpRgK4T7ORt11zQwZkkB"
-            //     }
-            // );
+        log("${response3.statusCode}");
+        log("${response3.headers}");
+        if(response3.statusCode==302){
+
+          final urlString4=Uri.parse("${response3.headers["location"]}");
+          final response4 = await http.post(  urlString4
+          );
+          log("....${response4.statusCode}");
+          log("${response4.headers}");
+          if(response4.statusCode==301){
+
+
+            final urlString5=Uri.parse("${response4.headers["location"]}");
+            final response5 = await http.post(  urlString5
+            );
+            log("....${response5.statusCode}");
+            log("${response5.headers}");
+            log(">>>>${response5.body}");
           }
+
         }
      //   return response.headers;
       }
