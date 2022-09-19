@@ -34,7 +34,7 @@ Future<void> initMethod() async{
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Timer(const Duration(milliseconds: 1000),(){
           if(mounted){
-            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.Dashboard, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
           }
         });
       });
