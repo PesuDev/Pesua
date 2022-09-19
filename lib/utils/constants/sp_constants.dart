@@ -1,4 +1,11 @@
 const sp_token='sp_token';
 const sp_userId='sp_userId';
+const sp_classId='sp_classId';
+const sp_batchId='s_batchId';
+const sp_batchClassId='sp_classBatchId';
+const sp_classBatchSectionId='sp_classSectionBatchId';
 const sp_password='sp_password';
 const sp_userName='sp_userName';
+const sp_userRoleId='sp_userRoleId';
+const sp_loginId='sp_loginId';
+const sp_branch="sp_branchId";

@@ -1,150 +1,193 @@
-class LoginResponseModel {
-  USERDETAILS? uSERDETAILS;
-  List<PARENTDETAILS>? pARENTDETAILS;
-  String? mobileAppAuthenticationToken;
+class LoginModel {
+  String? userId;
+  String? userRoleId;
+  String? login;
+  Null? errorMessage;
+  String? name;
+  String? photo;
+  Null? testResposeType;
+  Null? testErrorMessage;
+  String? phone;
+  Null? emergencyPhone;
+  String? email;
+  Null? menuItems;
+  Null? cResults;
+  Null? results;
+  int? serverMode;
+  String? redirectValue;
+  Null? timeRemaining;
+  int? status;
+  int? testStatus;
+  Null? scheduledQuizTests;
+  String? mobileAppTokenError;
+  String? program;
+  String? branch;
+  String? className;
+  String? batchClass;
+  String? classBatchSection;
+  String? sectionName;
+  int? programId;
+  int? classId;
+  String? loginId;
+  String? departmentId;
+  String? usertype;
+  int? instId;
+  bool? instIdNull;
+  List<UserParentList>? userParentList;
+  Null? cxoUsersWards;
+  String? dateofBirth;
+  int? userRequestedDate;
+  int? requestedType;
+  int? requestedDate;
+  int? parentRequestedType;
+  Null? parentRequestedDate;
 
-  LoginResponseModel(
-      {this.uSERDETAILS,
-        this.pARENTDETAILS,
-        this.mobileAppAuthenticationToken});
+  LoginModel(
+      {this.userId,
+        this.userRoleId,
+        this.login,
+        this.errorMessage,
+        this.name,
+        this.photo,
+        this.testResposeType,
+        this.testErrorMessage,
+        this.phone,
+        this.emergencyPhone,
+        this.email,
+        this.menuItems,
+        this.cResults,
+        this.results,
+        this.serverMode,
+        this.redirectValue,
+        this.timeRemaining,
+        this.status,
+        this.testStatus,
+        this.scheduledQuizTests,
+        this.mobileAppTokenError,
+        this.program,
+        this.branch,
+        this.className,
+        this.batchClass,
+        this.classBatchSection,
+        this.sectionName,
+        this.programId,
+        this.classId,
+        this.loginId,
+        this.departmentId,
+        this.usertype,
+        this.instId,
+        this.instIdNull,
+        this.userParentList,
+        this.cxoUsersWards,
+        this.dateofBirth,
+        this.userRequestedDate,
+        this.requestedType,
+        this.requestedDate,
+        this.parentRequestedType,
+        this.parentRequestedDate});
 
-  LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    uSERDETAILS = json['USERDETAILS'] != null
-        ? new USERDETAILS.fromJson(json['USERDETAILS'])
-        : null;
-    if (json['PARENTDETAILS'] != null) {
-      pARENTDETAILS = <PARENTDETAILS>[];
-      json['PARENTDETAILS'].forEach((v) {
-        pARENTDETAILS!.add(new PARENTDETAILS.fromJson(v));
+  LoginModel.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    userRoleId = json['userRoleId'];
+    login = json['login'];
+    errorMessage = json['errorMessage'];
+    name = json['name'];
+    photo = json['photo'];
+    testResposeType = json['testResposeType'];
+    testErrorMessage = json['testErrorMessage'];
+    phone = json['phone'];
+    emergencyPhone = json['emergencyPhone'];
+    email = json['email'];
+    menuItems = json['menuItems'];
+    cResults = json['cResults'];
+    results = json['results'];
+    serverMode = json['serverMode'];
+    redirectValue = json['redirectValue'];
+    timeRemaining = json['timeRemaining'];
+    status = json['status'];
+    testStatus = json['testStatus'];
+    scheduledQuizTests = json['scheduledQuizTests'];
+    mobileAppTokenError = json['mobileAppTokenError'];
+    program = json['program'];
+    branch = json['branch'];
+    className = json['className'];
+    batchClass = json['batchClass'];
+    classBatchSection = json['classBatchSection'];
+    sectionName = json['sectionName'];
+    programId = json['programId'];
+    classId = json['classId'];
+    loginId = json['loginId'];
+    departmentId = json['departmentId'];
+    usertype = json['usertype'];
+    instId = json['instId'];
+    instIdNull = json['instIdNull'];
+    if (json['userParentList'] != null) {
+      userParentList = <UserParentList>[];
+      json['userParentList'].forEach((v) {
+        userParentList!.add(new UserParentList.fromJson(v));
       });
     }
-    mobileAppAuthenticationToken = json['mobileAppAuthenticationToken'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.uSERDETAILS != null) {
-      data['USERDETAILS'] = this.uSERDETAILS!.toJson();
-    }
-    if (this.pARENTDETAILS != null) {
-      data['PARENTDETAILS'] =
-          this.pARENTDETAILS!.map((v) => v.toJson()).toList();
-    }
-    data['mobileAppAuthenticationToken'] = this.mobileAppAuthenticationToken;
-    return data;
-  }
-}
-
-class USERDETAILS {
-  String? userId;
-  String? loginId;
-  int? userStatus;
-  String? firstName;
-  String? profilePicture;
-  String? program;
-  String? programAbbreviation;
-  int? ucprogramid;
-  bool? ucprogramidNull;
-  int? programId;
-  bool? programIdNull;
-  String? branch;
-  String? branchAbbreviation;
-  String? sectionName;
-  int? classBatchSectionId;
-  bool? classBatchSectionIdNull;
-  int? batchClassId;
-  bool? batchClassIdNull;
-  String? className;
-  int? classId;
-  bool? classIdNull;
-  String? stream;
-  int? batchId;
-  bool? batchIdNull;
-
-  USERDETAILS(
-      {this.userId,
-        this.loginId,
-        this.userStatus,
-        this.firstName,
-        this.profilePicture,
-        this.program,
-        this.programAbbreviation,
-        this.ucprogramid,
-        this.ucprogramidNull,
-        this.programId,
-        this.programIdNull,
-        this.branch,
-        this.branchAbbreviation,
-        this.sectionName,
-        this.classBatchSectionId,
-        this.classBatchSectionIdNull,
-        this.batchClassId,
-        this.batchClassIdNull,
-        this.className,
-        this.classId,
-        this.classIdNull,
-        this.stream,
-        this.batchId,
-        this.batchIdNull});
-
-  USERDETAILS.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
-    loginId = json['loginId'];
-    userStatus = json['userStatus'];
-    firstName = json['firstName'];
-    profilePicture = json['profilePicture'];
-    program = json['program'];
-    programAbbreviation = json['programAbbreviation'];
-    ucprogramid = json['ucprogramid'];
-    ucprogramidNull = json['ucprogramidNull'];
-    programId = json['programId'];
-    programIdNull = json['programIdNull'];
-    branch = json['branch'];
-    branchAbbreviation = json['branchAbbreviation'];
-    sectionName = json['sectionName'];
-    classBatchSectionId = json['classBatchSectionId'];
-    classBatchSectionIdNull = json['classBatchSectionIdNull'];
-    batchClassId = json['batchClassId'];
-    batchClassIdNull = json['batchClassIdNull'];
-    className = json['className'];
-    classId = json['classId'];
-    classIdNull = json['classIdNull'];
-    stream = json['stream'];
-    batchId = json['batchId'];
-    batchIdNull = json['batchIdNull'];
+    cxoUsersWards = json['cxoUsersWards'];
+    dateofBirth = json['dateofBirth'];
+    userRequestedDate = json['userRequestedDate'];
+    requestedType = json['requestedType'];
+    requestedDate = json['requestedDate'];
+    parentRequestedType = json['parentRequestedType'];
+    parentRequestedDate = json['parentRequestedDate'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['userId'] = this.userId;
-    data['loginId'] = this.loginId;
-    data['userStatus'] = this.userStatus;
-    data['firstName'] = this.firstName;
-    data['profilePicture'] = this.profilePicture;
+    data['userRoleId'] = this.userRoleId;
+    data['login'] = this.login;
+    data['errorMessage'] = this.errorMessage;
+    data['name'] = this.name;
+    data['photo'] = this.photo;
+    data['testResposeType'] = this.testResposeType;
+    data['testErrorMessage'] = this.testErrorMessage;
+    data['phone'] = this.phone;
+    data['emergencyPhone'] = this.emergencyPhone;
+    data['email'] = this.email;
+    data['menuItems'] = this.menuItems;
+    data['cResults'] = this.cResults;
+    data['results'] = this.results;
+    data['serverMode'] = this.serverMode;
+    data['redirectValue'] = this.redirectValue;
+    data['timeRemaining'] = this.timeRemaining;
+    data['status'] = this.status;
+    data['testStatus'] = this.testStatus;
+    data['scheduledQuizTests'] = this.scheduledQuizTests;
+    data['mobileAppTokenError'] = this.mobileAppTokenError;
     data['program'] = this.program;
-    data['programAbbreviation'] = this.programAbbreviation;
-    data['ucprogramid'] = this.ucprogramid;
-    data['ucprogramidNull'] = this.ucprogramidNull;
-    data['programId'] = this.programId;
-    data['programIdNull'] = this.programIdNull;
     data['branch'] = this.branch;
-    data['branchAbbreviation'] = this.branchAbbreviation;
-    data['sectionName'] = this.sectionName;
-    data['classBatchSectionId'] = this.classBatchSectionId;
-    data['classBatchSectionIdNull'] = this.classBatchSectionIdNull;
-    data['batchClassId'] = this.batchClassId;
-    data['batchClassIdNull'] = this.batchClassIdNull;
     data['className'] = this.className;
+    data['batchClass'] = this.batchClass;
+    data['classBatchSection'] = this.classBatchSection;
+    data['sectionName'] = this.sectionName;
+    data['programId'] = this.programId;
     data['classId'] = this.classId;
-    data['classIdNull'] = this.classIdNull;
-    data['stream'] = this.stream;
-    data['batchId'] = this.batchId;
-    data['batchIdNull'] = this.batchIdNull;
+    data['loginId'] = this.loginId;
+    data['departmentId'] = this.departmentId;
+    data['usertype'] = this.usertype;
+    data['instId'] = this.instId;
+    data['instIdNull'] = this.instIdNull;
+    if (this.userParentList != null) {
+      data['userParentList'] =
+          this.userParentList!.map((v) => v.toJson()).toList();
+    }
+    data['cxoUsersWards'] = this.cxoUsersWards;
+    data['dateofBirth'] = this.dateofBirth;
+    data['userRequestedDate'] = this.userRequestedDate;
+    data['requestedType'] = this.requestedType;
+    data['requestedDate'] = this.requestedDate;
+    data['parentRequestedType'] = this.parentRequestedType;
+    data['parentRequestedDate'] = this.parentRequestedDate;
     return data;
   }
 }
 
-class PARENTDETAILS {
+class UserParentList {
   int? userParentId;
   String? userId;
   String? name;
@@ -154,7 +197,7 @@ class PARENTDETAILS {
   String? occupation;
   String? designation;
   String? employerDetails;
-  int? annualIncome;
+  double? annualIncome;
   bool? annualIncomeNull;
   String? isAlumni;
   int? type;
@@ -162,7 +205,7 @@ class PARENTDETAILS {
   int? status;
   bool? statusNull;
 
-  PARENTDETAILS(
+  UserParentList(
       {this.userParentId,
         this.userId,
         this.name,
@@ -180,7 +223,7 @@ class PARENTDETAILS {
         this.status,
         this.statusNull});
 
-  PARENTDETAILS.fromJson(Map<String, dynamic> json) {
+  UserParentList.fromJson(Map<String, dynamic> json) {
     userParentId = json['userParentId'];
     userId = json['userId'];
     name = json['name'];

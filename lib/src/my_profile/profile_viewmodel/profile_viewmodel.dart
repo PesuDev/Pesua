@@ -4,7 +4,9 @@ import 'package:pesu/src/my_profile/api/my_profile_api.dart';
 import 'package:pesu/src/my_profile/model/profile_model.dart';
 import 'package:pesu/src/my_profile/model/update_detail_model.dart';
 import 'package:pesu/src/my_profile/model/update_password_model.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../model/profile_detail/-model.dart';
 
 class ProfileViewmodel extends ChangeNotifier {
@@ -17,13 +19,13 @@ class ProfileViewmodel extends ChangeNotifier {
   ProfileModel? profileModel;
   ProfileDetailModel? profileDetailModel;
   UpdatePasswordModel? updatePasswordModel;
-
-
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
   void getProfileDetails(
-      {required int action,required int mode, required String userId,required double randomNum, required String callMethod,required bool isProfileRequest })
+      {required int action,required int mode, required double randomNum, required String callMethod,required bool isProfileRequest })
   async {
+    String? userId=await preferenceUtil.getString(sp_userId);
     final data = await _apiService.fetchProfileDetails(action: action,mode:
-    mode,userId: userId,randomNum:randomNum,callMethod: callMethod, isProfileRequest: isProfileRequest);
+    mode,userId: userId.toString(),randomNum:randomNum,callMethod: callMethod, isProfileRequest: isProfileRequest);
 
     profileModel = data;
 

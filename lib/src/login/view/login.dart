@@ -11,6 +11,7 @@ import 'dart:math' as math;
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/login/model/forget_password_model.dart';
 import 'package:pesu/src/login/model/login_request_model.dart';
+import 'package:pesu/src/login/model/login_response_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
@@ -227,41 +228,35 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
                       onPressed: () async {
-                        LoginRequestModel model = LoginRequestModel(
-                          jUsername: "pes1ug20cs216",
-                          jPassword: "pes123",
-                          jMobile: 'MOBILE',
-                          jMobileApp: 'YES',
-                          jSocial: 'NO',
-                          jAppId: '1',
-                          action: ' 0',
-                          mode: '0',
-                          randomNum: '0.6181071537315856',
-                          whichObjectId: 'loginSubmitButton',
-                        );
+                 LoginModel responseModel = await _viewModel.getLoginDetails(
+                      password: passwordController.text,username: usernameController.text);
 
-                        final responseModel = await _viewModel.getLoginDetails(
-                            loginRequestModel: model);
-
-                        if (responseModel != null &&
-                            responseModel.uSERDETAILS?.userId != null &&
-                            responseModel.mobileAppAuthenticationToken != null) {
+                        if (responseModel != null ) {
+                          log("Oye login came");
                           SharedPreferenceUtil util = SharedPreferenceUtil();
                           await util.setString(
-                              sp_userId, responseModel.uSERDETAILS?.userId ?? '');
+                              sp_userId,responseModel.userId??"");
                           await util.setString(
                               sp_password, passwordController.text);
-                          await util.setString(
-                              sp_userName, usernameController.text);
+                          await util.setString(sp_classId, "${responseModel.classId }");
+                          await util.setString(sp_userName, "${responseModel.name }");
+                          await util.setString(sp_batchClassId, "${responseModel.batchClass}");
+                          await util.setString(sp_classBatchSectionId, "${responseModel.classBatchSection }");
+                          await util.setString(sp_userRoleId, "${responseModel.userRoleId }");
+                          await util.setString(sp_branch, "${responseModel.branch}");
+                          await util.setString(sp_loginId, "${responseModel.loginId}");
+
+                          // await util.setString(
+                          //     sp_userName,responseModel.userParentList);
                           await util.setString(sp_token,
-                              responseModel.mobileAppAuthenticationToken ?? '');
+                              responseModel.mobileAppTokenError?? '');
 
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (_) => DashboardScreen()));
                         } else {
-                          log('Error while Login');
+                          log('Oye am not coming');
                         }
                       },
                       child: Text(
