@@ -38,8 +38,6 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
         fetchId: "1116-3385-2",
         subjectCode: "UE19CS303",
         subjectName: "Machine Intelligence",
-        userId: "e157111c-3591-4826-a1da-3b5d20db14df",
-        loginId: "PES1201900924",
         randomNum: 0.5177486893384107);
   }
 

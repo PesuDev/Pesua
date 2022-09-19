@@ -26,9 +26,7 @@ class _ISAResultsState extends State<ISAResults> {
         action: 6,
         mode: 5,
         whichObjectId: "clickHome_pesuacademy_myresults",
-        title: "ISA Results",
-        userId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
-        deviceType: 1,
+        title: "ISA Results", deviceType: 1,
         serverMode: 0,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.1629756694316884);
@@ -39,7 +37,6 @@ class _ISAResultsState extends State<ISAResults> {
         batchClassId: 1400,
         classBatchSectionId: 4164,
         fetchId: "1400-4164",
-        userId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
         randomNum: 0.4054309131337863);
   }
 

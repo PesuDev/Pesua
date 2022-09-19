@@ -23,11 +23,15 @@ class _SessionEffectState extends State<SessionEffect> {
   void initState() {
     super.initState();
     sessionEffectivenessViewmodel = Provider.of<SessionEffectivenessViewmodel>(context, listen: false);
-    sessionEffectivenessViewmodel!.getSessionDetail(action: 39, mode: 4, userId: 'bac97ff1-1c7e-4a64-b225-cdb77839a9c0', randomNum: 0.17770127727820895, dayNumber: 3);
+    sessionEffectivenessViewmodel!.getSessionDetail(action: 39, mode: 4,
+        randomNum: 0.17770127727820895, dayNumber: 3);
     sessionEffectivenessViewmodel!.feedbackDetails(timeTableTemplateDetailsId: '2c9d24fd-a1bc-11e7-8ecc-79e925fb7f88', BatchId: 26, mode: 2,
-        subjectCode: 'UM21MB651B', action: 39, BatchClassId: 1498, isLocallySavedData: 'FALSE', subjectId: 15436,
+        subjectCode: 'UM21MB651B', action: 39,
+        BatchClassId: 1498, isLocallySavedData: 'FALSE',
+        subjectId: 15436,
         ClassId: 2, ClassBatchSectionId: 4367, DepartmentId: 18, status: 4,
-        randomNum: 0.0780400788501232, userId: 'a354eafc-9c32-48c8-bcb8-09fccb614e8e', ProgramId: 7);
+        randomNum: 0.0780400788501232,
+        ProgramId: 7);
 
     //selectedRadio;
     // selectValue;
@@ -72,7 +76,8 @@ class _SessionEffectState extends State<SessionEffect> {
         data.sessionEffectivenessModel?.stuentsubjectlist !=null &&
         data.sessionEffectivenessModel?.subjectlist !=null &&
         data.sessionEffectivenessModel?.timetableList !=null &&
-        data.sessionEffectivenessModel?.timetableList?[0].timeTableTemplateDetailsId !=null
+            data.sessionEffectivenessModel?.timetableList?.length !=null &&
+            data.sessionEffectivenessModel?.timetableList?.isNotEmpty !=null
             ?
 
         Container(
@@ -405,7 +410,6 @@ class _SessionEffectState extends State<SessionEffect> {
                           DepartmentId: data.sessionEffectivenessModel?.subjectlist?[0].departmentId ??0,
                           status: selectedRadio??0,
                           randomNum: 0.0780400788501232,
-                          userId: 'a354eafc-9c32-48c8-bcb8-09fccb614e8e',
                           ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
                     },
                     child: Text("Submit"),),

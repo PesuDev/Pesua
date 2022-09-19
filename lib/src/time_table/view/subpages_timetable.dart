@@ -25,7 +25,6 @@ class _TableDetailsState extends State<TableDetails> {
     _viewModel.getTimeTableDetails(
         action: 16,
         mode: 1,
-        userId: "01bf7cdc-d30e-4bd2-b965-cc3ce5a34198",
         randomNum: 0.8235991550065647,
         callMethod: 'background');
   }
@@ -34,7 +33,6 @@ class _TableDetailsState extends State<TableDetails> {
     _viewModel.getTimeTableDetails(
         action: 16,
         mode: 1,
-        userId: "01bf7cdc-d30e-4bd2-b965-cc3ce5a34198",
         randomNum: 0.8235991550065647,
         callMethod: 'background');
   }
