@@ -228,36 +228,39 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
                       onPressed: () async {
-                 LoginModel responseModel = await _viewModel.getLoginDetails(
-                      password: passwordController.text,username: usernameController.text);
+                        if(_form.currentState!.validate()){
+                          LoginModel responseModel = await _viewModel.getLoginDetails(
+                              password: passwordController.text,username: usernameController.text);
 
-                        if (responseModel != null ) {
-                          log("Oye login came");
-                          SharedPreferenceUtil util = SharedPreferenceUtil();
-                          await util.setString(
-                              sp_userId,responseModel.userId??"");
-                          await util.setString(
-                              sp_password, passwordController.text);
-                          await util.setString(sp_classId, "${responseModel.classId }");
-                          await util.setString(sp_userName, "${responseModel.name }");
-                          await util.setString(sp_batchClassId, "${responseModel.batchClass}");
-                          await util.setString(sp_classBatchSectionId, "${responseModel.classBatchSection }");
-                          await util.setString(sp_userRoleId, "${responseModel.userRoleId }");
-                          await util.setString(sp_branch, "${responseModel.branch}");
-                          await util.setString(sp_loginId, "${responseModel.loginId}");
+                          if (responseModel != null ) {
+                            log("Oye login came");
+                            SharedPreferenceUtil util = SharedPreferenceUtil();
+                            await util.setString(
+                                sp_userId,responseModel.userId??"");
+                            await util.setString(
+                                sp_password, passwordController.text);
+                            await util.setString(sp_classId, "${responseModel.classId }");
+                            await util.setString(sp_userName, "${responseModel.name }");
+                            await util.setString(sp_batchClassId, "${responseModel.batchClass}");
+                            await util.setString(sp_classBatchSectionId, "${responseModel.classBatchSection }");
+                            await util.setString(sp_userRoleId, "${responseModel.userRoleId }");
+                            await util.setString(sp_branch, "${responseModel.branch}");
+                            await util.setString(sp_loginId, "${responseModel.loginId}");
 
-                          // await util.setString(
-                          //     sp_userName,responseModel.userParentList);
-                          // await util.setString(sp_token,
-                          //     responseModel.mobileAppTokenError?? '');
-log("Bose 2 ame:  ${await util.getToken()}");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => DashboardScreen()));
-                        } else {
-                          log('Oye am not coming');
+                            // await util.setString(
+                            //     sp_userName,responseModel.userParentList);
+                            // await util.setString(sp_token,
+                            //     responseModel.mobileAppTokenError?? '');
+                            log("Bose 2 ame:  ${await util.getToken()}");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => DashboardScreen()));
+                          } else {
+                            log('Oye am not coming');
+                          }
                         }
+
                       },
                       child: Text(
                         "Sign in",
