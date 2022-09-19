@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
+import 'package:pesu/utils/constants/custom_widgets.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
+import 'package:pesu/utils/services/sf_constant.dart';
+import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:pesu/utils/view/webView_page.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -73,9 +77,22 @@ class _MenuPageState extends State<MenuPage> {
             itemBuilder: (_, index) {
               var data = _viewModel.getSettingsList()[index];
               return InkWell(
-                onTap: () {
+                onTap: () async{
                   if (index == 0) {
-                    Navigator.pushNamed(context, AppRoutes.login);
+                    SharedPreferenceUtil util = SharedPreferenceUtil();
+
+
+                    bool dataalue = await util.clearAll();
+
+                    print("?????${dataalue}");
+                     if (dataalue) {
+                      CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
+
+                      Navigator.pushNamed(context, AppRoutes.login);
+                   }
+                    else{
+                 CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
+                    }
                   }
                   else if (index == 1) {
                     Navigator.pushNamed(context, AppRoutes.courseDashboard);
