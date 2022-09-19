@@ -71,7 +71,8 @@ class _SessionEffectState extends State<SessionEffect> {
         return data.sessionEffectivenessModel != null &&
         data.sessionEffectivenessModel?.stuentsubjectlist !=null &&
         data.sessionEffectivenessModel?.subjectlist !=null &&
-        data.sessionEffectivenessModel?.timetableList !=null
+        data.sessionEffectivenessModel?.timetableList !=null &&
+        data.sessionEffectivenessModel?.timetableList?[0].timeTableTemplateDetailsId !=null
             ?
 
         Container(
@@ -356,10 +357,9 @@ class _SessionEffectState extends State<SessionEffect> {
                                             fontWeight: FontWeight.bold,fontSize: 18),),
                                         Radio(
                                             value:4,
-
                                             groupValue:selectedRadio,
                                             onChanged: (int? val){
-                                           selectedRadio=val;
+                                             selectedRadio=val;
                                            setState(() {
                                              grid4=true;
                                              grid2=false;
@@ -392,7 +392,7 @@ class _SessionEffectState extends State<SessionEffect> {
                   child: ElevatedButton(
                     onPressed: ()async{
                       await sessionEffectivenessViewmodel!.feedbackDetails(
-                          timeTableTemplateDetailsId: data.sessionEffectivenessModel?.timetableList?[0].timeTableTemplateDetailsId ??'',
+                          timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
                           BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
                           mode: 2,
                           subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
