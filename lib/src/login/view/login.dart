@@ -228,8 +228,8 @@ class _LoginState extends State<Login> {
                       style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
                       onPressed: () async {
                         LoginRequestModel model = LoginRequestModel(
-                          jUsername: usernameController.text,
-                          jPassword: passwordController.text,
+                          jUsername: "pes1ug20cs216",
+                          jPassword: "pes123",
                           jMobile: 'MOBILE',
                           jMobileApp: 'YES',
                           jSocial: 'NO',
