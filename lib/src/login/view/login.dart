@@ -50,10 +50,12 @@ class _LoginState extends State<Login> {
       body: Container(
 
         width: double.infinity,
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           image: DecorationImage(
-            opacity: 5,
+            opacity: 0.5,
+              colorFilter: ColorFilter.mode(Colors.black87.withOpacity(1), BlendMode.dstATop),
               image: AssetImage("assets/images/login_background.jpg",
+
 
               ),
               fit: BoxFit.cover),
@@ -74,7 +76,7 @@ class _LoginState extends State<Login> {
                       "Sign in",
                       style: TextStyle(
                           fontSize: 62,
-                          color: Colors.black45,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Source Sans Pro'),
                     ),
