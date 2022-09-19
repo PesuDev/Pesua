@@ -120,11 +120,13 @@ class PesuApiService {
       //   queryParameters: queryParams,
       // );
 log("base url $_baseURL");
-      final response = await http.post(    Uri.https(_baseURL,
-       "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
-        body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
-
-      );
+final urlString= Uri.parse(url);
+      final response = await http.post(urlString);
+      // http.post(    Uri.https(_baseURL,
+      //  "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
+      //   body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
+      //
+      // );
       // var response = await Dio().post( Uri.https("$_baseURL","MAcademy/failLogin;jsessionid=SIPSyWrVz2_gA4VMtL_r9Hn6DZNWPP9QMFSRE9q7.prod01",).toString(),
       //   data: queryParams,
       //   options: Options(
