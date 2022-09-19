@@ -248,9 +248,9 @@ class _LoginState extends State<Login> {
 
                           // await util.setString(
                           //     sp_userName,responseModel.userParentList);
-                          await util.setString(sp_token,
-                              responseModel.mobileAppTokenError?? '');
-
+                          // await util.setString(sp_token,
+                          //     responseModel.mobileAppTokenError?? '');
+log("Bose 2 ame:  ${await util.getToken()}");
                           Navigator.push(
                               context,
                               MaterialPageRoute(

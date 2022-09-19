@@ -1,4 +1,5 @@
 const sp_token='sp_token';
+const sp_isLogin='sp_isLogin';
 const sp_userId='sp_userId';
 const sp_classId='sp_classId';
 const sp_batchId='s_batchId';

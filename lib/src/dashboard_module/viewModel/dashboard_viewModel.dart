@@ -7,7 +7,7 @@ class DashboardViewModel extends ChangeNotifier{
 
   List<SettingsModel> getSettingsList(){
     return [
-      SettingsModel(name: 'Login',icon: Icons.settings,callback: (){},),
+      SettingsModel(name: 'LogOut',icon: Icons.settings,callback: (){},),
       SettingsModel(name: 'My Courses',icon: Icons.settings,callback: (){}),
       SettingsModel(name: 'Exam Grievances',icon: Icons.settings,callback: (){}),
       SettingsModel(name: 'Time Table',icon: Icons.settings,callback: (){}),

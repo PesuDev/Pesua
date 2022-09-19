@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:pesu/utils/services/sf_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/sp_constants.dart';
+
 class SharedPreferenceUtil {
 
   getJson(String key) async {
@@ -32,8 +34,8 @@ class SharedPreferenceUtil {
 
 
   Future<String?> getToken() async {
-    String? registeredToken = await getString(sf_registeredUserToken);
-    if (registeredToken != null && registeredToken.length > 10) {
+    String? registeredToken = await getString(sp_token);
+    if (registeredToken != null && registeredToken.length > 0) {
       return registeredToken;
     }
   }
@@ -52,9 +54,9 @@ class SharedPreferenceUtil {
     return prefs.remove(input);
   }
 
-  clearAll() async{
+ Future<bool> clearAll() async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.clear();
+   return await preferences.clear();
   }
 
 

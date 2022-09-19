@@ -98,11 +98,12 @@ class PesuApiService {
                 log("after security check 3 ${response5.body}");
                 log("after security check 3${response5.toString()}");
                 if(response5.statusCode==200){
+                  await util.setString(sp_token,
+                      "${response5.headers['mobileappauthenticationtoken']}" );
                   print("Oye Hoye");
                   print("Oye check me :   ${response5.body}");
                   responseJson = await  _response(response5);
-                  await util.setString(sp_token,
-                     "${response5.headers['location']}" );
+
                   return responseJson;
                 }
               }
