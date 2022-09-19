@@ -16,29 +16,19 @@ class LoginApiService {
   late final PesuApiService _pesuApiService = PesuApiService();
 
 
-  Future<ReDirectModel?> fetchLoginDetails(
-      {required LoginRequestModel loginRequestModel}) async {
+  Future<LoginModel?> fetchLoginDetails(
+      {required String username,required String password}) async {
     String url = AppUrls.loginUrl;
 
     final data = await _pesuApiService.postApiCallForLogin(
         endPoint: url,
-    bodyParams: jsonEncode(loginRequestModel.toJson())
-    //     bodyParams: {
-    //   "j_mobile":"MOBILE",
-    //   "mode":"0",
-    //  "j_mobileApp":"YES",
-    //  " whichObjectId":"loginSubmitButton",
-    // " j_social":"NO",
-    //  " j_password":"pes123",
-    //   "action":"0",
-    //  " j_appId":"1",
-    //   "j_username":"pes1ug20cs216",
-    //   "randomNum":"0.6181071537315856",
-    // }
-
+    bodyParams: {
+      "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton",
+      "j_social":"NO", "j_password":"$password", "action":"0", "j_appId":"1", "j_username":"$username", "randomNum":"0.6181071537315856"
+    }
     );
     if(data != null){
-      return  ReDirectModel.fromJson(data);
+      return  LoginModel.fromJson(data);
     }
 
   }

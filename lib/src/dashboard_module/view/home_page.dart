@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     profileViewmodel=Provider.of<ProfileViewmodel>(context,listen: false);
-    profileViewmodel?.getProfileDetails(action: 4,mode: 7,userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
+    profileViewmodel?.getProfileDetails(action: 4,mode: 7,
         randomNum:0.824022142978994,callMethod:'background', isProfileRequest: true);
     announcementViewModel=Provider.of<AnnouncementViewModel>(context,listen: false);
 
