@@ -64,8 +64,9 @@ class PesuApiService {
       log('Status Code :: ${response.statusCode}');
       log('url    :: $_baseURL$endPoint');
       if (response.statusCode == 302 ) {
-        log('Response :: ${response.body.toString()}     ${response.headers}');
-      return  response.headers;
+        log('Response :: ${response.body.toString()}');
+         //response.headers['location'];
+        return response.body;
       }
     } on SocketException {
       log('Socket Exception');
