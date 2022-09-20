@@ -28,30 +28,32 @@ class _SplashScreenState extends State<SplashScreen> {
     //             context, MaterialPageRoute(builder: (_) => DashboardScreen()))
     // );
   }
-Future<void> initMethod() async{
-    SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
-    String? token=await preferenceUtil.getToken();
+
+  Future<void> initMethod() async {
+    SharedPreferenceUtil preferenceUtil = SharedPreferenceUtil();
+    String? token = await preferenceUtil.getToken();
     log("i am the bosee:     $token}");
-    if(token==null){
+    if (token == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 1000),(){
-          if(mounted){
-            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
+        Timer(const Duration(milliseconds: 1000), () {
+          if (mounted) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.login, (route) => false);
           }
         });
       });
-    }else{
+    } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 1000),(){
-          if(mounted){
+        Timer(const Duration(milliseconds: 1000), () {
+          if (mounted) {
             Navigator.push(
-                         context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                context, MaterialPageRoute(builder: (_) => DashboardScreen()));
           }
         });
       });
     }
+  }
 
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold();
