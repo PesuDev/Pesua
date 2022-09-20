@@ -49,7 +49,8 @@ class _ISAResultsState extends State<ISAResults> {
         body: Consumer<IsaViewModel>(builder: (context, model, child) {
           return Container(
             child: model.isaDropDownModel != null &&
-                    model.isaDropDownModel!.length != 0
+                    model.isaDropDownModel!.length != 0 &&
+                    model.isaResultModel != null
                 ? Container(
                     padding: EdgeInsets.only(
                         top: 15, left: 15, right: 15, bottom: 8),

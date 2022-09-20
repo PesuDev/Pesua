@@ -59,7 +59,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
           return Container(
             child:
                 model.courseDropDownModel != null &&
-                        model.courseDropDownModel!.length != 0
+                        model.courseDropDownModel!.length != 0 && model.courseModel!= null
                     ? Container(
                         padding: EdgeInsets.only(
                             top: 15, left: 15, right: 15, bottom: 3),

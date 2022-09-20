@@ -45,56 +45,62 @@ class _EsaGraphState extends State<EsaGraph> {
         backgroundColor: appThemeColor,
       ),
       body: Consumer<GraphViewModel>(builder: (context, model, child) {
-        return Container(
-          padding: EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text("UE20CS251 - ${model.graphModel?.subjectName}"),
-              ),
-              SfCartesianChart(
-                  backgroundColor: Colors.white,
-                  primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Grade')),
-                  primaryYAxis: NumericAxis(
-                    title: AxisTitle(text: 'Marks'),
-                  ),
-                  isTransposed: true,
-                  tooltipBehavior: TooltipBehavior(enable: true),
-                  series: <ChartSeries<Data, String>>[
-                    BarSeries<Data, String>(
-                        dataSource: model.graphModel?.data ?? [],
-                        xValueMapper: (Data data, _) => data.grade,
-                        yValueMapper: (Data data, _) => data.y,
-                        name: 'Grade - d Marks -1',
-                        // Enable data label
-                        dataLabelSettings: DataLabelSettings(
-                          isVisible: true,
-                        ))
-                  ]),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-                child: Text("Summary"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [Text("Your Score"), Text("-1")],
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Column(
-                    children: [Text("Average"), Text("24")],
-                  )
-                ],
+        return (model.graphModel != null)
+            ? Container(
+                padding: EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child:
+                          Text("UE20CS251 - ${model.graphModel?.subjectName}"),
+                    ),
+                    SfCartesianChart(
+                        backgroundColor: Colors.white,
+                        primaryXAxis:
+                            CategoryAxis(title: AxisTitle(text: 'Grade')),
+                        primaryYAxis: NumericAxis(
+                          title: AxisTitle(text: 'Marks'),
+                        ),
+                        isTransposed: true,
+                        tooltipBehavior: TooltipBehavior(enable: true),
+                        series: <ChartSeries<Data, String>>[
+                          BarSeries<Data, String>(
+                              dataSource: model.graphModel?.data ?? [],
+                              xValueMapper: (Data data, _) => data.grade,
+                              yValueMapper: (Data data, _) => data.y,
+                              name: 'Grade - d Marks -1',
+                              // Enable data label
+                              dataLabelSettings: DataLabelSettings(
+                                isVisible: true,
+                              ))
+                        ]),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+                      child: Text("Summary"),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [Text("Your Score"), Text("-1")],
+                        ),
+                        SizedBox(
+                          width: 40,
+                        ),
+                        Column(
+                          children: [Text("Average"), Text("24")],
+                        )
+                      ],
+                    )
+                  ],
+                ),
               )
-            ],
-          ),
-        );
+            : Center(
+                child: CircularProgressIndicator(),
+              );
       }),
     );
   }

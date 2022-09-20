@@ -73,7 +73,6 @@ class _PreviousSemState extends State<PreviousSem> {
   String? selectedItem = "Sem-1";
   int? selectedBatch;
 
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -83,7 +82,8 @@ class _PreviousSemState extends State<PreviousSem> {
           return data.esaModel2 != null &&
                   data.esaModel2!.studentCGPAWISE!.isNotEmpty &&
                   data.esaModel4 != null &&
-                  data.esaModel4!.rESULTS!.isNotEmpty ? SafeArea(
+                  data.esaModel4!.rESULTS!.isNotEmpty
+              ? SafeArea(
                   child: SingleChildScrollView(
                     child: Column(children: [
                       Container(
@@ -203,12 +203,17 @@ class _PreviousSemState extends State<PreviousSem> {
                                       TooltipBehavior(enable: true),
                                   series: <ChartSeries>[
                                     LineSeries<StudentCGPAWISE, dynamic>(
-                                      dataSource: data.esaModel2?.studentCGPAWISE ?? [],
-                                      xValueMapper: (StudentCGPAWISE sales, _) =>
+                                      dataSource:
+                                          data.esaModel2?.studentCGPAWISE ?? [],
+                                      xValueMapper: (StudentCGPAWISE sales,
+                                              _) =>
                                           int.tryParse(sales.cGPA.toString()),
-                                      yValueMapper: (StudentCGPAWISE sales, _) =>
-                                          int.tryParse(sales.credits.toString()),
-                                         dataLabelSettings: DataLabelSettings(isVisible: true),
+                                      yValueMapper:
+                                          (StudentCGPAWISE sales, _) =>
+                                              int.tryParse(
+                                                  sales.credits.toString()),
+                                      dataLabelSettings:
+                                          DataLabelSettings(isVisible: true),
                                     )
                                   ]),
                               Row(
@@ -219,12 +224,15 @@ class _PreviousSemState extends State<PreviousSem> {
                                     icon: const Icon(Icons.bar_chart),
                                     label: Text(""),
                                   ),
-                                  Text("CGPA",style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff666666),
-                                    fontFamily: 'Open Sans',
-                                  ),),
+                                  Text(
+                                    "CGPA",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                    ),
+                                  ),
                                   SizedBox(
                                     width: 20,
                                   ),
@@ -242,7 +250,6 @@ class _PreviousSemState extends State<PreviousSem> {
                                       fontFamily: 'Open Sans',
                                     ),
                                   ),
-
                                 ],
                               )
                             ],
@@ -460,9 +467,12 @@ class _PreviousSemState extends State<PreviousSem> {
                                                                 const EdgeInsets
                                                                         .only(
                                                                     right: 20),
-                                                            child:    TextButton.icon(
+                                                            child:
+                                                                TextButton.icon(
                                                               onPressed: null,
-                                                              icon: const Icon(Icons.bar_chart),
+                                                              icon: const Icon(
+                                                                  Icons
+                                                                      .bar_chart),
                                                               label: Text(""),
                                                             ),
                                                           ),

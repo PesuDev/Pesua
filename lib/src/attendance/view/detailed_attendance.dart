@@ -29,7 +29,7 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
     return Scaffold(
       appBar: sideNavAppBar("Attendance Report"),
       body: Consumer<AttendanceViewModel>(builder: (context,value,child) {
-        return value.detailedAttendanceModel != null ?
+        return value.detailedAttendanceModel != null && value.detailedAttendanceModel?.length != 0 ?
         SingleChildScrollView(
           child: Column(
             children: [
