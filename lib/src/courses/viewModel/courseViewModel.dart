@@ -3,6 +3,8 @@ import 'package:pesu/src/courses/api/courseApiService.dart';
 
 import 'package:pesu/src/courses/model/courseModel.dart';
 
+import '../../../utils/constants/sp_constants.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../model/courseDropDownModel.dart';
 import '../model/subjectModel.dart';
 import '../model/unitModel.dart';
@@ -17,7 +19,7 @@ class CourseViewModel extends ChangeNotifier {
   List<STUDENTSUBJECTS>? studentSubjects;
   SubjectModel? subjectModel;
   List<COURSECONTENT>? courseContent;
-
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
   List<UnitModel>? unitModel;
 
   void getCourseDropDownDetails(
@@ -25,18 +27,19 @@ class CourseViewModel extends ChangeNotifier {
       required int mode,
       required String whichObjectId,
       required String title,
-      required String userId,
       required int deviceType,
       required int serverMode,
       required int programId,
       required String redirectValue,
       required double randomNum}) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     final data = await _courseDropDownApiService.fetchCourseDDDetails(
         action: action,
         mode: mode,
         whichObjectId: whichObjectId,
         title: title,
-        userId: userId,
+        userId: userId.toString(),
         deviceType: deviceType,
         serverMode: serverMode,
         programId: programId,
@@ -53,17 +56,18 @@ class CourseViewModel extends ChangeNotifier {
       required int batchClassId,
       required int classBatchSectionId,
       required int classId,
-      required String userId,
       required int programId,
       required int semIndexVal,
       required double randomNum}) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     final data = await _courseApiService.fetchCourseDetails(
         action: action,
         mode: mode,
         batchClassId: batchClassId,
         classBatchSectionId: classBatchSectionId,
         classId: classId,
-        userId: userId,
+        userId: userId.toString(),
         programId: programId,
         semIndexVal: semIndexVal,
         randomNum: randomNum);

@@ -30,7 +30,6 @@ class _EsaGraphState extends State<EsaGraph> {
     viewModel.getGraphData(
       action: 7,
       mode: 4,
-      usn: 'PES1202101943',
       subjectCode: 'UM21MB641A',
       randomNum: 0.19526425584906115,
     );

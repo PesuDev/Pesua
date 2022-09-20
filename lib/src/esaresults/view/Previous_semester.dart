@@ -28,8 +28,6 @@ class _PreviousSemState extends State<PreviousSem> {
       //  _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
-      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
@@ -43,7 +41,6 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getESAData(
       action: 7,
       mode: 6,
-      userId: 'PES1201900924',
       randomNum: 0.9575638746600124,
     );
     _viewModel.getSubjectData(
@@ -54,8 +51,6 @@ class _PreviousSemState extends State<PreviousSem> {
       //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
-      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
