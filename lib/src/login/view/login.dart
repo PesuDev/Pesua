@@ -45,11 +45,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+     resizeToAvoidBottomInset: false,
 
       body: Container(
-
         width: double.infinity,
+        //height: MediaQuery.of(context).size.height,
         decoration:  BoxDecoration(
           image: DecorationImage(
             opacity: 0.5,
@@ -69,7 +69,6 @@ class _LoginState extends State<Login> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   Center(
                     child: Text(
                       "Sign in",
@@ -81,7 +80,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
            Container(
-             padding: EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 15),
+             padding: EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 40),
              color: Colors.black87.withOpacity(0.3),
              child: Column(
                children: [
@@ -183,6 +182,7 @@ class _LoginState extends State<Login> {
                        },
                        autovalidateMode: AutovalidateMode.onUserInteraction,
                        controller: usernameController,
+                       style: TextStyle(color: Colors.white),
                        decoration: InputDecoration(
                          hintText: "Username / SRN",
 fillColor: Colors.black87.withOpacity(0.7),
@@ -217,9 +217,11 @@ fillColor: Colors.black87.withOpacity(0.7),
                        autovalidateMode: AutovalidateMode.onUserInteraction,
                        controller: passwordController,
                        obscureText: _isObscure,
+                       style: TextStyle(color: Colors.white),
                        decoration: InputDecoration(
                            hintText: "Password",
                            fillColor: Colors.black87.withOpacity(0.7),
+
                            filled: true,
                            border: new OutlineInputBorder(
                              borderRadius: new BorderRadius.circular(25.0),
