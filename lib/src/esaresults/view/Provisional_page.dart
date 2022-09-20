@@ -27,7 +27,6 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
     _viewModel.getESAResults(
       action: 7,
       mode: 3,
-      userId: 'PES1201801724',
       randomNum: 0.8630615362836671,
     );
   }
