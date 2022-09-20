@@ -79,16 +79,22 @@ class _MenuPageState extends State<MenuPage> {
               return InkWell(
                 onTap: () async{
                   if (index == 0) {
+                    CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
                     SharedPreferenceUtil util = SharedPreferenceUtil();
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                  bottomProvider.selectBottomIndex(bottomIndex: 0);
 
 
                     bool dataalue = await util.clearAll();
 
                     print("?????${dataalue}");
+
                      if (dataalue) {
                       CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
-
-                      Navigator.pushNamed(context, AppRoutes.login);
+Navigator.pop(context);
+                      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
                    }
                     else{
                  CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
