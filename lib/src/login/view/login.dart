@@ -11,6 +11,7 @@ import 'dart:math' as math;
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/login/model/forget_password_model.dart';
 import 'package:pesu/src/login/model/login_request_model.dart';
+import 'package:pesu/src/login/model/login_response_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
 import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
@@ -45,279 +46,307 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xff191D6E),
-      body: Form(
-        key: _form,
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height / 8,
-                ),
-                Center(
-                  child: Text(
-                    "Sign in",
-                    style: TextStyle(
-                        fontSize: 62,
-                        color: Color(0xffFFFFFF),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: 'Source Sans Pro'),
-                  ),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 10,
-                ),
-                InkWell(
-                  onTap: () {
-                    final provider =
-                    Provider.of<GoogleSignInProvider>(context, listen: false);
-                    provider.googleLogin();
-                  },
-                  child: Container(
-                    color: Color(0xff0091CD),
-                    width: double.infinity,
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 50.0,
-                          width: 50.0,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image:
-                                AssetImage('assets/images/google_logo.png'),
-                                fit: BoxFit.fitWidth),
-                            // shape: BoxShape.circle,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          "Sign In with Google",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color(0xffFFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Source Sans Pro'),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 1.0,
-                        width: 80.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 1.0,
-                        width: 80.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "or",
+
+      body: Container(
+
+        width: double.infinity,
+        decoration:  BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.5,
+              colorFilter: ColorFilter.mode(Colors.black87.withOpacity(1), BlendMode.dstATop),
+              image: AssetImage("assets/images/login_background.jpg",
+
+
+              ),
+              fit: BoxFit.cover),
+        ),
+        child: Form(
+
+          key: _form,
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20,top: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Center(
+                    child: Text(
+                      "Sign in",
                       style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xffFFFFFF),
-                          fontWeight: FontWeight.w400,
+                          fontSize: 62,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                           fontFamily: 'Source Sans Pro'),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      height: 1.0,
-                      width: 70.0,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      height: 1.0,
-                      width: 80.0,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      validator: (val){
-                        if(val !=null){
-                          return null;
-                        }
-                        else{
-                          return "Please Enter Valid User name/SRN";
-                        }
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        hintText: "Username / SRN",
-                        hintStyle: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff999999),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Source Sans Pro'),
-                      ),
-                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: TextFormField(
-                      validator: (val){
-                        if(val !=null){
-                          return null;
-                        }
-                        else{
-                          return "Please Enter Valid Password";
-                        }
-                      },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: passwordController,
-                      obscureText: _isObscure,
-                      decoration: InputDecoration(
-                          hintText: "Password",
+           Container(
+             padding: EdgeInsets.only(left: 15,right: 15,top: 15,bottom: 15),
+             color: Colors.black87.withOpacity(0.3),
+             child: Column(
+               children: [
+                 InkWell(
+                   onTap: () {
+                     final provider =
+                     Provider.of<GoogleSignInProvider>(context, listen: false);
+                     provider.googleLogin();
+                   },
+                   child: Container(
+                     color: Color(0xff0091CD),
+                     width: double.infinity,
+                     child: Row(
+                       children: [
+                         Container(
+                           height: 50.0,
+                           width: 50.0,
+                           decoration: BoxDecoration(
+                             image: DecorationImage(
+                                 image:
+                                 AssetImage('assets/images/google_logo.png'),
+                                 fit: BoxFit.fitWidth),
+                             // shape: BoxShape.circle,
+                           ),
+                         ),
+                         SizedBox(
+                           width: 20,
+                         ),
+                         Text(
+                           "Sign In with Google",
+                           style: TextStyle(
+                               fontSize: 18,
+                               color: Color(0xffFFFFFF),
+                               fontWeight: FontWeight.w400,
+                               fontFamily: 'Source Sans Pro'),
+                         )
+                       ],
+                     ),
+                   ),
+                 ),
+                 SizedBox(
+                   height: 20,
+                 ),
+                 Row(
+                   children: [
+                     Expanded(
+                       child: Container(
+                         height: 1.0,
+                         width: 80.0,
+                         color: Colors.white,
+                       ),
+                     ),
+                     Expanded(
+                       child: Container(
+                         height: 1.0,
+                         width: 80.0,
+                         color: Colors.white,
+                       ),
+                     ),
+                     SizedBox(
+                       width: 20,
+                     ),
+                     Text(
+                       "or",
+                       style: TextStyle(
+                           fontSize: 18,
+                           color: Color(0xffFFFFFF),
+                           fontWeight: FontWeight.w400,
+                           fontFamily: 'Source Sans Pro'),
+                     ),
+                     Container(
+                       margin: EdgeInsets.only(left: 20),
+                       height: 1.0,
+                       width: 70.0,
+                       color: Colors.white,
+                     ),
+                     Container(
+                       height: 1.0,
+                       width: 80.0,
+                       color: Colors.white,
+                     ),
+                   ],
+                 ),
+                 SizedBox(
+                   height: 20,
+                 ),
+                 Container(
+                //   decoration: BoxDecoration(color: Colors.white),
+                   child: Padding(
+                     padding: const EdgeInsets.only(left: 10),
+                     child: TextFormField(
+                       validator: (val){
+                         if(val !=null){
+                           return null;
+                         }
+                         else{
+                           return "Please Enter Valid User name/SRN";
+                         }
+                       },
+                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                       controller: usernameController,
+                       decoration: InputDecoration(
+                         hintText: "Username / SRN",
+fillColor: Colors.black87.withOpacity(0.7),
+                         filled: true,
+                         border: new OutlineInputBorder(
+                           borderRadius: new BorderRadius.circular(25.0),
+                           borderSide: new BorderSide(),
+                         ),
+                         hintStyle: TextStyle(
+                             fontSize: 18,
+                             color: Color(0xff999999),
+                             fontWeight: FontWeight.w400,
+                             fontFamily: 'Source Sans Pro'),
+                       ),
+                     ),
+                   ),
+                 ),
+                 Container(
+                   margin: EdgeInsets.only(top: 10),
+           //        decoration: BoxDecoration(color: Colors.white),
+                   child: Padding(
+                     padding: const EdgeInsets.only(left: 10),
+                     child: TextFormField(
+                       validator: (val){
+                         if(val !=null){
+                           return null;
+                         }
+                         else{
+                           return "Please Enter Valid Password";
+                         }
+                       },
+                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                       controller: passwordController,
+                       obscureText: _isObscure,
+                       decoration: InputDecoration(
+                           hintText: "Password",
+                           fillColor: Colors.black87.withOpacity(0.7),
+                           filled: true,
+                           border: new OutlineInputBorder(
+                             borderRadius: new BorderRadius.circular(25.0),
+                             borderSide: new BorderSide(),
+                           ),
+                           hintStyle: TextStyle(
+                               fontSize: 18,
+                               color: Color(0xff999999),
+                               fontWeight: FontWeight.w400,
+                               fontFamily: 'Source Sans Pro'),
+                           suffixIcon: IconButton(
+                             onPressed: () {
+                               setState(() {
+                                 _isObscure = !_isObscure;
+                               });
+                             },
+                             icon: Icon(
+                               _isObscure
+                                   ? Icons.visibility
+                                   : Icons.visibility_off,
+                             ),
+                           )),
+                     ),
+                   ),
+                 ),
+                 SizedBox(
+                   height: 10,
+                 ),
+                 Container(
+                   height: 50,
+                   width: double.infinity,
+                   child: ElevatedButton(
 
-                          hintStyle: TextStyle(
-                              fontSize: 18,
-                              color: Color(0xff999999),
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Source Sans Pro'),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                          )),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
-                      onPressed: () async {
-                        LoginRequestModel model = LoginRequestModel(
-                          jUsername: "pes1ug20cs216",
-                          jPassword: "pes123",
-                          jMobile: 'MOBILE',
-                          jMobileApp: 'YES',
-                          jSocial: 'NO',
-                          jAppId: '1',
-                          action: ' 0',
-                          mode: '0',
-                          randomNum: '0.6181071537315856',
-                          whichObjectId: 'loginSubmitButton',
-                        );
+                       style: ElevatedButton.styleFrom(primary: Color(0xffED4700)),
+                       onPressed: () async {
+                         if(_form.currentState!.validate()){
+                           LoginModel responseModel = await _viewModel.getLoginDetails(
+                               password: passwordController.text,username: usernameController.text);
 
-                        final responseModel = await _viewModel.getLoginDetails(
-                            loginRequestModel: model);
+                           if (responseModel != null ) {
+                             log("Oye login came");
+                             SharedPreferenceUtil util = SharedPreferenceUtil();
+                             await util.setString(
+                                 sp_userId,responseModel.userId??"");
+                             await util.setString(
+                                 sp_password, passwordController.text);
+                             await util.setString(sp_classId, "${responseModel.classId }");
+                             await util.setString(sp_userName, "${responseModel.name }");
+                             await util.setString(sp_batchClassId, "${responseModel.batchClass}");
+                             await util.setString(sp_classBatchSectionId, "${responseModel.classBatchSection }");
+                             await util.setString(sp_userRoleId, "${responseModel.userRoleId }");
+                             await util.setString(sp_branch, "${responseModel.branch}");
+                             await util.setString(sp_loginId, "${responseModel.loginId}");
 
-                        if (responseModel != null &&
-                            responseModel.uSERDETAILS?.userId != null &&
-                            responseModel.mobileAppAuthenticationToken != null) {
-                          SharedPreferenceUtil util = SharedPreferenceUtil();
-                          await util.setString(
-                              sp_userId, responseModel.uSERDETAILS?.userId ?? '');
-                          await util.setString(
-                              sp_password, passwordController.text);
-                          await util.setString(
-                              sp_userName, usernameController.text);
-                          await util.setString(sp_token,
-                              responseModel.mobileAppAuthenticationToken ?? '');
+                             // await util.setString(
+                             //     sp_userName,responseModel.userParentList);
+                             // await util.setString(sp_token,
+                             //     responseModel.mobileAppTokenError?? '');
+                             log("Bose 2 ame:  ${await util.getToken()}");
+                             Navigator.push(
+                                 context,
+                                 MaterialPageRoute(
+                                     builder: (_) => DashboardScreen()));
+                           } else {
+                             log('Oye am not coming');
+                           }
+                         }
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => DashboardScreen()));
-                        } else {
-                          log('Error while Login');
-                        }
-                      },
-                      child: Text(
-                        "Sign in",
-                        style: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Source Sans Pro',
-                          fontSize: 16,
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                InkWell(
-                  onTap: () {
-                    _buildPopupDialog();
-                  },
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "For all login issue, please send an email to ",
-                  style: TextStyle(
-                    color: Color(0xffFFFFFF),
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Source Sans Pro',
-                    fontSize: 16,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    _SendEmail();
-                  },
-                  child: Text(
-                    "support@pesuacademy.com",
-                    style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
+                       },
+                       child: Text(
+                         "Sign in",
+                         style: TextStyle(
+                           color: Color(0xffFFFFFF),
+                           fontWeight: FontWeight.bold,
+                           fontFamily: 'Source Sans Pro',
+                           fontSize: 16,
+                         ),
+                       )),
+                 ),
+                 SizedBox(
+                   height: 40,
+                 ),
+                 InkWell(
+                   onTap: () {
+                     _buildPopupDialog();
+                   },
+                   child: Text(
+                     "Forgot Password?",
+                     style: TextStyle(
+                       color: Color(0xffFFFFFF),
+                       fontWeight: FontWeight.w400,
+                       fontFamily: 'Source Sans Pro',
+                       fontSize: 16,
+                     ),
+                   ),
+                 ),
+                 SizedBox(
+                   height: 40,
+                 ),
+                 Text(
+                   "For all login issue, please send an email to ",
+                   style: TextStyle(
+                     color: Color(0xffFFFFFF),
+                     fontWeight: FontWeight.w400,
+                     fontFamily: 'Source Sans Pro',
+                     fontSize: 16,
+                   ),
+                 ),
+                 InkWell(
+                   onTap: () {
+                     _SendEmail();
+                   },
+                   child: Text(
+                     "support@pesuacademy.com",
+                     style: TextStyle(
+                       color: Colors.blueAccent,
+                       fontWeight: FontWeight.w400,
+                       fontFamily: 'Source Sans Pro',
+                       fontSize: 16,
+                     ),
+                   ),
+                 ),
+               ],
+             ),
+           )
+                ],
+              ),
             ),
           ),
         ),
@@ -511,3 +540,5 @@ class GoogleSignInProvider extends ChangeNotifier {
 }
 
 //pes1201800032
+
+//pes1ug20cs216

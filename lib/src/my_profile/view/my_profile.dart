@@ -46,7 +46,6 @@ class _MyProfileState extends State<MyProfile> {
     profileViewmodel!.getProfileDetails(
         action: 4,
         mode: 7,
-        userId: "0163f09a-84d8-43c0-b853-b9846c0e1799",
         randomNum: 0.824022142978994,
         callMethod: 'background',
         isProfileRequest: true);

@@ -12,6 +12,8 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
+import '../constants/sp_constants.dart';
+
 class PesuApiService {
   String _baseURL = AppUrls.baseUrl;
   late Dio _dio = Dio();
@@ -53,19 +55,66 @@ class PesuApiService {
   Future<dynamic> postApiCallForLogin(
       {required String endPoint,
        bodyParams,
-
       }) async {
+    SharedPreferenceUtil util = SharedPreferenceUtil();
+    var responseJson;
     var url="MAcademy/j_spring_security_check?j_mobile=MOBILE&mode=0&j_mobileApp=YES&whichObjectId=loginSubmitButton&j_social=NO&j_password=pes123&action=0&j_appId=1&j_username=pes1ug20cs216&randomNum=0.6181071537315856";
     try {
-      final response = await http.post(    Uri.https(_baseURL,endPoint),body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
-
+      final response = await http.post(    Uri.https(_baseURL,endPoint),
+        body: bodyParams,
       );
-
       log('Status Code :: ${response.statusCode}');
       log('url    :: $_baseURL$endPoint');
       if (response.statusCode == 302 ) {
-        log('Response :: ${response.body.toString()}     ${response.headers}');
-      return  response.headers;
+
+          log("base url $_baseURL");
+          final urlString= Uri.parse("${response.headers['location']}");
+          final response1 = await http.post(urlString);
+          log('Status Code for security check :: ???????${response1.statusCode}');
+          log('Status Code :for security check${response1.headers}');
+
+          if (response1.statusCode == 301) {
+
+            final urlString2=Uri.parse("${response1.headers["location"]}");
+            final response3 = await http.post(  urlString2
+            );
+            log(" after security check 1 ${response3.statusCode}");
+            log(" after security check 1 ${response3.headers}");
+            if(response3.statusCode==302){
+
+              final urlString4=Uri.parse("${response3.headers["location"]}");
+              final response4 = await http.post(  urlString4
+              );
+              log("after security check 2 ${response4.statusCode}");
+              log("after security check 2 ${response4.headers}");
+              if(response4.statusCode==301){
+
+
+                final urlString5=Uri.parse("${response4.headers["location"]}");
+                final response5 = await http.post(  urlString5
+                );
+                log("after security check 3 ${response5.statusCode}");
+                log(" after security check 3 ${response5.headers}");
+                log("after security check 3 ${response5.body}");
+                log("after security check 3${response5.toString()}");
+                if(response5.statusCode==200){
+                  await util.setString(sp_token,
+                      "${response5.headers['mobileappauthenticationtoken']}" );
+                  print("Oye Hoye");
+                  print("Oye check me :   ${response5.body}");
+                  responseJson = await  _response(response5);
+
+                  return responseJson;
+                }
+              }
+
+            }
+            //   return response.headers;
+          }
+
+
+
+
       }
     } on SocketException {
       log('Socket Exception');
@@ -73,7 +122,6 @@ class PesuApiService {
       log(e.toString());
     }
 
-    return null;
   }
 
   Future<dynamic> postApiCall(
@@ -112,66 +160,7 @@ class PesuApiService {
   Future<dynamic> postApiCallWithQueryParamsLogin(
       {required String url,
         required Map<String, dynamic> queryParams}) async {
-    try {
 
-      log(queryParams.toString());
-      // final response = await _dio.post(
-      //   Uri.https(_baseURL, endPoint).toString(),
-      //   queryParameters: queryParams,
-      // );
-log("base url $_baseURL");
-final urlString= Uri.parse(url);
-      final response1 = await http.post(urlString);
-      // http.post(    Uri.https(_baseURL,
-      //  "/MAcademy/a/0;jsessionid=b1hIUGnGnRtGX2kER3QfSOV2yE8WMTsKcsTOk1w_.prod01"),
-      //   body: { "j_mobile":"MOBILE", "mode":"0", "j_mobileApp":"YES", "whichObjectId":"loginSubmitButton", "j_social":"NO", "j_password":"pes123", "action":"0", "j_appId":"1", "j_username":"pes1ug20cs216", "randomNum":"0.6181071537315856" },
-      //
-      // );
-      // var response = await Dio().post( Uri.https("$_baseURL","MAcademy/failLogin;jsessionid=SIPSyWrVz2_gA4VMtL_r9Hn6DZNWPP9QMFSRE9q7.prod01",).toString(),
-      //   data: queryParams,
-      //   options: Options(
-      //       followRedirects: true,
-      //       validateStatus: (status) { return status! < 500;
-      //       }
-      //   ),
-      // );
-      log('Status Code :: ???????${response1.statusCode}');
-  //    List<ReDirectModel> responseModel=response.headers as List<ReDirectModel>;
-      log('Status Code :: ???????${response1.headers}');
-  //    log('Status Code :: ???????$responseModel');
-      if (response1.statusCode == 301) {
-        log("Wait");
-   final urlString2=Uri.parse("${response1.headers["location"]}");
-        final response3 = await http.post(  urlString2
-        );
-        log("${response3.statusCode}");
-        log("${response3.headers}");
-        if(response3.statusCode==302){
-
-          final urlString4=Uri.parse("${response3.headers["location"]}");
-          final response4 = await http.post(  urlString4
-          );
-          log("....${response4.statusCode}");
-          log("${response4.headers}");
-          if(response4.statusCode==301){
-
-
-            final urlString5=Uri.parse("${response4.headers["location"]}");
-            final response5 = await http.post(  urlString5
-            );
-            log("....${response5.statusCode}");
-            log("${response5.headers}");
-            log(">>>>${response5.body}");
-          }
-
-        }
-     //   return response.headers;
-      }
-    } on SocketException {
-      log('Socket Exception');
-    } catch (e) {
-      log(e.toString());
-    }
 
     return null;
   }
@@ -258,6 +247,7 @@ final urlString= Uri.parse(url);
         String decryptedData = response.body;
         if (decryptedData != null) {
           responseJson = json.decode(decryptedData);
+          getToast(message:"Sucess", color: Colors.green);
           log('responseJson:$responseJson');
           return responseJson;
         } else {
