@@ -23,9 +23,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     with SingleTickerProviderStateMixin {
   CourseViewModel _subjectViewModel = CourseViewModel();
   CourseViewModel _unitViewModel = CourseViewModel();
+  int? selected;
   late final _tabController =
       TabController(length: 4, initialIndex: 0, vsync: this);
-  bool expand = false;
 
   @override
   void initState() {
@@ -113,7 +113,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         String? htmlCode;
         return Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
-          child: ListView.separated(
+          child: ListView.builder(
             itemCount: data.unitModel?.length ?? 0,
             itemBuilder: (context, i) {
               print("length------ ${data.subjectModel?.cOURSECONTENT?.length}");
@@ -122,107 +122,123 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
               String uriDecode = Uri.decodeFull(uriString!);
               htmlCode = uriDecode;
 
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          print("jjjjjj $expand");
-                          setState(() {
-                            if (expand == false) {
-                              expand = true;
-                            } else if (expand == true) {
-                              expand = false;
-                            }
-                          });
-                          print("jjjjjj $expand");
-                        },
-                        child: Icon(
-                          (expand == false)
-                              ? Icons.add_circle
-                              : Icons.remove_circle_rounded,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.individualUnit,
-                              arguments: CourseArguments(
-                                  data.unitModel?[i].topicTitle ?? ''));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(left: 10),
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(data.unitModel?[i].topicTitle ?? ""),
-                              Icon(
-                                Icons.chevron_right,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  (expand == true)
-                      ? Consumer<CourseViewModel>(
-                          builder: (context, model, child) {
-                          String? val1;
-                          if (model.subjectModel?.cOURSECONTENT?[i]
-                                  .courseContentTypeId ==
-                              3) {
-                            val1 = htmlCode;
-                          }
-                          return Container(
-                            padding: EdgeInsets.only(top: 10, left: 15),
-                            child: HtmlWidget(val1 != null ? val1 : ''),
-                          );
-                        })
-                      : Container(),
-                ],
-              );
-              /*Column(
+              return Column(children: [
+                /*   Row(
                   children: [
-                    ExpansionTile(
-                      childrenPadding: EdgeInsets.zero,
-                      backgroundColor: Colors.blueGrey,
-                      title: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CourseDashboard()),
-                          );
-                        },
-                        child: Container(
-                          color: Colors.blueGrey,
-                          padding: EdgeInsets.only(
-                            top: 8,
-                            bottom: 8,
-                            left: 5,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Unit $i"),
-                              Icon(Icons.arrow_forward_ios)
-                            ],
-                          ),
+                    InkWell(
+                      onTap: () {
+                        print("jjjjjj $expand");
+                        setState(() {
+                          if (expand == false) {
+                            expand = true;
+                          } else if (expand == true) {
+                            expand = false;
+                          }
+                        });
+                        print("jjjjjj $expand");
+                      },
+                      child: Icon(
+                        (expand == false)
+                            ? Icons.add_circle
+                            : Icons.remove_circle_rounded,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.individualUnit,
+                            arguments: CourseArguments(
+                                data.unitModel?[i].topicTitle ?? ''));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(data.unitModel?[i].topicTitle ?? ""),
+                            Icon(
+                              Icons.chevron_right,
+                              color: Colors.grey,
+                            )
+                          ],
                         ),
                       ),
-                      leading: Container(
-                        child: Icon(
-                          Icons.add,
-                        ),
-                      ),
-                      trailing: const SizedBox(
-                        width: 0,
-                      ),
-                      */
+                    )
+                  ],
+                ),
+                (expand == true)
+                    ? Consumer<CourseViewModel>(
+                        builder: (context, model, child) {
+                        String? val1;
+                        if (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            3) {
+                          val1 = htmlCode;
+                        }
+                        return Container(
+                          padding: EdgeInsets.only(top: 10, left: 15),
+                          child: (model.subjectModel?.cOURSECONTENT?[i]
+                                      .courseContentTypeId ==
+                                  3)
+                              ? HtmlWidget(htmlCode!)
+                              : Container(),
+                        );
+                      })
+                    : Container(),*/
+                ExpansionTile(
+                  title: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutes.individualUnit,
+                          arguments: CourseArguments(
+                              data.unitModel?[i].topicTitle ?? ''));
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(data.unitModel?[i].topicTitle ?? ""),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 12,
+                            )
+                          ],
+                        )),
+                  ),
+                  // subtitle: Text('Leading expansion arrow icon'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  onExpansionChanged: ((newState) {
+                    if (newState)
+                      setState(() {
+                        selected = i;
+                      });
+                    else
+                      setState(() {
+                        selected = -1;
+                      });
+                  }),
+                  // initiallyExpanded: i == selected,
+                  leading: Container(
+                      child: Icon(
+                    selected == i
+                        ? Icons.remove_circle_rounded
+                        : Icons.add_circle,
+                    color: Colors.blue,
+                  )),
+                  // tilePadding: EdgeInsets.zero,
+                  children: <Widget>[
+                    ListTile(
+                      title: (model.subjectModel?.cOURSECONTENT?[i]
+                                  .courseContentTypeId ==
+                              3)
+                          ? HtmlWidget(htmlCode!)
+                          : Container(),
+                    ),
+                  ],
+                )
+              ]);
+
               /* trailing: Container(
                         color: Colors.blueGrey,
                         padding:
@@ -246,9 +262,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     )
                   ],
                 );*/
-            },
-            separatorBuilder: (context, i) {
-              return Divider();
             },
           ),
         );
