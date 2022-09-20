@@ -81,26 +81,27 @@ class _MenuPageState extends State<MenuPage> {
                   if (index == 0) {
                     SharedPreferenceUtil util = SharedPreferenceUtil();
                     print("class Id:  ${await util.getString(sp_classBatchSectionId)}");
-//                     CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
-//                     SharedPreferenceUtil util = SharedPreferenceUtil();
-//                     final bottomProvider =
-//                     Provider.of<BottomNavigationProvider>(context,
-//                         listen: false);
-//                   bottomProvider.selectBottomIndex(bottomIndex: 0);
-//
-//
-//                     bool dataalue = await util.clearAll();
-//
-//                     print("?????${dataalue}");
-//
-//                      if (dataalue) {
-//                       CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
-// Navigator.pop(context);
-//                       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
-//                    }
-//                     else{
-//                  CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
-//                     }
+                    CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
+               //     SharedPreferenceUtil util = SharedPreferenceUtil();
+
+
+
+                    bool dataalue = await util.clearAll();
+
+                    print("?????${dataalue}");
+
+                     if (dataalue) {
+                      CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
+Navigator.pop(context);
+                      Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
+                      final bottomProvider =
+                      Provider.of<BottomNavigationProvider>(context,
+                          listen: false);
+                      bottomProvider.selectBottomIndex(bottomIndex: 0);
+                   }
+                    else{
+                 CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
+                    }
                   }
                   else if (index == 1) {
                     Navigator.pushNamed(context, AppRoutes.courseDashboard);
