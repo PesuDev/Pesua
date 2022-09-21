@@ -49,6 +49,7 @@ class _SessionEffectState extends State<SessionEffect> {
 
     //selectedRadio;
     // selectValue;
+    dates();
 
   }
 
@@ -69,6 +70,18 @@ var sessionTime;
       selectedRadio = val;
     });
   }  //int? value=0;
+  String todayDate='';
+
+  void dates(){
+    var today = DateTime.now();
+    var dateFormat = DateFormat('dd-MM-yyyy');
+    String currentDate = dateFormat.format(today);
+    setState(() {
+      todayDate=currentDate;
+      print('jaa$todayDate');
+
+    });
+  }
 
 
 
@@ -93,8 +106,8 @@ var sessionTime;
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-
-                              "${DateTime.now()}",
+                          '$todayDate',
+                              //"${DateTime.now()}",
                           //  data.sessionEffectivenessModel?.currentDate ??"",
                           // "24-May-2022 Tuesday",
                           style: TextStyle(
@@ -104,7 +117,7 @@ var sessionTime;
                             value: subject,
                             items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
                               value: item.subjectName,
-                              child: Text(item.subjectName.toString()),
+                              child: Text(item.subjectName.toString(),),
                             ))
                                 .toList(),
                             onChanged: (item) {
