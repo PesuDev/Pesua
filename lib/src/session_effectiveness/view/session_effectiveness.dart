@@ -61,7 +61,9 @@ class _SessionEffectState extends State<SessionEffect> {
   var grid4=false;
   var selectColor=Colors.blue;
   var unselectColor=Colors.white;
-
+var subject;
+var subjectCode;
+var sessionTime;
   setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
@@ -80,40 +82,44 @@ class _SessionEffectState extends State<SessionEffect> {
         body:
         Consumer<SessionEffectivenessViewmodel>(builder: (context, data, child) {
 
-          return data.sessionEffectivenessModel != null &&
-              data.sessionEffectivenessModel?.stuentsubjectlist?.isNotEmpty !=null &&
-              data.sessionEffectivenessModel?.subjectlist?.isNotEmpty !=null &&
-              data.sessionEffectivenessModel?.timetableList?.isNotEmpty !=null
+          return data.sessionEffectivenessModel != null
               ?
 
           Container(
             margin: EdgeInsets.all(10.0),
             child: SingleChildScrollView(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: data.sessionEffectivenessModel?.timetableList?.length ,
-                  itemBuilder: (context, index) {
-                    return Column(
+              child:
+   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          data.sessionEffectivenessModel?.timetableList?[index].currentDate ??
-                              "",
+
+                              "${DateTime.now()}",
                           //  data.sessionEffectivenessModel?.currentDate ??"",
                           // "24-May-2022 Tuesday",
                           style: TextStyle(
                               fontWeight: FontWeight.bold
                           ),),
                         DropdownButtonFormField<String>(
-                            value: data.sessionEffectivenessModel?.timetableList?[index].subjectName,
-                            items: data.items
-                                .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(item),
+                            value: subject,
+                            items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
+                              value: item.subjectName,
+                              child: Text(item.subjectName.toString()),
                             ))
                                 .toList(),
                             onChanged: (item) {
+                              print("Oye");
+                              setState(() {
+                                subject=item;
+
+                              });
+                              print("Hoye");
+                              data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                if(item==itemValue.subjectName){
+                                  subjectCode=itemValue.subjectCode;
+                                }
+                                print(">>>>  $subjectCode");
+                              });
                             }),
 
                         SizedBox(
@@ -124,15 +130,15 @@ class _SessionEffectState extends State<SessionEffect> {
                         Row(
                           children: [
                             Text(
-                              data.sessionEffectivenessModel?.timetableList?[index].subjectCode ??
-                                  "",
+
+                                  "$subjectCode",
 
                               style: TextStyle(color: Colors.grey),),
                             SizedBox(
                               width: 5,
                             ),
                             Text(
-                              data.sessionEffectivenessModel?.timetableList?[index].subjectName ??
+                              subject ??
                                   "",                    ),
                           ],
                         ),
@@ -147,7 +153,7 @@ class _SessionEffectState extends State<SessionEffect> {
                           child:
 
                           DropdownButtonFormField<String>(
-                              value: data.sessionEffectivenessModel?.timetableList?[index].startTiming,
+                              value: sessionTime,
                               items: data.items1
                                   .map((item) => DropdownMenuItem<String>(
                                 value: item,
@@ -155,6 +161,9 @@ class _SessionEffectState extends State<SessionEffect> {
                               ))
                                   .toList(),
                               onChanged: (item) {
+                                setState(() {
+                                  sessionTime=item;
+                                });
                               }),
                         ),
 
@@ -346,21 +355,21 @@ class _SessionEffectState extends State<SessionEffect> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: ()async{
-                              await sessionEffectivenessViewmodel!.feedbackDetails(
-                                  timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[index].timeTableTemplateDetailsId ??'',
-                                  BatchId: data.sessionEffectivenessModel?.subjectlist?[index].batchId ??0,
-                                  mode: 2,
-                                  subjectCode: data.sessionEffectivenessModel?.subjectlist?[index].subjectCode??'',
-                                  action: 39,
-                                  BatchClassId: data.sessionEffectivenessModel?.subjectlist?[index].batchClassId ??0,
-                                  isLocallySavedData: 'FALSE',
-                                  subjectId:data.sessionEffectivenessModel?.subjectlist?[index].subjectId ??0 ,
-                                  ClassId: data.sessionEffectivenessModel?.subjectlist?[index].classId ??0,
-                                  ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[index].classBatchSectionId ??0,
-                                  DepartmentId: data.sessionEffectivenessModel?.subjectlist?[index].departmentId ??0,
-                                  status: selectedRadio??0,
-                                  randomNum: 0.0780400788501232,
-                                  ProgramId: data.sessionEffectivenessModel?.subjectlist?[index].programId ??0);
+                              // await sessionEffectivenessViewmodel!.feedbackDetails(
+                              //     timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[index].timeTableTemplateDetailsId ??'',
+                              //     BatchId: data.sessionEffectivenessModel?.subjectlist?[index].batchId ??0,
+                              //     mode: 2,
+                              //     subjectCode: data.sessionEffectivenessModel?.subjectlist?[index].subjectCode??'',
+                              //     action: 39,
+                              //     BatchClassId: data.sessionEffectivenessModel?.subjectlist?[index].batchClassId ??0,
+                              //     isLocallySavedData: 'FALSE',
+                              //     subjectId:data.sessionEffectivenessModel?.subjectlist?[index].subjectId ??0 ,
+                              //     ClassId: data.sessionEffectivenessModel?.subjectlist?[index].classId ??0,
+                              //     ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[index].classBatchSectionId ??0,
+                              //     DepartmentId: data.sessionEffectivenessModel?.subjectlist?[index].departmentId ??0,
+                              //     status: selectedRadio??0,
+                              //     randomNum: 0.0780400788501232,
+                              //     ProgramId: data.sessionEffectivenessModel?.subjectlist?[index].programId ??0);
                             },
                             child: Text("Submit"),),
                         ),
@@ -410,11 +419,8 @@ class _SessionEffectState extends State<SessionEffect> {
 
 
                       ],
-                    );
+                    )
 
-                  }
-
-              ),
             ),
           )
 
