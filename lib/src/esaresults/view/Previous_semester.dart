@@ -1,10 +1,6 @@
-import 'dart:math';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'dart:developer';
 import '../model/esa_model.dart';
 import '../viewmodel/Esa_viewmodel.dart';
 
@@ -19,11 +15,13 @@ class _PreviousSemState extends State<PreviousSem> {
   late EsaViewModel _viewModel;
   var batch;
 
+
   Future<void> _submittedRefreshList() async {
     _viewModel.getSubjectData(
       action: 7,
       mode: 7,
-      BatchClassId: 744,
+      BatchClassId: 61,
+      // BatchClassId: _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId ?? 0,
       //selectedBatch,
       //  _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
       ClassBatchSectionId: 2,
@@ -41,12 +39,14 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getESAData(
       action: 7,
       mode: 6,
+      userId : 'PES1201700290',
       randomNum: 0.9575638746600124,
     );
     _viewModel.getSubjectData(
       action: 7,
       mode: 7,
-      BatchClassId: 744,
+      BatchClassId: 61,
+      //_viewModel.esaModel2?.studentSemesterWise?[index].batchClassId ?? 0,
       //selectedBatch,
       //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
@@ -261,29 +261,52 @@ class _PreviousSemState extends State<PreviousSem> {
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8),
-                          child: DropdownButtonFormField<String>(
-                              value: data
-                                  .esaModel2?.studentSemesterWise?[0].className,
-                              items: data.items
-                                  .map((item) => DropdownMenuItem<String>(
-                                        value: item,
-                                        child: Text(item),
-                                      ))
-                                  .toList(),
-                              onChanged: (item) {
-                                setState(() {
-                                  selectedItem = item;
-                                  selectedBatch = data.esaModel4
-                                      ?.cGPASEMESTERWISE?[0].batchClassId;
-                                });
-                                //setState(() => selectedItem = item,batch=data.esaModel2?.studentSemesterWise?[0].batchClassId.toString());
-                                // log("SEMMMMM${selectedItem}");
-                                // log("MMMM${selectedBatch}");
-                                _submittedRefreshList();
-                              }),
-                        ),
+                        child: ListView.builder(
+                            itemCount:
+                            data.esaModel2?.studentCGPAWISE?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.only(left: 8),
+                                child: DropdownButtonFormField<String>(
+                                    value: data
+                                        .esaModel2?.studentSemesterWise?[index]
+                                        .className,
+                                    items: data.items
+
+                                        .map((item) =>
+                                        DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Text(item),
+                                        ))
+                                        .toList(),
+                                    onChanged: (item) {
+                                      setState(() {
+                                        selectedItem = item;
+                                        // selectedBatch = data.esaModel4
+                                        //     ?.cGPASEMESTERWISE?[0].batchClassId;
+                                        // _viewModel.getSubjectData(
+                                        //   action: 7,
+                                        //   mode: 7,
+                                        //   BatchClassId:
+                                        //   _viewModel.esaModel2
+                                        //       ?.studentSemesterWise?[index]
+                                        //       .batchClassId ?? 0,
+                                        //   ClassBatchSectionId: 2,
+                                        //   ClassessId: 2,
+                                        //   ClassName: selectedItem.toString(),
+                                        //   isFinalised: 1,
+                                        //   randomNum: 0.2195043762231128,
+                                        // );
+                                      });
+                                      //setState(() => selectedItem = item,batch=data.esaModel2?.studentSemesterWise?[0].batchClassId.toString());
+                                      // log("SEMMMMM${selectedItem}");
+                                      // log("MMMM${selectedBatch}");
+                                      _submittedRefreshList();
+                                    }),
+                              );
+                            },
+                          shrinkWrap: true,
+                            )
                       ),
                       SizedBox(
                         height: 5,
