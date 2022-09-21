@@ -63,6 +63,7 @@ class _MyProfileState extends State<MyProfile> {
 
 
 
+
   }
 
 
@@ -1366,17 +1367,17 @@ class _MyProfileState extends State<MyProfile> {
                                 onTap: () async {
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
-                                    UpdatePasswordModel model =
-                                    UpdatePasswordModel(
-                                      action: 10,
-                                      mode: 1,
-                                      oldPass: currentPasswordController.text,
-                                      newPass: newPasswordController.text,
-                                      newPass1: confirmPasswordController.text,
-                                      userId: 1604,
-                                      loginId: 'PES1201900270',
-                                      randomNum: 0.47685889613355137,
-                                    );
+                                    // UpdatePasswordModel model =
+                                    // UpdatePasswordModel(
+                                    //   action: 10,
+                                    //   mode: 1,
+                                    //   oldPass: currentPasswordController.text,
+                                    //   newPass: newPasswordController.text,
+                                    //   newPass1: confirmPasswordController.text,
+                                    //   userId: 1604,
+                                    //   loginId: 'PES1201900270',
+                                    //   randomNum: 0.47685889613355137,
+                                    // );
                                     await profileViewmodel
                                         ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
                                         newPass1: confirmPasswordController.text);

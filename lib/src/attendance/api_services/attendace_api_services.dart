@@ -5,11 +5,15 @@ import 'package:pesu/src/attendance/model/attendance_list_model.dart';
 import 'package:pesu/src/attendance/model/detailed_attendance_model.dart';
 
 import '../../../utils/constants/app_urls.dart';
+import '../../../utils/constants/sp_constants.dart';
 import '../../../utils/services/pesu_api_service.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../model/attendance_dropdown_model.dart';
 
 class AttendanceApiServices {
   late final PesuApiService _pesuApiService = PesuApiService();
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
+
 
 
 
@@ -17,13 +21,15 @@ class AttendanceApiServices {
   Future <AttendanceDropDownModel?>fetchAttendanceDropDownInfo(
   ) async {
     String url = AppUrls.commonUrl;
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
         "action":18,
         "mode":1,
         "whichObjectId":"clickHome_pesuacademy_attendance",
         "title":"Attendance",
-       "userId":"7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
+       "userId":userId,
         "deviceType":1,
         "serverMode":0,
         "programId":6,
@@ -42,12 +48,14 @@ class AttendanceApiServices {
   Future<AttendanceListModel?> fetchAttendanceListInfo(
       ) async {
     String url = AppUrls.commonUrl;
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":6,
           "batchClassId":1503,
-          "userId":"7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
+          "userId":userId,
           "semIndexVal":0,
           "randomNum":0.35304028500236595
         }
@@ -65,13 +73,15 @@ class AttendanceApiServices {
       // int subjectId,int batchClassId,int classBatchId,
       ) async {
     String url = AppUrls.commonUrl;
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":16,
           "subjectId":13892,
           "idType":1,
-          "userId":"7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
+          "userId":userId,
          "batchClassId":1400,
           "classBatchSectionId":4164,
          " subjectInfo":"1503&&4378&&42&&46&&UE21EC642A&&Analog VLSI &&91.3",

@@ -41,7 +41,8 @@ class _SessionEffectState extends State<SessionEffect> {
         isLocallySavedData: 'FALSE',
         subjectId: 15436,
         ClassId: 2,
-        ClassBatchSectionId: 4367, DepartmentId: 18,
+        ClassBatchSectionId: 4367,
+        DepartmentId: 18,
         status: 4,
         randomNum: 0.0780400788501232,
         ProgramId: 7);
