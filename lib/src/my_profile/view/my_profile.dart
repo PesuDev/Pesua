@@ -52,13 +52,15 @@ class _MyProfileState extends State<MyProfile> {
     profileViewmodel!.getProfileDetailsData(
         action: 27,
         mode: 1,
-        userId: "PES1202002878",
+       // userId: "PES1202002878",
         randomNum: 0.5799475622899326,
         callMethod: 'background',
-        loginId: "PES1202002878",
+       // loginId: "PES1202002878",
         searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
         userType: 1,
-        userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760');
+       // userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760'
+    );
+
 
 
 
@@ -1365,19 +1367,20 @@ class _MyProfileState extends State<MyProfile> {
                                 onTap: () async {
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
-                                    UpdatePasswordModel model =
-                                    UpdatePasswordModel(
-                                      action: 10,
-                                      mode: 1,
-                                      oldPass: currentPasswordController.text,
-                                      newPass: newPasswordController.text,
-                                      newPass1: confirmPasswordController.text,
-                                      userId: 1604,
-                                      loginId: 'PES1201900270',
-                                      randomNum: 0.47685889613355137,
-                                    );
+                                    // UpdatePasswordModel model =
+                                    // UpdatePasswordModel(
+                                    //   action: 10,
+                                    //   mode: 1,
+                                    //   oldPass: currentPasswordController.text,
+                                    //   newPass: newPasswordController.text,
+                                    //   newPass1: confirmPasswordController.text,
+                                    //   userId: 1604,
+                                    //   loginId: 'PES1201900270',
+                                    //   randomNum: 0.47685889613355137,
+                                    // );
                                     await profileViewmodel
-                                        ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text, newPass1: confirmPasswordController.text, userId:'1604', loginId: 'PES1201900270');
+                                        ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
+                                        newPass1: confirmPasswordController.text);
                                     Navigator.pop(context);
                                     // if(response!=null){
                                     //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
@@ -1496,8 +1499,6 @@ class _MyProfileState extends State<MyProfile> {
                                 mode: 2,
                                 email: emailController.text,
                                 phone: phoneController.text,
-                                userId:
-                                '0163f09a-84d8-43c0-b853-b9846c0e1799',
                                 randomNum: 0.03338104178082224
                             );
                             Navigator.pushReplacementNamed(

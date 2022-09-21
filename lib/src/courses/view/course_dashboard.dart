@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 
 import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 1,
         whichObjectId: "clickHome_pesuacademy_mycourses",
         title: "My Courses",
-        userId: "e157111c-3591-4826-a1da-3b5d20db14df",
         deviceType: 1,
         serverMode: 0,
         programId: 1,
@@ -42,8 +42,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 2,
         batchClassId: 1272,
         classBatchSectionId: 4063,
-        classId: 39,
-        userId: "b12faeb9-f07a-4456-8e71-50f4d81919ed",
         programId: 1,
         semIndexVal: 0,
         randomNum: 0.26757885412517934);
@@ -370,7 +368,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
                     mode: 1,
                     whichObjectId: "clickHome_pesuacademy_mycourses",
                     title: "My Courses",
-                    userId: "e157111c-3591-4826-a1da-3b5d20db14df",
                     deviceType: 1,
                     serverMode: 0,
                     programId: 1,

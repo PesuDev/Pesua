@@ -24,7 +24,6 @@ class _SeatingInfoState extends State<SeatingInfo> {
     _viewModel.getSeatingInfoDetails(
         action: 13,
         mode: 3,
-        userId: '97a94041-9712-42d3-b353-a3da4daaa779',
         randomNum: 0.6803998119716814,
         callMethod: 'background');
   }

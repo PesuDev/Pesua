@@ -34,10 +34,16 @@ class ProfileViewmodel extends ChangeNotifier {
   }
 
   void getProfileDetailsData(
-      {required int action,required int mode, required String userId,required double randomNum, required String callMethod,
-        required String loginId, required String searchUserId,required int userType,required String userRoleId })
+      {required int action,required int mode,required double randomNum, required String callMethod,
+         required String searchUserId,required int userType })
   async {
-    final data = await _api.fetchProfileDetailsData(action: action, mode: mode, randomNum: randomNum, userId: userId, callMethod: callMethod, loginId: loginId, searchUserId: searchUserId, userType: userType, userRoleId: userRoleId);
+    String? userId=await preferenceUtil.getString(sp_userId);
+    String? loginId=await preferenceUtil.getString(sp_loginId);
+    String? userRoleId=await preferenceUtil.getString(sp_userRoleId);
+
+    final data = await _api.fetchProfileDetailsData(action: action, mode: mode, randomNum: randomNum,
+        userId: userId.toString(), callMethod: callMethod,
+        loginId: loginId.toString(), searchUserId: searchUserId, userType: userType, userRoleId: userRoleId.toString());
 
     profileDetailModel = data;
 
@@ -52,12 +58,17 @@ class ProfileViewmodel extends ChangeNotifier {
         required String oldPass,
         required String newPass,
         required String newPass1,
-        required String userId,
-        required String loginId,
       })
   async {
-    final data = await updatePasswordApi1.updatePasswordDetails1(action: action, mode: mode, randomNum: randomNum, oldPass:oldPass,newPass:newPass,newPass1:newPass1,userId:userId,
-        loginId:loginId);
+    String? userId=await preferenceUtil.getString(sp_userId);
+    String? loginId=await preferenceUtil.getString(sp_loginId);
+    String? oldPass=await preferenceUtil.getString(sp_password);
+    final data = await updatePasswordApi1.updatePasswordDetails1(
+        action: action, mode: mode, randomNum: randomNum,
+        oldPass:oldPass.toString(),
+        newPass:newPass,newPass1:newPass1,
+        userId:userId.toString(),
+        loginId:loginId.toString());
 
 
     notifyListeners();
@@ -68,11 +79,15 @@ class ProfileViewmodel extends ChangeNotifier {
         required int mode,
         required String phone,
         required double randomNum,
-        required String userId,
         required String email,
       })
   async {
-    final data = await updateDetailApi1.updateDetails1(action:action,mode:mode,email:email,phone:phone,userId:userId,randomNum:randomNum);
+    String? userId=await preferenceUtil.getString(sp_userId);
+
+    final data = await updateDetailApi1.updateDetails1(
+        action:action,mode:mode,email:email,
+        phone:phone,
+        userId:userId.toString(),randomNum:randomNum);
 
 
     notifyListeners();

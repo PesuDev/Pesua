@@ -3,16 +3,22 @@ import 'dart:developer';
 import 'package:pesu/src/announcements/model/announcement_model.dart';
 
 import '../../../utils/constants/app_urls.dart';
+import '../../../utils/constants/sp_constants.dart';
 import '../../../utils/services/pesu_api_service.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 
 class AnnouncementApiServices {
   late final PesuApiService _pesuApiService = PesuApiService();
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
+
 
 
 
 
   Future <List<AnnouncementModel>?>fetchAnnouncement(
       ) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
+
     String url = AppUrls.commonUrl;
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
@@ -23,7 +29,7 @@ class AnnouncementApiServices {
           "limit":10,
           "action":20,
           "minLimit":0,
-          "userId":"c59d0010-d5c0-4a5d-9b4f-3a69af635a42",
+          "userId":userId,
           "randomNum":0.481912564709001
 
 
