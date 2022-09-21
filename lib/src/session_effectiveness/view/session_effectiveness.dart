@@ -110,15 +110,21 @@ var sessionTime;
                               print("Oye");
                               setState(() {
                                 subject=item;
+var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+  if(item==itemValue.subjectName){
+return itemValue.subjectCode.toString();
+  }
 
+});
+for (var subjectData in subjectCodeList!){
+  if(subjectData !=null){
+    subjectCode=subjectData;
+  }
+}
                               });
                               print("Hoye");
-                              data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-                                if(item==itemValue.subjectName){
-                                  subjectCode=itemValue.subjectCode;
-                                }
-                                print(">>>>  $subjectCode");
-                              });
+                              print(">>>>  $subjectCode");
+
                             }),
 
                         SizedBox(
