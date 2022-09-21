@@ -25,7 +25,7 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
 
     final data = await _sessionEffectivenessApi.fetchSessionDetail(action: action,mode:
     mode,userId: userId.toString(),randomNum:randomNum,dayNumber: dayNumber);
-    this.items = data?.timetableList?.map((e) => e.subjectName.toString()).toList() ?? <String>[];
+    this.items = data?.stuentsubjectlist?.map((e) => e.subjectName.toString()).toList() ?? <String>[];
     this.items1 = data?.timetableList?.map((e) => e.startTiming.toString()).toList() ?? <String>[];
 
     sessionEffectivenessModel= data;

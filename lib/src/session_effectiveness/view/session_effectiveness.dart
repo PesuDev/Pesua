@@ -111,17 +111,17 @@ var sessionTime;
                               print("Oye");
                               setState(() {
                                 subject=item;
-var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-  if(item==itemValue.subjectName){
-return itemValue.subjectCode.toString();
-  }
+                        var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                        if(item==itemValue.subjectName){
+                        return itemValue.subjectCode.toString();
+                        }
 
-});
-for (var subjectData in subjectCodeList!){
-  if(subjectData !=null){
-    subjectCode=subjectData;
-  }
-}
+                        });
+                      for (var subjectData in subjectCodeList!){
+                       if(subjectData !=null){
+                        subjectCode=subjectData;
+                       }
+                    }
                               });
                               print("Hoye");
                               print(">>>>  $subjectCode");
@@ -137,7 +137,7 @@ for (var subjectData in subjectCodeList!){
                           children: [
                             Text(
 
-                                  "$subjectCode",
+                                  subjectCode??'',
 
                               style: TextStyle(color: Colors.grey),),
                             SizedBox(
@@ -361,21 +361,22 @@ for (var subjectData in subjectCodeList!){
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: ()async{
-                              // await sessionEffectivenessViewmodel!.feedbackDetails(
-                              //     timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[index].timeTableTemplateDetailsId ??'',
-                              //     BatchId: data.sessionEffectivenessModel?.subjectlist?[index].batchId ??0,
-                              //     mode: 2,
-                              //     subjectCode: data.sessionEffectivenessModel?.subjectlist?[index].subjectCode??'',
-                              //     action: 39,
-                              //     BatchClassId: data.sessionEffectivenessModel?.subjectlist?[index].batchClassId ??0,
-                              //     isLocallySavedData: 'FALSE',
-                              //     subjectId:data.sessionEffectivenessModel?.subjectlist?[index].subjectId ??0 ,
-                              //     ClassId: data.sessionEffectivenessModel?.subjectlist?[index].classId ??0,
-                              //     ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[index].classBatchSectionId ??0,
-                              //     DepartmentId: data.sessionEffectivenessModel?.subjectlist?[index].departmentId ??0,
-                              //     status: selectedRadio??0,
-                              //     randomNum: 0.0780400788501232,
-                              //     ProgramId: data.sessionEffectivenessModel?.subjectlist?[index].programId ??0);
+                              await sessionEffectivenessViewmodel!.feedbackDetails(
+                                  timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
+                                  BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
+                                  mode: 2,
+                                 // subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                  subjectCode: subjectCode??'',
+                                  action: 39,
+                                  BatchClassId: data.sessionEffectivenessModel?.subjectlist?[0].batchClassId ??0,
+                                  isLocallySavedData: 'FALSE',
+                                  subjectId:data.sessionEffectivenessModel?.subjectlist?[0].subjectId ??0 ,
+                                  ClassId: data.sessionEffectivenessModel?.subjectlist?[0].classId ??0,
+                                  ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[0].classBatchSectionId ??0,
+                                  DepartmentId: data.sessionEffectivenessModel?.subjectlist?[0].departmentId ??0,
+                                  status: selectedRadio??0,
+                                  randomNum: 0.0780400788501232,
+                                  ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
                             },
                             child: Text("Submit"),),
                         ),
