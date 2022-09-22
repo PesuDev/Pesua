@@ -25,10 +25,9 @@ class AttendanceApiServices {
         params: {
         "action":18,
         "mode":1,
-          "userId":userId,
-
-          "whichObjectId":"clickHome_pesuacademy_attendance",
+        "whichObjectId":"clickHome_pesuacademy_attendance",
         "title":"Attendance",
+       "userId":userId,
         "deviceType":1,
         "serverMode":0,
         "programId":6,
@@ -81,8 +80,7 @@ class AttendanceApiServices {
           "subjectId":13892,
           "idType":1,
           "userId":userId,
-
-          "batchClassId":1400,
+         "batchClassId":1400,
           "classBatchSectionId":4164,
          " subjectInfo":"1503&&4378&&42&&46&&UE21EC642A&&Analog VLSI &&91.3",
           "randomNum":0.8549240905984299
