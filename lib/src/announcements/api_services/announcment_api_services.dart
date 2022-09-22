@@ -25,10 +25,7 @@ class AnnouncementApiServices {
 
           "mode":5,
           "callMethod":"background",
-          "appId":1,
-          "limit":10,
           "action":20,
-          "minLimit":0,
           "userId":userId,
           "randomNum":0.481912564709001
 

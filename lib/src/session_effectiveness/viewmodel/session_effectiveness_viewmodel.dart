@@ -11,7 +11,7 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
   late final SessionEffectivenessApi _sessionEffectivenessApi = SessionEffectivenessApi();
   late final FeedbackApi _feedbackApi = FeedbackApi();
   SessionEffectivenessModel? sessionEffectivenessModel;
-  List<String> items = [''];
+  List<String> subject= [''];
   List<String> items1 = [''];
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
@@ -25,7 +25,7 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
 
     final data = await _sessionEffectivenessApi.fetchSessionDetail(action: action,mode:
     mode,userId: userId.toString(),randomNum:randomNum,dayNumber: dayNumber);
-    this.items = data?.stuentsubjectlist?.map((e) => e.subjectName.toString()).toList() ?? <String>[];
+    this.subject = data?.stuentsubjectlist?.map((e) => e.subjectName.toString()).toList() ?? <String>[];
     this.items1 = data?.timetableList?.map((e) => e.startTiming.toString()).toList() ?? <String>[];
 
     sessionEffectivenessModel= data;

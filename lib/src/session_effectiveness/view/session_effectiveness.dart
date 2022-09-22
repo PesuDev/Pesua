@@ -73,11 +73,16 @@ var sessionTime;
   String todayDate='';
 
   void dates(){
-    var today = DateTime.now();
-    var dateFormat = DateFormat('dd-MM-yyyy');
-    String currentDate = dateFormat.format(today);
+    // var today = DateTime.now();
+    // var dateFormat = DateFormat('dd-MM-yyyy');
+    // String currentDate = dateFormat.format(today);
+    var date = new DateTime.now().toString();
+
+    var dateParse = DateTime.parse(date);
+
+    var formattedDate = "${dateParse.day}-${dateParse.month.toString()}-${dateParse.year}";
     setState(() {
-      todayDate=currentDate;
+      todayDate=formattedDate;
       print('jaa$todayDate');
 
     });
