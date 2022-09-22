@@ -15,11 +15,13 @@ class AttendanceDashboard extends StatefulWidget {
 
 class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
+  var classBatch;
+
   void initState() {
     super.initState();
     _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
-    // _viewModel.getAttendanceDropDown(
-    // );
+     _viewModel.getAttendanceDropDown(
+     );
     _viewModel.getAttendanceListInfo();
   }
 
@@ -45,6 +47,33 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                         //  DropdownButtonFormField<String>(
+                         //      value: classBatch,
+                         //      items:value.attendanceDropDownModel.map((item) => DropdownMenuItem<String>(
+                         //        value: item.subjectName,
+                         //        child: Text(item.subjectName.toString(),),
+                         //      ))
+                         //          .toList(),
+                         //      onChanged: (item) {
+                         //        print("Oye");
+                         //        setState(() {
+                         //          // subject=item;
+                         //          // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                         //          //   if(item==itemValue.subjectName){
+                         //          //     return itemValue.subjectCode.toString();
+                         //          //   }
+                         //          //
+                         //          // });
+                         //          // for (var subjectData in subjectCodeList!){
+                         //          //   if(subjectData !=null){
+                         //          //     subjectCode=subjectData;
+                         //          //   }
+                         //          // }
+                         //        });
+                         //        print("Hoye");
+                         // //       print(">>>>  $subjectCode");
+                         //
+                         //      }),
                           Text("Sem-3",
                             style: TextStyle(
                               color: Colors.black87,
