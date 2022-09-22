@@ -1,25 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pesu/src/esaresults/model/graph_model.dart';
-
-import '../api/esa_api.dart';
+import '../../../utils/constants/sp_constants.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../api/graph_api.dart';
-import '../model/esa_model.dart';
 
 class GraphViewModel extends ChangeNotifier {
   late final GraphApi _apiService = GraphApi();
   GraphModel? graphModel;
   List<Data>? data;
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
   void getGraphData(
       {required int action,
       required int mode,
       required double randomNum,
-      required String usn,
       required String subjectCode}) async {
+    String? usn=await preferenceUtil.getString(sp_userId);
+
     final data = await _apiService.fetchGraphInfo(
       action: action,
       mode: mode,
-      usn: usn,
+      usn: usn.toString(),
       subjectCode: subjectCode,
       randomNum: randomNum,
     );

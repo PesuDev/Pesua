@@ -23,9 +23,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     with SingleTickerProviderStateMixin {
   CourseViewModel _subjectViewModel = CourseViewModel();
   CourseViewModel _unitViewModel = CourseViewModel();
+  int? selected;
   late final _tabController =
       TabController(length: 4, initialIndex: 0, vsync: this);
-  bool expand = false;
 
   @override
   void initState() {
@@ -111,119 +111,141 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Consumer<CourseViewModel>(builder: (context, data, child) {
         String? htmlCode;
-        return Container(
-          padding: EdgeInsets.only(top: 8, bottom: 8),
-          child: ListView.separated(
-            itemCount: data.unitModel?.length ?? 0,
-            itemBuilder: (context, i) {
-              print("length------ ${data.subjectModel?.cOURSECONTENT?.length}");
-              String? uriString =
-                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
-              String uriDecode = Uri.decodeFull(uriString!);
-              htmlCode = uriDecode;
+        return model.subjectModel != null &&
+                data.unitModel != null &&
+                data.unitModel?.length != 0
+            ? Container(
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+                child: ListView.builder(
+                  itemCount: data.unitModel?.length ?? 0,
+                  itemBuilder: (context, i) {
+                    print(
+                        "length------ ${data.subjectModel?.cOURSECONTENT?.length}");
+                    String? uriString =
+                        model.subjectModel?.cOURSECONTENT?[i].courseContent;
+                    String uriDecode = Uri.decodeFull(uriString!);
+                    htmlCode = uriDecode;
 
-              return Column(
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          print("jjjjjj $expand");
-                          setState(() {
-                            if (expand == false) {
-                              expand = true;
-                            } else if (expand == true) {
-                              expand = false;
-                            }
-                          });
-                          print("jjjjjj $expand");
-                        },
-                        child: Icon(
-                          (expand == false)
-                              ? Icons.add_circle
-                              : Icons.remove_circle_rounded,
-                          color: Colors.blue,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.individualUnit,
-                              arguments: CourseArguments(
-                                  data.unitModel?[i].topicTitle ?? ''));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.only(left: 10),
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(data.unitModel?[i].topicTitle ?? ""),
-                              Icon(
-                                Icons.chevron_right,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  (expand == true)
-                      ? Consumer<CourseViewModel>(
-                          builder: (context, model, child) {
-                          String? val1;
-                          if (model.subjectModel?.cOURSECONTENT?[i]
-                                  .courseContentTypeId ==
-                              3) {
-                            val1 = htmlCode;
-                          }
-                          return Container(
-                            padding: EdgeInsets.only(top: 10, left: 15),
-                            child: HtmlWidget(val1 != null ? val1 : ''),
-                          );
-                        })
-                      : Container(),
-                ],
-              );
-              /*Column(
+                    return Column(children: [
+                      /*   Row(
                   children: [
-                    ExpansionTile(
-                      childrenPadding: EdgeInsets.zero,
-                      backgroundColor: Colors.blueGrey,
-                      title: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CourseDashboard()),
-                          );
-                        },
-                        child: Container(
-                          color: Colors.blueGrey,
-                          padding: EdgeInsets.only(
-                            top: 8,
-                            bottom: 8,
-                            left: 5,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Unit $i"),
-                              Icon(Icons.arrow_forward_ios)
-                            ],
-                          ),
+                    InkWell(
+                      onTap: () {
+                        print("jjjjjj $expand");
+                        setState(() {
+                          if (expand == false) {
+                            expand = true;
+                          } else if (expand == true) {
+                            expand = false;
+                          }
+                        });
+                        print("jjjjjj $expand");
+                      },
+                      child: Icon(
+                        (expand == false)
+                            ? Icons.add_circle
+                            : Icons.remove_circle_rounded,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.individualUnit,
+                            arguments: CourseArguments(
+                                data.unitModel?[i].topicTitle ?? ''));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(data.unitModel?[i].topicTitle ?? ""),
+                            Icon(
+                              Icons.chevron_right,
+                              color: Colors.grey,
+                            )
+                          ],
                         ),
                       ),
-                      leading: Container(
-                        child: Icon(
-                          Icons.add,
+                    )
+                  ],
+                ),
+                (expand == true)
+                    ? Consumer<CourseViewModel>(
+                        builder: (context, model, child) {
+                        String? val1;
+                        if (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            3) {
+                          val1 = htmlCode;
+                        }
+                        return Container(
+                          padding: EdgeInsets.only(top: 10, left: 15),
+                          child: (model.subjectModel?.cOURSECONTENT?[i]
+                                      .courseContentTypeId ==
+                                  3)
+                              ? HtmlWidget(htmlCode!)
+                              : Container(),
+                        );
+                      })
+                    : Container(),*/
+                      ExpansionTile(
+                        title: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.individualUnit,
+                                arguments: CourseArguments(
+                                    data.unitModel?[i].topicTitle ?? ''));
+                          },
+                          child: Container(
+                              padding: EdgeInsets.only(top: 8, bottom: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(data.unitModel?[i].topicTitle ?? ""),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 12,
+                                  )
+                                ],
+                              )),
                         ),
-                      ),
-                      trailing: const SizedBox(
-                        width: 0,
-                      ),
-                      */
-              /* trailing: Container(
+                        // subtitle: Text('Leading expansion arrow icon'),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        onExpansionChanged: ((newState) {
+                          if (newState)
+                            setState(() {
+                              selected = i;
+                            });
+                          else
+                            setState(() {
+                              selected = -1;
+                            });
+                        }),
+                        // initiallyExpanded: i == selected,
+                        leading: Container(
+                            child: Icon(
+                          selected == i
+                              ? Icons.remove_circle_rounded
+                              : Icons.add_circle,
+                          color: Colors.blue,
+                        )),
+                        // tilePadding: EdgeInsets.zero,
+                        children: <Widget>[
+                          ListTile(
+                            title: (model.subjectModel?.cOURSECONTENT?[i]
+                                        .courseContentTypeId ==
+                                    3)
+                                ? HtmlWidget(htmlCode!)
+                                : Container(),
+                          ),
+                        ],
+                      )
+                    ]);
+
+                    /* trailing: Container(
                         color: Colors.blueGrey,
                         padding:
                             EdgeInsets.only(top: 8, bottom: 8, left: 0, right: 8),
@@ -237,7 +259,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                             },
                             child: Icon(Icons.arrow_forward_ios)),
                       ),*/
-              /*
+                    /*
                       children: [
                         ListTile(
                           title: Text("Helooo"),
@@ -246,77 +268,83 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     )
                   ],
                 );*/
-            },
-            separatorBuilder: (context, i) {
-              return Divider();
-            },
-          ),
-        );
+                  },
+                ),
+              )
+            : Center(child: CircularProgressIndicator());
       });
     });
   }
 
   Widget? objectives() {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
-      return Container(
-        padding: EdgeInsets.only(top: 8, bottom: 8),
-        child: ListView.builder(
-            itemCount: model.subjectModel?.cOURSECONTENT?.length,
-            itemBuilder: (context, int i) {
-              String? uriString =
-                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
-              String uriDecode = Uri.decodeFull(uriString!);
-              String htmlCode = uriDecode;
-              return (model.subjectModel?.cOURSECONTENT?[i]
-                          .courseContentTypeId ==
-                      1)
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.ac_unit_outlined),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          padding: EdgeInsets.only(left: 5, top: 5),
-                          child: HtmlWidget(
-                            htmlCode,
-                          ),
-                        )
-                      ],
-                    )
-                  : Container();
-            }),
-      );
+      return model.subjectModel != null &&
+              model.subjectModel?.cOURSECONTENT?.length != 0
+          ? Container(
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: ListView.builder(
+                  itemCount: model.subjectModel?.cOURSECONTENT?.length,
+                  itemBuilder: (context, int i) {
+                    String? uriString =
+                        model.subjectModel?.cOURSECONTENT?[i].courseContent;
+                    String uriDecode = Uri.decodeFull(uriString!);
+                    String htmlCode = uriDecode;
+                    return (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            1)
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: HtmlWidget(
+                                  htmlCode,
+                                ),
+                              )
+                            ],
+                          )
+                        : Container();
+                  }),
+            )
+          : Center(
+              child: CircularProgressIndicator(),
+            );
     });
   }
 
   Widget? outcomes() {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
-      return Container(
-        padding: EdgeInsets.only(top: 8, bottom: 8),
-        child: ListView.builder(
-            itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
-            itemBuilder: (context, int i) {
-              String? uriString =
-                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
-              String uriDecode = Uri.decodeFull(uriString!);
-              String htmlCode = uriDecode;
-              return (model.subjectModel?.cOURSECONTENT?[i]
-                          .courseContentTypeId ==
-                      2)
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(Icons.ac_unit_outlined),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.85,
-                          padding: EdgeInsets.only(left: 5, top: 5),
-                          child: HtmlWidget(htmlCode),
-                        )
-                      ],
-                    )
-                  : Container();
-            }),
-      );
+      return model.subjectModel != null &&
+              model.subjectModel?.cOURSECONTENT?.length != 0
+          ? Container(
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: ListView.builder(
+                  itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
+                  itemBuilder: (context, int i) {
+                    String? uriString =
+                        model.subjectModel?.cOURSECONTENT?[i].courseContent;
+                    String uriDecode = Uri.decodeFull(uriString!);
+                    String htmlCode = uriDecode;
+                    return (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            2)
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                padding: EdgeInsets.only(left: 5, top: 5),
+                                child: HtmlWidget(htmlCode),
+                              )
+                            ],
+                          )
+                        : Container();
+                  }),
+            )
+          : Center(child: CircularProgressIndicator());
     });
   }
 
@@ -324,39 +352,43 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
     return Container(
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Consumer<CourseViewModel>(builder: (context, model, child) {
-          return ListView.separated(
-            itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
-            itemBuilder: (context, int i) {
-              String? uriString =
-                  model.subjectModel?.cOURSECONTENT?[i].courseContent;
-              String uriDecode = Uri.decodeFull(uriString!);
-              String htmlCode = uriDecode;
-              return (model.subjectModel?.cOURSECONTENT?[i]
-                          .courseContentTypeId ==
-                      5)
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.ac_unit_outlined,
-                          size: 100,
-                        ),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            padding: EdgeInsets.only(left: 10, top: 5),
-                            child: HtmlWidget(htmlCode)),
-                      ],
-                    )
-                  : Container();
-            },
-            separatorBuilder: (context, i) {
-              return (model.subjectModel?.cOURSECONTENT?[i]
-                          .courseContentTypeId ==
-                      5)
-                  ? Divider()
-                  : Container();
-            },
-          );
+          return model.subjectModel != null &&
+                  model.subjectModel?.cOURSECONTENT?.length != 0
+              ? ListView.separated(
+                  itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
+                  itemBuilder: (context, int i) {
+                    String? uriString =
+                        model.subjectModel?.cOURSECONTENT?[i].courseContent;
+                    String uriDecode = Uri.decodeFull(uriString!);
+                    String htmlCode = uriDecode;
+                    return (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            5)
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.ac_unit_outlined,
+                                size: 100,
+                              ),
+                              Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  padding: EdgeInsets.only(left: 10, top: 5),
+                                  child: HtmlWidget(htmlCode)),
+                            ],
+                          )
+                        : Container();
+                  },
+                  separatorBuilder: (context, i) {
+                    return (model.subjectModel?.cOURSECONTENT?[i]
+                                .courseContentTypeId ==
+                            5)
+                        ? Divider()
+                        : Container();
+                  },
+                )
+              : Center(child: CircularProgressIndicator());
         }));
   }
 }

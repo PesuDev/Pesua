@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    initMethod();
+   initMethod();
     // Timer(
     //     Duration(seconds: 1),
     //     () =>
@@ -28,32 +28,49 @@ class _SplashScreenState extends State<SplashScreen> {
     //             context, MaterialPageRoute(builder: (_) => DashboardScreen()))
     // );
   }
-Future<void> initMethod() async{
-    SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
-    String? token=await preferenceUtil.getToken();
+
+  Future<void> initMethod() async {
+    SharedPreferenceUtil preferenceUtil = SharedPreferenceUtil();
+    String? token = await preferenceUtil.getToken();
     log("i am the bosee:     $token}");
-    if(token==null){
+    if (token == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 1000),(){
-          if(mounted){
-            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
+        Timer(const Duration(milliseconds: 1000), () {
+          if (mounted) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.login, (route) => false);
           }
         });
       });
-    }else{
+    } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 1000),(){
-          if(mounted){
+        Timer(const Duration(milliseconds: 1000), () {
+          if (mounted) {
             Navigator.push(
-                         context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                context, MaterialPageRoute(builder: (_) => DashboardScreen()));
           }
         });
       });
     }
+  }
 
-}
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Container(
+height: MediaQuery.of(context).size.height/1.5,
+width: MediaQuery.of(context).size.width/1.5,
+
+child: Image(
+
+  image: AssetImage("assets/images/pesu-logo-big.png",
+
+  ),
+)
+        ),
+      ),
+    );
   }
 }

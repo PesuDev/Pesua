@@ -28,8 +28,6 @@ class _PreviousSemState extends State<PreviousSem> {
       //  _viewModel.esaModel2?.studentSemesterWise?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
-      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
@@ -43,7 +41,6 @@ class _PreviousSemState extends State<PreviousSem> {
     _viewModel.getESAData(
       action: 7,
       mode: 6,
-      userId: 'PES1201900924',
       randomNum: 0.9575638746600124,
     );
     _viewModel.getSubjectData(
@@ -54,8 +51,6 @@ class _PreviousSemState extends State<PreviousSem> {
       //  _viewModel.esaModel4?.cGPASEMESTERWISE?[0].batchClassId,
       ClassBatchSectionId: 2,
       ClassessId: 2,
-      UserId: '08f61824-1338-46c8-81b2-1a73c3060c09',
-      usn: 'PES1UG19EC199',
       ClassName: selectedItem.toString(),
       isFinalised: 1,
       randomNum: 0.2195043762231128,
@@ -73,7 +68,6 @@ class _PreviousSemState extends State<PreviousSem> {
   String? selectedItem = "Sem-1";
   int? selectedBatch;
 
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -83,7 +77,8 @@ class _PreviousSemState extends State<PreviousSem> {
           return data.esaModel2 != null &&
                   data.esaModel2!.studentCGPAWISE!.isNotEmpty &&
                   data.esaModel4 != null &&
-                  data.esaModel4!.rESULTS!.isNotEmpty ? SafeArea(
+                  data.esaModel4!.rESULTS!.isNotEmpty
+              ? SafeArea(
                   child: SingleChildScrollView(
                     child: Column(children: [
                       Container(
@@ -203,12 +198,17 @@ class _PreviousSemState extends State<PreviousSem> {
                                       TooltipBehavior(enable: true),
                                   series: <ChartSeries>[
                                     LineSeries<StudentCGPAWISE, dynamic>(
-                                      dataSource: data.esaModel2?.studentCGPAWISE ?? [],
-                                      xValueMapper: (StudentCGPAWISE sales, _) =>
+                                      dataSource:
+                                          data.esaModel2?.studentCGPAWISE ?? [],
+                                      xValueMapper: (StudentCGPAWISE sales,
+                                              _) =>
                                           int.tryParse(sales.cGPA.toString()),
-                                      yValueMapper: (StudentCGPAWISE sales, _) =>
-                                          int.tryParse(sales.credits.toString()),
-                                         dataLabelSettings: DataLabelSettings(isVisible: true),
+                                      yValueMapper:
+                                          (StudentCGPAWISE sales, _) =>
+                                              int.tryParse(
+                                                  sales.credits.toString()),
+                                      dataLabelSettings:
+                                          DataLabelSettings(isVisible: true),
                                     )
                                   ]),
                               Row(
@@ -219,12 +219,15 @@ class _PreviousSemState extends State<PreviousSem> {
                                     icon: const Icon(Icons.bar_chart),
                                     label: Text(""),
                                   ),
-                                  Text("CGPA",style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff666666),
-                                    fontFamily: 'Open Sans',
-                                  ),),
+                                  Text(
+                                    "CGPA",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                    ),
+                                  ),
                                   SizedBox(
                                     width: 20,
                                   ),
@@ -242,7 +245,6 @@ class _PreviousSemState extends State<PreviousSem> {
                                       fontFamily: 'Open Sans',
                                     ),
                                   ),
-
                                 ],
                               )
                             ],
@@ -460,9 +462,12 @@ class _PreviousSemState extends State<PreviousSem> {
                                                                 const EdgeInsets
                                                                         .only(
                                                                     right: 20),
-                                                            child:    TextButton.icon(
+                                                            child:
+                                                                TextButton.icon(
                                                               onPressed: null,
-                                                              icon: const Icon(Icons.bar_chart),
+                                                              icon: const Icon(
+                                                                  Icons
+                                                                      .bar_chart),
                                                               label: Text(""),
                                                             ),
                                                           ),

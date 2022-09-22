@@ -12,17 +12,15 @@ import '../model/attendance_dropdown_model.dart';
 
 class AttendanceApiServices {
   late final PesuApiService _pesuApiService = PesuApiService();
+
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
-
-
-
 
 
   Future <AttendanceDropDownModel?>fetchAttendanceDropDownInfo(
   ) async {
-    String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
 
+    String url = AppUrls.commonUrl;
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
         "action":18,
