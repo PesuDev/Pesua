@@ -263,7 +263,7 @@ class _PreviousSemState extends State<PreviousSem> {
                         ),
                         child: ListView.builder(
                             itemCount:
-                            data.esaModel2?.studentCGPAWISE?.length ?? 0,
+                            data.esaModel2?.studentSemesterWise?.length ?? 0,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: EdgeInsets.only(left: 8),
@@ -272,7 +272,6 @@ class _PreviousSemState extends State<PreviousSem> {
                                         .esaModel2?.studentSemesterWise?[index]
                                         .className,
                                     items: data.items
-
                                         .map((item) =>
                                         DropdownMenuItem<String>(
                                           value: item,
@@ -284,19 +283,18 @@ class _PreviousSemState extends State<PreviousSem> {
                                         selectedItem = item;
                                         // selectedBatch = data.esaModel4
                                         //     ?.cGPASEMESTERWISE?[0].batchClassId;
-                                        // _viewModel.getSubjectData(
-                                        //   action: 7,
-                                        //   mode: 7,
-                                        //   BatchClassId:
-                                        //   _viewModel.esaModel2
-                                        //       ?.studentSemesterWise?[index]
-                                        //       .batchClassId ?? 0,
-                                        //   ClassBatchSectionId: 2,
-                                        //   ClassessId: 2,
-                                        //   ClassName: selectedItem.toString(),
-                                        //   isFinalised: 1,
-                                        //   randomNum: 0.2195043762231128,
-                                        // );
+                                        _viewModel.getSubjectData(
+                                          action: 7,
+                                          mode: 7,
+                                          BatchClassId: _viewModel.esaModel2
+                                              ?.studentSemesterWise?[1]
+                                              .batchClassId ?? 0,
+                                          ClassBatchSectionId: 2,
+                                          ClassessId: 2,
+                                          ClassName: selectedItem.toString(),
+                                          isFinalised: 1,
+                                          randomNum: 0.2195043762231128,
+                                        );
                                       });
                                       //setState(() => selectedItem = item,batch=data.esaModel2?.studentSemesterWise?[0].batchClassId.toString());
                                       // log("SEMMMMM${selectedItem}");

@@ -49,12 +49,13 @@ class AttendanceApiServices {
       ) async {
     String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
+    String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
 
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":6,
-          "batchClassId":1503,
+          "batchClassId":int.parse(batchClassId.toString()),
           "userId":userId,
           "semIndexVal":0,
           "randomNum":0.35304028500236595
@@ -74,6 +75,9 @@ class AttendanceApiServices {
       ) async {
     String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
+    String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
+    String? classBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
+
 
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
@@ -82,8 +86,8 @@ class AttendanceApiServices {
           "subjectId":13892,
           "idType":1,
           "userId":userId,
-         "batchClassId":1400,
-          "classBatchSectionId":4164,
+         "batchClassId":int.parse(batchClassId.toString()),
+          "classBatchSectionId":int.parse(classBatchSectionId.toString()),
          " subjectInfo":"1503&&4378&&42&&46&&UE21EC642A&&Analog VLSI &&91.3",
           "randomNum":0.8549240905984299
         }

@@ -62,12 +62,15 @@ class CourseViewModel extends ChangeNotifier {
       required double randomNum}) async {
     String? userId=await preferenceUtil.getString(sp_userId);
     String? classId=await preferenceUtil.getString(sp_classId);
+    String? classBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
+    String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
+
 
     final data = await _courseApiService.fetchCourseDetails(
         action: action,
         mode: mode,
-        batchClassId: batchClassId,
-        classBatchSectionId: classBatchSectionId,
+        batchClassId: int.parse(batchClassId.toString()),
+        classBatchSectionId: int.parse(classBatchSectionId.toString()),
         classId: int.parse(classId.toString()),
         userId: userId.toString(),
         programId: programId,

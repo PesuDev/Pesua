@@ -55,15 +55,27 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
       })
   async {
     String? userId=await preferenceUtil.getString(sp_userId);
+    String? BatchClassId=await preferenceUtil.getString(sp_batchClassId);
+    String? ClassBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
+    String? ClassId=await preferenceUtil.getString(sp_classId);
+    String? DepartmentId=await preferenceUtil.getString(sp_DepartmentId);
+
 
 
     final data = await _feedbackApi.feedbackData(action: action,
-        mode: mode, subjectId: subjectId, status: status,
-        BatchId: BatchId, BatchClassId: BatchClassId,
-        ClassBatchSectionId: ClassBatchSectionId, ClassId: ClassId,
-        DepartmentId: DepartmentId, ProgramId: ProgramId,
-        isLocallySavedData: isLocallySavedData, subjectCode: subjectCode,
-        userId: userId.toString(), timeTableTemplateDetailsId: timeTableTemplateDetailsId,
+        mode: mode,
+        subjectId: subjectId,
+        status: status,
+        BatchId: BatchId,
+        BatchClassId: int.parse(BatchClassId.toString()),
+        ClassBatchSectionId: int.parse(ClassBatchSectionId.toString()),
+        ClassId: int.parse(ClassId.toString()),
+        DepartmentId: int.parse(DepartmentId.toString()),
+        ProgramId: ProgramId,
+        isLocallySavedData: isLocallySavedData,
+        subjectCode: subjectCode,
+        userId: userId.toString(),
+        timeTableTemplateDetailsId: timeTableTemplateDetailsId,
         randomNum: randomNum);
     notifyListeners();
 
