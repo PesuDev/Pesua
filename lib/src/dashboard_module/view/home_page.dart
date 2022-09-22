@@ -44,12 +44,7 @@ class _HomePageState extends State<HomePage> {
 
   var _mainHeight;
   var _mainWidth;
-  // List<String> imageList = [
-  //   'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
-  //   'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
-  //   'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
-  //   'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
-  // ];
+
   @override
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
@@ -182,18 +177,24 @@ class _HomePageState extends State<HomePage> {
                               horizontal: _mainWidth * 0.03),
                           child: Swiper(
                             itemBuilder: (BuildContext context, int index) {
+                              String? base64Image = (value.announcementModel?[index].iconPath);
+                              final UriData? mydata = Uri.parse(base64Image.toString()).data;
+                              Uint8List? myImage = mydata?.contentAsBytes();
                               return Stack(
                                 children: [
+                                  myImage !=null?
                                   Container(
+                                    height:400,
+                                    width: 400,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
-                                          image: NetworkImage(
-                                            imageList[index],
+                                          image: MemoryImage(
+                                            myImage
                                           ),
-                                          fit: BoxFit.cover,
+                                          fit: BoxFit.fill,
                                         )),
-                                  ),
+                                  ):Container(),
                                   Positioned(
                                     bottom: 0,
                                     child: Container(
@@ -223,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                             autoplay: true,
-                            itemCount: imageList.length,
+                            itemCount: value.announcementModel!.length,
+                          //  itemCount: imageList.length,
                           ),
                         ),
                         SizedBox(

@@ -28,6 +28,7 @@ class AnnouncementModel {
   int? deadlineDate;
   int? reminderDate;
   String? pictureIconPath;
+  String? iconPath;
   int? isBannerImage;
   List<dynamic>? files;
 
@@ -62,6 +63,7 @@ class AnnouncementModel {
         this.reminderDate,
         this.pictureIconPath,
         this.isBannerImage,
+        this.iconPath,
         this.files});
 
   AnnouncementModel.fromJson(Map<String, dynamic> json) {
@@ -94,6 +96,7 @@ class AnnouncementModel {
     deadlineDate = json['deadlineDate'];
     reminderDate = json['reminderDate'];
     pictureIconPath = json['pictureIconPath'];
+    iconPath = json['iconPath'];
     isBannerImage = json['isBannerImage'];
     files = json['files'];
   }
@@ -129,6 +132,7 @@ class AnnouncementModel {
     data['deadlineDate'] = this.deadlineDate;
     data['reminderDate'] = this.reminderDate;
     data['pictureIconPath'] = this.pictureIconPath;
+    data['iconPath'] = this.iconPath;
     data['isBannerImage'] = this.isBannerImage;
     data['files'] = this.files;
     return data;
