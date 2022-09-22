@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
 
 class AttendanceDashboard extends StatefulWidget {
-  const AttendanceDashboard({Key? key}) : super(key: key);
+  bool isFromDashboard;
+ AttendanceDashboard({required this.isFromDashboard}) ;
 
   @override
   _AttendanceDashboardState createState() => _AttendanceDashboardState();
@@ -38,7 +39,7 @@ print(">>>>> $classBatch");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: sideNavAppBar("Attendance"),
+      appBar:widget.isFromDashboard?sideNavAppBarForDashboard("Attendance"): sideNavAppBar("Attendance"),
      // drawer: Container(),
       body: Consumer<AttendanceViewModel>(builder: (context,value,child){
 

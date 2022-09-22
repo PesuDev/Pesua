@@ -9,7 +9,8 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
 class CourseDashboard extends StatefulWidget {
-  const CourseDashboard({Key? key}) : super(key: key);
+ bool isFromDashboard;
+ CourseDashboard({required this.isFromDashboard});
 
   @override
   _CourseDashboardState createState() => _CourseDashboardState();
@@ -52,7 +53,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: sideNavAppBar("My Courses"),
+        appBar:widget.isFromDashboard?sideNavAppBarForDashboard("My Courses"): sideNavAppBar("My Courses"),
         body: Consumer<CourseViewModel>(builder: (context, model, child) {
           return Container(
             child:
