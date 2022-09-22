@@ -41,12 +41,12 @@ class _HomePageState extends State<HomePage> {
 
   var _mainHeight;
   var _mainWidth;
-  List<String> imageList = [
-    'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
-    'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
-    'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
-    'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
-  ];
+  // List<String> imageList = [
+  //   'https://events.pes.edu/Uploads/20220514%20025025_DigitalBanner400x222may142022.jpg',
+  //   'https://events.pes.edu/Uploads/20220531%20091235_Free%20Vacational%20Training400X222V1.jpg',
+  //   'https://events.pes.edu/Uploads/20220603%20124410_preplacementdiscussion.jpg',
+  //   'https://events.pes.edu/Uploads/20220530%20061247_Campus_placement_drive_400X222_v2%20(1).jpg',
+  // ];
   @override
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
@@ -157,22 +157,55 @@ class _HomePageState extends State<HomePage> {
                   height: _mainHeight * 0.01,
                 ),
                 Container(
+                 // color: Colors.amber,
                   height: _mainHeight * 0.2,
-                  padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
+                 // padding: EdgeInsets.symmetric(horizontal: _mainWidth * 0.03),
                   child: Swiper(
                     itemBuilder: (BuildContext context, int index) {
+                      String? base64Image = (value.announcementModel?[index].pictureIconPath);
+                      final UriData? mydata = Uri
+                          .parse(base64Image.toString())
+                          .data;
+                      Uint8List? myImage = mydata?.contentAsBytes();
                       return Stack(
                         children: [
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(5),
+                          //       image: DecorationImage(
+                          //         image: NetworkImage(
+                          //           imageList[index],
+                          //         ),
+                          //         fit: BoxFit.cover,
+                          //       )),
+                          // ),
+                         myImage !=null?
+                          // Container(
+                          //   height: _mainHeight * 0.2,
+                          //  // color: Colors.red,
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(5),
+                          //       image: DecorationImage(
+                          //         image:NetworkImage(
+                          //           ""
+                          //         ),
+                          //         fit: BoxFit.cover,
+                          //       )),
+                          // )
+                          //     :Container(),
+
                           Container(
+                            height: 100,
+                            color:Colors.red,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    imageList[index],
-                                  ),
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
+                              borderRadius: BorderRadius.circular(0),
+                              image: new DecorationImage(
+                                  fit: BoxFit.fitWidth,
+                                  image: MemoryImage(myImage),
+                              ),
+                            ),
+                          )                              :Container(),
+
                           Positioned(
                             bottom: 0,
                             child: Container(
@@ -201,7 +234,9 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     autoplay: true,
-                    itemCount: imageList.length,
+                    itemCount: value.announcementModel!.length,
+
+
                   ),
                 ),
                 SizedBox(
