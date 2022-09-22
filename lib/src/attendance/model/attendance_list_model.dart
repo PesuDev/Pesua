@@ -57,10 +57,10 @@ class ATTENDANCELIST {
   int? subjectId;
   String? subjectName;
   String? subjectCode;
-  Null? idType;
-  Null? attendedClasses;
-  Null? totalClasses;
-  Null? attendancePercenrage;
+  int? idType;
+ double? attendedClasses;
+int? totalClasses;
+  double? attendancePercenrage;
 
   ATTENDANCELIST(
       {this.subjectId,
