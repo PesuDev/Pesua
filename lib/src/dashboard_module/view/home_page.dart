@@ -184,10 +184,8 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   myImage !=null?
                                   Container(
-                                    height:400,
-                                    width: 400,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(5),
                                         image: DecorationImage(
                                           image: MemoryImage(
                                             myImage
