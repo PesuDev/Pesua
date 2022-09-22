@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    initMethod();
+   initMethod();
     // Timer(
     //     Duration(seconds: 1),
     //     () =>
@@ -56,6 +56,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Container(
+height: MediaQuery.of(context).size.height/1.5,
+width: MediaQuery.of(context).size.width/1.5,
+
+child: Image(
+
+  image: AssetImage("assets/images/pesu-logo-big.png",
+
+  ),
+)
+        ),
+      ),
+    );
   }
 }
