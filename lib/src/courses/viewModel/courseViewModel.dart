@@ -21,7 +21,7 @@ class CourseViewModel extends ChangeNotifier {
   List<COURSECONTENT>? courseContent;
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
   List<UnitModel>? unitModel;
-  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
+
 
 
   void getCourseDropDownDetails(
@@ -64,7 +64,6 @@ class CourseViewModel extends ChangeNotifier {
     String? userId=await preferenceUtil.getString(sp_userId);
     String? classId=await preferenceUtil.getString(sp_classId);
 
-    String? userId=await preferenceUtil.getString(sp_userId);
 
     final data = await _courseApiService.fetchCourseDetails(
         action: action,
