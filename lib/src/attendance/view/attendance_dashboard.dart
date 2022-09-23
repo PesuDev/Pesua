@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/services/sharedpreference_utils.dart';
+
 class AttendanceDashboard extends StatefulWidget {
-  const AttendanceDashboard({Key? key}) : super(key: key);
+  bool isFromDashboard;
+ AttendanceDashboard({required this.isFromDashboard}) ;
 
   @override
   _AttendanceDashboardState createState() => _AttendanceDashboardState();
@@ -15,20 +19,30 @@ class AttendanceDashboard extends StatefulWidget {
 
 class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
+  var classBatch;
+
   void initState() {
     super.initState();
-    _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
-    // _viewModel.getAttendanceDropDown(
-    // );
-    _viewModel.getAttendanceListInfo();
+ initMethod();
   }
+  SharedPreferenceUtil util = SharedPreferenceUtil();
+initMethod()async{
+  _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
+  _viewModel.getAttendanceDropDown(
+  );
+  _viewModel.getAttendanceListInfo(isDynamic: false);
 
+  classBatch= await util.getString(sp_className);
+
+print(">>>>> $classBatch");
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: sideNavAppBar("Attendance"),
+      appBar:widget.isFromDashboard?sideNavAppBarForDashboard("Attendance"): sideNavAppBar("Attendance"),
      // drawer: Container(),
       body: Consumer<AttendanceViewModel>(builder: (context,value,child){
+
         return value.attendanceListModel?.aTTENDANCELIST !=null?Container(
           margin: EdgeInsets.only(top: 15,left: 15,right: 15,bottom: 15),
           child: SingleChildScrollView(
@@ -36,27 +50,43 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blueGrey)
                   ),
-                  child: TextButton(onPressed: (){},
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField<String>(
+                        value: classBatch,
+                        items:value.attendanceDropDownModel?.map((item) => DropdownMenuItem<String>(
+                          value: item.className,
+                          child: Text(item.className.toString(),),
+                        ))
+                            .toList(),
+                        onChanged: (item) {
+                          print("Oye");
+                          var batchClassId;
+                          setState(() {
+                            // subject=item;
+                            // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                            //   if(item==itemValue.subjectName){
+                            //     return itemValue.subjectCode.toString();
+                            //   }
+                            //
+                            // });
 
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Sem-3",
-                            style: TextStyle(
-                              color: Colors.black87,
-                            ),
-                          ),
-                          Icon(Icons.arrow_drop_down_outlined,
-                            color: Colors.black,
-                          ),
-                        ],
-                      )),
+                            for (var subjectData in value!.attendanceDropDownModel!){
+                              if(subjectData.className==item){
+                               batchClassId=subjectData.batchClassId;
+                              }
+                            }
+                          });
+                          print("Hoye");
+                          //       print(">>>>  $subjectCode");
+                          _viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                        }),
+                  ),
                 ),
-
                 Container(
                   child: Column(
                     children: [
@@ -138,7 +168,7 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
                                               subjectCode: value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode,
                                               subjectName: value.attendanceListModel?.aTTENDANCELIST?[index].subjectName,
                                               attendance: "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses}",
-                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage
+                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString()
                                             ));
                                           },
                                         )),

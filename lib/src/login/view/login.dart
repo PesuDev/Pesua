@@ -277,7 +277,9 @@ fillColor: Colors.black87.withOpacity(0.7),
                                    await util.setString(sp_classBatchSectionId, "${responseModel.classBatchSection }");
                                    await util.setString(sp_userRoleId, "${responseModel.userRoleId }");
                                    await util.setString(sp_branch, "${responseModel.branch}");
+                                   await util.setString(sp_branch, "${responseModel.className}");
                                    await util.setString(sp_loginId, "${responseModel.loginId}");
+
                                    await util.setString(sp_DepartmentId, "${responseModel.departmentId}");
                                    await util.setString(sp_programId, "${responseModel.programId}");
 

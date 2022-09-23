@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import '../viewmodel/isaViewModel.dart';
 
 class ISAResults extends StatefulWidget {
-  const ISAResults({Key? key}) : super(key: key);
+  bool isFromDashboard;
+ISAResults({required this.isFromDashboard});
 
   @override
   State<ISAResults> createState() => _ISAResultsState();

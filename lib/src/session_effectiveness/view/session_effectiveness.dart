@@ -73,11 +73,18 @@ var sessionTime;
   String todayDate='';
 
   void dates(){
-    var today = DateTime.now();
-    var dateFormat = DateFormat('dd-MM-yyyy');
-    String currentDate = dateFormat.format(today);
+    // var today = DateTime.now();
+    // var dateFormat = DateFormat('dd-MM-yyyy');
+    // String currentDate = dateFormat.format(today);
+    var date = new DateTime.now();
+    String datetime4 = DateFormat(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(date);
+
+
+   // var dateParse = DateTime.parse(date);
+
+   // var formattedDate = "${dateParse.day}-${dateParse.month.toString()}-${dateParse.year}";
     setState(() {
-      todayDate=currentDate;
+      todayDate=datetime4;
       print('jaa$todayDate');
 
     });
@@ -102,7 +109,7 @@ var sessionTime;
             margin: EdgeInsets.all(10.0),
             child: SingleChildScrollView(
               child:
-   Column(
+                 Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -114,7 +121,7 @@ var sessionTime;
                               fontWeight: FontWeight.bold
                           ),),
                         DropdownButtonFormField<String>(
-                            value: subject,
+                            value:subject,
                             items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
                               value: item.subjectName,
                               child: Text(item.subjectName.toString(),),
@@ -444,7 +451,7 @@ var sessionTime;
             ),
           )
 
-              : Center(child: Text('hiiii'));
+              : Center(child: CircularProgressIndicator());
         })
 
     );

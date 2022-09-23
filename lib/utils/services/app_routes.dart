@@ -63,7 +63,7 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
               create: (_) => AttendanceViewModel(),
-              child: AttendanceDashboard()));
+              child: AttendanceDashboard(isFromDashboard: false,)));
     case AppRoutes.settings:
       return MaterialPageRoute(builder: (_) => Settings());
     case AppRoutes.backLog:
@@ -136,7 +136,7 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
                 create: (_) => IsaViewModel(),
-                child: ISAResults(),
+                child: ISAResults(isFromDashboard: false,),
               ));
     case AppRoutes.isaResultsGraph:
       return MaterialPageRoute(
@@ -152,7 +152,7 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
                 create: (_) => CourseViewModel(),
-                child: CourseDashboard(),
+                child: CourseDashboard(isFromDashboard: false,),
               ));
     case AppRoutes.individualSub:
       return MaterialPageRoute(

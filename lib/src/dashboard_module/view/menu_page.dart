@@ -8,6 +8,7 @@ import 'package:pesu/utils/services/sf_constant.dart';
 import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:pesu/utils/view/webView_page.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../utils/services/web_url_link.dart';
@@ -104,50 +105,130 @@ Navigator.pop(context);
                     }
                   }
                   else if (index == 1) {
+
                     Navigator.pushNamed(context, AppRoutes.courseDashboard);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                   else if (index == 2) {
+
                     Navigator.pushNamed(context, AppRoutes.examination);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                   else if (index == 3) {
                     Navigator.pushNamed(context, AppRoutes.timeTable);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 4) {
                     Navigator.pushNamed(context, AppRoutes.attendance);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 5) {
                     Navigator.pushNamed(context, AppRoutes.assignment);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 6) {
                     Navigator.pushNamed(context, AppRoutes.isaResults);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 7) {
                     Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 8) {
                     Navigator.pushNamed(
                         context, AppRoutes.sessionEffectiveness);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
 
                     //session effectiveness
                   } else if (index == 9) {
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                     //class room videos
                   } else if (index == 10) {
                     Navigator.pushNamed(context, AppRoutes.backLog);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 11) {
                     Navigator.pushNamed(context, AppRoutes.onlinePayments);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 12) {
                     Navigator.pushNamed(context, AppRoutes.placement);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 13) {
                     Navigator.pushNamed(context, AppRoutes.calendarDashboard);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 14) {
                     Navigator.pushNamed(context, AppRoutes.announcements);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
 
                     //Announcements
                   } else if (index == 15) {
-            WebViewPage(title: "Library",urlLink: libraryUrl,);
+                    launch("http://library.pes.edu");
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+         //   WebViewPage(title: "Library",urlLink: libraryUrl,);
                   } else if (index == 16) {
+
                     Navigator.pushNamed(context, AppRoutes.transport);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 17) {
-                    //PESU Forms
+                    ///web url
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 18) {
                     Navigator.pushNamed(context, AppRoutes.myProfile);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 19) {
                     Navigator.pushNamed(context, AppRoutes.esaresults);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                 },
                 child: Container(

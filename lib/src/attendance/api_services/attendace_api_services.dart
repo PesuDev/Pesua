@@ -18,7 +18,7 @@ class AttendanceApiServices {
 
 
 
-  Future <AttendanceDropDownModel?>fetchAttendanceDropDownInfo(
+  Future <List<AttendanceDropDownModel>?>fetchAttendanceDropDownInfo(
   ) async {
     String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
@@ -42,10 +42,13 @@ class AttendanceApiServices {
 
     log("response:${data.toString()}");
     if (data != null) {
-      return AttendanceDropDownModel.fromJson(data[0]);
+      final Iterable json = data;
+      return json.map((e) => AttendanceDropDownModel.fromJson(e)).toList();
+
     }
   }
   Future<AttendanceListModel?> fetchAttendanceListInfo(
+  {required bool isDynamic, int? batchId}
       ) async {
     String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
@@ -55,7 +58,7 @@ class AttendanceApiServices {
         params: {
           "action":18,
           "mode":6,
-          "batchClassId":int.parse(batchClassId.toString()),
+          "batchClassId":isDynamic?batchId:int.parse(batchClassId.toString()),
           "userId":userId,
           "semIndexVal":0,
           "randomNum":0.35304028500236595
