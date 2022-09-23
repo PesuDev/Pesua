@@ -46,7 +46,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
     print(
         "dddddddddddddddd ${_courseDropDownViewModel.courseDropDownModel?.length}");
   }
-
+var classBatch;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +61,42 @@ class _CourseDashboardState extends State<CourseDashboard> {
                             top: 15, left: 15, right: 15, bottom: 3),
                         child: Column(
                           children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueGrey)
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                    value: classBatch,
+                                    items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
+                                      value: item.className,
+                                      child: Text(item.className.toString(),),
+                                    ))
+                                        .toList(),
+                                    onChanged: (item) {
+                                      print("Oye");
+                                      var batchClassId;
+                                      setState(() {
+                                        // subject=item;
+                                        // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                        //   if(item==itemValue.subjectName){
+                                        //     return itemValue.subjectCode.toString();
+                                        //   }
+                                        //
+                                        // });
+
+                                        for (var subjectData in model.courseDropDownModel!){
+                                          if(subjectData.className==item){
+                                            batchClassId=subjectData.batchClassId;
+                                          }
+                                        }
+                                      });
+                                      print("Hoye");
+                                      //       print(">>>>  $subjectCode");
+                                      //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                                    }),
+                              ),
+                            ),
                             InkWell(
                               onTap: () {
                                 print("set $isSemSelected");
