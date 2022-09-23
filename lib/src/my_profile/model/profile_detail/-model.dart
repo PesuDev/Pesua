@@ -706,9 +706,9 @@ class STUDENTSEMESTERS {
 
 class STUDENTCGPADETAILS {
   final String? uSN;
-  final int? credits;
-  final int? earnedCredits;
-  final int? cGPA;
+  final dynamic? credits;
+  final dynamic? earnedCredits;
+  final dynamic? cGPA;
 
   STUDENTCGPADETAILS({
     this.uSN,
@@ -719,9 +719,9 @@ class STUDENTCGPADETAILS {
 
   STUDENTCGPADETAILS.fromJson(Map<String, dynamic> json)
       : uSN = json['USN'] as String?,
-        credits = json['Credits'] as int?,
-        earnedCredits = json['EarnedCredits'] as int?,
-        cGPA = json['CGPA'] as int?;
+        credits = json['Credits'] as dynamic?,
+        earnedCredits = json['EarnedCredits'] as dynamic?,
+        cGPA = json['CGPA'] as dynamic?;
 
   Map<String, dynamic> toJson() => {
     'USN' : uSN,
