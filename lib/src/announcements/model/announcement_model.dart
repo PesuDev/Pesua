@@ -17,7 +17,7 @@ class AnnouncementModel {
   String? userId;
   String? loginId;
   int? createddate;
-  Null? modifiedDate;
+ int? modifiedDate;
   int? announcementDocId;
   String? documentPath;
   int? isReusedIcon;
