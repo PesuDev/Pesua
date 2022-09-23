@@ -120,6 +120,11 @@ data(RouteSettings settings) {
         create: (_) =>AnnouncementViewModel(),
         child: Announcements(),
       ));
+      case AppRoutes.announcement:
+      return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
+        create: (_) =>AnnouncementViewModel(),
+        child: Announcement(),
+      ));
     case AppRoutes.login:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
@@ -196,6 +201,7 @@ class AppRoutes {
   static const String onlinePayments = "onlinePayments";
   static const String examination = "examination";
   static const String announcements = "announcements";
+  static const String announcement = "announcement";
   static const String login = "login";
   static const String sessionEffectiveness = "sessionEffectiveness";
   static const String isaResults = "isaResults";
