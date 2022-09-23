@@ -35,14 +35,15 @@ class EsaViewModel extends ChangeNotifier {
   void  getESAData(
       {required int action,
         required int mode,
+        required String userId,
         required double randomNum,}) async {
-    String? userId=await preferenceUtil.getString(sp_userId);
+     String? userId=await preferenceUtil.getString(sp_userId);
     final data = await _apiService.fetchEsaSemInfo(
       action: action,
       mode: mode,
       userId: userId.toString(),
       randomNum: randomNum,);
-  this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
+    this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
     esaModel2 = data;
     notifyListeners();
   }
@@ -53,22 +54,23 @@ class EsaViewModel extends ChangeNotifier {
         required int mode,
         required double randomNum, required int ClassBatchSectionId, required int ClassessId, required int isFinalised, required String ClassName, required int BatchClassId,}) async {
     String? UserId=await preferenceUtil.getString(sp_userId);
-    String BatchClassId=await preferenceUtil.getString(sp_batchClassId) ?? " ";
-     String ClassBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId) ?? " ";
-     String ClassessId=await preferenceUtil.getString(sp_classId) ?? " ";
+     String BatchClassId=await preferenceUtil.getString(sp_batchClassId) ?? " ";
+      String ClassBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId) ?? " ";
+      String ClassessId=await preferenceUtil.getString(sp_classId) ?? " ";
 print("object $BatchClassId");
     final data = await _apiService.fetchSubjectInfo(
       action: action,
       mode: mode,
       userId: UserId.toString(),
-      classBatchSectionId: int.parse(ClassBatchSectionId.toString()),
-      batchClassId: int.parse(BatchClassId.toString()),
-      classessId: int.parse(ClassessId.toString()),
+      classBatchSectionId: int.parse(ClassBatchSectionId),
+      batchClassId: int.parse(BatchClassId),
+      classessId: int.parse(ClassessId),
       className: ClassName.toString(),
       isFinalized: isFinalised,
       randomNum: randomNum,);
 
     esaModel4 = data;
     notifyListeners();
+    print("motu$BatchClassId");
   }
 }

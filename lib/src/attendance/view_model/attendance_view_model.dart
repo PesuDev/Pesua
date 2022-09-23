@@ -8,7 +8,7 @@ import 'package:pesu/src/attendance/model/detailed_attendance_model.dart';
 
 class AttendanceViewModel extends ChangeNotifier {
   late final AttendanceApiServices _apiService = AttendanceApiServices();
-AttendanceDropDownModel ?attendanceDropDownModel;
+List<AttendanceDropDownModel> ?attendanceDropDownModel;
 AttendanceListModel ?attendanceListModel;
 List<DetailedAttendanceModel> ?detailedAttendanceModel;
 
@@ -22,9 +22,9 @@ List<DetailedAttendanceModel> ?detailedAttendanceModel;
   }
 
   void  getAttendanceListInfo(
-
+  {required bool isDynamic,int? batchId}
       ) async {
-    final data = await _apiService.fetchAttendanceListInfo();
+    final data = await _apiService.fetchAttendanceListInfo(isDynamic: isDynamic,batchId: batchId);
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
 attendanceListModel= data;
     notifyListeners();

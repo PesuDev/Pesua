@@ -9,7 +9,8 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
 class CourseDashboard extends StatefulWidget {
-  const CourseDashboard({Key? key}) : super(key: key);
+ bool isFromDashboard;
+ CourseDashboard({required this.isFromDashboard});
 
   @override
   _CourseDashboardState createState() => _CourseDashboardState();
@@ -31,7 +32,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 1,
         whichObjectId: "clickHome_pesuacademy_mycourses",
         title: "My Courses",
-
         deviceType: 1,
         serverMode: 0,
         programId: 1,
@@ -43,7 +43,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 2,
         batchClassId: 1272,
         classBatchSectionId: 4063,
-        classId: 39,
         programId: 1,
         semIndexVal: 0,
         randomNum: 0.26757885412517934);
@@ -54,12 +53,12 @@ class _CourseDashboardState extends State<CourseDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: sideNavAppBar("My Courses"),
+        appBar:widget.isFromDashboard?sideNavAppBarForDashboard("My Courses"): sideNavAppBar("My Courses"),
         body: Consumer<CourseViewModel>(builder: (context, model, child) {
           return Container(
             child:
                 model.courseDropDownModel != null &&
-                        model.courseDropDownModel!.length != 0 && model.courseModel!= null
+                        model.courseDropDownModel!.length != 0
                     ? Container(
                         padding: EdgeInsets.only(
                             top: 15, left: 15, right: 15, bottom: 3),

@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     log("i am the bosee:     $token}");
     if (token == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 1000), () {
+        Timer(const Duration(milliseconds: 100), () {
           if (mounted) {
             Navigator.pushNamedAndRemoveUntil(
                 context, AppRoutes.login, (route) => false);
