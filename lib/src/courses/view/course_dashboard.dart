@@ -33,7 +33,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         title: "My Courses",
         deviceType: 1,
         serverMode: 0,
-        programId: 1,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.3376470323389076);
     _courseViewModel = Provider.of<CourseViewModel>(context, listen: false);
@@ -42,7 +41,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 2,
         batchClassId: 1272,
         classBatchSectionId: 4063,
-        programId: 1,
         semIndexVal: 0,
         randomNum: 0.26757885412517934);
     print(
@@ -359,8 +357,17 @@ class _CourseDashboardState extends State<CourseDashboard> {
           children: <Widget>[
             InkWell(
               onTap: () {
+                var batchClassId;
+                var classBatchSectionId;
                 setState(() {
                   dropDownTitle = name;
+                  // for (var subjectData in data.esaModel2!
+                  //     .studentSemesterWise!) {
+                  //   if (subjectData.className == item) {
+                  //     batchId = subjectData.batchClassId;
+                  //     classesId = subjectData.classessId;
+                  //   }
+                  //}
                 });
                 Navigator.of(context).pop();
                 _courseDropDownViewModel.getCourseDropDownDetails(
@@ -370,7 +377,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
                     title: "My Courses",
                     deviceType: 1,
                     serverMode: 0,
-                    programId: 1,
                     redirectValue: "redirect:/a/ad",
                     randomNum: 0.3376470323389076);
               },
