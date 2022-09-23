@@ -11,7 +11,7 @@ import '../model/esa_model.dart';
 
 class EsaViewModel extends ChangeNotifier {
   late final EsaApi _apiService = EsaApi();
-  List<String> items = ["Sem-1"];
+  List<String> items = [];
    ESAModel1? esaModel1;
    ESAModel2? esaModel2;
   ESAModel4? esaModel4;
@@ -35,13 +35,13 @@ class EsaViewModel extends ChangeNotifier {
   void  getESAData(
       {required int action,
         required int mode,
-        required String userId,
+        // required String userId,
         required double randomNum,}) async {
-     String? userId=await preferenceUtil.getString(sp_userId);
+     String? departmentId=await preferenceUtil.getString(sp_DepartmentId);
     final data = await _apiService.fetchEsaSemInfo(
       action: action,
       mode: mode,
-      userId: userId.toString(),
+      userId: departmentId.toString(),
       randomNum: randomNum,);
     this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
     esaModel2 = data;
@@ -49,7 +49,7 @@ class EsaViewModel extends ChangeNotifier {
   }
 
 
-  void  getSubjectData(
+  Future  getSubjectData(
       {required int action,
         required int mode,
         required double randomNum, required int ClassBatchSectionId, required int ClassessId, required int isFinalised, required String ClassName, required int BatchClassId,}) async {
@@ -65,6 +65,28 @@ print("object $BatchClassId");
       classBatchSectionId: int.parse(ClassBatchSectionId),
       batchClassId: int.parse(BatchClassId),
       classessId: int.parse(ClassessId),
+      className: ClassName.toString(),
+      isFinalized: isFinalised,
+      randomNum: randomNum,);
+
+    esaModel4 = data;
+    notifyListeners();
+    print("motu$BatchClassId");
+  }
+
+  Future  dynamicGetSubjectData(
+      {required int action,
+        required int mode,
+        required double randomNum, required int ClassBatchSectionId, required int ClassessId, required int isFinalised, required String ClassName, required int BatchClassId,}) async {
+    String? UserId=await preferenceUtil.getString(sp_userId);
+    print("object $BatchClassId");
+    final data = await _apiService.fetchSubjectInfo(
+      action: action,
+      mode: mode,
+      userId: UserId.toString(),
+      classBatchSectionId: ClassBatchSectionId,
+      batchClassId: BatchClassId,
+      classessId: ClassessId,
       className: ClassName.toString(),
       isFinalized: isFinalised,
       randomNum: randomNum,);

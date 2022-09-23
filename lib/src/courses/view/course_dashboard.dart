@@ -34,7 +34,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
         title: "My Courses",
         deviceType: 1,
         serverMode: 0,
-        programId: 1,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.3376470323389076);
     _courseViewModel = Provider.of<CourseViewModel>(context, listen: false);
@@ -43,13 +42,12 @@ class _CourseDashboardState extends State<CourseDashboard> {
         mode: 2,
         batchClassId: 1272,
         classBatchSectionId: 4063,
-        programId: 1,
         semIndexVal: 0,
         randomNum: 0.26757885412517934);
     print(
         "dddddddddddddddd ${_courseDropDownViewModel.courseDropDownModel?.length}");
   }
-
+var classBatch;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,87 +62,138 @@ class _CourseDashboardState extends State<CourseDashboard> {
                             top: 15, left: 15, right: 15, bottom: 3),
                         child: Column(
                           children: [
-                            InkWell(
-                              onTap: () {
-                                print("set $isSemSelected");
-                                isSemSelected = true;
-                                print("reset $isSemSelected");
-                                // _semBottomSheet();
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Dialog(
-                                      backgroundColor: Colors.black45,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      elevation: 16,
-                                      child: Container(
-                                        child: ListView.separated(
-                                          itemCount: model.courseDropDownModel
-                                                  ?.length ??
-                                              0,
-                                          itemBuilder: (context, index) {
-                                            print("bbbbbb $dropDownTitle");
-                                            return Column(
-                                              children: [
-                                                _buildRow(model
-                                                        .courseDropDownModel?[
-                                                            index]
-                                                        .className ??
-                                                    ""),
-                                              ],
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return Divider(
-                                              color: Colors.white60,
-                                              endIndent: 5.0,
-                                              indent: 5.0,
-                                            );
-                                          },
-                                          shrinkWrap: true,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                        offset: Offset(2, 2),
-                                        blurRadius: 8,
-                                        color: (isSemSelected == true)
-                                            ? Colors.blue
-                                            : Colors.white)
-                                  ],
-                                  border: Border.all(
-                                      color: (isSemSelected == true)
-                                          ? Colors.blueAccent
-                                          : Colors.grey),
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                                child: Container(
-                                  color: Colors.white,
-                                  padding: EdgeInsets.only(
-                                      left: 5, right: 5, top: 5, bottom: 5),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        dropDownTitle ??
-                                            "${model.courseDropDownModel![0].className}",
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                      Icon(Icons.arrow_drop_down),
-                                    ],
-                                  ),
-                                ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueGrey)
+                              ),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButtonFormField<String>(
+                                    value: classBatch,
+                                    items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
+                                      value: item.className,
+                                      child: Text(item.className.toString(),),
+                                    ))
+                                        .toList(),
+                                    onChanged: (item) {
+                                      print("Oye");
+                                      var batchClassId;
+                                      var classBatchSectionId;
+                                      var classId;
+                                      var programId;
+                                      setState(() {
+                                         classBatch=item;
+                                        // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                        //   if(item==itemValue.subjectName){
+                                        //     return itemValue.subjectCode.toString();
+                                        //   }
+                                        //
+                                        // });
+
+                                        for (var subjectData in model.courseDropDownModel!){
+                                          if(subjectData.className==item){
+                                            batchClassId=subjectData.batchClassId;
+                                            classBatchSectionId = subjectData.classBatchSectionId;
+                                            classId = subjectData.classId;
+
+                                          }
+                                        }
+                                      });
+                                      _courseViewModel.dropdownGetCourseDetails(
+                                          action: 18,
+                                          mode: 2,
+                                          batchClassId: batchClassId,
+                                          classBatchSectionId: classBatchSectionId,
+                                        programId: 1,
+                                        classId: classId,
+                                          semIndexVal: 0,
+                                          randomNum: 0.26757885412517934,  );
+                                      print("Hoye");
+                                      //       print(">>>>  $subjectCode");
+                                      //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                                    }),
                               ),
                             ),
+                            // InkWell(
+                            //   onTap: () {
+                            //     print("set $isSemSelected");
+                            //     isSemSelected = true;
+                            //     print("reset $isSemSelected");
+                            //     // _semBottomSheet();
+                            //     showDialog(
+                            //       context: context,
+                            //       builder: (context) {
+                            //         return Dialog(
+                            //           backgroundColor: Colors.black45,
+                            //           shape: RoundedRectangleBorder(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(20)),
+                            //           elevation: 16,
+                            //           child: Container(
+                            //             child: ListView.separated(
+                            //               itemCount: model.courseDropDownModel
+                            //                       ?.length ??
+                            //                   0,
+                            //               itemBuilder: (context, index) {
+                            //                 print("bbbbbb $dropDownTitle");
+                            //                 return Column(
+                            //                   children: [
+                            //                     _buildRow(model
+                            //                             .courseDropDownModel?[
+                            //                                 index]
+                            //                             .className ??
+                            //                         ""),
+                            //                   ],
+                            //                 );
+                            //               },
+                            //               separatorBuilder: (context, index) {
+                            //                 return Divider(
+                            //                   color: Colors.white60,
+                            //                   endIndent: 5.0,
+                            //                   indent: 5.0,
+                            //                 );
+                            //               },
+                            //               shrinkWrap: true,
+                            //             ),
+                            //           ),
+                            //         );
+                            //       },
+                            //     );
+                            //   },
+                            //   child: Container(
+                            //     decoration: BoxDecoration(
+                            //       boxShadow: [
+                            //         BoxShadow(
+                            //             offset: Offset(2, 2),
+                            //             blurRadius: 8,
+                            //             color: (isSemSelected == true)
+                            //                 ? Colors.blue
+                            //                 : Colors.white)
+                            //       ],
+                            //       border: Border.all(
+                            //           color: (isSemSelected == true)
+                            //               ? Colors.blueAccent
+                            //               : Colors.grey),
+                            //       borderRadius: BorderRadius.circular(2),
+                            //     ),
+                            //     child: Container(
+                            //       color: Colors.white,
+                            //       padding: EdgeInsets.only(
+                            //           left: 5, right: 5, top: 5, bottom: 5),
+                            //       child: Row(
+                            //         mainAxisAlignment:
+                            //             MainAxisAlignment.spaceBetween,
+                            //         children: [
+                            //           Text(
+                            //             dropDownTitle ??
+                            //                 "${model.courseDropDownModel![0].className}",
+                            //             style: TextStyle(fontSize: 18),
+                            //           ),
+                            //           Icon(Icons.arrow_drop_down),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 15,
                             ),
@@ -360,8 +409,17 @@ class _CourseDashboardState extends State<CourseDashboard> {
           children: <Widget>[
             InkWell(
               onTap: () {
+                var batchClassId;
+                var classBatchSectionId;
                 setState(() {
                   dropDownTitle = name;
+                  // for (var subjectData in data.esaModel2!
+                  //     .studentSemesterWise!) {
+                  //   if (subjectData.className == item) {
+                  //     batchId = subjectData.batchClassId;
+                  //     classesId = subjectData.classessId;
+                  //   }
+                  //}
                 });
                 Navigator.of(context).pop();
                 _courseDropDownViewModel.getCourseDropDownDetails(
@@ -371,7 +429,6 @@ class _CourseDashboardState extends State<CourseDashboard> {
                     title: "My Courses",
                     deviceType: 1,
                     serverMode: 0,
-                    programId: 1,
                     redirectValue: "redirect:/a/ad",
                     randomNum: 0.3376470323389076);
               },

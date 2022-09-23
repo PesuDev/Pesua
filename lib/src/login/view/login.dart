@@ -281,6 +281,7 @@ fillColor: Colors.black87.withOpacity(0.7),
                                    await util.setString(sp_loginId, "${responseModel.loginId}");
 
                                    await util.setString(sp_DepartmentId, "${responseModel.departmentId}");
+                                   await util.setString(sp_programId, "${responseModel.programId}");
 
                                    // await util.setString(
                                    //     sp_userName,responseModel.userParentList);
