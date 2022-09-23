@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 
 
+import '../../../utils/constants/sp_constants.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../api/esa_api.dart';
 import '../model/esa_model.dart';
 
@@ -11,16 +15,17 @@ class EsaViewModel extends ChangeNotifier {
    ESAModel1? esaModel1;
    ESAModel2? esaModel2;
   ESAModel4? esaModel4;
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
   void  getESAResults(
       {required int action,
         required int mode,
-        required String userId,
         required double randomNum,}) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
     final data = await _apiService.fetchEsaInfoDetails(
         action: action,
         mode: mode,
-        userId: userId,
+        userId: userId.toString(),
         randomNum: randomNum,);
 
     esaModel1 = data;
@@ -32,12 +37,13 @@ class EsaViewModel extends ChangeNotifier {
         required int mode,
         required String userId,
         required double randomNum,}) async {
+     String? userId=await preferenceUtil.getString(sp_userId);
     final data = await _apiService.fetchEsaSemInfo(
       action: action,
       mode: mode,
-      userId: userId,
+      userId: userId.toString(),
       randomNum: randomNum,);
-  this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
+    this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
     esaModel2 = data;
     notifyListeners();
   }
@@ -46,20 +52,25 @@ class EsaViewModel extends ChangeNotifier {
   void  getSubjectData(
       {required int action,
         required int mode,
-        required String UserId,
-        required double randomNum, required int? BatchClassId, required int ClassBatchSectionId, required int ClassessId, required String usn, required int isFinalised, required String ClassName,}) async {
+        required double randomNum, required int ClassBatchSectionId, required int ClassessId, required int isFinalised, required String ClassName, required int BatchClassId,}) async {
+    String? UserId=await preferenceUtil.getString(sp_userId);
+     String BatchClassId=await preferenceUtil.getString(sp_batchClassId) ?? " ";
+      String ClassBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId) ?? " ";
+      String ClassessId=await preferenceUtil.getString(sp_classId) ?? " ";
+print("object $BatchClassId");
     final data = await _apiService.fetchSubjectInfo(
       action: action,
       mode: mode,
-      userId: UserId,
-      classBatchSectionId: ClassBatchSectionId,
-      batchClassId: BatchClassId,
-      classessId: ClassessId,
-      className: ClassName,
+      userId: UserId.toString(),
+      classBatchSectionId: int.parse(ClassBatchSectionId),
+      batchClassId: int.parse(BatchClassId),
+      classessId: int.parse(ClassessId),
+      className: ClassName.toString(),
       isFinalized: isFinalised,
       randomNum: randomNum,);
 
     esaModel4 = data;
     notifyListeners();
+    print("motu$BatchClassId");
   }
 }

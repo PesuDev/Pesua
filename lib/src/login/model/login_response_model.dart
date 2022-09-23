@@ -40,7 +40,7 @@ class LoginModel {
   int? requestedType;
   int? requestedDate;
   int? parentRequestedType;
-  Null? parentRequestedDate;
+  int? parentRequestedDate;
 
   LoginModel(
       {this.userId,

@@ -50,12 +50,15 @@ class IsaViewModel extends ChangeNotifier {
       required String fetchId,
       required double randomNum}) async {
     String? userId=await preferenceUtil.getString(sp_userId);
+    String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
+    String? classBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
+
 
     final data = await _isaResultApiService.fetchIsaResultDetails(
         action: action,
         mode: mode,
-        batchClassId: batchClassId,
-        classBatchSectionId: classBatchSectionId,
+        batchClassId: int.parse(batchClassId.toString()),
+        classBatchSectionId: int.parse(classBatchSectionId.toString()),
         fetchId: fetchId,
         userId: userId.toString(),
         randomNum: randomNum);

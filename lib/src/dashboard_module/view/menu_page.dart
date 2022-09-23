@@ -79,12 +79,11 @@ class _MenuPageState extends State<MenuPage> {
               return InkWell(
                 onTap: () async{
                   if (index == 0) {
-                    CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
                     SharedPreferenceUtil util = SharedPreferenceUtil();
-                    final bottomProvider =
-                    Provider.of<BottomNavigationProvider>(context,
-                        listen: false);
-                  bottomProvider.selectBottomIndex(bottomIndex: 0);
+                    print("class Id:  ${await util.getString(sp_classBatchSectionId)}");
+                    CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
+               //     SharedPreferenceUtil util = SharedPreferenceUtil();
+
 
 
                     bool dataalue = await util.clearAll();
@@ -95,56 +94,139 @@ class _MenuPageState extends State<MenuPage> {
                       CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
 Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
+                      final bottomProvider =
+                      Provider.of<BottomNavigationProvider>(context,
+                          listen: false);
+                      bottomProvider.selectBottomIndex(bottomIndex: 0);
                    }
                     else{
                  CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
                     }
                   }
                   else if (index == 1) {
+
                     Navigator.pushNamed(context, AppRoutes.courseDashboard);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                   else if (index == 2) {
+
                     Navigator.pushNamed(context, AppRoutes.examination);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                   else if (index == 3) {
                     Navigator.pushNamed(context, AppRoutes.timeTable);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 4) {
                     Navigator.pushNamed(context, AppRoutes.attendance);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 5) {
                     Navigator.pushNamed(context, AppRoutes.assignment);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 6) {
                     Navigator.pushNamed(context, AppRoutes.isaResults);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 7) {
                     Navigator.pushNamed(context, AppRoutes.seatingInfo);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 8) {
                     Navigator.pushNamed(
                         context, AppRoutes.sessionEffectiveness);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
 
                     //session effectiveness
                   } else if (index == 9) {
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                     //class room videos
                   } else if (index == 10) {
                     Navigator.pushNamed(context, AppRoutes.backLog);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 11) {
                     Navigator.pushNamed(context, AppRoutes.onlinePayments);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 12) {
                     Navigator.pushNamed(context, AppRoutes.placement);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 13) {
                     Navigator.pushNamed(context, AppRoutes.calendarDashboard);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 14) {
                     Navigator.pushNamed(context, AppRoutes.announcements);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
 
                     //Announcements
                   } else if (index == 15) {
-            WebViewPage(title: "Library",urlLink: libraryUrl,);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+         //   WebViewPage(title: "Library",urlLink: libraryUrl,);
                   } else if (index == 16) {
+
                     Navigator.pushNamed(context, AppRoutes.transport);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 17) {
-                    //PESU Forms
+                    ///web url
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 18) {
                     Navigator.pushNamed(context, AppRoutes.myProfile);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 19) {
                     Navigator.pushNamed(context, AppRoutes.esaresults);
+                    final bottomProvider =
+                    Provider.of<BottomNavigationProvider>(context,
+                        listen: false);
+                    bottomProvider.selectBottomIndex(bottomIndex: 0);
                   }
                 },
                 child: Container(
