@@ -8,6 +8,7 @@ import 'package:pesu/utils/services/sf_constant.dart';
 import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:pesu/utils/view/webView_page.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../utils/services/web_url_link.dart';
@@ -197,6 +198,7 @@ Navigator.pop(context);
 
                     //Announcements
                   } else if (index == 15) {
+                    launch("http://library.pes.edu");
                     final bottomProvider =
                     Provider.of<BottomNavigationProvider>(context,
                         listen: false);
@@ -237,7 +239,7 @@ Navigator.pop(context);
                     children: [
                       Icon(
                         data.icon,
-                        color: Colors.grey.shade400,
+                        color: Colors.blue,
                         size: _mainHeight * 0.04,
                       ),
                       SizedBox(

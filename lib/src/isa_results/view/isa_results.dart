@@ -19,6 +19,8 @@ class _ISAResultsState extends State<ISAResults> {
   String? dropDownTitle;
   late IsaViewModel isaViewModel;
   late IsaViewModel _isaViewModel;
+  var classBatch;
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +45,7 @@ class _ISAResultsState extends State<ISAResults> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: sideNavAppBar("ISA Results"),
+        appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
         body: Consumer<IsaViewModel>(builder: (context, model, child) {
           return Container(
             child: model.isaDropDownModel != null &&
@@ -55,84 +57,132 @@ class _ISAResultsState extends State<ISAResults> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            print("set $isSemSelected");
-                            isSemSelected = true;
-                            print("reset $isSemSelected");
-                            // _semBottomSheet();
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  backgroundColor: Colors.black45,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  elevation: 16,
-                                  child: Container(
-                                    child: ListView.separated(
-                                      itemCount:
-                                          model.isaDropDownModel?.length ?? 0,
-                                      itemBuilder: (context, index) {
-                                        print("bbbbbb $dropDownTitle");
-                                        return Column(
-                                          children: [
-                                            _buildRow(model
-                                                    .isaDropDownModel?[index]
-                                                    .className ??
-                                                ""),
-                                          ],
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return Divider(
-                                          color: Colors.white60,
-                                          endIndent: 5.0,
-                                          indent: 5.0,
-                                        );
-                                      },
-                                      shrinkWrap: true,
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(2, 2),
-                                    blurRadius: 8,
-                                    color: (isSemSelected == true)
-                                        ? Colors.blue
-                                        : Colors.white)
-                              ],
-                              border: Border.all(
-                                  color: (isSemSelected == true)
-                                      ? Colors.blueAccent
-                                      : Colors.grey),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                            child: Container(
-                              color: Colors.white,
-                              padding: EdgeInsets.only(
-                                  left: 5, right: 5, top: 5, bottom: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    dropDownTitle ??
-                                        "${model.isaDropDownModel![0].className}",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Icon(Icons.arrow_drop_down),
-                                ],
-                              ),
-                            ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blueGrey)
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButtonFormField<String>(
+                                value: classBatch,
+                                items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
+                                  value: item.className,
+                                  child: Text(item.className.toString(),),
+                                ))
+                                    .toList(),
+                                onChanged: (item) {
+                                  print("Oye");
+                                  var batchClassId;
+                                  var classBatchSectionId;
+                                  var fetchId;
+                                  var programId;
+                                  setState(() {
+                                    classBatch=item;
+                                    // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                    //   if(item==itemValue.subjectName){
+                                    //     return itemValue.subjectCode.toString();
+                                    //   }
+                                    //
+                                    // });
+
+                                    for (var subjectData in model.isaDropDownModel!){
+                                      if(subjectData.className==item){
+                                        batchClassId=subjectData.batchClassId;
+                                        classBatchSectionId = subjectData.classBatchSectionId;
+                                        // fetchId = subjectData.;
+
+                                      }
+                                    }
+                                  });
+                                  _isaViewModel.dynamicGetIsaResultDetails(
+                                    action: 6,
+                                    mode: 10,
+                                    batchClassId: batchClassId,
+                                    classBatchSectionId: classBatchSectionId,
+                                    fetchId: "1400-4164",                                    randomNum: 0.26757885412517934,  );
+                                  print("Hoye");
+                                  //       print(">>>>  $subjectCode");
+                                  //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                                }),
                           ),
                         ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     print("set $isSemSelected");
+                        //     isSemSelected = true;
+                        //     print("reset $isSemSelected");
+                        //     // _semBottomSheet();
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (context) {
+                        //         return Dialog(
+                        //           backgroundColor: Colors.black45,
+                        //           shape: RoundedRectangleBorder(
+                        //               borderRadius: BorderRadius.circular(20)),
+                        //           elevation: 16,
+                        //           child: Container(
+                        //             child: ListView.separated(
+                        //               itemCount:
+                        //                   model.isaDropDownModel?.length ?? 0,
+                        //               itemBuilder: (context, index) {
+                        //                 print("bbbbbb $dropDownTitle");
+                        //                 return Column(
+                        //                   children: [
+                        //                     _buildRow(model
+                        //                             .isaDropDownModel?[index]
+                        //                             .className ??
+                        //                         ""),
+                        //                   ],
+                        //                 );
+                        //               },
+                        //               separatorBuilder: (context, index) {
+                        //                 return Divider(
+                        //                   color: Colors.white60,
+                        //                   endIndent: 5.0,
+                        //                   indent: 5.0,
+                        //                 );
+                        //               },
+                        //               shrinkWrap: true,
+                        //             ),
+                        //           ),
+                        //         );
+                        //       },
+                        //     );
+                        //   },
+                        //   child: Container(
+                        //     decoration: BoxDecoration(
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //             offset: Offset(2, 2),
+                        //             blurRadius: 8,
+                        //             color: (isSemSelected == true)
+                        //                 ? Colors.blue
+                        //                 : Colors.white)
+                        //       ],
+                        //       border: Border.all(
+                        //           color: (isSemSelected == true)
+                        //               ? Colors.blueAccent
+                        //               : Colors.grey),
+                        //       borderRadius: BorderRadius.circular(2),
+                        //     ),
+                        //     child: Container(
+                        //       color: Colors.white,
+                        //       padding: EdgeInsets.only(
+                        //           left: 5, right: 5, top: 5, bottom: 5),
+                        //       child: Row(
+                        //         mainAxisAlignment:
+                        //             MainAxisAlignment.spaceBetween,
+                        //         children: [
+                        //           Text(
+                        //             dropDownTitle ??
+                        //                 "${model.isaDropDownModel![0].className}",
+                        //             style: TextStyle(fontSize: 18),
+                        //           ),
+                        //           Icon(Icons.arrow_drop_down),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 15,
                         ),
@@ -186,29 +236,17 @@ class _ISAResultsState extends State<ISAResults> {
 
   Widget resultDetails() {
     return Consumer<IsaViewModel>(builder: (context, model, child) {
+      var subjectName=model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
       return ListView.builder(
-          itemCount: model.isaResultModel?.length,
+          itemCount: subjectName?.length,
           itemBuilder: (context, int i) {
             /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
             String? titleCode = model.isaResultModel?[i].subjectCode;
-            /*     var count = model.isaResultModel
-                ?.where((c) =>
-                    c.subjectCode == model.isaResultModel?[i].subjectCode)
-                .toList()
-                .length;
-            print(count);
+      //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
 
-            var n = model.isaResultModel
-                ?.where((c) =>
-                    c.subjectCode == model.isaResultModel?[i].subjectCode)
-                .toSet()
-                .toList();
-            print(n);*/
-            /*     for (var x = model.isaResultModel?[i].subjectId;
-                x == model.isaResultModel?[i].subjectId;) {
-              print(x);
-            }*/
+print("Oye single subject ${subjectName}");
+
             return Container(
               padding: EdgeInsets.only(bottom: 10),
               child: Column(

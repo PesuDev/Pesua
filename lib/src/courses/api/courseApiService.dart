@@ -66,6 +66,7 @@ class CourseApiService {
     });
     if (data != null) {
       Iterable iterable = data;
+      print("nanna${data}");
       return iterable.map((e) => CourseDropDownModel.fromJson(e)).toList();
     }
     log("CourseDropDownDetails $data");

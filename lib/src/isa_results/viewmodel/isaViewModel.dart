@@ -67,6 +67,29 @@ class IsaViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  void dynamicGetIsaResultDetails(
+      {required int action,
+        required int mode,
+        required int batchClassId,
+        required int classBatchSectionId,
+        required String fetchId,
+        required double randomNum}) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
+
+    final data = await _isaResultApiService.fetchIsaResultDetails(
+        action: action,
+        mode: mode,
+        batchClassId: batchClassId,
+        classBatchSectionId: classBatchSectionId,
+        fetchId: fetchId,
+        userId: userId.toString(),
+        randomNum: randomNum);
+    isaResultModel = data;
+
+    notifyListeners();
+  }
+
   void getIsaGraphDetails(
       {required int action,
       required int mode,

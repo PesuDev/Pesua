@@ -41,7 +41,7 @@ class _TableDetailsState extends State<TableDetails> {
   Widget build(BuildContext context) {
 
     return widget.day=="mon"? Monday():widget.day=="tuesday"?Tuesday():widget.day=="wednesday"?Wednesday():widget.day=="thursday"?Thursday()
-    :widget.day=="friday"?Friday():widget.day=="saturday"?Saturday():widget.day=="sunday"?Sunday():Container();
+        :widget.day=="friday"?Friday():widget.day=="saturday"?Saturday():widget.day=="sunday"?Sunday():Container();
   }
   Widget Monday(){
     return RefreshIndicator(

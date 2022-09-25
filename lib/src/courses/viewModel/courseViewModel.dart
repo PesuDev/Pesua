@@ -31,10 +31,10 @@ class CourseViewModel extends ChangeNotifier {
       required String title,
       required int deviceType,
       required int serverMode,
-      required int programId,
       required String redirectValue,
       required double randomNum}) async {
     String? userId=await preferenceUtil.getString(sp_userId);
+    String? programId=await preferenceUtil.getString(sp_programId);
 
     final data = await _courseDropDownApiService.fetchCourseDDDetails(
         action: action,
@@ -44,7 +44,7 @@ class CourseViewModel extends ChangeNotifier {
         userId: userId.toString(),
         deviceType: deviceType,
         serverMode: serverMode,
-        programId: programId,
+        programId: int.parse(programId.toString()),
         redirectValue: redirectValue,
         randomNum: randomNum);
     courseDropDownModel = data;
@@ -57,13 +57,14 @@ class CourseViewModel extends ChangeNotifier {
       required int mode,
       required int batchClassId,
       required int classBatchSectionId,
-      required int programId,
       required int semIndexVal,
       required double randomNum}) async {
     String? userId=await preferenceUtil.getString(sp_userId);
     String? classId=await preferenceUtil.getString(sp_classId);
     String? classBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
     String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
+    String? programId=await preferenceUtil.getString(sp_programId);
+
 
 
     final data = await _courseApiService.fetchCourseDetails(
@@ -73,6 +74,34 @@ class CourseViewModel extends ChangeNotifier {
         classBatchSectionId: int.parse(classBatchSectionId.toString()),
         classId: int.parse(classId.toString()),
         userId: userId.toString(),
+        programId: int.parse(programId.toString()),
+        semIndexVal: semIndexVal,
+        randomNum: randomNum);
+    courseModel = data;
+
+    notifyListeners();
+  }
+
+
+
+  void dropdownGetCourseDetails(
+      {required int action,
+        required int mode,
+        required int batchClassId,
+        required int classBatchSectionId,
+        required int classId,
+        required int programId,
+        required int semIndexVal,
+        required double randomNum}) async {
+    String? userId=await preferenceUtil.getString(sp_userId);
+
+    final data = await _courseApiService.fetchCourseDetails(
+        action: action,
+        mode: mode,
+        batchClassId: batchClassId,
+        classBatchSectionId:classBatchSectionId,
+        classId: classId,
+        userId: userId.toString(),
         programId: programId,
         semIndexVal: semIndexVal,
         randomNum: randomNum);
@@ -80,6 +109,9 @@ class CourseViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
+
+
+
 
   void getSubjectContentDetails(
       {required int action,
