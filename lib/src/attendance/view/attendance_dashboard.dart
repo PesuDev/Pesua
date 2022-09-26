@@ -20,7 +20,7 @@ class AttendanceDashboard extends StatefulWidget {
 class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
   var classBatch;
-var classBatchData;
+  var classBatchData;
   void initState() {
     super.initState();
  initMethod();

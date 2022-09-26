@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -39,12 +40,14 @@ class _AnnouncementState extends State<Announcement> {
         announcementId: widget.announcementId, mode: 6, action: 20, randomNum: 0.8517174029236512);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: sideNavAppBar("Announcement"),
         backgroundColor: Colors.white.withOpacity(0.9),
         body: Consumer<AnnouncementViewModel>(builder: (context, value, child) {
+
           String? htmlCode;
 
           return value.announcementBannerModel != null &&
@@ -63,6 +66,7 @@ class _AnnouncementState extends State<Announcement> {
                        physics: NeverScrollableScrollPhysics(),
                       itemCount: value.announcementBannerModel?.length,
                       itemBuilder: (BuildContext context, int index) {
+
                         String? base64Image = (value.announcementBannerModel?[index].pictureIconPath);
                         final UriData? mydata = Uri.parse(base64Image.toString()).data;
                         Uint8List? myImage = mydata?.contentAsBytes();
@@ -71,6 +75,7 @@ class _AnnouncementState extends State<Announcement> {
                             value.announcementBannerModel?[index].description;
                         String uriDecode = Uri.decodeFull(uriString!);
                         htmlCode = uriDecode;
+
                         return
                           Container(
                           color: Colors.white,
@@ -114,18 +119,30 @@ class _AnnouncementState extends State<Announcement> {
                                   color: Colors.black,
                                 ),
 
-                                        Row(
-                                        children: [
-                                          Container(
-                                              //margin: EdgeInsets.only(top: 10,left: 10),
-                                              child: Text("ST_Labs_Swayam_May_2022_converted.pdf",style: TextStyle(color: Color(0xff333333),fontSize: 16),)),
-                                          Spacer(),
-                                          Transform.rotate(
-                                              angle: 180 * math.pi / 140,
-                                          child: Icon(Icons.attach_file,color: Colors.grey,))
+                                        GestureDetector(
+                                          onTap: ()async{
+                                            PDFDocument doc = await PDFDocument.fromURL(value.announcementBannerModel?[index].files?[index]) ;
+                                            PDFViewer(document: doc);
 
-                                        ],
+
+                                          },
+                                          child: Row(
+                                          children: [
+                                            Container(
+                                                //margin: EdgeInsets.only(top: 10,left: 10),
+                                                child:
+                                                Text(
+                                                //  value.announcementBannerModel?[index].files?[index],
+                                                  "ST_Labs_Swayam_May_2022_converted.pdf",
+                                                  style: TextStyle(color: Color(0xff333333),fontSize: 16),)),
+                                            Spacer(),
+                                            Transform.rotate(
+                                                angle: 180 * math.pi / 140,
+                                            child: Icon(Icons.attach_file,color: Colors.grey,))
+
+                                          ],
                                       ),
+                                        ),
 
                                 Divider(
                                   color: Colors.black,

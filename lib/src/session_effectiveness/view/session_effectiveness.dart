@@ -121,6 +121,7 @@ var sessionTime;
                               fontWeight: FontWeight.bold
                           ),),
                         DropdownButtonFormField<String>(
+                          hint: Text("Select Subject"),
                             value:subject,
                             items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
                               value: item.subjectName,
@@ -179,6 +180,7 @@ var sessionTime;
                           child:
 
                           DropdownButtonFormField<String>(
+                            hint: Text("Select Time"),
                               value: sessionTime,
                               items: data.items1
                                   .map((item) => DropdownMenuItem<String>(
@@ -381,7 +383,7 @@ var sessionTime;
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: ()async{
-                              await sessionEffectivenessViewmodel!.feedbackDetails(
+                              await sessionEffectivenessViewmodel?.feedbackDetails(
                                   timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
                                   BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
                                   mode: 2,
