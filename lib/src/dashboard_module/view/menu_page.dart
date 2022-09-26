@@ -239,7 +239,7 @@ Navigator.pop(context);
                     children: [
                       Icon(
                         data.icon,
-                        color: Colors.grey.shade400,
+                        color: Colors.blue,
                         size: _mainHeight * 0.04,
                       ),
                       SizedBox(
