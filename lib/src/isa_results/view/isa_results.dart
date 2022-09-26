@@ -45,7 +45,7 @@ class _ISAResultsState extends State<ISAResults> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: sideNavAppBar("ISA Results"),
+        appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
         body: Consumer<IsaViewModel>(builder: (context, model, child) {
           return Container(
             child: model.isaDropDownModel != null &&
@@ -236,29 +236,17 @@ class _ISAResultsState extends State<ISAResults> {
 
   Widget resultDetails() {
     return Consumer<IsaViewModel>(builder: (context, model, child) {
+      var subjectName=model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
       return ListView.builder(
-          itemCount: model.isaResultModel?.length,
+          itemCount: subjectName?.length,
           itemBuilder: (context, int i) {
             /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
             String? titleCode = model.isaResultModel?[i].subjectCode;
-            /*     var count = model.isaResultModel
-                ?.where((c) =>
-                    c.subjectCode == model.isaResultModel?[i].subjectCode)
-                .toList()
-                .length;
-            print(count);
+      //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
 
-            var n = model.isaResultModel
-                ?.where((c) =>
-                    c.subjectCode == model.isaResultModel?[i].subjectCode)
-                .toSet()
-                .toList();
-            print(n);*/
-            /*     for (var x = model.isaResultModel?[i].subjectId;
-                x == model.isaResultModel?[i].subjectId;) {
-              print(x);
-            }*/
+print("Oye single subject ${subjectName}");
+
             return Container(
               padding: EdgeInsets.only(bottom: 10),
               child: Column(
