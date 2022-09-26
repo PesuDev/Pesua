@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -121,8 +121,8 @@ class _AnnouncementState extends State<Announcement> {
 
                                         GestureDetector(
                                           onTap: ()async{
-                                            PDFDocument doc = await PDFDocument.fromURL(value.announcementBannerModel?[index].files?[index]) ;
-                                            PDFViewer(document: doc);
+                                            // PDFDocument doc = await PDFDocument.fromURL(value.announcementBannerModel?[index].files?[index]) ;
+                                            // PDFViewer(document: doc);
 
 
                                           },
