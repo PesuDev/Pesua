@@ -11,6 +11,7 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/services/date_time.dart';
+import '../../announcements/view/announcement.dart';
 import '../../my_profile/profile_viewmodel/profile_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
@@ -180,45 +181,56 @@ class _HomePageState extends State<HomePage> {
                               String? base64Image = (value.announcementModel?[index].iconPath);
                               final UriData? mydata = Uri.parse(base64Image.toString()).data;
                               Uint8List? myImage = mydata?.contentAsBytes();
-                              return Stack(
-                                children: [
-                                  myImage !=null?
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        image: DecorationImage(
-                                          image: MemoryImage(
-                                            myImage
-                                          ),
-                                          fit: BoxFit.fill,
-                                        )),
-                                  ):Container(),
-                                  Positioned(
-                                    bottom: 0,
-                                    child: Container(
-                                        width: _mainWidth,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black54,
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(5),
-                                              bottomRight: Radius.circular(5)),
-                                        ),
-                                        height: 30,
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "Invitation to Participate from dated - 07 June 2022",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white),
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
+                                  ));
+
+                                },
+                                child: Stack(
+                                  children: [
+                                    myImage !=null?
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          image: DecorationImage(
+                                            image: MemoryImage(
+                                              myImage
                                             ),
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ):Container(),
+                                    Positioned(
+                                      bottom: 0,
+                                      child: Container(
+                                          width: _mainWidth,
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black54,
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(5),
+                                                bottomRight: Radius.circular(5)),
                                           ),
-                                        )),
-                                  )
-                                ],
+                                          height: 30,
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                value.announcementModel?[index].announcementName??"",
+                                               // "Invitation to Participate from dated - 07 June 2022",
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          )),
+                                    )
+                                  ],
+                                ),
                               );
                             },
                             autoplay: true,
@@ -255,8 +267,16 @@ class _HomePageState extends State<HomePage> {
                               Uint8List? myImage = mydata?.contentAsBytes();
 
                               return GestureDetector(
-                                onTap: () {},
-                                child: Container(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
+                                  ));
+
+                                },
+                                child:
+                                Container(
                                   padding: EdgeInsets.only(
                                       top: _mainHeight * 0.02,
                                       bottom: _mainHeight * 0.018),
@@ -345,7 +365,14 @@ class _HomePageState extends State<HomePage> {
                           child: Swiper(
                             itemBuilder: (BuildContext context, int index) {
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
+                                  ));
+
+                                },
                                 child: Container(
                                   padding: EdgeInsets.only(
                                       top: _mainHeight * 0.02,
