@@ -8,6 +8,8 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/services/sharedpreference_utils.dart';
+
 class CourseDashboard extends StatefulWidget {
  bool isFromDashboard;
  CourseDashboard({required this.isFromDashboard});
@@ -22,9 +24,14 @@ class _CourseDashboardState extends State<CourseDashboard> {
   String? dropDownTitle;
   late CourseViewModel _courseDropDownViewModel;
   late CourseViewModel _courseViewModel;
-
+var classBatchData;
   void initState() {
     super.initState();
+    initMethod();
+  }
+  SharedPreferenceUtil util = SharedPreferenceUtil();
+
+  initMethod()async{
     _courseDropDownViewModel =
         Provider.of<CourseViewModel>(context, listen: false);
     _courseDropDownViewModel.getCourseDropDownDetails(
@@ -46,8 +53,13 @@ class _CourseDashboardState extends State<CourseDashboard> {
         randomNum: 0.26757885412517934);
     print(
         "dddddddddddddddd ${_courseDropDownViewModel.courseDropDownModel?.length}");
+    classBatchData= await util.getString(sp_className);
+
+    print(">>>>> $classBatch");
   }
-var classBatch;
+
+
+  var classBatch;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +80,7 @@ var classBatch;
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButtonFormField<String>(
+                                    hint: Text("$classBatchData"),
                                     value: classBatch,
                                     items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
                                       value: item.className,

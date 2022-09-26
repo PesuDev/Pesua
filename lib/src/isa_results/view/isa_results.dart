@@ -4,6 +4,8 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/sp_constants.dart';
+import '../../../utils/services/sharedpreference_utils.dart';
 import '../viewmodel/isaViewModel.dart';
 
 class ISAResults extends StatefulWidget {
@@ -20,10 +22,17 @@ class _ISAResultsState extends State<ISAResults> {
   late IsaViewModel isaViewModel;
   late IsaViewModel _isaViewModel;
   var classBatch;
+  var classBatchData;
 
   @override
   void initState() {
     super.initState();
+    initMethod();
+
+  }
+  SharedPreferenceUtil util = SharedPreferenceUtil();
+
+  initMethod()async{
     isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
     isaViewModel.getIsaDropDownDetails(
         action: 6,
@@ -41,7 +50,11 @@ class _ISAResultsState extends State<ISAResults> {
         classBatchSectionId: 4164,
         fetchId: "1400-4164",
         randomNum: 0.4054309131337863);
+    classBatchData= await util.getString(sp_className);
+
+    print(">>>>> $classBatch");
   }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +76,7 @@ class _ISAResultsState extends State<ISAResults> {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButtonFormField<String>(
+                                hint: Text("$classBatchData"),
                                 value: classBatch,
                                 items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
                                   value: item.className,
