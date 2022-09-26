@@ -20,7 +20,7 @@ class AttendanceDashboard extends StatefulWidget {
 class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
   var classBatch;
-
+var classBatchData;
   void initState() {
     super.initState();
  initMethod();
@@ -32,7 +32,7 @@ initMethod()async{
   );
   _viewModel.getAttendanceListInfo(isDynamic: false);
 
-  classBatch= await util.getString(sp_className);
+  classBatchData= await util.getString(sp_className);
 
 print(">>>>> $classBatch");
 }
@@ -57,6 +57,7 @@ print(">>>>> $classBatch");
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
+                      hint: Text("$classBatchData"),
                         value: classBatch,
                         items:value.attendanceDropDownModel?.map((item) => DropdownMenuItem<String>(
                           value: item.className,
