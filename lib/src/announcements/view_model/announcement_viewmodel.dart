@@ -29,10 +29,15 @@ Future <List<AnnouncementModel>?>getAnnouncementListInfo(
   }
 
   Future <List<AnnouncementBannerModel>?>getAnnouncementBannerInfo(
+      { required int action,
+        required int mode,
+        required double randomNum,
+        required int announcementId,}
 
       ) async {
     log("annuncement");
-    final data = await _apiService.fetchAnnouncementBanner();
+    final data = await _apiService.fetchAnnouncementBanner(randomNum: randomNum,
+        announcementId: announcementId, mode: mode, action: action);
     log("hey i came");
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
     announcementBannerModel= data;

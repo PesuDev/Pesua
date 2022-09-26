@@ -12,7 +12,11 @@ import 'dart:math' as math;
 import '../view_model/announcement_viewmodel.dart';
 
 class Announcement extends StatefulWidget {
-  const Announcement({Key? key}) : super(key: key);
+
+  var announcementId;
+  Announcement({this.announcementId});
+
+  // const Announcement({Key? key}) : super(key: key);
 
   @override
   State<Announcement> createState() => _AnnouncementState();
@@ -31,7 +35,8 @@ class _AnnouncementState extends State<Announcement> {
 
     _announcementViewModel =
         Provider.of<AnnouncementViewModel>(context, listen: false);
-    _announcementViewModel.getAnnouncementBannerInfo();
+    _announcementViewModel.getAnnouncementBannerInfo(
+        announcementId: widget.announcementId, mode: 6, action: 20, randomNum: 0.8517174029236512);
   }
 
   @override
@@ -55,6 +60,7 @@ class _AnnouncementState extends State<Announcement> {
               child: Padding(
                   padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: ListView.builder(
+                       physics: NeverScrollableScrollPhysics(),
                       itemCount: value.announcementBannerModel?.length,
                       itemBuilder: (BuildContext context, int index) {
                         String? base64Image = (value.announcementBannerModel?[index].pictureIconPath);

@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
                                           ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                              child: Announcement())
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
                                   ));
 
                                 },
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
                                           ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                              child: Announcement())
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
                                   ));
 
                                 },
@@ -369,7 +369,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) =>
                                           ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                              child: Announcement())
+                                              child: Announcement(announcementId:value.announcementModel?[index].announcementId))
                                   ));
 
                                 },

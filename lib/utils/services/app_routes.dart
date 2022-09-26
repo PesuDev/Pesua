@@ -46,6 +46,7 @@ import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import '../../src/announcements/view/announcement.dart';
+import '../../src/announcements/view_model/announcement_arguments.dart';
 import '../../src/dashboard_module/view/dashboard_page.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
 
@@ -116,9 +117,11 @@ data(RouteSettings settings) {
     case AppRoutes.examination:
       return MaterialPageRoute(builder: (_) => Examination());
     case AppRoutes.announcements:
+      final AnnouncementArguments? args = settings.arguments as AnnouncementArguments?;
+
       return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
         create: (_) =>AnnouncementViewModel(),
-        child: Announcements(),
+        child: Announcements(announcementId: args?.announcementId,),
       ));
       case AppRoutes.announcement:
       return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(

@@ -10,7 +10,9 @@ import '../../../utils/view/widget.dart';
 import 'announcement.dart';
 
 class Announcements extends StatefulWidget {
-  const Announcements({Key? key}) : super(key: key);
+  var announcementId;
+  Announcements({this.announcementId});
+ // const Announcements({Key? key}) : super(key: key);
 
   @override
   State<Announcements> createState() => _AnnouncementsState();
@@ -56,24 +58,24 @@ class _AnnouncementsState extends State<Announcements> {
                       child: Container(
                         color: Colors.white,
                         // height: MediaQuery.of(context).size.height,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                        child: Announcement())
-                            ));
+                        child:
+                        ListView.builder(
+                            itemCount: value.announcementModel?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              String? base64Image = (value.announcementModel?[index].iconPath);
+                              final UriData? mydata = Uri.parse(base64Image.toString()).data;
+                              Uint8List? myImage = mydata?.contentAsBytes();
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 20,left: 10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
+                                                child: Announcement(announcementId:value.announcementModel?[index].announcementId ))
+                                    ));
 
-                          },
-                          child:
-                          ListView.builder(
-                              itemCount: value.announcementModel?.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                String? base64Image = (value.announcementModel?[index].iconPath);
-                                final UriData? mydata = Uri.parse(base64Image.toString()).data;
-                                Uint8List? myImage = mydata?.contentAsBytes();
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 20,left: 10),
+                                  },
                                   child: Column(
                                     children: [
                                       Row(
@@ -95,7 +97,17 @@ class _AnnouncementsState extends State<Announcements> {
                                             ),
                                           )
                                               : Container(
-                                            color: Colors.amber,
+                                           // color: Colors.amber,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.black)
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 5),
+                                              child: Center(
+                                                child: Text("   No Image"),
+
+                                              ),
+                                            ),
                                             height: 50,
                                             width: 50,
                                           ),
@@ -172,9 +184,9 @@ class _AnnouncementsState extends State<Announcements> {
                                       ),
                                     ],
                                   ),
-                                );
-                              }),
-                        ),
+                                ),
+                              );
+                            }),
                       ),
                     ),
 
