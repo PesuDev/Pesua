@@ -51,7 +51,7 @@ class _AnnouncementsState extends State<Announcements> {
 
                         //"IMPORTANT ANNOUNCEMENT ",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ),
                     Expanded(
@@ -129,11 +129,11 @@ class _AnnouncementsState extends State<Announcements> {
                                                 child: Text(value
                                                         .announcementModel?[index]
                                                         .announcementName ??
-                                                    "Seatinginformation_24.05.2022"),
+                                                    "Seatinginformation_24.05.2022",style: TextStyle(fontSize: 14),),
                                               ),
                                               Text(value.announcementModel?[index]
                                                       .instituteName ??
-                                                  "_AS_RRCampus"),
+                                                  "_AS_RRCampus",style: TextStyle(fontSize: 14),),
                                               SizedBox(
                                                 height: 5,
                                               ),
@@ -142,12 +142,12 @@ class _AnnouncementsState extends State<Announcements> {
                                                   Text(
                                                     "${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
                                                     style: TextStyle(
-                                                        color: Colors.grey),
+                                                        color: Colors.grey,fontSize: 14),
                                                   ),
                                                   Text(
                                                     "to ${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].endDate}"))}",
                                                     style: TextStyle(
-                                                        color: Colors.grey),
+                                                        color: Colors.grey,fontSize: 14),
                                                   ),
                                                 ],
                                               ),
@@ -171,7 +171,7 @@ class _AnnouncementsState extends State<Announcements> {
                                               ),
                                               Icon(
                                                 Icons.chevron_right,
-                                                size: 20,
+                                                size: 14,
                                               ),
 
                                             ],
