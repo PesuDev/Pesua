@@ -12,6 +12,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
+import '../constants/custom_widgets.dart';
 import '../constants/sp_constants.dart';
 
 class PesuApiService {
@@ -75,6 +76,7 @@ class PesuApiService {
 
           if (response1.statusCode == 301) {
 
+
             final urlString2=Uri.parse("${response1.headers["location"]}");
             final response3 = await http.post(  urlString2
             );
@@ -88,6 +90,7 @@ class PesuApiService {
               log("after security check 2 ${response4.statusCode}");
               log("after security check 2 ${response4.headers}");
               if(response4.statusCode==301){
+                CustomWidgets.getToast(message: "Please Enter Valid  Details", color:  Colors.green);
 
 
                 final urlString5=Uri.parse("${response4.headers["location"]}");

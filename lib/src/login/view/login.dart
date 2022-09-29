@@ -9,19 +9,15 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
 
-import 'package:pesu/src/dashboard_module/view/home_page.dart';
 import 'package:pesu/src/login/model/forget_password_model.dart';
-import 'package:pesu/src/login/model/login_request_model.dart';
 import 'package:pesu/src/login/model/login_response_model.dart';
 import 'package:pesu/src/login/viewmodel/login_viewmodel.dart';
-import 'package:pesu/src/session_effectiveness/view/session_effectiveness.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/constants/custom_widgets.dart';
-import '../../../utils/services/app_routes.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -44,6 +40,9 @@ class _LoginState extends State<Login> {
     _focus.addListener(_onFocusChange);
     _focusPass.addListener(_onFocusChange);
 
+
+
+
   }
   void dispose() {
     super.dispose();
@@ -63,14 +62,12 @@ class _LoginState extends State<Login> {
   FocusNode _focusPass = FocusNode();
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset:true,
-            appBar: AppBar(
+            resizeToAvoidBottomInset: false,
+          appBar: AppBar(
               backgroundColor: Colors.white,
               title: Image.asset(
                 'assets/images/logo.png',
@@ -78,379 +75,370 @@ class _LoginState extends State<Login> {
               ),
               titleSpacing: 100,
             ),
-            body: WillPopScope(
-                onWillPop: () {
-                  if(_focus.hasFocus ||_focusPass.hasFocus){
-             _focus.unfocus();
-              _focusPass.unfocus();
-             }
+            body: GestureDetector(
+              onTap: (){
+                if(_focus.hasFocus ||_focusPass.hasFocus){
+                  _focus.unfocus();
+                  _focusPass.unfocus();
 
-                  return exit(0);
-                },
-                child: GestureDetector(
-                  onTap: (){
-                    if(_focus.hasFocus ||_focusPass.hasFocus){
-                      _focus.unfocus();
-                      _focusPass.unfocus();
-                    }
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          opacity: 0.6,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black87.withOpacity(1), BlendMode.dstATop),
-                          image: AssetImage(
-                            "assets/images/test1.png",
-                          ),
-                          fit: BoxFit.cover),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 50, right: 50),
-                      child: Form(
-                        key: _form,
-                        child: SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          child: Column(children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 60),
-                              child: Text(
-                                "Sign in",
+                }
+              },
+              child:
+              Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      opacity: 0.6,
+                      colorFilter: ColorFilter.mode(
+                          Colors.black87.withOpacity(1), BlendMode.dstATop),
+                      image: AssetImage(
+                        "assets/images/test1.png",
+
+                      ),
+                      fit: BoxFit.cover),
+                ),
+                child: Form(
+                  key: _form,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 40,right: 40),
+                    child: Column(
+                        children: [
+                        SizedBox(height: 30,),
+                      Text(
+                        "Sign in",
+                        style: TextStyle(
+                            fontSize: 52,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Source Sans Pro'),
+                      ),
+                      _focus.hasFocus ||_focusPass.hasFocus?
+                      SizedBox(height: 0,):
+                      Container(
+                        //color: Colors.amber,
+                        height: MediaQuery.of(context).size.height/3.8,
+                      ),
+                         // SizedBox(height: 250,),
+                      InkWell(
+                        onTap: () {
+                          final provider =
+                              Provider.of<GoogleSignInProvider>(context,
+                                  listen: false);
+                          provider.googleLogin();
+                        },
+                        child:
+                        Container(
+                          color: Color(0xff0091CD),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 40.0,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/google_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                "Sign In with Google",
                                 style: TextStyle(
-                                    fontSize: 52,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal,
+                                    fontSize: 18,
+                                    color: Color(0xffFFFFFF),
+                                    fontWeight: FontWeight.w400,
                                     fontFamily: 'Source Sans Pro'),
                               ),
-                            ),
-                            _focus.hasFocus ||_focusPass.hasFocus?
-                            SizedBox(height: 0,):
-                            Container(
-                              //color: Colors.amber,
-                              height: MediaQuery.of(context).size.height/3.8,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                final provider =
-                                    Provider.of<GoogleSignInProvider>(context,
-                                        listen: false);
-                                provider.googleLogin();
-                              },
-                              child:
-                              Container(
-                                color: Color(0xff0091CD),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/google_logo.png'),
-                                            fit: BoxFit.cover),
-                                        // shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      "Sign In with Google",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Color(0xffFFFFFF),
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Source Sans Pro'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: 1.0,
-                                    width: 80.0,
-                                    color: Color(0xff888888),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    height: 1.0,
-                                    width: 80.0,
-                                    color: Color(0xff888888),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  "or",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Color(0xffFFFFFF),
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Source Sans Pro'),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  height: 1.0,
-                                  width: 70.0,
-                                  color: Color(0xff888888),
-                                ),
-                                Container(
-                                  height: 1.0,
-                                  width: 80.0,
-                                  color: Color(0xff888888),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color:Color(0xff888888) ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    top: 3,
-                                  ),
-                                  child: TextFormField(
-
-                                    style: TextStyle(color: Colors.white,fontSize: 16),
-                                    focusNode: _focus,
-                                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    validator: (String? value) {
-                                      if (value!.trim().isEmpty) {
-                                        return "Please Enter Valid User name/SRN";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                   // autofocus: true,
-                                    controller: usernameController,
-                                    decoration: new InputDecoration(
-
-                                      fillColor: Colors.transparent,
-                                      contentPadding: EdgeInsets.only(
-                                          top: 1, left: 4, bottom: 1, right: 4),
-                                      hintText: "Username / SRN",
-                                      hintStyle: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                      border: InputBorder.none,
-                                      // focusedBorder:
-                                      // new OutlineInputBorder(
-                                      //   borderRadius:
-                                      //   new BorderRadius.circular(0),
-                                      //   borderSide: new BorderSide(
-                                      //     color: Color(0xff888888),
-                                      //
-                                      //   ),
-                                      //
-                                      // ),
-                                    ),
-                                    onChanged: (text) {
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-
-
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color:Color(0xff888888) ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                    top: 20,
-                                  ),
-                                  child: TextFormField(
-                                    style: TextStyle(color: Colors.white,fontSize: 16),
-                                    focusNode: _focusPass,
-                                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                                    validator: (String? value) {
-                                      if (value!.trim().isEmpty) {
-                                        return "Please Enter Valid Password";
-                                      } else {
-                                        return null;
-                                      }
-                                    },
-                                  //  autofocus: true,
-                                    controller: passwordController,
-                                    obscureText: _isObscure,
-
-                                    decoration: new InputDecoration(
-
-                                      fillColor: Colors.transparent,
-                                      contentPadding: EdgeInsets.only(
-                                          top: 15, left: 4,  right: 4),
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 16,
-                                        color: Colors.white,
-                                      ),
-                                        border: InputBorder.none,
-
-                                        suffixIcon: IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              _isObscure = !_isObscure;
-                                            });
-                                          },
-                                          icon: Icon(
-                                            _isObscure
-                                                ? Icons.visibility_outlined
-                                                : Icons.visibility_off,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                    ),
-                                    onChanged: (text) {
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (_form.currentState!.validate()) {
-                                  LoginModel responseModel =
-                                      await _viewModel.getLoginDetails(
-                                          password: passwordController.text,
-                                          username: usernameController.text);
-
-                                  if (responseModel != null) {
-                                    log("Oye login came");
-                                    SharedPreferenceUtil util =
-                                        SharedPreferenceUtil();
-                                    await util.setString(
-                                        sp_userId, responseModel.userId ?? "");
-                                    await util.setString(
-                                        sp_password, passwordController.text);
-                                    await util.setString(
-                                        sp_classId, "${responseModel.classId}");
-                                    await util.setString(
-                                        sp_userName, "${responseModel.name}");
-                                    await util.setString(sp_batchClassId,
-                                        "${responseModel.batchClass}");
-                                    await util.setString(sp_classBatchSectionId,
-                                        "${responseModel.classBatchSection}");
-                                    await util.setString(sp_userRoleId,
-                                        "${responseModel.userRoleId}");
-                                    await util.setString(
-                                        sp_branch, "${responseModel.branch}");
-                                    await util.setString(sp_className,
-                                        "${responseModel.className}");
-                                    await util.setString(sp_branch,
-                                        "${responseModel.className}");
-                                    await util.setString(
-                                        sp_loginId, "${responseModel.loginId}");
-
-                                    await util.setString(sp_DepartmentId,
-                                        "${responseModel.departmentId}");
-                                    await util.setString(sp_programId,
-                                        "${responseModel.programId}");
-
-                                    // await util.setString(
-                                    //     sp_userName,responseModel.userParentList);
-                                    // await util.setString(sp_token,
-                                    //     responseModel.mobileAppTokenError?? '');
-                                    log("Bose 2 ame:  ${await util.getToken()}");
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => DashboardScreen()));
-                                  } else {
-                                    log('Oye am not coming');
-                                  }
-                                }
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xff0091cd),
-                                ),
-                                height: 34,
-                                //color: Color(0xff0091cd),
-                                child: Center(
-                                  child: Text(
-                                    "Sign in",
-                                    style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'Source Sans Pro',
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                _buildPopupDialog();
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  color: Color(0xffFFFFFF),
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Source Sans Pro',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "For all login issue, please send an email to ",
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Source Sans Pro',
-                                fontSize: 16,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                _SendEmail();
-                              },
-                              child: Text(
-                                "support@pesuacademy.com",
-                                style: TextStyle(
-                                  color: Colors.blueAccent,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Source Sans Pro',
-                                  fontSize: 16,
-                                ),
-                              ),
-                            )
-                          ]),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 1.0,
+                              width: 80.0,
+                              color: Color(0xff888888),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 1.0,
+                              width: 80.0,
+                              color: Color(0xff888888),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "or",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Color(0xffFFFFFF),
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Source Sans Pro'),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                            height: 1.0,
+                            width: 70.0,
+                            color: Color(0xff888888),
+                          ),
+                          Container(
+                            height: 1.0,
+                            width: 80.0,
+                            color: Color(0xff888888),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(color:Color(0xff888888) ),
+                        ),
+
+                        child: TextFormField(
+                          cursorColor: Colors.white,
+                          style: TextStyle(color: Colors.white,fontSize: 16),
+                          focusNode: _focus,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          // validator: (String? value) {
+                          //   if (value!.trim().isEmpty) {
+                          //     return "Please Enter Valid User name/SRN";
+                          //   } else {
+                          //     return null;
+                          //   }
+                          // },
+                         // autofocus: true,
+                          controller: usernameController,
+                          decoration: new InputDecoration(
+                            fillColor: Colors.transparent,
+
+                            contentPadding: EdgeInsets.only(
+                                left: 10,),
+                            hintText: "Username / SRN",
+                            hintStyle: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                            border: InputBorder.none,
+
+
+                          ),
+                          onChanged: (text) {
+                            setState(() {});
+                          },
+
+                        ),
+                      ),
+
+
+                      Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(color:Color(0xff888888) ),
+                        ),
+                        margin: EdgeInsets.only(
+                          top: 20,
+                        ),
+                        child: TextFormField(
+                          cursorColor: Colors.white,
+
+                          style: TextStyle(color: Colors.white,fontSize: 16),
+                          focusNode: _focusPass,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          // validator: (String? value) {
+                          //   if (value!.trim().isEmpty) {
+                          //     return "Please Enter Valid Password";
+                          //   } else {
+                          //     return null;
+                          //   }
+                          // },
+                        //  autofocus: true,
+                          controller: passwordController,
+                          obscureText: _isObscure,
+                          decoration: new InputDecoration(
+                              fillColor: Colors.transparent,
+                            contentPadding: EdgeInsets.only(
+                               left: 10,top: 5),
+                            hintText: "Password",
+                            hintStyle: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                              border: InputBorder.none,
+
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                },
+                                icon: Icon(
+                                  _isObscure
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off,
+                                  color: Colors.white,
+                                ),
+                              )
+                          ),
+                          onChanged: (text) {
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if(usernameController.text.trim().isEmpty || passwordController.text.trim().isEmpty){
+                            CustomWidgets.getToast(message: "Please Enter Valid  Details", color:  Colors.green);
+                          }else {
+                            LoginModel responseModel =
+                            await _viewModel.getLoginDetails(
+                                password: passwordController.text,
+                                username: usernameController.text);
+
+                            if (responseModel != null) {
+
+
+                              log("Oye login came");
+                              SharedPreferenceUtil util =
+                              SharedPreferenceUtil();
+                              await util.setString(
+                                  sp_userId, responseModel.userId ?? "");
+                              await util.setString(
+                                  sp_password, passwordController.text);
+                              await util.setString(
+                                  sp_classId, "${responseModel.classId}");
+                              await util.setString(
+                                  sp_userName, "${responseModel.name}");
+                              await util.setString(sp_batchClassId,
+                                  "${responseModel.batchClass}");
+                              await util.setString(sp_classBatchSectionId,
+                                  "${responseModel.classBatchSection}");
+                              await util.setString(sp_userRoleId,
+                                  "${responseModel.userRoleId}");
+                              await util.setString(
+                                  sp_branch, "${responseModel.branch}");
+                              await util.setString(sp_className,
+                                  "${responseModel.className}");
+                              await util.setString(sp_branch,
+                                  "${responseModel.className}");
+                              await util.setString(
+                                  sp_loginId, "${responseModel.loginId}");
+
+                              await util.setString(sp_DepartmentId,
+                                  "${responseModel.departmentId}");
+                              await util.setString(sp_programId,
+                                  "${responseModel.programId}");
+
+
+                              // await util.setString(
+                              //     sp_userName,responseModel.userParentList);
+                              // await util.setString(sp_token,
+                              //     responseModel.mobileAppTokenError?? '');
+                              log("Bose 2 ame:  ${await util.getToken()}");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => DashboardScreen()));
+                            } else {
+                              log('Oye am not coming');
+                            }
+                          }
+
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0xff0091cd),
+                          ),
+                          height: 34,
+                          //color: Color(0xff0091cd),
+                          child: Center(
+                            child: Text(
+                              "Sign in",
+                              style: TextStyle(
+                                color: Color(0xffFFFFFF),
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Source Sans Pro',
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _buildPopupDialog();
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Source Sans Pro',
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "For all login issue, please send an email to ",
+                        style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 16,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _SendEmail();
+                        },
+                        child: Text(
+                          "support@pesuacademy.com",
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Source Sans Pro',
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                          // Container(height: 60.0),
+
+                          //Spacer(),
+                    ]),
                   ),
-                ))));
+                ),
+              ),
+            )
+
+        )
+    );
   }
 
 
