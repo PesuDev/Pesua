@@ -308,7 +308,7 @@ class _LoginState extends State<Login> {
                       GestureDetector(
                         onTap: () async {
                           if(usernameController.text.trim().isEmpty || passwordController.text.trim().isEmpty){
-                            CustomWidgets.getToast(message: "Please Enter Valid  Details", color:  Colors.green);
+                            CustomWidgets.getToast(message: "Please fill all required fields", color:  Color(0xff273746));
                           }else {
                             LoginModel responseModel =
                             await _viewModel.getLoginDetails(

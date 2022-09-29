@@ -54,6 +54,14 @@ class _HomePageState extends State<HomePage> {
       child: Consumer<AnnouncementViewModel>(
         builder: (context, value, child) {
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              title: Image.asset(
+                'assets/images/logo.png',
+                height: 40,
+              ),
+              titleSpacing: 100,
+            ),
             body: (value.announcementModel != null &&
                     value.announcementModel?.length != 0)
                 ? Container(
