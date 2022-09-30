@@ -60,6 +60,8 @@ class _HomePageState extends State<HomePage> {
                 'assets/images/logo.png',
                 height: 40,
               ),
+              leadingWidth: 1,
+
               titleSpacing: 100,
             ),
             body: (value.announcementModel != null &&

@@ -66,7 +66,6 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            resizeToAvoidBottomInset: false,
           appBar: AppBar(
               backgroundColor: Colors.white,
               title: Image.asset(
@@ -77,14 +76,11 @@ class _LoginState extends State<Login> {
             ),
             body: GestureDetector(
               onTap: (){
-                if(_focus.hasFocus ||_focusPass.hasFocus){
-                  _focus.unfocus();
-                  _focusPass.unfocus();
-
+                if(_focusPass.hasFocus||_focus.hasFocus){
+                  _focus.unfocus();_focusPass.unfocus();
                 }
               },
-              child:
-              Container(
+              child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
@@ -98,14 +94,16 @@ class _LoginState extends State<Login> {
                       ),
                       fit: BoxFit.cover),
                 ),
-                child: Form(
-                  key: _form,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 40,right: 40),
-                    child: Column(
-                        children: [
-                        SizedBox(height: 30,),
-                      Text(
+                child: ListView(
+                  padding:EdgeInsets.only(left: 50,right: 50,bottom: 30),
+                  reverse: true,
+
+                  shrinkWrap: true,
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 200),
+                    child: Center(
+                      child: Text(
                         "Sign in",
                         style: TextStyle(
                             fontSize: 52,
@@ -113,326 +111,329 @@ class _LoginState extends State<Login> {
                             fontWeight: FontWeight.normal,
                             fontFamily: 'Source Sans Pro'),
                       ),
-                      _focus.hasFocus ||_focusPass.hasFocus?
-                      SizedBox(height: 0,):
-                      Container(
-                        //color: Colors.amber,
-                        height: MediaQuery.of(context).size.height/3.8,
-                      ),
-                         // SizedBox(height: 250,),
-                      InkWell(
-                        onTap: () {
-                          final provider =
-                              Provider.of<GoogleSignInProvider>(context,
-                                  listen: false);
-                          provider.googleLogin();
-                        },
-                        child:
-                        Container(
-                          color: Color(0xff0091CD),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 40.0,
-                                width: 40.0,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/google_logo.png'),
-                                      fit: BoxFit.cover),
-                                  // shape: BoxShape.circle,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                "Sign In with Google",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Color(0xffFFFFFF),
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Source Sans Pro'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
+                    ),
+                  ),
+                 // SizedBox(height: 140,),
+
+                  InkWell(
+                    onTap: () {
+                      final provider =
+                          Provider.of<GoogleSignInProvider>(context,
+                              listen: false);
+                      provider.googleLogin();
+                    },
+                    child:
+                    Container(
+                      color: Color(0xff0091CD),
+                      child: Row(
                         children: [
-                          Expanded(
-                            child: Container(
-                              height: 1.0,
-                              width: 80.0,
-                              color: Color(0xff888888),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              height: 1.0,
-                              width: 80.0,
-                              color: Color(0xff888888),
+                          Container(
+                            height: 40.0,
+                            width: 40.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/google_logo.png'),
+                                  fit: BoxFit.cover),
+                              // shape: BoxShape.circle,
                             ),
                           ),
                           SizedBox(
                             width: 20,
                           ),
                           Text(
-                            "or",
+                            "Sign In with Google",
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Color(0xffFFFFFF),
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Source Sans Pro'),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 20),
-                            height: 1.0,
-                            width: 70.0,
-                            color: Color(0xff888888),
-                          ),
-                          Container(
-                            height: 1.0,
-                            width: 80.0,
-                            color: Color(0xff888888),
-                          ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(color:Color(0xff888888) ),
-                        ),
-
-                        child: TextFormField(
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.white,fontSize: 16),
-                          focusNode: _focus,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          // validator: (String? value) {
-                          //   if (value!.trim().isEmpty) {
-                          //     return "Please Enter Valid User name/SRN";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // },
-                         // autofocus: true,
-                          controller: usernameController,
-                          decoration: new InputDecoration(
-                            fillColor: Colors.transparent,
-
-                            contentPadding: EdgeInsets.only(
-                                left: 10,),
-                            hintText: "Username / SRN",
-                            hintStyle: TextStyle(
-                              fontFamily: "Nunito",
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                            border: InputBorder.none,
-
-
-                          ),
-                          onChanged: (text) {
-                            setState(() {});
-                          },
-
-                        ),
-                      ),
-
-
-                      Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(color:Color(0xff888888) ),
-                        ),
-                        margin: EdgeInsets.only(
-                          top: 20,
-                        ),
-                        child: TextFormField(
-                          cursorColor: Colors.white,
-
-                          style: TextStyle(color: Colors.white,fontSize: 16),
-                          focusNode: _focusPass,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          // validator: (String? value) {
-                          //   if (value!.trim().isEmpty) {
-                          //     return "Please Enter Valid Password";
-                          //   } else {
-                          //     return null;
-                          //   }
-                          // },
-                        //  autofocus: true,
-                          controller: passwordController,
-                          obscureText: _isObscure,
-                          decoration: new InputDecoration(
-                              fillColor: Colors.transparent,
-                            contentPadding: EdgeInsets.only(
-                               left: 10,top: 5),
-                            hintText: "Password",
-                            hintStyle: TextStyle(
-                              fontFamily: "Nunito",
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                              border: InputBorder.none,
-
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isObscure = !_isObscure;
-                                  });
-                                },
-                                icon: Icon(
-                                  _isObscure
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off,
-                                  color: Colors.white,
-                                ),
-                              )
-                          ),
-                          onChanged: (text) {
-                            setState(() {});
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          if(usernameController.text.trim().isEmpty || passwordController.text.trim().isEmpty){
-                            CustomWidgets.getToast(message: "Please fill all required fields", color:  Color(0xff273746));
-                          }else {
-                            LoginModel responseModel =
-                            await _viewModel.getLoginDetails(
-                                password: passwordController.text,
-                                username: usernameController.text);
-
-                            if (responseModel != null) {
-
-
-                              log("Oye login came");
-                              SharedPreferenceUtil util =
-                              SharedPreferenceUtil();
-                              await util.setString(
-                                  sp_userId, responseModel.userId ?? "");
-                              await util.setString(
-                                  sp_password, passwordController.text);
-                              await util.setString(
-                                  sp_classId, "${responseModel.classId}");
-                              await util.setString(
-                                  sp_userName, "${responseModel.name}");
-                              await util.setString(sp_batchClassId,
-                                  "${responseModel.batchClass}");
-                              await util.setString(sp_classBatchSectionId,
-                                  "${responseModel.classBatchSection}");
-                              await util.setString(sp_userRoleId,
-                                  "${responseModel.userRoleId}");
-                              await util.setString(
-                                  sp_branch, "${responseModel.branch}");
-                              await util.setString(sp_className,
-                                  "${responseModel.className}");
-                              await util.setString(sp_branch,
-                                  "${responseModel.className}");
-                              await util.setString(
-                                  sp_loginId, "${responseModel.loginId}");
-
-                              await util.setString(sp_DepartmentId,
-                                  "${responseModel.departmentId}");
-                              await util.setString(sp_programId,
-                                  "${responseModel.programId}");
-
-
-                              // await util.setString(
-                              //     sp_userName,responseModel.userParentList);
-                              // await util.setString(sp_token,
-                              //     responseModel.mobileAppTokenError?? '');
-                              log("Bose 2 ame:  ${await util.getToken()}");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => DashboardScreen()));
-                            } else {
-                              log('Oye am not coming');
-                            }
-                          }
-
-                        },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
                         child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Color(0xff0091cd),
-                          ),
-                          height: 34,
-                          //color: Color(0xff0091cd),
-                          child: Center(
-                            child: Text(
-                              "Sign in",
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Source Sans Pro',
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
+                          height: 1.0,
+                          width: 80.0,
+                          color: Color(0xff888888),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 1.0,
+                          width: 80.0,
+                          color: Color(0xff888888),
                         ),
                       ),
                       SizedBox(
-                        height: 20,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _buildPopupDialog();
-                        },
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            color: Color(0xffFFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Source Sans Pro',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
+                        width: 20,
                       ),
                       Text(
-                        "For all login issue, please send an email to ",
+                        "or",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Source Sans Pro'),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        height: 1.0,
+                        width: 70.0,
+                        color: Color(0xff888888),
+                      ),
+                      Container(
+                        height: 1.0,
+                        width: 80.0,
+                        color: Color(0xff888888),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      border: Border.all(color:Color(0xff888888) ),
+                    ),
+
+                    child: TextFormField(
+                      cursorColor: Colors.white,
+                      style: TextStyle(color: Colors.white,fontSize: 16),
+                      focusNode: _focus,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      // validator: (String? value) {
+                      //   if (value!.trim().isEmpty) {
+                      //     return "Please Enter Valid User name/SRN";
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
+                     // autofocus: true,
+                      controller: usernameController,
+                      decoration: new InputDecoration(
+                        fillColor: Colors.transparent,
+
+                        contentPadding: EdgeInsets.only(
+                            left: 10,),
+                        hintText: "Username / SRN",
+                        hintStyle: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                        border: InputBorder.none,
+
+
+                      ),
+                      onChanged: (text) {
+                        setState(() {});
+                      },
+
+                    ),
+                  ),
+
+
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      border: Border.all(color:Color(0xff888888) ),
+                    ),
+                    margin: EdgeInsets.only(
+                      top: 20,
+                    ),
+                    child: TextFormField(
+                      cursorColor: Colors.white,
+
+                      style: TextStyle(color: Colors.white,fontSize: 16),
+                      focusNode: _focusPass,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      // validator: (String? value) {
+                      //   if (value!.trim().isEmpty) {
+                      //     return "Please Enter Valid Password";
+                      //   } else {
+                      //     return null;
+                      //   }
+                      // },
+                    //  autofocus: true,
+                      controller: passwordController,
+                      obscureText: _isObscure,
+                      decoration: new InputDecoration(
+                          fillColor: Colors.transparent,
+                        contentPadding: EdgeInsets.only(
+                           left: 10,top: 5),
+                        hintText: "Password",
+                        hintStyle: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                          border: InputBorder.none,
+
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off,
+                              color: Colors.white,
+                            ),
+                          )
+                      ),
+                      onChanged: (text) {
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      if(usernameController.text.trim().isEmpty || passwordController.text.trim().isEmpty){
+                        CustomWidgets.getToast(message: "Please fill all required fields", color:  Color(0xff273746));
+                      }else {
+                        LoginModel responseModel =
+                        await _viewModel.getLoginDetails(
+                            password: passwordController.text,
+                            username: usernameController.text);
+
+                        if (responseModel != null) {
+
+
+                          log("Oye login came");
+                          SharedPreferenceUtil util =
+                          SharedPreferenceUtil();
+                          await util.setString(
+                              sp_userId, responseModel.userId ?? "");
+                          await util.setString(
+                              sp_password, passwordController.text);
+                          await util.setString(
+                              sp_classId, "${responseModel.classId}");
+                          await util.setString(
+                              sp_userName, "${responseModel.name}");
+                          await util.setString(sp_batchClassId,
+                              "${responseModel.batchClass}");
+                          await util.setString(sp_classBatchSectionId,
+                              "${responseModel.classBatchSection}");
+                          await util.setString(sp_userRoleId,
+                              "${responseModel.userRoleId}");
+                          await util.setString(
+                              sp_branch, "${responseModel.branch}");
+                          await util.setString(sp_className,
+                              "${responseModel.className}");
+                          await util.setString(sp_branch,
+                              "${responseModel.className}");
+                          await util.setString(
+                              sp_loginId, "${responseModel.loginId}");
+
+                          await util.setString(sp_DepartmentId,
+                              "${responseModel.departmentId}");
+                          await util.setString(sp_programId,
+                              "${responseModel.programId}");
+
+
+                          // await util.setString(
+                          //     sp_userName,responseModel.userParentList);
+                          // await util.setString(sp_token,
+                          //     responseModel.mobileAppTokenError?? '');
+                          log("Bose 2 ame:  ${await util.getToken()}");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => DashboardScreen()));
+                        } else {
+                          log('Oye am not coming');
+                        }
+                      }
+
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color(0xff0091cd),
+                      ),
+                      height: 34,
+                      //color: Color(0xff0091cd),
+                      child: Center(
+                        child: Text(
+                          "Sign in",
+                          style: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Source Sans Pro',
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      _buildPopupDialog();
+                    },
+                    child: Center(
+                      child: Text(
+                        "Forgot Password?",
                         style: TextStyle(
                           color: Color(0xffFFFFFF),
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Source Sans Pro',
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Text(
+                      "For all login issue, please send an email to ",
+                      style: TextStyle(
+                        color: Color(0xffFFFFFF),
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Source Sans Pro',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      _SendEmail();
+                    },
+                    child: Center(
+                      child: Text(
+                        "support@pesuacademy.com",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.normal,
                           fontFamily: 'Source Sans Pro',
                           fontSize: 16,
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          _SendEmail();
-                        },
-                        child: Text(
-                          "support@pesuacademy.com",
-                          style: TextStyle(
-                            color: Colors.blueAccent,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Source Sans Pro',
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                          // Container(height: 60.0),
-
-                          //Spacer(),
-                    ]),
+                    ),
                   ),
+                      // Container(height: 60.0),
+
+                      //Spacer(),
+                ].reversed.toList(),
                 ),
               ),
             )
