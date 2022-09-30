@@ -96,6 +96,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             currentIndex: value.selectedIndex,
             fixedColor: appThemeColor,
             items: getNavBarItems(),
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
             type: BottomNavigationBarType.fixed,
             onTap: (index) => value.selectBottomIndex(bottomIndex: index),
           );

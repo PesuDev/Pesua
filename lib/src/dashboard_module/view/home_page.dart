@@ -31,6 +31,12 @@ class _HomePageState extends State<HomePage> {
   late SeatingInfoViewModel _viewModel;
 
   String currentDate = DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
+  // String currentDate = DateFormat('29-MM-yyyy').format(DateTime.now());
+  // String Time=("7:45 PM");
+
+  // late String live=currentDate + " " + Time;
+
+   int? currentIndex=0;
 
   //DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
   // DateFormat('dd-MM-yyyy HH:MM').format(DateTime.now());
@@ -97,9 +103,10 @@ class _HomePageState extends State<HomePage> {
 
                 title: Image.asset(
                   'assets/images/logo.png',
-                  height: 29,
+                  height: 30,
                 ),
-              //  titleSpacing: 100,
+                // titleSpacing: 40,
+                elevation: 0,
               ),
               // backgroundColor: Colors.grey,
               body: (value.announcementModel != null &&
@@ -121,11 +128,13 @@ class _HomePageState extends State<HomePage> {
                               height: _mainHeight * 0.01,
                             ),
                             Container(
-                              color: Color(0xffFAFAFA),
+                              // color: Color(0xffFAFAFA),
+                              color: Colors.white,
                               padding: EdgeInsets.only(
-                                  left: _mainWidth * 0.05,
-                                  right: _mainWidth * 0.05,
-                                  top: _mainHeight * 0.01),
+                                //  left: MediaQuery.of(context).size.width/22,
+                                  right: MediaQuery.of(context).size.width/22,
+
+                                top: _mainHeight * 0.01),
                               //  margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
                               height: _mainHeight * 0.1,
                               child: SingleChildScrollView(
@@ -134,6 +143,10 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Container(
+                                     // color: Colors.amber,
+                                      width: MediaQuery.of(context).size.width/30,
+                                    ),
                                     getStudentLinks(
                                         icon: Icon(Icons.wysiwyg_outlined,),
                                         color: Color(0xffE3E7FD),
@@ -143,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                                               context, AppRoutes.courseDashboard);
                                         }),
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.add_chart),
@@ -154,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                                               context, AppRoutes.isaResults);
                                         }),
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.access_time),
@@ -165,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                                               context, AppRoutes.attendance);
                                         }),
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.view_week),
@@ -175,8 +188,12 @@ class _HomePageState extends State<HomePage> {
                                           Navigator.pushNamed(
                                               context, AppRoutes.seatingInfo);
                                         }),
-                                    SizedBox(
-                                      width: 26,
+                                    // SizedBox(
+                                    //   width: MediaQuery.of(context).size.width/12,
+                                    // ),
+                                    Container(
+                                      color: Colors.white,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.calendar_today_sharp),
@@ -187,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                                               AppRoutes.calendarDashboard);
                                         }),
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.menu_book),
@@ -198,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                                               context, AppRoutes.esaresults);
                                         }),
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     ),
                                     getStudentLinks(
                                         icon: Icon(Icons.speaker_notes_outlined),
@@ -208,8 +225,9 @@ class _HomePageState extends State<HomePage> {
                                           Navigator.pushNamed(
                                               context, AppRoutes.timeTable);
                                         }),
+
                                     SizedBox(
-                                      width: 26,
+                                      width: MediaQuery.of(context).size.width/17,
                                     )
                                   ],
                                 ),
@@ -271,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                                                     bottomRight:
                                                         Radius.circular(5)),
                                               ),
-                                              height: 30,
+                                              height: 25,
                                               child: Align(
                                                 alignment: Alignment.center,
                                                 child: Padding(
@@ -304,13 +322,13 @@ class _HomePageState extends State<HomePage> {
                               height: 10,
                             ),
                             Container(
-                              color: Color(0xffFFFFFF),
+                            //  color: Color(0xffFFFFFF),
                               padding: EdgeInsets.only(
                                   right: 15, top: 5, bottom: 0, left: 15),
                               child: data.seatingInfoModel != null
                                   ? seatingInfo(
                                       seatingInfoModel: data.seatingInfoModel)
-                                  : Text("data"),
+                                  : Container(),
                             ),
                             SizedBox(
                               height: 8,
@@ -324,7 +342,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Important Announcement"}  (${value.announcementModel?.length ?? ""})",
+                                      "${"Important Announcement"}  (${currentIndex}/${value.announcementModel?.length ?? ""})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -480,6 +498,11 @@ class _HomePageState extends State<HomePage> {
                                       },
                                       autoplay: true,
                                       itemCount: value.announcementModel!.length,
+                                        onIndexChanged: (int index) {
+                                          setState(() {
+                                            currentIndex = index;
+                                          });
+                                        }
                                     ),
                                   ),
                                 ],
@@ -497,7 +520,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Announcement"}  (${value.announcementModel?.length ?? ""})",
+                                      "${"Announcement"}  (${currentIndex}/${value.announcementModel?.length ?? ""})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -509,8 +532,10 @@ class _HomePageState extends State<HomePage> {
                                     margin: EdgeInsets.only(top: 5),
                                     height: 46,
                                     child: Swiper(
+
                                       itemBuilder:
                                           (BuildContext context, int index) {
+
                                         String? base64Image = (value
                                             .announcementModel![index]
                                             .pictureIconPath);
@@ -610,7 +635,7 @@ class _HomePageState extends State<HomePage> {
                                                         Icon(Icons.circle,
                                                             color:
                                                                 Color(0xff337ab7),
-                                                            size: 14),
+                                                            size: 10),
                                                       ],
                                                     ),
                                                     Row(
@@ -640,7 +665,7 @@ class _HomePageState extends State<HomePage> {
                                                                 .arrow_forward_ios_rounded,
                                                             color:
                                                                 Color(0xff337ab7),
-                                                            size: 10),
+                                                            size: 14),
                                                       ],
                                                     ),
                                                   ],
@@ -649,10 +674,18 @@ class _HomePageState extends State<HomePage> {
                                             ],
                                           ),
                                         );
+
+
                                       },
+
                                       autoplay: true,
                                       itemCount: value.announcementModel!.length,
-                                    ),
+          onIndexChanged: (int index) {
+            setState(() {
+              currentIndex = index;
+            });
+          }
+          ),
                                   ),
                                 ],
                               ),
@@ -717,14 +750,16 @@ class _HomePageState extends State<HomePage> {
                 height: _mainHeight * 0.060,
                 color: Colors.white,
                 margin: EdgeInsets.only(
-                    left: _mainWidth * 0.03,
-                    right: _mainWidth * 0.03,
+                    // left: _mainWidth * 0.03,
+                    // right: _mainWidth * 0.03,
                     top: _mainHeight * 0.01),
                 child: Row(
+
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     myImage != null
                         ? Container(
+                      margin: EdgeInsets.only(left: 10),
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
@@ -775,133 +810,140 @@ class _HomePageState extends State<HomePage> {
     return seatingInfoModel != null
         ? ListTileTheme.merge(
             dense: true,
-            child: ListView.builder(
-              itemCount: seatingInfoModel.length ?? 0,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                SeatingInfoModel model = seatingInfoModel[index];
-                print(
-                    "DATeJNS${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}");
-                print("james${currentDate}");
+            child: Container(
+              color: Colors.white,
+              child: ListView.builder(
+                itemCount: seatingInfoModel.length ?? 0,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  SeatingInfoModel model = seatingInfoModel[index];
+                  var mydate=DateTimeUtil.convertDate(model.testStartTime!.toInt());
+                  print("ApiDate==${mydate}");
+                  print("MyDate==${currentDate}");
+                  // print("MyTime==${Time}");
+                  // print("MyDADA==${live}");
 
-                return '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ==
-                        currentDate
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
 
-                        children: [
-                          Text(
-                            'Seating Info',
-                            style: TextStyle(
-                                // backgroundColor: Color(0xffFFFFFF),
-                                color: Color(0xfffd981b),
-                                fontSize: 16,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            model.subjectCode ?? 'UEMEIDH',
-                            style: TextStyle(
-                                // backgroundColor: Color(0xffFFFFFF),
-                                color: Color(0xfff9B9B9B),
-                                fontSize: 14,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            model.subjectName ?? 'Computer Network Security',
-                            style: TextStyle(
-                                //    backgroundColor: Color(0xffFFFFFF),
-                                color: Color(0xfff333333),
-                                fontSize: 16,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Date & Time',
-                                style: TextStyle(
-                                    //   backgroundColor: Color(0xffFFFFFF),
-                                    color: Color(0xfff9B9B9B),
-                                    fontSize: 14,
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              Text(
-                                'Terminal',
-                                style: TextStyle(
-                                    //   backgroundColor: Color(0xffFFFFFF),
-                                    color: Color(0xfff9B9B9B),
-                                    fontSize: 14,
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ??
-                                    'Terminal',
-                                style: TextStyle(
-                                    backgroundColor: Color(0xffFFFFFF),
-                                    color: Color(0xfff333333),
-                                    fontSize: 16,
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              Text(
-                                model.terminalName ?? 'S401',
-                                style: TextStyle(
-                                    //   backgroundColor: Color(0xffFFFFFF),
-                                    color: Color(0xfff333333),
-                                    fontSize: 14,
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            'Location',
-                            style: TextStyle(
-                                //   backgroundColor: Color(0xffFFFFFF),
-                                color: Color(0xfff9B9B9B),
-                                fontSize: 14,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            model.roomName ?? 'S401',
-                            style: TextStyle(
-                                //   backgroundColor: Color(0xffFFFFFF),
-                                color: Color(0xfff333333),
-                                fontSize: 14,
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400),
-                          ),
-                          Divider(
-                            thickness: 3,
-                          ),
-                        ],
-                      )
-                    : SizedBox(
-                        height: 0,
-                      );
-              },
+                  return mydate ==
+                          currentDate
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+
+                          children: [
+                            Text(
+                              'Seating Info',
+                              style: TextStyle(
+                                  // backgroundColor: Color(0xffFFFFFF),
+                                  color: Color(0xfffd981b),
+                                  fontSize: 16,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              model.subjectCode ?? 'UEMEIDH',
+                              style: TextStyle(
+                                  // backgroundColor: Color(0xffFFFFFF),
+                                  color: Color(0xfff9B9B9B),
+                                  fontSize: 14,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              model.subjectName ?? 'Computer Network Security',
+                              style: TextStyle(
+                                  //    backgroundColor: Color(0xffFFFFFF),
+                                  color: Color(0xfff333333),
+                                  fontSize: 16,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Date & Time',
+                                  style: TextStyle(
+                                      //   backgroundColor: Color(0xffFFFFFF),
+                                      color: Color(0xfff9B9B9B),
+                                      fontSize: 14,
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  'Terminal',
+                                  style: TextStyle(
+                                      //   backgroundColor: Color(0xffFFFFFF),
+                                      color: Color(0xfff9B9B9B),
+                                      fontSize: 14,
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ??
+                                      'Terminal',
+                                  style: TextStyle(
+                                      backgroundColor: Color(0xffFFFFFF),
+                                      color: Color(0xfff333333),
+                                      fontSize: 16,
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  model.terminalName ?? 'S401',
+                                  style: TextStyle(
+                                      //   backgroundColor: Color(0xffFFFFFF),
+                                      color: Color(0xfff333333),
+                                      fontSize: 14,
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              'Location',
+                              style: TextStyle(
+                                  //   backgroundColor: Color(0xffFFFFFF),
+                                  color: Color(0xfff9B9B9B),
+                                  fontSize: 14,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              model.roomName ?? 'S401',
+                              style: TextStyle(
+                                  //   backgroundColor: Color(0xffFFFFFF),
+                                  color: Color(0xfff333333),
+                                  fontSize: 14,
+                                  fontFamily: 'Open Sans',
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Divider(
+                              thickness: 3,
+                            ),
+                          ],
+                        )
+                      : Container();
+                  // SizedBox(
+                  //         height: 0,
+                  //       );
+                },
+              ),
             ),
           )
         : Center(child: CircularProgressIndicator());

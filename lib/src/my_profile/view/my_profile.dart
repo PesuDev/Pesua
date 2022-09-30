@@ -101,15 +101,16 @@ class _MyProfileState extends State<MyProfile> {
                         children: [
                           myImage != null && myImage.isNotEmpty
                               ? Container(
-                            width: 110,
-                            height: 110,
+                            width: 100,
+                            height: 100,
                             decoration: BoxDecoration(
                               borderRadius:
                               BorderRadius.circular(100),
                               image: new DecorationImage(
+
                                   fit: BoxFit.fill,
-                                  image: MemoryImage(myImage,
-                                      scale: 0.5)),
+                                  image: MemoryImage(myImage
+                                      )),
                             ),
                           )
                               :
