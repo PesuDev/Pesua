@@ -59,157 +59,159 @@ class _ISAResultsState extends State<ISAResults> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
-        body: Consumer<IsaViewModel>(builder: (context, model, child) {
-          return Container(
-            child: model.isaDropDownModel != null &&
-                    model.isaDropDownModel!.length != 0 &&
-                    model.isaResultModel != null
-                ? Container(
-                    padding: EdgeInsets.only(
-                        top: 15, left: 15, right: 15, bottom: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blueGrey)
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButtonFormField<String>(
-                                hint: Text("$classBatchData"),
-                                value: classBatch,
-                                items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
-                                  value: item.className,
-                                  child: Text(item.className.toString(),),
-                                ))
-                                    .toList(),
-                                onChanged: (item) {
-                                  print("Oye");
-                                  var batchClassId;
-                                  var classBatchSectionId;
-                                  var fetchId;
-                                  var programId;
-                                  setState(() {
-                                    classBatch=item;
-                                    // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-                                    //   if(item==itemValue.subjectName){
-                                    //     return itemValue.subjectCode.toString();
-                                    //   }
-                                    //
-                                    // });
+        body: SingleChildScrollView(
+          child: Consumer<IsaViewModel>(builder: (context, model, child) {
+            return Container(
+              child: model.isaDropDownModel != null &&
+                      model.isaDropDownModel!.length != 0 &&
+                      model.isaResultModel != null
+                  ? Container(
+                      padding: EdgeInsets.only(
+                          top: 15, left: 15, right: 15, bottom: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueGrey)
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButtonFormField<String>(
+                                  hint: Text("$classBatchData"),
+                                  value: classBatch,
+                                  items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
+                                    value: item.className,
+                                    child: Text(item.className.toString(),),
+                                  ))
+                                      .toList(),
+                                  onChanged: (item) {
+                                    print("Oye");
+                                    var batchClassId;
+                                    var classBatchSectionId;
+                                    var fetchId;
+                                    var programId;
+                                    setState(() {
+                                      classBatch=item;
+                                      // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                      //   if(item==itemValue.subjectName){
+                                      //     return itemValue.subjectCode.toString();
+                                      //   }
+                                      //
+                                      // });
 
-                                    for (var subjectData in model.isaDropDownModel!){
-                                      if(subjectData.className==item){
-                                        batchClassId=subjectData.batchClassId;
-                                        classBatchSectionId = subjectData.classBatchSectionId;
-                                        // fetchId = subjectData.;
+                                      for (var subjectData in model.isaDropDownModel!){
+                                        if(subjectData.className==item){
+                                          batchClassId=subjectData.batchClassId;
+                                          classBatchSectionId = subjectData.classBatchSectionId;
+                                          // fetchId = subjectData.;
 
+                                        }
                                       }
-                                    }
-                                  });
-                                  _isaViewModel.dynamicGetIsaResultDetails(
-                                    action: 6,
-                                    mode: 10,
-                                    batchClassId: batchClassId,
-                                    classBatchSectionId: classBatchSectionId,
-                                    fetchId: "1400-4164",                                    randomNum: 0.26757885412517934,  );
-                                  print("Hoye");
-                                  //       print(">>>>  $subjectCode");
-                                  //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
-                                }),
+                                    });
+                                    _isaViewModel.dynamicGetIsaResultDetails(
+                                      action: 6,
+                                      mode: 10,
+                                      batchClassId: batchClassId,
+                                      classBatchSectionId: classBatchSectionId,
+                                      fetchId: "1400-4164",                                    randomNum: 0.26757885412517934,  );
+                                    print("Hoye");
+                                    //       print(">>>>  $subjectCode");
+                                    //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                                  }),
+                            ),
                           ),
-                        ),
-                        // InkWell(
-                        //   onTap: () {
-                        //     print("set $isSemSelected");
-                        //     isSemSelected = true;
-                        //     print("reset $isSemSelected");
-                        //     // _semBottomSheet();
-                        //     showDialog(
-                        //       context: context,
-                        //       builder: (context) {
-                        //         return Dialog(
-                        //           backgroundColor: Colors.black45,
-                        //           shape: RoundedRectangleBorder(
-                        //               borderRadius: BorderRadius.circular(20)),
-                        //           elevation: 16,
-                        //           child: Container(
-                        //             child: ListView.separated(
-                        //               itemCount:
-                        //                   model.isaDropDownModel?.length ?? 0,
-                        //               itemBuilder: (context, index) {
-                        //                 print("bbbbbb $dropDownTitle");
-                        //                 return Column(
-                        //                   children: [
-                        //                     _buildRow(model
-                        //                             .isaDropDownModel?[index]
-                        //                             .className ??
-                        //                         ""),
-                        //                   ],
-                        //                 );
-                        //               },
-                        //               separatorBuilder: (context, index) {
-                        //                 return Divider(
-                        //                   color: Colors.white60,
-                        //                   endIndent: 5.0,
-                        //                   indent: 5.0,
-                        //                 );
-                        //               },
-                        //               shrinkWrap: true,
-                        //             ),
-                        //           ),
-                        //         );
-                        //       },
-                        //     );
-                        //   },
-                        //   child: Container(
-                        //     decoration: BoxDecoration(
-                        //       boxShadow: [
-                        //         BoxShadow(
-                        //             offset: Offset(2, 2),
-                        //             blurRadius: 8,
-                        //             color: (isSemSelected == true)
-                        //                 ? Colors.blue
-                        //                 : Colors.white)
-                        //       ],
-                        //       border: Border.all(
-                        //           color: (isSemSelected == true)
-                        //               ? Colors.blueAccent
-                        //               : Colors.grey),
-                        //       borderRadius: BorderRadius.circular(2),
-                        //     ),
-                        //     child: Container(
-                        //       color: Colors.white,
-                        //       padding: EdgeInsets.only(
-                        //           left: 5, right: 5, top: 5, bottom: 5),
-                        //       child: Row(
-                        //         mainAxisAlignment:
-                        //             MainAxisAlignment.spaceBetween,
-                        //         children: [
-                        //           Text(
-                        //             dropDownTitle ??
-                        //                 "${model.isaDropDownModel![0].className}",
-                        //             style: TextStyle(fontSize: 18),
-                        //           ),
-                        //           Icon(Icons.arrow_drop_down),
-                        //         ],
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.7,
-                          child: resultDetails(),
-                        )
-                      ],
-                    ),
-                  )
-                : Center(child: CircularProgressIndicator()),
-          );
-        }));
+                          // InkWell(
+                          //   onTap: () {
+                          //     print("set $isSemSelected");
+                          //     isSemSelected = true;
+                          //     print("reset $isSemSelected");
+                          //     // _semBottomSheet();
+                          //     showDialog(
+                          //       context: context,
+                          //       builder: (context) {
+                          //         return Dialog(
+                          //           backgroundColor: Colors.black45,
+                          //           shape: RoundedRectangleBorder(
+                          //               borderRadius: BorderRadius.circular(20)),
+                          //           elevation: 16,
+                          //           child: Container(
+                          //             child: ListView.separated(
+                          //               itemCount:
+                          //                   model.isaDropDownModel?.length ?? 0,
+                          //               itemBuilder: (context, index) {
+                          //                 print("bbbbbb $dropDownTitle");
+                          //                 return Column(
+                          //                   children: [
+                          //                     _buildRow(model
+                          //                             .isaDropDownModel?[index]
+                          //                             .className ??
+                          //                         ""),
+                          //                   ],
+                          //                 );
+                          //               },
+                          //               separatorBuilder: (context, index) {
+                          //                 return Divider(
+                          //                   color: Colors.white60,
+                          //                   endIndent: 5.0,
+                          //                   indent: 5.0,
+                          //                 );
+                          //               },
+                          //               shrinkWrap: true,
+                          //             ),
+                          //           ),
+                          //         );
+                          //       },
+                          //     );
+                          //   },
+                          //   child: Container(
+                          //     decoration: BoxDecoration(
+                          //       boxShadow: [
+                          //         BoxShadow(
+                          //             offset: Offset(2, 2),
+                          //             blurRadius: 8,
+                          //             color: (isSemSelected == true)
+                          //                 ? Colors.blue
+                          //                 : Colors.white)
+                          //       ],
+                          //       border: Border.all(
+                          //           color: (isSemSelected == true)
+                          //               ? Colors.blueAccent
+                          //               : Colors.grey),
+                          //       borderRadius: BorderRadius.circular(2),
+                          //     ),
+                          //     child: Container(
+                          //       color: Colors.white,
+                          //       padding: EdgeInsets.only(
+                          //           left: 5, right: 5, top: 5, bottom: 5),
+                          //       child: Row(
+                          //         mainAxisAlignment:
+                          //             MainAxisAlignment.spaceBetween,
+                          //         children: [
+                          //           Text(
+                          //             dropDownTitle ??
+                          //                 "${model.isaDropDownModel![0].className}",
+                          //             style: TextStyle(fontSize: 18),
+                          //           ),
+                          //           Icon(Icons.arrow_drop_down),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: resultDetails(),
+                          )
+                        ],
+                      ),
+                    )
+                  : Center(child: CircularProgressIndicator()),
+            );
+          }),
+        ));
   }
 
   void _semBottomSheet() {

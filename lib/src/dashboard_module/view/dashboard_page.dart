@@ -11,6 +11,7 @@ import 'package:pesu/src/dashboard_module/view/menu_page.dart';
 import 'package:pesu/src/dashboard_module/viewModel/dashboard_viewModel.dart';
 import 'package:pesu/src/isa_results/view/isa_results.dart';
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
+import 'package:pesu/src/seatinginfo/viewmodel/seating_info_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +54,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ChangeNotifierProvider(
                       create: (_) => ProfileViewmodel(),),
               ChangeNotifierProvider(
-              create: (_) => AnnouncementViewModel(),)
+              create: (_) => AnnouncementViewModel(),),
+                      ChangeNotifierProvider(
+                        create: (_) => SeatingInfoViewModel(),)
                     ],
 
                       child: HomePage(),
