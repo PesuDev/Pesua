@@ -92,7 +92,16 @@ class _HomePageState extends State<HomePage> {
         builder: (context, value, data, child) {
           return SafeArea(
             child: Scaffold(
-              backgroundColor: Colors.grey,
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+
+                title: Image.asset(
+                  'assets/images/logo.png',
+                  height: 29,
+                ),
+              //  titleSpacing: 100,
+              ),
+              // backgroundColor: Colors.grey,
               body: (value.announcementModel != null &&
                       value.announcementModel?.length != 0)
                   ? Padding(
@@ -126,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     getStudentLinks(
-                                        icon: Icon(Icons.wysiwyg),
+                                        icon: Icon(Icons.wysiwyg_outlined,),
                                         color: Color(0xffE3E7FD),
                                         text: 'My Courses',
                                         callback: () {
@@ -137,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 26,
                                     ),
                                     getStudentLinks(
-                                        icon: Icon(Icons.archive),
+                                        icon: Icon(Icons.add_chart),
                                         color: Color(0xffFDECE3),
                                         text: 'ISA Results',
                                         callback: () {
@@ -148,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 26,
                                     ),
                                     getStudentLinks(
-                                        icon: Icon(Icons.date_range),
+                                        icon: Icon(Icons.access_time),
                                         color: Color(0xffE3FDE3),
                                         text: 'Attendance',
                                         callback: () {

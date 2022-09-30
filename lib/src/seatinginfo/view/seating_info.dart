@@ -63,7 +63,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                           fontFamily: 'Open Sans',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.blue),
+                                          color: Color(0xff008DC9)),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -72,8 +72,8 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                       model.assessmentName ?? "",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
                                           color: Color(0xffFFFFFF)),
                                     ),
                                     SizedBox(
@@ -85,7 +85,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                           fontFamily: 'Open Sans',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.blue),
+                                          color: Color(0xff008DC9)),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -94,7 +94,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                       model.roomName ?? "",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
-                                          fontSize: 18,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color(0xffFFFFFF)),
                                     ),
@@ -115,7 +115,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                   Text(
@@ -123,7 +123,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                   Text(
@@ -131,7 +131,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                 ],
