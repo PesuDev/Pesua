@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -87,7 +88,7 @@ class _AnnouncementState extends State<Announcement> {
                                   value.announcementBannerModel?[index].announcementName??""
                                   ,
                                   style: TextStyle(fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                                      fontSize: 14,
                                       color: Color(0xff191D6E)),
                                 ),
 
@@ -110,7 +111,7 @@ class _AnnouncementState extends State<Announcement> {
                                   value.announcementBannerModel?[index].createdDateFrSorting??''
                                   ,
                                   style: TextStyle(fontWeight: FontWeight.normal,
-                                      fontSize: 20,
+                                      fontSize: 14,
                                       color: Color(0xff191D6E)),
                                 ),
                                 Divider(
@@ -119,8 +120,10 @@ class _AnnouncementState extends State<Announcement> {
 
                                         GestureDetector(
                                           onTap: ()async{
-                                            // PDFDocument doc = await PDFDocument.fromURL(value.announcementBannerModel?[index].files?[index]) ;
-                                            // PDFViewer(document: doc);
+                                            PDFDocument doc = await PDFDocument.fromURL('http://www.africau.edu/images/default/sample.pdf') ;
+                                            PDFViewer(document: doc);
+                                            // File file  = File(value.announcementBannerModel?[index].files);
+                                            // PDFDocument doc = await PDFDocument.fromFile(file);
 
 
                                           },
@@ -130,9 +133,10 @@ class _AnnouncementState extends State<Announcement> {
                                                 //margin: EdgeInsets.only(top: 10,left: 10),
                                                 child:
                                                 Text(
-                                                //  value.announcementBannerModel?[index].files?[index],
+
+                                                 //value.announcementBannerModel?[index].documentPath,
                                                   "ST_Labs_Swayam_May_2022_converted.pdf",
-                                                  style: TextStyle(color: Color(0xff333333),fontSize: 16),)),
+                                                  style: TextStyle(color: Color(0xff333333),fontSize: 14),)),
                                             Spacer(),
                                             Transform.rotate(
                                                 angle: 180 * math.pi / 140,

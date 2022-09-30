@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +33,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> initMethod() async {
     SharedPreferenceUtil preferenceUtil = SharedPreferenceUtil();
     String? token = await preferenceUtil.getToken();
-    log("i am the bosee:     $token}");
+    log("i am the bosee: $token}");
     if (token == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(milliseconds: 100), () {
+        Timer(const Duration(milliseconds: 500), () {
           if (mounted) {
             Navigator.pushNamedAndRemoveUntil(
                 context, AppRoutes.login, (route) => false);
+
           }
         });
       });
@@ -58,17 +60,39 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
+      body: WillPopScope(
+        onWillPop: (){
+          return exit(0);
+        },
         child: Container(
-height: MediaQuery.of(context).size.height/1.5,
-width: MediaQuery.of(context).size.width/1.5,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/index-bg-pattern.png",
+                ),
+                fit: BoxFit.cover),
+              ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height/10,),
+              Image.asset(
+                "assets/images/pesu-logo-big.png",
+                fit: BoxFit.cover,
+                width: 300,
 
-child: Image(
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height/10,),
+              CircularProgressIndicator(),
 
-  image: AssetImage("assets/images/pesu-logo-big.png",
+            ],
 
-  ),
-)
+            ),
+
+
+
         ),
       ),
     );

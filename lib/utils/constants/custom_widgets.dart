@@ -45,6 +45,7 @@ class CustomWidgets{
   static void getToast({required String message, required Color color}) {
     Fluttertoast.showToast(
         msg: message,
+
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
