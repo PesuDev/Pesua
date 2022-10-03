@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
 
   // late String live=currentDate + " " + Time;
 
-   int? currentIndex=0;
+   int? currentIndex;
+   int? myLength;
+   int? count;
 
   //DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
   // DateFormat('dd-MM-yyyy HH:MM').format(DateTime.now());
@@ -342,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Important Announcement"}  (${currentIndex}/${value.announcementModel?.length ?? ""})",
+                                      "${"Important Announcement"}  (${currentIndex ??""}/${value.announcementModel?.length ?? ""})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -500,7 +502,8 @@ class _HomePageState extends State<HomePage> {
                                       itemCount: value.announcementModel!.length,
                                         onIndexChanged: (int index) {
                                           setState(() {
-                                            currentIndex = index;
+                                              currentIndex = index;
+
                                           });
                                         }
                                     ),
@@ -520,7 +523,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Announcement"}  (${currentIndex}/${value.announcementModel?.length ?? ""})",
+                                      "${"Announcement"}  (${currentIndex ??""}/${value.announcementModel?.length})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -680,11 +683,19 @@ class _HomePageState extends State<HomePage> {
 
                                       autoplay: true,
                                       itemCount: value.announcementModel!.length,
+                                        // onTap: (int){
+                                        // setState(() {
+                                        //   myLength=value.announcementModel?.length;
+                                        //   count=(myLength! - currentIndex!);
+                                        // });
+                                        // },
           onIndexChanged: (int index) {
             setState(() {
               currentIndex = index;
+
             });
           }
+
           ),
                                   ),
                                 ],
