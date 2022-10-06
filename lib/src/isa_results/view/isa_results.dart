@@ -8,7 +8,7 @@ import '../viewmodel/isaViewModel.dart';
 
 class ISAResults extends StatefulWidget {
   bool isFromDashboard;
-ISAResults({required this.isFromDashboard});
+  ISAResults({required this.isFromDashboard});
 
   @override
   State<ISAResults> createState() => _ISAResultsState();
@@ -20,6 +20,7 @@ class _ISAResultsState extends State<ISAResults> {
   late IsaViewModel isaViewModel;
   late IsaViewModel _isaViewModel;
   var classBatch;
+  int? newbatchclassId;
 
   @override
   void initState() {
@@ -29,7 +30,8 @@ class _ISAResultsState extends State<ISAResults> {
         action: 6,
         mode: 5,
         whichObjectId: "clickHome_pesuacademy_myresults",
-        title: "ISA Results", deviceType: 1,
+        title: "ISA Results",
+        deviceType: 1,
         serverMode: 0,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.1629756694316884);
@@ -45,7 +47,9 @@ class _ISAResultsState extends State<ISAResults> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
+        appBar: widget.isFromDashboard
+            ? sideNavAppBarForDashboard("ISA Results")
+            : sideNavAppBar("ISA Results"),
         body: Consumer<IsaViewModel>(builder: (context, model, child) {
           return Container(
             child: model.isaDropDownModel != null &&
@@ -59,15 +63,17 @@ class _ISAResultsState extends State<ISAResults> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blueGrey)
-                          ),
+                              border: Border.all(color: Colors.blueGrey)),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButtonFormField<String>(
                                 value: classBatch,
-                                items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
-                                  value: item.className,
-                                  child: Text(item.className.toString(),),
-                                ))
+                                items: model.isaDropDownModel
+                                    ?.map((item) => DropdownMenuItem<String>(
+                                          value: item.className,
+                                          child: Text(
+                                            item.className.toString(),
+                                          ),
+                                        ))
                                     .toList(),
                                 onChanged: (item) {
                                   print("Oye");
@@ -76,7 +82,7 @@ class _ISAResultsState extends State<ISAResults> {
                                   var fetchId;
                                   var programId;
                                   setState(() {
-                                    classBatch=item;
+                                    classBatch = item;
                                     // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                                     //   if(item==itemValue.subjectName){
                                     //     return itemValue.subjectCode.toString();
@@ -84,13 +90,16 @@ class _ISAResultsState extends State<ISAResults> {
                                     //
                                     // });
 
-                                    for (var subjectData in model.isaDropDownModel!){
-                                      if(subjectData.className==item){
-                                        batchClassId=subjectData.batchClassId;
-                                        classBatchSectionId = subjectData.classBatchSectionId;
+                                    for (var subjectData
+                                        in model.isaDropDownModel!) {
+                                      if (subjectData.className == item) {
+                                        batchClassId = subjectData.batchClassId;
+                                        classBatchSectionId =
+                                            subjectData.classBatchSectionId;
                                         // fetchId = subjectData.;
 
                                       }
+                                      newbatchclassId = batchClassId;
                                     }
                                   });
                                   _isaViewModel.dynamicGetIsaResultDetails(
@@ -98,7 +107,9 @@ class _ISAResultsState extends State<ISAResults> {
                                     mode: 10,
                                     batchClassId: batchClassId,
                                     classBatchSectionId: classBatchSectionId,
-                                    fetchId: "1400-4164",                                    randomNum: 0.26757885412517934,  );
+                                    fetchId: "1400-4164",
+                                    randomNum: 0.26757885412517934,
+                                  );
                                   print("Hoye");
                                   //       print(">>>>  $subjectCode");
                                   //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
@@ -198,148 +209,122 @@ class _ISAResultsState extends State<ISAResults> {
         }));
   }
 
-  void _semBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return Consumer<IsaViewModel>(builder: (context, model, child) {
-            return new Container(
-              color: Color(0xFF737373),
-              //could change this to Color(0xFF737373),
-              //so you don't have to change MaterialApp canvasColor
-              child: new Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  decoration: new BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(30.0),
-                          topRight: const Radius.circular(30.0))),
-                  child: Column(
-                    children: [
-                      ListView.separated(
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('2 00}'),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider();
-                        },
-                      )
-                    ],
-                  )),
-            );
-          });
-        });
-  }
-
   Widget resultDetails() {
     return Consumer<IsaViewModel>(builder: (context, model, child) {
-      var subjectName=model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
+      var subjectName =
+          model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
       return ListView.builder(
           itemCount: subjectName?.length,
           itemBuilder: (context, int i) {
             /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
             String? titleCode = model.isaResultModel?[i].subjectCode;
-      //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
+            //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
 
-print("Oye single subject ${subjectName}");
+            print("Oye single subject ${subjectName}");
 
-            return Container(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    alignment: Alignment.centerLeft,
-                    color: Colors.blue,
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
-                    child: RichText(
-                      text: TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: titleCode,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 16,
-                                  color: Colors.white60)),
-                          TextSpan(
-                              text: ' - ' +
-                                  (model.isaResultModel?[i].subjectName ??
-                                      'Design and Analysis of Algorithm '),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.white)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return Divider(
-                          color: Colors.black26,
-                          height: 0.05,
-                        );
-                      },
-                      itemCount: model.isaResultModel?.length ?? 0,
-                      shrinkWrap: true,
-                      physics: ScrollPhysics(),
-                      itemBuilder: (context1, int j) {
-                        return (titleCode ==
-                                model.isaResultModel?[j].subjectCode)
-                            ? Container(
-                                padding: EdgeInsets.only(left: 4, top: 7),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                1.7,
-                                        padding: EdgeInsets.only(right: 5),
-                                        child: Text(
-                                          model.isaResultModel?[j].iSAMaster ??
-                                              "",
-                                          textAlign: TextAlign.left,
-                                        )),
-                                    Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                6.5,
-                                        child: Text(
-                                            "${model.isaResultModel?[j].marks}/${model.isaResultModel?[j].maxISAMarks}",
-                                            textAlign: TextAlign.left)),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, AppRoutes.isaResultsGraph);
-                                      },
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6.5,
-                                          child: Icon(
-                                            Icons.bar_chart,
-                                          )),
+            return (model.isaResultModel?[i].batchClassId == newbatchclassId)
+                ? Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          alignment: Alignment.centerLeft,
+                          color: Colors.blue,
+                          padding: EdgeInsets.only(
+                              left: 8, right: 8, top: 8, bottom: 8),
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: titleCode,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 16,
+                                        color: Colors.white60)),
+                                TextSpan(
+                                    text: ' - ' +
+                                        (model.isaResultModel?[i].subjectName ??
+                                            'Design and Analysis of Algorithm '),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                color: Colors.black26,
+                                height: 0.05,
+                              );
+                            },
+                            itemCount: model.isaResultModel?.length ?? 0,
+                            shrinkWrap: true,
+                            physics: ScrollPhysics(),
+                            itemBuilder: (context1, int j) {
+                              return (titleCode ==
+                                      model.isaResultModel?[j].subjectCode)
+                                  ? Container(
+                                      padding: EdgeInsets.only(left: 4, top: 7),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.7,
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Text(
+                                                model.isaResultModel?[j]
+                                                        .iSAMaster ??
+                                                    "",
+                                                textAlign: TextAlign.left,
+                                              )),
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  6.5,
+                                              child: Text(
+                                                  "${model.isaResultModel?[j].marks}/${model.isaResultModel?[j].maxISAMarks}",
+                                                  textAlign: TextAlign.left)),
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.pushNamed(context,
+                                                  AppRoutes.isaResultsGraph);
+                                            },
+                                            child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    6.5,
+                                                child: Icon(
+                                                  Icons.bar_chart,
+                                                )),
+                                          )
+                                        ],
+                                      ),
                                     )
-                                  ],
-                                ),
-                              )
-                            : Container();
-                      }),
-                  /*   Divider(
+                                  : Container();
+                            }),
+                        /*   Divider(
                     color: Colors.grey,
                     thickness: 1.0,
                   ),*/
-                ],
-              ),
-            );
+                      ],
+                    ),
+                  )
+                : Center(
+                    child: Text("No Data Found"),
+                  );
           });
     });
   }
