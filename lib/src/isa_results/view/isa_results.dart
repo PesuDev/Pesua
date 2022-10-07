@@ -271,7 +271,7 @@ print("Oye single subject ${subjectName}");
                   Container(
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.centerLeft,
-                    color: Colors.blue,
+                    color: Colors.lightBlue,
                     padding:
                         EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
                     child: RichText(
@@ -288,9 +288,9 @@ print("Oye single subject ${subjectName}");
                                   (model.isaResultModel?[i].subjectName ??
                                       'Design and Analysis of Algorithm '),
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w300,
                                   fontSize: 16,
-                                  color: Colors.white)),
+                                  color: Color(0xffFFFFFF))),
                         ],
                       ),
                     ),
@@ -321,6 +321,10 @@ print("Oye single subject ${subjectName}");
                                         child: Text(
                                           model.isaResultModel?[j].iSAMaster ??
                                               "",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14,
+                                              color: Color(0xff333333)),
                                           textAlign: TextAlign.left,
                                         )),
                                     Container(
@@ -329,6 +333,10 @@ print("Oye single subject ${subjectName}");
                                                 6.5,
                                         child: Text(
                                             "${model.isaResultModel?[j].marks}/${model.isaResultModel?[j].maxISAMarks}",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 14,
+                                                color: Color(0xff333333)),
                                             textAlign: TextAlign.left)),
                                     InkWell(
                                       onTap: () {
@@ -342,6 +350,7 @@ print("Oye single subject ${subjectName}");
                                               6.5,
                                           child: Icon(
                                             Icons.bar_chart,
+                                            color: Colors.black,
                                           )),
                                     )
                                   ],
@@ -349,10 +358,9 @@ print("Oye single subject ${subjectName}");
                               )
                             : Container();
                       }),
-                  /*   Divider(
-                    color: Colors.grey,
-                    thickness: 1.0,
-                  ),*/
+              SizedBox(
+                height: 10,
+              )
                 ],
               ),
             );
