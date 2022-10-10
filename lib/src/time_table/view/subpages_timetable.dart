@@ -92,7 +92,7 @@ class _TableDetailsState extends State<TableDetails> {
                                               .width /
                                               3,
                                           child: Text(
-                                            ("${model.startTime}-${model.endTime}"),
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
                                             // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
                                                 color: Color(0xff000000),
@@ -253,7 +253,7 @@ class _TableDetailsState extends State<TableDetails> {
                                               .width /
                                               3,
                                           child: Text(
-                                            ("${model.startTime}-${model.endTime}"),
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
                                             // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
                                                 color: Color(0xff000000),
@@ -413,7 +413,7 @@ class _TableDetailsState extends State<TableDetails> {
                                               .width /
                                               3,
                                           child: Text(
-                                            ("${model.startTime}-${model.endTime}"),
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
                                             // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
                                                 color: Color(0xff000000),
@@ -574,7 +574,7 @@ class _TableDetailsState extends State<TableDetails> {
                                               .width /
                                               3,
                                           child: Text(
-                                            ("${model.startTime}-${model.endTime}"),
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
                                             // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
                                                 color: Color(0xff000000),
@@ -736,7 +736,7 @@ class _TableDetailsState extends State<TableDetails> {
                                               .width /
                                               3,
                                           child: Text(
-                                            ("${model.startTime}-${model.endTime}"),
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
                                             // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
                                                 color: Color(0xff000000),

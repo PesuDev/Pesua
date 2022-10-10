@@ -1380,25 +1380,23 @@ class _MyProfileState extends State<MyProfile> {
                                 onTap: () async {
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
+                                    if(sp_password==newPasswordController.text){
+                                      CustomWidgets.getToast(message: "New password can't be same as old password", color:  Colors.grey);
+                                    }else if(sp_password==currentPasswordController.text && currentPasswordController.text.isNotEmpty&&newPasswordController.text.isNotEmpty&&currentPasswordController.text.isNotEmpty){
+                                      await profileViewmodel
+                                          ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
+                                          newPass1: confirmPasswordController.text);
+                                      Navigator.pop(context);
+                                      CustomWidgets.getToast(message: "Passworf updated", color:  Colors.grey);
+                                      Navigator.pushReplacementNamed(
+                                          context, AppRoutes.myProfile);
 
-                                    await profileViewmodel
-                                        ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
-                                        newPass1: confirmPasswordController.text);
-                                    Navigator.pop(context);
-                                    // if(sp_password==currentPasswordController.text){
-                                    //   CustomWidgets.getToast(message: "New password can't be same as old password", color:  Colors.grey);
-                                    // }else if(currentPasswordController.text.isNotEmpty&&newPasswordController.text.isNotEmpty&&currentPasswordController.text.isNotEmpty){
-                                    //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.grey);
-                                    //
-                                    // }
+                                    }else if(sp_password!=currentPasswordController){
+                                      CustomWidgets.getToast(message: "Old password entered does not match the password on record", color:  Colors.grey);
+
+                                    }
                                     // Navigator.pop(context);
-                                    // if(response!=null){
-                                    //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
-                                    //   Navigator.pushReplacementNamed(context, AppRoutes.myProfile);
-                                    // }else{
-                                    //   Navigator.pop(context);
-                                    //   CustomWidgets.getToast(message: "Could not Update the Password ", color:  Colors.red);
-                                    // }
+
 
                                   }
                                 },
