@@ -7,6 +7,7 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
 import 'package:pesu/utils/view/widget.dart';
@@ -125,19 +126,17 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pushNamed(
                                       context, AppRoutes.myProfile);
                                 },
-                                child: getDrawerDetails(context: context)),
+                                child:
+                              sp_token !=null?  getDrawerDetails(context: context):Text("")),
                             SizedBox(
                               height: _mainHeight * 0.01,
                             ),
                             Container(
-                              // color: Color(0xffFAFAFA),
                               color: Colors.white,
                               padding: EdgeInsets.only(
-                                //  left: MediaQuery.of(context).size.width/22,
                                   right: MediaQuery.of(context).size.width/22,
 
                                 top: _mainHeight * 0.01),
-                              //  margin: EdgeInsets.only(left: _mainWidth*0.03,right: _mainWidth*0.03),
                               height: _mainHeight * 0.1,
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,

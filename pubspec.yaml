@@ -45,6 +45,7 @@ dependencies:
   fl_chart: 0.45.1
   advance_pdf_viewer: ^2.0.1
   avoid_keyboard: ^0.3.0
+  email_validator: ^2.1.17
 
 
 
