@@ -61,7 +61,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Assesment",
+                                      "Assessment",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
                                           fontSize: 18,
@@ -114,7 +114,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    "Subject",
+                                    "SUBJECT",
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
@@ -208,7 +208,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${DateTimeUtil.convertDate(model.testEndTime!.toInt())}'
+                                                      '${DateTimeUtil.convertDate(model.testStartTime!.toInt())}'
                                                           "",
                                                       maxLines: 5,
                                                       textAlign:
@@ -224,7 +224,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                               0xff333333)),
                                                     ),
                                                     Text(
-                                                      ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}-${DateTimeUtil.convertDate(model.testEndTime!.toInt())}") ?? "",
+                                                      ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
                                                       maxLines: 5,
                                                       textAlign:
                                                           TextAlign.start,

@@ -42,6 +42,7 @@ class _ESAResultsState extends State<ESAResults> {
                                 "Provisional",
                                 style: TextStyle(
                                   fontFamily: 'Open Sans',
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xffFFFFFF)
                                 ),
@@ -52,9 +53,10 @@ class _ESAResultsState extends State<ESAResults> {
                           Tab(
                             child: Container(
                               child: Text(
-                                "PreviousSemesters",
+                                "Previous Semesters",
                                 style: TextStyle(
                                     fontFamily: 'Open Sans',
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: Color(0xffFFFFFF)
                                 ),

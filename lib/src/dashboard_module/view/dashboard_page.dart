@@ -29,83 +29,83 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: Consumer<BottomNavigationProvider>(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Consumer<BottomNavigationProvider>(
+          builder: (context, value, child) {
+  return WillPopScope(
+            onWillPop: (){
+
+                if (value.selectedIndex == 0) {
+                  return exit(0);
+                } else {
+                  print("callllllaaa");
+
+                  value.selectBottomIndex(bottomIndex: 0);
+                  return Future.value(null);
+                }
+
+            },
+            child: Consumer<BottomNavigationProvider>(
               builder: (context, value, child) {
-                return WillPopScope(
-                  onWillPop: (){
+                log(value.selectedIndex.toString());
+                switch (value.selectedIndex) {
+                  case 0:
+                    return MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider(
+                        create: (_) => ProfileViewmodel(),),
+                ChangeNotifierProvider(
+                create: (_) => AnnouncementViewModel(),),
+                        ChangeNotifierProvider(
+                          create: (_) => SeatingInfoViewModel(),)
+                      ],
 
-                    if (value.selectedIndex == 0) {
-                      return exit(0);
-                    } else {
-                      print("callllllaaa");
+                        child: HomePage(),
 
-                      value.selectBottomIndex(bottomIndex: 0);
-                      return Future.value(null);
-                    }
+                    );
+                  case 1:
+                    return ChangeNotifierProvider(
+                      create: (_) => CourseViewModel(),
+                      child: CourseDashboard(isFromDashboard: true,),
+                    );
+                  case 2:
+                    return ChangeNotifierProvider(
+                      create: (_) => IsaViewModel(),
+                      child: ISAResults(isFromDashboard: true,),
+                    );
+                  case 3:
+                    return ChangeNotifierProvider(
+                      create: (_) => AttendanceViewModel(),
+                      child: AttendanceDashboard(isFromDashboard: true,),
+                    );
+                  case 4:
+                    return ChangeNotifierProvider(
+                      create: (_) => DashboardViewModel(),
+                      child: MenuPage(),
+                    );
 
-                  },
-                  child: Consumer<BottomNavigationProvider>(
-                    builder: (context, value, child) {
-                      log(value.selectedIndex.toString());
-                      switch (value.selectedIndex) {
-                        case 0:
-                          return MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider(
-                                create: (_) => ProfileViewmodel(),),
-                              ChangeNotifierProvider(
-                                create: (_) => AnnouncementViewModel(),),
-                              ChangeNotifierProvider(
-                                create: (_) => SeatingInfoViewModel(),)
-                            ],
-
-                            child: HomePage(),
-
-                          );
-                        case 1:
-                          return ChangeNotifierProvider(
-                            create: (_) => CourseViewModel(),
-                            child: CourseDashboard(isFromDashboard: true,),
-                          );
-                        case 2:
-                          return ChangeNotifierProvider(
-                            create: (_) => IsaViewModel(),
-                            child: ISAResults(isFromDashboard: true,),
-                          );
-                        case 3:
-                          return ChangeNotifierProvider(
-                            create: (_) => AttendanceViewModel(),
-                            child: AttendanceDashboard(isFromDashboard: true,),
-                          );
-                        case 4:
-                          return ChangeNotifierProvider(
-                            create: (_) => DashboardViewModel(),
-                            child: MenuPage(),
-                          );
-
-                        default:
-                          return Container();
-                      }
-                    },
-                  ),
-                );
-              }),
-          bottomNavigationBar: Consumer<BottomNavigationProvider>(
-            builder: (context, value, child) {
-              return BottomNavigationBar(
-                currentIndex: value.selectedIndex,
-                fixedColor: appThemeColor,
-                items: getNavBarItems(),
-                selectedFontSize: 10,
-                unselectedFontSize: 10,
-                type: BottomNavigationBarType.fixed,
-                onTap: (index) => value.selectBottomIndex(bottomIndex: index),
-              );
+                default:
+                  return Container();
+              }
             },
           ),
-        ));
+        );
+        }),
+      bottomNavigationBar: Consumer<BottomNavigationProvider>(
+        builder: (context, value, child) {
+          return BottomNavigationBar(
+            currentIndex: value.selectedIndex,
+            fixedColor: appThemeColor,
+            items: getNavBarItems(),
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) => value.selectBottomIndex(bottomIndex: index),
+          );
+        },
+      ),
+    ));
   }
 
   List<BottomNavigationBarItem> getNavBarItems() {
