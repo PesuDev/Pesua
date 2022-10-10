@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/seatinginfo/model/seating_info_model.dart';
@@ -16,6 +17,8 @@ class SeatingInfo extends StatefulWidget {
 
 class _SeatingInfoState extends State<SeatingInfo> {
   late SeatingInfoViewModel _viewModel;
+  Timestamp? time;
+
 
   @override
   void initState() {
@@ -192,7 +195,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                             fontWeight:
                                                                 FontWeight.w400,
                                                             color: Color(
-                                                                0xff666666)),
+                                                                0xff8b8b8b)),
                                                       ),
                                                     ],
                                                   ),
@@ -205,10 +208,11 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' 
+                                                      '${DateTimeUtil.convertDate(model.testEndTime!.toInt())}'
                                                           "",
                                                       maxLines: 5,
                                                       textAlign:
+
                                                           TextAlign.start,
                                                       style: TextStyle(
                                                           fontFamily:
@@ -217,10 +221,10 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           color: Color(
-                                                              0xff000000)),
+                                                              0xff333333)),
                                                     ),
                                                     Text(
-                                                      "09:00 AM",
+                                                      ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}-${DateTimeUtil.convertDate(model.testEndTime!.toInt())}") ?? "",
                                                       maxLines: 5,
                                                       textAlign:
                                                           TextAlign.start,
@@ -249,7 +253,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                               'Open Sans',
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w400,
+                                                              FontWeight.w500,
                                                           color: Color(
                                                               0xff000000)),
                                                     ),

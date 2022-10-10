@@ -229,23 +229,25 @@ var classBatchData;
                                         return Column(
                                           children: [
                                             Container(
-                                              height: 100,
+                                              height: 110,
                                               child: Card(
                                                 elevation: 5,
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(
-                                                      top: 10, bottom: 10),
+                                                      top: 10,),
                                                   child: Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment.start,
                                                     children: [
-                                                      Container(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  top: 5),
-                                                          width: 40,
-                                                          child: Icon(
-                                                              Icons.ac_unit)),
+                                                      Flexible(
+                                                        child: Container(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 5),
+                                                            width: 40,
+                                                            child: Icon(
+                                                                Icons.ac_unit)),
+                                                      ),
                                                       Container(
                                                         padding: EdgeInsets.only(
                                                             left: 10),
@@ -269,7 +271,12 @@ var classBatchData;
                                                                         ?.sTUDENTSUBJECTS?[
                                                                             index]
                                                                         .subjectCode ??
-                                                                    ""),
+                                                                    "",style: TextStyle(
+                                                                  fontWeight: FontWeight.w400,
+                                                                  fontSize: 14,
+                                                                  fontFamily: 'open-sans',
+                                                                  color: Color(0xff9B9B9B)
+                                                                )),
                                                                 PopupMenuButton(
                                                                   child: Icon(Icons
                                                                       .more_vert),
@@ -306,9 +313,12 @@ var classBatchData;
                                                                                 left: 15),
                                                                             child:
                                                                                 Text(
-                                                                              'View Details',
-                                                                              style:
-                                                                                  TextStyle(fontSize: 14),
+                                                                              'View Course Info',
+                                                                                    style: TextStyle(
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                        fontSize: 12,
+                                                                                        fontFamily: 'open-sans',
+                                                                                        color: Color(0xff333333))
                                                                             ),
                                                                           ),
                                                                         ),
@@ -319,7 +329,12 @@ var classBatchData;
                                                               ],
                                                             ),
                                                             Text(
-                                                                "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}"),
+                                                                "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 14,
+                                                                fontFamily: 'open-sans',
+                                                                color: Color(0xff333333)
+                                                            )),
                                                             Divider(
                                                               color: Colors.grey,
                                                             ),
@@ -336,22 +351,21 @@ var classBatchData;
                                                                           text:
                                                                               'Type:',
                                                                           style: TextStyle(
-                                                                              fontWeight: FontWeight
-                                                                                  .normal,
-                                                                              fontSize:
-                                                                                  14,
-                                                                              color:
-                                                                                  Colors.grey)),
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontFamily: 'open-sans',
+                                                                              fontSize: 12,
+                                                                              color: Color(0xff9B9B9B)
+                                                                          )),
                                                                       TextSpan(
                                                                           text:
                                                                               " ${data.courseModel?.sTUDENTSUBJECTS?[index].name}",
                                                                           style: TextStyle(
                                                                               fontWeight: FontWeight
-                                                                                  .bold,
+                                                                                  .w500,
                                                                               fontSize:
-                                                                                  14,
+                                                                                  12,
                                                                               color:
-                                                                                  Colors.blueGrey)),
+                                                                                  Color(0xff333333))),
                                                                     ],
                                                                   ),
                                                                 ),
@@ -370,16 +384,18 @@ var classBatchData;
                                                                             text:
                                                                                 'Credits:',
                                                                             style: TextStyle(
-                                                                                fontWeight: FontWeight.normal,
-                                                                                fontSize: 14,
-                                                                                color: Colors.grey)),
+                                                                                fontWeight: FontWeight.w400,
+                                                                                fontSize: 12,
+                                                                                fontFamily: 'open-sans',
+                                                                                color: Color(0xff9B9B9B))),
                                                                         TextSpan(
                                                                             text:
                                                                                 ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits ?? ""}',
                                                                             style: TextStyle(
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: 14,
-                                                                                color: Colors.blueGrey)),
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 12,
+                                                                                fontFamily: 'open-sans',
+                                                                                color: Color(0xff333333))),
                                                                       ],
                                                                     ),
                                                                   ),

@@ -138,17 +138,20 @@ print(">>>>> $classBatch");
                                             children: [
                                               Text("${value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode}",
                                                 style: TextStyle(
-
-
-                                                    fontSize: 14
+                                                    fontFamily: 'open sans',
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Color(0xff333333),
+                                                    fontSize: 12
                                                 ),
                                               ),
+                                              SizedBox(height: 5,),
                                               Text("${value.attendanceListModel?.aTTENDANCELIST?[index].subjectName}",
                                                 maxLines: 4,
                                                 style: TextStyle(
-
-
-                                                    fontSize: 14
+fontFamily: 'open sans',
+fontWeight: FontWeight.w400,
+color: Color(0xff9B9B9B),
+                                                    fontSize: 12
                                                 ),
                                               ),
                                             ],

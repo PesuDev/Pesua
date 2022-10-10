@@ -17,26 +17,22 @@ import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:pesu/utils/view/splash_screen.dart';
 import 'package:provider/provider.dart';
 
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+  HttpOverrides.global = MyHttpOverrides();
+}
 
-class PostHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides{
   @override
-  HttpClient createHttpClient( context){
+  HttpClient createHttpClient(SecurityContext? context){
     return super.createHttpClient(context)
       ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-  HttpOverrides.global = new PostHttpOverrides();
-
-}
-
 class MyApp extends StatelessWidget {
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -67,4 +63,7 @@ class MyApp extends StatelessWidget {
 
     );
   }
+
+
+
 }
