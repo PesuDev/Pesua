@@ -128,15 +128,18 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                               ),
                                             ],
                                           ),
-                                          Text(
-                                            data.esaModel1?.results?[index]
-                                                    .semester ??
-                                                '',
-                                            style: TextStyle(
-                                                fontFamily: 'Open Sans',
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 15,
-                                                color: Color(0xff333333)),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 6.0),
+                                            child: Text(
+                                              data.esaModel1?.results?[index]
+                                                      .semester ??
+                                                  '',
+                                              style: TextStyle(
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15,
+                                                  color: Color(0xff333333)),
+                                            ),
                                           ),
                                           Divider(
                                             thickness: 3,
