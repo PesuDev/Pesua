@@ -54,6 +54,7 @@ class _SessionEffectState extends State<SessionEffect> {
   }
 
 
+
   int? selectedRadio;
   var selectValue=false;
   var grid1=false;
@@ -65,26 +66,37 @@ class _SessionEffectState extends State<SessionEffect> {
 var subject;
 var subjectCode;
 var sessionTime;
+
   setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
     });
   }  //int? value=0;
+  String day='';
+  String month='';
+  String year='';
+  String weakday='';
   String todayDate='';
-
   void dates(){
     // var today = DateTime.now();
     // var dateFormat = DateFormat('dd-MM-yyyy');
     // String currentDate = dateFormat.format(today);
     var date = new DateTime.now();
-    String datetime4 = DateFormat(DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY).format(date);
+    String datetime4 = DateFormat(DateFormat.DAY).format(date);
+    String datetime5 = DateFormat(DateFormat.MONTH).format(date);
+    String datetime6 = DateFormat(DateFormat.YEAR).format(date);
+    String datetime7 = DateFormat(DateFormat.WEEKDAY).format(date);
 
 
    // var dateParse = DateTime.parse(date);
 
    // var formattedDate = "${dateParse.day}-${dateParse.month.toString()}-${dateParse.year}";
     setState(() {
-      todayDate=datetime4;
+     day=datetime4;
+      month=datetime5;
+      year=datetime6;
+      weakday=datetime7;
+      todayDate=day+"-"+month+"-"+year+" "+weakday;
       print('jaa$todayDate');
 
     });
@@ -114,40 +126,49 @@ var sessionTime;
                       children: [
                         Text(
                           '$todayDate',
-                              //"${DateTime.now()}",
-                          //  data.sessionEffectivenessModel?.currentDate ??"",
-                          // "24-May-2022 Tuesday",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.w600,fontSize: 17,
                           ),),
-                        DropdownButtonFormField<String>(
-                          hint: Text("Select Subject"),
-                            value:subject,
-                            items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
-                              value: item.subjectName,
-                              child: Text(item.subjectName.toString(),),
-                            ))
-                                .toList(),
-                            onChanged: (item) {
-                              print("Oye");
-                              setState(() {
-                                subject=item;
-                        var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-                        if(item==itemValue.subjectName){
-                        return itemValue.subjectCode.toString();
-                        }
+                        SizedBox(height: 10,),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey)
+                          ),
+                          height: 34,
+                          child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration.collapsed(hintText: ''),
 
-                        });
+                              hint: Text("Select Subject"),
+                              value:subject,
+                              items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
+                                value: item.subjectName,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 7,left: 5),
+                                  child: Text(item.subjectName.toString(),),
+                                ),
+                              ))
+                                  .toList(),
+                              onChanged: (item) {
+                                print("Oye");
+                                setState(() {
+                                  subject=item;
+                          var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                          if(item==itemValue.subjectName){
+                          return itemValue.subjectCode.toString();
+                          }
+
+                          });
                       for (var subjectData in subjectCodeList!){
                        if(subjectData !=null){
-                        subjectCode=subjectData;
+                          subjectCode=subjectData;
                        }
                     }
-                              });
-                              print("Hoye");
-                              print(">>>>  $subjectCode");
+                                });
+                                print("Hoye");
+                                print(">>>>  $subjectCode");
 
-                            }),
+                              }),
+                        ),
 
                         SizedBox(
                           height: 15,
@@ -160,13 +181,15 @@ var sessionTime;
 
                                   subjectCode??'',
 
-                              style: TextStyle(color: Colors.grey),),
+                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),),
                             SizedBox(
                               width: 5,
                             ),
                             Text(
                               subject ??
-                                  "",                    ),
+                                  "",style: TextStyle(
+                              fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black
+                            ), ),
                           ],
                         ),
                         SizedBox(
@@ -174,13 +197,23 @@ var sessionTime;
                         ),
 
                         Text("Please select a session",style: TextStyle(
-                            fontWeight: FontWeight.bold
+                            fontWeight: FontWeight.w700,fontSize: 15,
                         ),),
+                        SizedBox(height: 10,),
                         Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)
+                          ),
+                          height: 34,
                           child:
 
                           DropdownButtonFormField<String>(
-                            hint: Text("Select Time"),
+                              decoration: InputDecoration.collapsed(hintText: ''),
+
+                              hint: Padding(
+                                padding: const EdgeInsets.only(top: 5,left: 5),
+                                child: Text("Select Time"),
+                              ),
                               value: sessionTime,
                               items: data.items1
                                   .map((item) => DropdownMenuItem<String>(
@@ -200,13 +233,15 @@ var sessionTime;
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Please provide Session Effectiveness Feedback Below"),
+                              Text("Please provide Session Effectiveness Feedback Below",style: TextStyle(
+                                fontSize: 14
+                              ),),
                               SizedBox(height: 10,),
                               Row(
                                 children: [
                                   RotatedBox(
                                       quarterTurns: 7,
-                                      child: Text("Learning Effectiveness")),
+                                      child: Text("Learning Effectiveness",style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w600),)),
                                   SizedBox(
                                     width: 10,
                                   ),
@@ -230,7 +265,7 @@ var sessionTime;
                                               children: [
                                                 SizedBox(height: 30,),
                                                 Text("Low/High",style: TextStyle(
-                                                    fontWeight: FontWeight.bold,fontSize: 18),),
+                                                    fontWeight: FontWeight.w700,fontSize: 15),),
                                                 Radio(
                                                     value: 1,
                                                     groupValue: selectedRadio,
@@ -269,7 +304,7 @@ var sessionTime;
                                               children: [
                                                 SizedBox(height: 30,),
                                                 Text("High/High",style: TextStyle(
-                                                    fontWeight: FontWeight.bold,fontSize: 18),),
+                                                    fontWeight: FontWeight.w700,fontSize: 15),),
                                                 Radio(
                                                     value: 2,
                                                     groupValue:selectedRadio,
@@ -310,7 +345,7 @@ var sessionTime;
                                               children: [
                                                 SizedBox(height: 30,),
                                                 Text("Low/Low",style: TextStyle(
-                                                    fontWeight: FontWeight.bold,fontSize: 18),),
+                                                    fontWeight:FontWeight.w700,fontSize: 15),),
                                                 Radio(
                                                     value: 3,
                                                     groupValue:selectedRadio,
@@ -346,7 +381,7 @@ var sessionTime;
                                               children: [
                                                 SizedBox(height: 30,),
                                                 Text("High/Low",style: TextStyle(
-                                                    fontWeight: FontWeight.bold,fontSize: 18),),
+                                                    fontWeight: FontWeight.w700,fontSize: 15),),
                                                 Radio(
                                                     value:4,
                                                     groupValue:selectedRadio,
@@ -374,20 +409,20 @@ var sessionTime;
                                 ],
                               ),
                               SizedBox(height: 10,),
-                              Center(child: Text("Session Effectiveness"))
+                              Center(child: Text("Session Effectiveness",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14),))
                             ],
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10,right: 30,top: 30),
-                          width: double.infinity,
-                          child: ElevatedButton(
+                        SizedBox(height: 20,),
+
+                        GestureDetector(
+                          onTap: (){
                             onPressed: ()async{
                               await sessionEffectivenessViewmodel?.feedbackDetails(
                                   timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
                                   BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
                                   mode: 2,
-                                 // subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                  // subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
                                   subjectCode: subjectCode??'',
                                   action: 39,
                                   BatchClassId: data.sessionEffectivenessModel?.subjectlist?[0].batchClassId ??0,
@@ -399,13 +434,27 @@ var sessionTime;
                                   status: selectedRadio??0,
                                   randomNum: 0.0780400788501232,
                                   ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
-                            },
-                            child: Text("Submit"),),
+                            };
+                          },
+                          child: Container(
+                            height: 34,
+                            color: Color(0xff337ab7),
+                            width: double.infinity,
+                            child: Center(
+                                child: Text(
+                                  "Submit",
+                                  style: TextStyle(
+                                    fontSize: 15,fontWeight: FontWeight.w400,color: Colors.white),
+                                  textAlign: TextAlign.center,
+
+
+                                )),
+                          ),
                         ),
                         SizedBox(height: 20,),
-                        Text("Note :",style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text("Note :",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14),),
                         SizedBox(height: 10,),
-                        Text("Please mark the area on the grid that accurately reflects today's session.",style: TextStyle(fontWeight: FontWeight.normal),),
+                        Text("Please mark the area on the grid that accurately reflects today's session.",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 14),),
                         SizedBox(height: 10,),
 
                         Text("Session Effectiveness vs Learning Effectiveness",style: TextStyle(fontWeight: FontWeight.bold),),

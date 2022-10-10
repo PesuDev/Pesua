@@ -85,26 +85,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: MenuPage(),
                     );
 
-                  default:
-                    return Container();
-                }
-              },
-            ),
+                default:
+                  return Container();
+              }
+            },
+          ),
+        );
+        }),
+      bottomNavigationBar: Consumer<BottomNavigationProvider>(
+        builder: (context, value, child) {
+          return BottomNavigationBar(
+            currentIndex: value.selectedIndex,
+            fixedColor: appThemeColor,
+            items: getNavBarItems(),
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) => value.selectBottomIndex(bottomIndex: index),
           );
-          }),
-        bottomNavigationBar: Consumer<BottomNavigationProvider>(
-          builder: (context, value, child) {
-            return BottomNavigationBar(
-              currentIndex: value.selectedIndex,
-              fixedColor: appThemeColor,
-              items: getNavBarItems(),
-              type: BottomNavigationBarType.fixed,
-              onTap: (index) => value.selectBottomIndex(bottomIndex: index),
-            );
-          },
-        ),
+        },
       ),
-    );
+    ));
   }
 
   List<BottomNavigationBarItem> getNavBarItems() {
