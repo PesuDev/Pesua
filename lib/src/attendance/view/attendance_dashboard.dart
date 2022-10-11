@@ -21,9 +21,11 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
   var classBatch;
   var classBatchData;
+  var classBatchData1;
   void initState() {
     super.initState();
  initMethod();
+    drop();
   }
   SharedPreferenceUtil util = SharedPreferenceUtil();
 initMethod()async{
@@ -36,6 +38,13 @@ initMethod()async{
 
 print(">>>>> $classBatch");
 }
+
+  drop()async{
+    classBatchData=  await util.getString(sp_className);
+    classBatchData1 = classBatchData.toString().substring(0,5);
+    print("object${classBatchData1}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +66,7 @@ print(">>>>> $classBatch");
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
-                      hint: Text("$classBatchData"),
+                      hint: Text("$classBatchData1"),
                         value: classBatch,
                         items:value.attendanceDropDownModel?.map((item) => DropdownMenuItem<String>(
                           value: item.className,

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
+import 'course_dashboard.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   const IndividualSubScreen({Key? key}) : super(key: key);
@@ -52,6 +53,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         length: 4,
         child: Scaffold(
           appBar: AppBar(
+            leading:
+              BackButton(
+                onPressed: (){
+                  Navigator.pushNamed(
+                      context,
+                      AppRoutes.Dashboard);
+                },
+              ),
             title: Text("Subject"),
             bottom: TabBar(
               indicatorSize: TabBarIndicatorSize.label,
@@ -127,69 +136,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     htmlCode = uriDecode;
 
                     return Column(children: [
-                      /*   Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("jjjjjj $expand");
-                        setState(() {
-                          if (expand == false) {
-                            expand = true;
-                          } else if (expand == true) {
-                            expand = false;
-                          }
-                        });
-                        print("jjjjjj $expand");
-                      },
-                      child: Icon(
-                        (expand == false)
-                            ? Icons.add_circle
-                            : Icons.remove_circle_rounded,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.individualUnit,
-                            arguments: CourseArguments(
-                                data.unitModel?[i].topicTitle ?? ''));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10),
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(data.unitModel?[i].topicTitle ?? ""),
-                            Icon(
-                              Icons.chevron_right,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                (expand == true)
-                    ? Consumer<CourseViewModel>(
-                        builder: (context, model, child) {
-                        String? val1;
-                        if (model.subjectModel?.cOURSECONTENT?[i]
-                                .courseContentTypeId ==
-                            3) {
-                          val1 = htmlCode;
-                        }
-                        return Container(
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: (model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContentTypeId ==
-                                  3)
-                              ? HtmlWidget(htmlCode!)
-                              : Container(),
-                        );
-                      })
-                    : Container(),*/
                       ExpansionTile(
                         title: InkWell(
                           onTap: () {

@@ -59,6 +59,7 @@ var classBatchData;
   }
 
 
+
   var classBatch;
   @override
   Widget build(BuildContext context) {
@@ -127,87 +128,6 @@ var classBatchData;
                                       }),
                                 ),
                               ),
-                              // InkWell(
-                              //   onTap: () {
-                              //     print("set $isSemSelected");
-                              //     isSemSelected = true;
-                              //     print("reset $isSemSelected");
-                              //     // _semBottomSheet();
-                              //     showDialog(
-                              //       context: context,
-                              //       builder: (context) {
-                              //         return Dialog(
-                              //           backgroundColor: Colors.black45,
-                              //           shape: RoundedRectangleBorder(
-                              //               borderRadius:
-                              //                   BorderRadius.circular(20)),
-                              //           elevation: 16,
-                              //           child: Container(
-                              //             child: ListView.separated(
-                              //               itemCount: model.courseDropDownModel
-                              //                       ?.length ??
-                              //                   0,
-                              //               itemBuilder: (context, index) {
-                              //                 print("bbbbbb $dropDownTitle");
-                              //                 return Column(
-                              //                   children: [
-                              //                     _buildRow(model
-                              //                             .courseDropDownModel?[
-                              //                                 index]
-                              //                             .className ??
-                              //                         ""),
-                              //                   ],
-                              //                 );
-                              //               },
-                              //               separatorBuilder: (context, index) {
-                              //                 return Divider(
-                              //                   color: Colors.white60,
-                              //                   endIndent: 5.0,
-                              //                   indent: 5.0,
-                              //                 );
-                              //               },
-                              //               shrinkWrap: true,
-                              //             ),
-                              //           ),
-                              //         );
-                              //       },
-                              //     );
-                              //   },
-                              //   child: Container(
-                              //     decoration: BoxDecoration(
-                              //       boxShadow: [
-                              //         BoxShadow(
-                              //             offset: Offset(2, 2),
-                              //             blurRadius: 8,
-                              //             color: (isSemSelected == true)
-                              //                 ? Colors.blue
-                              //                 : Colors.white)
-                              //       ],
-                              //       border: Border.all(
-                              //           color: (isSemSelected == true)
-                              //               ? Colors.blueAccent
-                              //               : Colors.grey),
-                              //       borderRadius: BorderRadius.circular(2),
-                              //     ),
-                              //     child: Container(
-                              //       color: Colors.white,
-                              //       padding: EdgeInsets.only(
-                              //           left: 5, right: 5, top: 5, bottom: 5),
-                              //       child: Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceBetween,
-                              //         children: [
-                              //           Text(
-                              //             dropDownTitle ??
-                              //                 "${model.courseDropDownModel![0].className}",
-                              //             style: TextStyle(fontSize: 18),
-                              //           ),
-                              //           Icon(Icons.arrow_drop_down),
-                              //         ],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
                               SizedBox(
                                 height: 15,
                               ),
@@ -427,107 +347,5 @@ var classBatchData;
             );
           }),
         ));
-  }
-
-  Widget _buildRow(
-    String name,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Container(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            InkWell(
-              onTap: () {
-                var batchClassId;
-                var classBatchSectionId;
-                setState(() {
-                  dropDownTitle = name;
-                  // for (var subjectData in data.esaModel2!
-                  //     .studentSemesterWise!) {
-                  //   if (subjectData.className == item) {
-                  //     batchId = subjectData.batchClassId;
-                  //     classesId = subjectData.classessId;
-                  //   }
-                  //}
-                });
-                Navigator.of(context).pop();
-                _courseDropDownViewModel.getCourseDropDownDetails(
-                    action: 18,
-                    mode: 1,
-                    whichObjectId: "clickHome_pesuacademy_mycourses",
-                    title: "My Courses",
-                    deviceType: 1,
-                    serverMode: 0,
-                    redirectValue: "redirect:/a/ad",
-                    randomNum: 0.3376470323389076);
-              },
-              child: Container(
-                padding:
-                    EdgeInsets.only(left: 10.0, top: 8, bottom: 8, right: 8),
-                child: InkWell(
-                  child: Row(
-                    children: <Widget>[
-                      Center(
-                        child: Text(
-                          name,
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _semBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return new Container(
-            color: Color(0xFF737373),
-            //could change this to Color(0xFF737373),
-            //so you don't have to change MaterialApp canvasColor
-            child: new Container(
-                padding: EdgeInsets.only(top: 10, bottom: 10),
-                decoration: new BoxDecoration(
-                    color: Colors.black45,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(30.0),
-                        topRight: const Radius.circular(30.0))),
-                child: Column(
-                  children: [
-                    new Text(
-                      "SEM 3",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      indent: 12.0,
-                      endIndent: 12.0,
-                    ),
-                    new Text(
-                      "SEM 4",
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                )),
-          );
-        });
   }
 }

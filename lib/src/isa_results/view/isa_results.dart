@@ -23,12 +23,13 @@ class _ISAResultsState extends State<ISAResults> {
   late IsaViewModel _isaViewModel;
   var classBatch;
   var classBatchData;
+  var classBatchData1;
 List dropDownData=[];
   @override
   void initState() {
     super.initState();
     initMethod();
-
+drop();
   }
   SharedPreferenceUtil util = SharedPreferenceUtil();
 
@@ -53,6 +54,11 @@ List dropDownData=[];
     classBatchData= await util.getString(sp_className);
 
     print(">>>>> $classBatch");
+  }
+  drop()async{
+    classBatchData=  await util.getString(sp_className);
+    classBatchData1 = classBatchData.toString().substring(0,5);
+    print("object${classBatchData1}");
   }
 
 
@@ -82,7 +88,7 @@ List dropDownData=[];
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  hint: Text("$classBatchData"),
+                                  hint: Text("$classBatchData1"),
                                   value: classBatch,
                                   items:dropDownData?.map((item) => DropdownMenuItem<String>(
                                     value: item,
