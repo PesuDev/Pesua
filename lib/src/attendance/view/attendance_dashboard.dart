@@ -160,7 +160,7 @@ color: Color(0xff9B9B9B),
                                         SizedBox(width: 20,),
                                         Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
                                         SizedBox(width: 5,),
-                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??0}%")),
+                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??"NA"}")),
                                         SizedBox(width: 5,),
                                         Expanded(child: IconButton(
                                           icon:      Icon(Icons.keyboard_arrow_right,

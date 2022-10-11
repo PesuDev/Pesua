@@ -199,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                                     getStudentLinks(
                                         icon: Icon(Icons.calendar_today_sharp),
                                         color: Color(0xffFDECE3),
-                                        text: 'Calender',
+                                        text: 'Calendar',
                                         callback: () {
                                           Navigator.pushNamed(context,
                                               AppRoutes.calendarDashboard);
