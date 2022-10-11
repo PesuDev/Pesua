@@ -57,7 +57,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
             appBar: sideNavAppBar("TimeTable"),
 
             backgroundColor:Colors.red.withOpacity(0.9),
-            body: Column(children: [
+            body:
+            Column(
+                children: [
               Container(
                 color: headingColor,
                 width: double.infinity,
@@ -200,7 +202,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                 ),
               ),
 
-            ])));
+            ])
+        )
+      );
   }
 
   }

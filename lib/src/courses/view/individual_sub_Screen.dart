@@ -9,6 +9,8 @@ import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/color_consts.dart';
+import '../../../utils/view/widget.dart';
 import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
 
@@ -51,47 +53,136 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text("Subject"),
-            bottom: TabBar(
-              indicatorSize: TabBarIndicatorSize.label,
-              isScrollable: true,
-              controller: _tabController,
-              tabs: [
-                Tab(
-                  child: Text("Content"),
+          // appBar: AppBar(
+          //   title: Text("Subject"),
+          //   bottom: TabBar(
+          //     indicatorSize: TabBarIndicatorSize.label,
+          //     isScrollable: true,
+          //     controller: _tabController,
+          //     tabs: [
+          //       Tab(
+          //         child: Text("Content"),
+          //       ),
+          //       Tab(
+          //         child: Text("Objectives"),
+          //       ),
+          //       Tab(
+          //         child: Text("Outcomes"),
+          //       ),
+          //       Tab(
+          //         child: Text("References"),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          appBar: sideNavAppBar("TimeTable"),
+
+          body:
+          Column(
+              children: [
+
+                Container(
+                  color: headingColor,
+                  width: double.infinity,
+                  child:
+                  TabBar(
+
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.white.withOpacity(0.9),
+                    isScrollable: true,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: Colors.amber,
+
+                    tabs: [
+                      Tab(
+                        child: Container(
+                          child: Text(
+
+                            "Content",
+                            style: TextStyle(
+                              fontFamily: 'Open Sans',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              // color: Color(0xffFFFFFF)
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10,left: 20),
+                            child: Text(
+                              "Objectives",
+                              style: TextStyle(
+                                fontFamily: 'Open Sans',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                //color: Color(0xffFFFFFF)
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 10,left: 20),
+                            child: Text(
+                              "Outcomes",
+                              style: TextStyle(
+                                fontFamily: 'Open Sans',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                // color: Color(0xffFFFFFF)
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Tab(
+                        child: Container(
+                          child: Text(
+                            "References",
+                            style: TextStyle(
+                              fontFamily: 'Open Sans',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              // color: Color(0xffFFFFFF)
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
                 ),
-                Tab(
-                  child: Text("Objectives"),
+                Expanded(
+                  child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      child:
+                      TabBarView(
+                        //controller:tabController,
+
+                          children: [
+                          Container(
+                            child: content(),
+                          ), Container(
+                            child: objectives(),
+                          ), Container(
+                            child: outcomes(),
+                          ), Container(
+                            child: references(),
+                          ),
+                          ])
+                  ),
                 ),
-                Tab(
-                  child: Text("Outcomes"),
-                ),
-                Tab(
-                  child: Text("References"),
-                ),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                child: content(),
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                child: objectives(),
-              ),
-              Container(
-                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                  child: outcomes()),
-              Container(
-                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                  child: references()),
-            ],
-          ),
+
+              ])
         ),
       );
     });
@@ -281,6 +372,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
+            color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length,
@@ -295,7 +387,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
+                              ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.85,
                                 padding: EdgeInsets.only(left: 5, top: 5),
@@ -319,6 +422,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
+        color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
@@ -333,7 +437,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
+                              ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.85,
                                 padding: EdgeInsets.only(left: 5, top: 5),
@@ -350,6 +465,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
   Widget? references() {
     return Container(
+      color: Colors.white,
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Consumer<CourseViewModel>(builder: (context, model, child) {
           return model.subjectModel != null &&
@@ -367,10 +483,19 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.ac_unit_outlined,
-                                size: 100,
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
                               ),
+
                               Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,

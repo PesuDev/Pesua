@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -312,8 +313,8 @@ class _LoginState extends State<Login> {
 
                           if (responseModel != null) {
 
-                            CircularProgressIndicator(
-                                valueColor:AlwaysStoppedAnimation<Color>(Colors.blue));
+
+
                             log("Oye login came");
                             SharedPreferenceUtil util =
                             SharedPreferenceUtil();
@@ -351,11 +352,19 @@ class _LoginState extends State<Login> {
                             // await util.setString(sp_token,
                             //     responseModel.mobileAppTokenError?? '');
                             log("Bose 2 ame:  ${await util.getToken()}");
+                            CircularProgressIndicator();
 
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => DashboardScreen()));
+                        Timer(const Duration(milliseconds: 1000), () {
+                              if (mounted) {
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                              }
+                            });
+
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (_) => DashboardScreen()));
                             CustomWidgets.getToast(message: "Login Successfully", color:  Color(0xff273746));
 
 

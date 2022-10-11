@@ -1355,6 +1355,10 @@ class _MyProfileState extends State<MyProfile> {
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).pop();
+                                  currentPasswordController.clear();
+                                  confirmPasswordController.clear();
+                                  newPasswordController.clear();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
