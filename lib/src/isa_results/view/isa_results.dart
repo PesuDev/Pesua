@@ -23,7 +23,7 @@ class _ISAResultsState extends State<ISAResults> {
   late IsaViewModel _isaViewModel;
   var classBatch;
   var classBatchData;
-
+List dropDownData=[];
   @override
   void initState() {
     super.initState();
@@ -61,11 +61,16 @@ class _ISAResultsState extends State<ISAResults> {
         appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
         body: SingleChildScrollView(
           child: Consumer<IsaViewModel>(builder: (context, model, child) {
+            if(model.isaDropDownModel != null &&
+                model.isaDropDownModel!.length != 0 &&
+                model.isaResultModel != null){
+              dropDownData=model.isaDropDownModel!.map((e) => e.className).toSet().toList();
+            }
             return Container(
               child: model.isaDropDownModel != null &&
                       model.isaDropDownModel!.length != 0 &&
                       model.isaResultModel != null
-                  ? Container(
+                  ?  Container(
                       padding: EdgeInsets.only(
                           top: 15, left: 15, right: 15, bottom: 8),
                       child: Column(
@@ -79,10 +84,10 @@ class _ISAResultsState extends State<ISAResults> {
                               child: DropdownButtonFormField<String>(
                                   hint: Text("$classBatchData"),
                                   value: classBatch,
-                                  items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
-                                    value: item.className,
-                                    child: Text(item.className.toString(),),
-                                  ))
+                                  items:dropDownData?.map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(item.toString(),),
+                                  )).toSet()
                                       .toList(),
                                   onChanged: (item) {
                                     print("Oye");
@@ -208,6 +213,8 @@ class _ISAResultsState extends State<ISAResults> {
                         ],
                       ),
                     )
+
+
                   : Center(child: CircularProgressIndicator()),
             );
           }),

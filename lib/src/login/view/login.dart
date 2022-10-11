@@ -217,14 +217,7 @@ class _LoginState extends State<Login> {
                         style: TextStyle(color: Colors.white,fontSize: 16),
                         focusNode: _focus,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        // validator: (String? value) {
-                        //   if (value!.trim().isEmpty) {
-                        //     return "Please Enter Valid User name/SRN";
-                        //   } else {
-                        //     return null;
-                        //   }
-                        // },
-                       // autofocus: true,
+
                         controller: usernameController,
                         decoration: new InputDecoration(
                           fillColor: Colors.transparent,
@@ -319,7 +312,8 @@ class _LoginState extends State<Login> {
 
                           if (responseModel != null) {
 
-
+                            CircularProgressIndicator(
+                                valueColor:AlwaysStoppedAnimation<Color>(Colors.blue));
                             log("Oye login came");
                             SharedPreferenceUtil util =
                             SharedPreferenceUtil();
@@ -357,13 +351,13 @@ class _LoginState extends State<Login> {
                             // await util.setString(sp_token,
                             //     responseModel.mobileAppTokenError?? '');
                             log("Bose 2 ame:  ${await util.getToken()}");
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => DashboardScreen()));
                             CustomWidgets.getToast(message: "Login Successfully", color:  Color(0xff273746));
-                            CircularProgressIndicator(
-                                valueColor:AlwaysStoppedAnimation<Color>(Colors.blue));
+
 
 
                           } else {
@@ -539,12 +533,18 @@ class _LoginState extends State<Login> {
                              if (_form.currentState != null) {
                                _form.currentState?.validate();
 
-                               await _viewModel.forgetPasswordDetails1(
-                                   action: 11,
-                                   mode: 1,
-                                   loginId: forgetPasswordController.text,
-                                   appId: 1,
-                                   randomNum: 0.3145632102349487);
+                               if(forgetPasswordController.text.isEmpty){
+                                   CustomWidgets.getToast(message: "Enter Login ID", color:  Colors.grey);
+                               }else {
+                                 await _viewModel.forgetPasswordDetails1(
+                                     action: 11,
+                                     mode: 1,
+                                     loginId: forgetPasswordController.text,
+                                     appId: 1,
+                                     randomNum: 0.3145632102349487);
+                               }
+
+
 
                                //
 
