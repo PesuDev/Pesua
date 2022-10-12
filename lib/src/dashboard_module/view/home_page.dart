@@ -238,81 +238,88 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: _mainHeight * 0.01,
                             ),
+
                             Container(
                               height: _mainHeight * 0.27,
-                              // padding: EdgeInsets.symmetric(
-                              //     horizontal: _mainWidth * 0.03),
-                              child:
-                              Swiper(
+
+                              child: Swiper(
                                 itemBuilder: (BuildContext context, int index) {
+                                  // List<AnnouncementModel> name=((value.announcementModel?[index].announcementType==2)?value.announcementModel![index].batchClassId:"hh");
+                                  // print("bababa$name");
                                   String? base64Image =
                                   (value.announcementModel?[index].iconPath);
                                   final UriData? mydata =
                                       Uri.parse(base64Image.toString()).data;
                                   Uint8List? myImage = mydata?.contentAsBytes();
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChangeNotifierProvider(
-                                                      create: (BuildContext
-                                                      context) =>
-                                                          AnnouncementViewModel(),
-                                                      child: Announcement(
-                                                          announcementId: value
-                                                              .announcementModel?[
-                                                          index]
-                                                              .announcementId))));
-                                    },
-                                    child: Stack(
-                                      children: [
-                                        myImage != null
-                                            ? Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(5),
-                                              image: DecorationImage(
-                                                image: MemoryImage(myImage),
-                                                fit: BoxFit.fill,
-                                              )),
-                                              )
-                                            : Container(),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                              padding: EdgeInsets.only(top: 5),
-                                              width: _mainWidth,
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black54,
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                    Radius.circular(5),
-                                                    bottomRight:
-                                                    Radius.circular(5)),
-                                              ),
-                                              height: 25,
-                                              child: Align(
+                                  return Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChangeNotifierProvider(
+                                                        create: (BuildContext
+                                                        context) =>
+                                                            AnnouncementViewModel(),
+                                                        child: Announcement(
+                                                            announcementId: value
+                                                                .announcementModel?[
+                                                            index]
+                                                                .announcementId))));
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          myImage != null && value.announcementModel?[index].announcementType==2
+                                              ? Container(
+                                            height: _mainHeight * 0.27,
+
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(5),
+                                                image: DecorationImage(
+                                                  image:
+                                                  MemoryImage(myImage),
+                                                  fit: BoxFit.fill,
+                                                )),
+                                                )
+                                              : Container(
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            child: Container(
+                                                padding: EdgeInsets.only(top: 5),
+                                                width: _mainWidth,
                                                 alignment: Alignment.center,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      bottom: 5),
-                                                  child: Text(
-                                                    value
-                                                        .announcementModel?[
-                                                    index]
-                                                        .announcementName ??
-                                                        "",
-                                                    // "Invitation to Participate from dated - 07 June 2022",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white),
-                                                  ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black54,
+                                                  borderRadius: BorderRadius.only(
+                                                      bottomLeft:
+                                                      Radius.circular(5),
+                                                      bottomRight:
+                                                      Radius.circular(5)),
                                                 ),
-                                              )),
-                                        )
-                                      ],
+                                                height: 25,
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        bottom: 5),
+                                                    child: Text(
+                                                      value
+                                                          .announcementModel?[
+                                                      index]
+                                                          .announcementName ??
+                                                          "",
+                                                      // "Invitation to Participate from dated - 07 June 2022",
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                )),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -320,92 +327,6 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: value.announcementModel!.length,
                                 //  itemCount: imageList.length,
                               ),
-
-                              // Swiper(
-                              //   itemBuilder: (BuildContext context, int index) {
-                              //     String? base64Image =
-                              //     (value.announcementModel?[index].iconPath);
-                              //     final UriData? mydata =
-                              //         Uri.parse(base64Image.toString()).data;
-                              //     Uint8List? myImage = mydata?.contentAsBytes();
-                              //     return GestureDetector(
-                              //       onTap: () {
-                              //         Navigator.of(context).push(
-                              //             MaterialPageRoute(
-                              //                 builder: (context) =>
-                              //                     ChangeNotifierProvider(
-                              //                         create: (BuildContext
-                              //                         context) =>
-                              //                             AnnouncementViewModel(),
-                              //                         child: Announcement(
-                              //                             announcementId: value
-                              //                                 .announcementModel?[
-                              //                             index]
-                              //                                 .announcementId))));
-                              //       },
-                              //       child:
-                              //       Stack(
-                              //         children: [
-                              //           myImage != null && value.announcementModel?[index].announcementType==2
-                              //               ? Container(
-                              //             decoration: BoxDecoration(
-                              //                 borderRadius:
-                              //                 BorderRadius.circular(5),
-                              //                 image: DecorationImage(
-                              //                   image: MemoryImage(myImage),
-                              //                   fit: BoxFit.fill,
-                              //                 )),
-                              //           )
-                              //               : Container(
-                              //             color: Colors.amber,
-                              //           ),
-                              //           Positioned(
-                              //             bottom: 0,
-                              //             child: Container(
-                              //                 padding: EdgeInsets.only(top: 5),
-                              //                 width: _mainWidth,
-                              //                 alignment: Alignment.center,
-                              //                 decoration: BoxDecoration(
-                              //                   color: Colors.black54,
-                              //                   borderRadius: BorderRadius.only(
-                              //                       bottomLeft:
-                              //                       Radius.circular(5),
-                              //                       bottomRight:
-                              //                       Radius.circular(5)),
-                              //                 ),
-                              //                 height: 25,
-                              //                 child: Align(
-                              //                   alignment: Alignment.center,
-                              //                   child: Padding(
-                              //                     padding: const EdgeInsets.only(
-                              //                         bottom: 5),
-                              //                     child:
-                              //                     value.announcementModel?[index].announcementType==2?
-                              //                     Text(
-                              //                       value
-                              //                           .announcementModel?[
-                              //                       index]
-                              //                           .announcementName ??
-                              //                           "",
-                              //                       // "Invitation to Participate from dated - 07 June 2022",
-                              //                       style: TextStyle(
-                              //                           fontSize: 16,
-                              //                           color: Colors.white),
-                              //                     ):Text(""),
-                              //                   ),
-                              //                 )),
-                              //           )
-                              //         ],
-                              //       ),
-                              //     );
-                              //   },
-                              //   autoplay: true,
-                              //   itemCount: value.announcementModel!.length,
-                              //   //  itemCount: imageList.length,
-                              // ),
-
-
-
                             ),
                             SizedBox(
                               height: 10,
