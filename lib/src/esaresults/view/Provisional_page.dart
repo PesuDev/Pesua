@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/constants/color_consts.dart';
 import '../../../utils/view/widget.dart';
+import '../../attendance/model/attendance_arguments.dart';
 import '../viewmodel/Esa_viewmodel.dart';
 
 class ProvisionalPage extends StatefulWidget {
@@ -343,7 +344,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                               Navigator.pushNamed(
                                                                   context,
                                                                   AppRoutes
-                                                                      .esaGraph);
+                                                                      .esaGraph,arguments: DetailedArguments(subjectCode:  data
+                                                                  .esaModel1
+                                                                  ?.results?[
+                                                              index]
+                                                                  .subjectCode));
                                                             },
                                                             icon: const Icon(
                                                                 Icons

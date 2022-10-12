@@ -173,10 +173,13 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => IndividualUnitScreen(title: args?.title));
     case AppRoutes.esaGraph:
+      final args = settings.arguments as DetailedArguments;
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
                 create: (_) => GraphViewModel(),
-                child: EsaGraph(),
+                child: EsaGraph(
+                  subjectCode: args.subjectCode.toString(),
+                ),
               ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
