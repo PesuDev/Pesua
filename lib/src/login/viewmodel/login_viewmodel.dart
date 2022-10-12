@@ -23,6 +23,7 @@ class LoginViewModel extends ChangeNotifier {
 loginResponseModel=response;
     notifyListeners();
     print(">>>> ${loginResponseModel?.batchClass}");
+
 return loginResponseModel;
   }
 

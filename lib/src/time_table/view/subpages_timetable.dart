@@ -379,7 +379,8 @@ class _TableDetailsState extends State<TableDetails> {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height/1.25 ,
-                  child: Consumer<TimeTableViewmodel>(
+                  child:
+                  Consumer<TimeTableViewmodel>(
                     builder: (context, data, child) {
                       return data.timeTableModel != null &&
                           data.timeTableModel!.isNotEmpty
@@ -540,7 +541,8 @@ class _TableDetailsState extends State<TableDetails> {
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height/1.25 ,
-                  child: Consumer<TimeTableViewmodel>(
+                  child:
+                  Consumer<TimeTableViewmodel>(
                     builder: (context, data, child) {
                       return data.timeTableModel != null &&
                           data.timeTableModel!.isNotEmpty

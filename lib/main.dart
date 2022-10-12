@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pesu/src/announcements/view/announcement.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
@@ -17,12 +18,19 @@ import 'package:pesu/utils/services/bottom_navigaton_provider.dart';
 import 'package:pesu/utils/view/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
   HttpOverrides.global = MyHttpOverrides();
+  await Firebase.initializeApp();
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
+  runApp(MyApp());
+
 }
+
+
+
 
 class MyHttpOverrides extends HttpOverrides{
   @override

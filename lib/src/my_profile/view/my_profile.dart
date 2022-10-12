@@ -1355,6 +1355,10 @@ class _MyProfileState extends State<MyProfile> {
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).pop();
+                                  currentPasswordController.clear();
+                                  confirmPasswordController.clear();
+                                  newPasswordController.clear();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -1606,27 +1610,7 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         InkWell(
                           onTap: () async{
-                            //   SharedPreferenceUtil util = SharedPreferenceUtil();
-                            // //  print("class Id:  ${await util.getString(sp_classBatchSectionId)}");
-                            //   CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
-                            //   //     SharedPreferenceUtil util = SharedPreferenceUtil();
-                            //
-                            //
-                            //
-                            //   bool dataalue = await util.clearAll();
-                            //
-                            //   print("?????${dataalue}");
-                            //
-                            //   if (dataalue) {
-                            //   CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
-                            //   Navigator.pop(context);
-                            //   Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
-                            //
-                            //   }
-                            //   else{
-                            //   CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
-                            //   }
-                            Navigator.of(context);
+                            Navigator.pop(context);
                           },
                           child: Container(
                             color: Colors.white,
@@ -1658,7 +1642,7 @@ class _MyProfileState extends State<MyProfile> {
 
                               Navigator.pushNamedAndRemoveUntil(
                                   context,
-                                  AppRoutes.Dashboard,
+                                  AppRoutes.login,
                                       (route) => false);
                               await SharedPreferenceUtil()
                                   .clearAll();

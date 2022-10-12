@@ -9,8 +9,11 @@ import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/color_consts.dart';
+import '../../../utils/view/widget.dart';
 import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
+import 'course_dashboard.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   const IndividualSubScreen({Key? key}) : super(key: key);
@@ -52,6 +55,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         length: 4,
         child: Scaffold(
           appBar: AppBar(
+            leading:
+              BackButton(
+                onPressed: (){
+                  Navigator.pushNamed(
+                      context,
+                      AppRoutes.Dashboard);
+                },
+              ),
             title: Text("Subject"),
             bottom: TabBar(
               indicatorSize: TabBarIndicatorSize.label,
@@ -127,69 +138,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     htmlCode = uriDecode;
 
                     return Column(children: [
-                      /*   Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("jjjjjj $expand");
-                        setState(() {
-                          if (expand == false) {
-                            expand = true;
-                          } else if (expand == true) {
-                            expand = false;
-                          }
-                        });
-                        print("jjjjjj $expand");
-                      },
-                      child: Icon(
-                        (expand == false)
-                            ? Icons.add_circle
-                            : Icons.remove_circle_rounded,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.individualUnit,
-                            arguments: CourseArguments(
-                                data.unitModel?[i].topicTitle ?? ''));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10),
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(data.unitModel?[i].topicTitle ?? ""),
-                            Icon(
-                              Icons.chevron_right,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                (expand == true)
-                    ? Consumer<CourseViewModel>(
-                        builder: (context, model, child) {
-                        String? val1;
-                        if (model.subjectModel?.cOURSECONTENT?[i]
-                                .courseContentTypeId ==
-                            3) {
-                          val1 = htmlCode;
-                        }
-                        return Container(
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: (model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContentTypeId ==
-                                  3)
-                              ? HtmlWidget(htmlCode!)
-                              : Container(),
-                        );
-                      })
-                    : Container(),*/
                       ExpansionTile(
                         title: InkWell(
                           onTap: () {
@@ -281,6 +229,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
+            color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length,
@@ -295,7 +244,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
+                              ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.85,
                                 padding: EdgeInsets.only(left: 5, top: 5),
@@ -319,6 +279,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
+        color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
@@ -333,7 +294,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.ac_unit_outlined),
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
+                              ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.85,
                                 padding: EdgeInsets.only(left: 5, top: 5),
@@ -350,6 +322,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
   Widget? references() {
     return Container(
+      color: Colors.white,
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Consumer<CourseViewModel>(builder: (context, model, child) {
           return model.subjectModel != null &&
@@ -367,10 +340,19 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ? Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.ac_unit_outlined,
-                                size: 100,
+                              Container(
+                                margin: EdgeInsets.only(left: 5),
+                                height: 40,
+                                width: 40.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/pesu_logo.png'),
+                                      fit: BoxFit.cover),
+                                  // shape: BoxShape.circle,
+                                ),
                               ),
+
                               Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,

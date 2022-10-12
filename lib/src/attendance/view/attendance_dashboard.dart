@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
@@ -6,6 +8,7 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
 
 class AttendanceDashboard extends StatefulWidget {
@@ -21,9 +24,11 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   late AttendanceViewModel _viewModel;
   var classBatch;
   var classBatchData;
+  var classBatchData1;
   void initState() {
     super.initState();
  initMethod();
+    drop();
   }
   SharedPreferenceUtil util = SharedPreferenceUtil();
 initMethod()async{
@@ -36,6 +41,13 @@ initMethod()async{
 
 print(">>>>> $classBatch");
 }
+
+  drop()async{
+    classBatchData=  await util.getString(sp_className);
+    classBatchData1 = classBatchData.toString().substring(0,5);
+    print("object${classBatchData1}");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +69,7 @@ print(">>>>> $classBatch");
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
-                      hint: Text("$classBatchData"),
+                      hint: Text("$classBatchData1"),
                         value: classBatch,
                         items:value.attendanceDropDownModel?.map((item) => DropdownMenuItem<String>(
                           value: item.className,
@@ -160,7 +172,7 @@ color: Color(0xff9B9B9B),
                                         SizedBox(width: 20,),
                                         Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
                                         SizedBox(width: 5,),
-                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??0}%")),
+                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??"NA"}")),
                                         SizedBox(width: 5,),
                                         Expanded(child: IconButton(
                                           icon:      Icon(Icons.keyboard_arrow_right,
@@ -168,13 +180,18 @@ color: Color(0xff9B9B9B),
                                             color: Color(0xff999999),
                                           ),
                                           onPressed: (){
+                                            print("object${value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses }");
+                                            if(value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses ==null || value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses == 0 ){
+
+                                              CustomWidgets.getToast(message: "No Data Available", color:  Color(0xff273746));
+                                            }else{
                                             Navigator.pushNamed(context, AppRoutes.detailedAttendance,arguments: DetailedArguments(
                                               subjectCode: value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode,
                                               subjectName: value.attendanceListModel?.aTTENDANCELIST?[index].subjectName,
                                               attendance: "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses}",
                                               percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString()
                                             ));
-                                          },
+                                          }},
                                         )),
                                       ],
                                     ),

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:intl/intl.dart';
+import 'package:pesu/src/announcements/model/announcement_model.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   AnnouncementViewModel? announcementViewModel;
   late SeatingInfoViewModel _viewModel;
 
-  String currentDate = DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
+  String currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   // String currentDate = DateFormat('29-MM-yyyy').format(DateTime.now());
   // String Time=("7:45 PM");
 
@@ -199,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                                     getStudentLinks(
                                         icon: Icon(Icons.calendar_today_sharp),
                                         color: Color(0xffFDECE3),
-                                        text: 'Calender',
+                                        text: 'Calendar',
                                         callback: () {
                                           Navigator.pushNamed(context,
                                               AppRoutes.calendarDashboard);
@@ -237,80 +238,88 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: _mainHeight * 0.01,
                             ),
+
                             Container(
                               height: _mainHeight * 0.27,
-                              // padding: EdgeInsets.symmetric(
-                              //     horizontal: _mainWidth * 0.03),
+
                               child: Swiper(
                                 itemBuilder: (BuildContext context, int index) {
+                                  // List<AnnouncementModel> name=((value.announcementModel?[index].announcementType==2)?value.announcementModel![index].batchClassId:"hh");
+                                  // print("bababa$name");
                                   String? base64Image =
-                                      (value.announcementModel?[index].iconPath);
+                                  (value.announcementModel?[index].iconPath);
                                   final UriData? mydata =
                                       Uri.parse(base64Image.toString()).data;
                                   Uint8List? myImage = mydata?.contentAsBytes();
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChangeNotifierProvider(
-                                                      create: (BuildContext
-                                                              context) =>
-                                                          AnnouncementViewModel(),
-                                                      child: Announcement(
-                                                          announcementId: value
-                                                              .announcementModel?[
-                                                                  index]
-                                                              .announcementId))));
-                                    },
-                                    child: Stack(
-                                      children: [
-                                        myImage != null
-                                            ? Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(5),
-                                                    image: DecorationImage(
-                                                      image: MemoryImage(myImage),
-                                                      fit: BoxFit.fill,
-                                                    )),
-                                              )
-                                            : Container(),
-                                        Positioned(
-                                          bottom: 0,
-                                          child: Container(
-                                              padding: EdgeInsets.only(top: 5),
-                                              width: _mainWidth,
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                color: Colors.black54,
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(5),
-                                                    bottomRight:
-                                                        Radius.circular(5)),
-                                              ),
-                                              height: 25,
-                                              child: Align(
+                                  return Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChangeNotifierProvider(
+                                                        create: (BuildContext
+                                                        context) =>
+                                                            AnnouncementViewModel(),
+                                                        child: Announcement(
+                                                            announcementId: value
+                                                                .announcementModel?[
+                                                            index]
+                                                                .announcementId))));
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          myImage != null && value.announcementModel?[index].announcementType==2
+                                              ? Container(
+                                            height: _mainHeight * 0.27,
+
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius.circular(5),
+                                                image: DecorationImage(
+                                                  image:
+                                                  MemoryImage(myImage),
+                                                  fit: BoxFit.fill,
+                                                )),
+                                                )
+                                              : Container(
+                                          ),
+                                          Positioned(
+                                            bottom: 0,
+                                            child: Container(
+                                                padding: EdgeInsets.only(top: 5),
+                                                width: _mainWidth,
                                                 alignment: Alignment.center,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      bottom: 5),
-                                                  child: Text(
-                                                    value
-                                                            .announcementModel?[
-                                                                index]
-                                                            .announcementName ??
-                                                        "",
-                                                    // "Invitation to Participate from dated - 07 June 2022",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white),
-                                                  ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black54,
+                                                  borderRadius: BorderRadius.only(
+                                                      bottomLeft:
+                                                      Radius.circular(5),
+                                                      bottomRight:
+                                                      Radius.circular(5)),
                                                 ),
-                                              )),
-                                        )
-                                      ],
+                                                height: 25,
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        bottom: 5),
+                                                    child: Text(
+                                                      value
+                                                          .announcementModel?[
+                                                      index]
+                                                          .announcementName ??
+                                                          "",
+                                                      // "Invitation to Participate from dated - 07 June 2022",
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                )),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -712,6 +721,105 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+  Widget swiper(){
+    return Consumer<AnnouncementViewModel>(
+      builder: (context, data, child) {
+        return data.announcementModel != null &&
+            data.announcementModel!.isNotEmpty
+            ? ListView.builder(
+            itemCount: data.announcementModel?.length ?? 0,
+            itemBuilder: (context, index) {
+              AnnouncementModel model = data.announcementModel![index];
+
+              return data.announcementModel?[index].announcementType == 2
+                  ?
+              Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  String? base64Image =
+                  (data.announcementModel?[index].iconPath);
+                  final UriData? mydata =
+                      Uri.parse(base64Image.toString()).data;
+                  Uint8List? myImage = mydata?.contentAsBytes();
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ChangeNotifierProvider(
+                                      create: (BuildContext
+                                      context) =>
+                                          AnnouncementViewModel(),
+                                      child: Announcement(
+                                          announcementId: data
+                                              .announcementModel?[
+                                          index]
+                                              .announcementId))));
+                    },
+                    child:
+                    Stack(
+                      children: [
+                        myImage != null
+                            ? Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(5),
+                              image: DecorationImage(
+                                image: MemoryImage(myImage),
+                                fit: BoxFit.fill,
+                              )),
+                        )
+                            : Container(),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                              padding: EdgeInsets.only(top: 5),
+                              width: _mainWidth,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft:
+                                    Radius.circular(5),
+                                    bottomRight:
+                                    Radius.circular(5)),
+                              ),
+                              height: 25,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 5),
+                                  child: Text(
+                                    data
+                                        .announcementModel?[
+                                    index]
+                                        .announcementName ??
+                                        "",
+                                    // "Invitation to Participate from dated - 07 June 2022",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              )),
+                        )
+                      ],
+                    ),
+                  );
+                },
+                autoplay: true,
+                itemCount: data.announcementModel!.length,
+                //  itemCount: imageList.length,
+              ):
+
+               Container();
+            })
+            : Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+
   AppBar getAppBar({required BuildContext context}) {
     return AppBar(
       titleSpacing: 0,
@@ -751,7 +859,8 @@ class _HomePageState extends State<HomePage> {
     Uint8List? myImage = mydata?.contentAsBytes();
     return RefreshIndicator(
       onRefresh: _submittedRefreshList,
-      child: Consumer<ProfileViewmodel>(builder: (context, data, child) {
+      child:
+      Consumer<ProfileViewmodel>(builder: (context, data, child) {
         String? base64Image = (data.profileModel?.photo);
         final UriData? mydata = Uri.parse(base64Image.toString()).data;
         Uint8List? myImage = mydata?.contentAsBytes();
@@ -878,50 +987,113 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Date & Time',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff9B9B9B),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w500),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Date & Time",       style: TextStyle(
+                               backgroundColor: Color(0xffFFFFFF),
+                            color: Color(0xfff9B9B9B),
+                            fontSize: 14,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w500),),
+                                    Row(
+                                      children: [
+                                        Text( ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}"","), style: TextStyle(
+                                            backgroundColor: Color(0xffFFFFFF),
+                                            color: Color(0xfff333333),
+                                            fontSize: 16,
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w400),),
+                  Text(
+                        ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
+
+                        style: TextStyle(
+                                backgroundColor: Color(0xffFFFFFF),
+                                color: Color(0xfff333333),
+                                fontSize: 16,
+                                fontFamily: 'Open Sans',
+                                fontWeight: FontWeight.w400),
+                      ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  'Terminal',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff9B9B9B),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
+                                Column(
+                                  children: [
+                                    Text("Terminal", style: TextStyle(
+                               backgroundColor: Color(0xffFFFFFF),
+                            color: Color(0xfff9B9B9B),
+                            fontSize: 14,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w400),),
+                                    Text( model.terminalName ?? 'S401',  style: TextStyle(
+                                        backgroundColor: Color(0xffFFFFFF),
+                                        color: Color(0xfff333333),
+                                        fontSize: 16,
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w400),),
+                                  ],
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ??
-                                      'Terminal',
-                                  style: TextStyle(
-                                      backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff333333),
-                                      fontSize: 16,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  model.terminalName ?? 'S401',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff333333),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Text(
+                            //       'Date & Time',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff9B9B9B),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w500),
+                            //     ),
+                            //     Text(
+                            //       'Terminal',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff9B9B9B),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //
+                            //   children: [
+                            //     Text(
+                            //       ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}"",") ?? "",
+                            //
+                            //       style: TextStyle(
+                            //           backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 16,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //     Text(
+                            //       ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
+                            //
+                            //       style: TextStyle(
+                            //           backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 16,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //
+                            //     Text(
+                            //       model.terminalName ?? 'S401',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 4,
                             ),

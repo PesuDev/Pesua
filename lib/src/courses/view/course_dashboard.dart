@@ -25,6 +25,7 @@ class _CourseDashboardState extends State<CourseDashboard> {
   late CourseViewModel _courseDropDownViewModel;
   late CourseViewModel _courseViewModel;
 var classBatchData;
+var classBatchData1;
   void initState() {
     super.initState();
     initMethod();
@@ -53,11 +54,18 @@ var classBatchData;
         randomNum: 0.26757885412517934);
     print(
         "dddddddddddddddd ${_courseDropDownViewModel.courseDropDownModel?.length}");
-    classBatchData= await util.getString(sp_className);
+    // classBatchData= await util.getString(sp_className);
+    // classBatchData.toString().substring(0,5);
+    my();
 
     print(">>>>> $classBatch");
   }
+my()async{
+  classBatchData= await util.getString(sp_className);
+  classBatchData1=classBatchData.toString().substring(0,5);
+  print("my1 $classBatchData1");
 
+}
 
   var classBatch;
   @override
@@ -76,16 +84,26 @@ var classBatchData;
                           child: Column(
                             children: [
                               Container(
+                                height: 34,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.blueGrey)
                                 ),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButtonFormField<String>(
-                                      hint: Text("$classBatchData"),
+                                      decoration: InputDecoration.collapsed(hintText: ''),
+
+
+                                      hint: Padding(
+                                        padding: const EdgeInsets.only(top: 7,left: 10),
+                                        child: Text("$classBatchData1"),
+                                      ),
                                       value: classBatch,
                                       items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
                                         value: item.className,
-                                        child: Text(item.className.toString(),),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 7,left: 5),
+                                          child: Text(item.className.toString(),),
+                                        ),
                                       ))
                                           .toList(),
                                       onChanged: (item) {
@@ -127,95 +145,15 @@ var classBatchData;
                                       }),
                                 ),
                               ),
-                              // InkWell(
-                              //   onTap: () {
-                              //     print("set $isSemSelected");
-                              //     isSemSelected = true;
-                              //     print("reset $isSemSelected");
-                              //     // _semBottomSheet();
-                              //     showDialog(
-                              //       context: context,
-                              //       builder: (context) {
-                              //         return Dialog(
-                              //           backgroundColor: Colors.black45,
-                              //           shape: RoundedRectangleBorder(
-                              //               borderRadius:
-                              //                   BorderRadius.circular(20)),
-                              //           elevation: 16,
-                              //           child: Container(
-                              //             child: ListView.separated(
-                              //               itemCount: model.courseDropDownModel
-                              //                       ?.length ??
-                              //                   0,
-                              //               itemBuilder: (context, index) {
-                              //                 print("bbbbbb $dropDownTitle");
-                              //                 return Column(
-                              //                   children: [
-                              //                     _buildRow(model
-                              //                             .courseDropDownModel?[
-                              //                                 index]
-                              //                             .className ??
-                              //                         ""),
-                              //                   ],
-                              //                 );
-                              //               },
-                              //               separatorBuilder: (context, index) {
-                              //                 return Divider(
-                              //                   color: Colors.white60,
-                              //                   endIndent: 5.0,
-                              //                   indent: 5.0,
-                              //                 );
-                              //               },
-                              //               shrinkWrap: true,
-                              //             ),
-                              //           ),
-                              //         );
-                              //       },
-                              //     );
-                              //   },
-                              //   child: Container(
-                              //     decoration: BoxDecoration(
-                              //       boxShadow: [
-                              //         BoxShadow(
-                              //             offset: Offset(2, 2),
-                              //             blurRadius: 8,
-                              //             color: (isSemSelected == true)
-                              //                 ? Colors.blue
-                              //                 : Colors.white)
-                              //       ],
-                              //       border: Border.all(
-                              //           color: (isSemSelected == true)
-                              //               ? Colors.blueAccent
-                              //               : Colors.grey),
-                              //       borderRadius: BorderRadius.circular(2),
-                              //     ),
-                              //     child: Container(
-                              //       color: Colors.white,
-                              //       padding: EdgeInsets.only(
-                              //           left: 5, right: 5, top: 5, bottom: 5),
-                              //       child: Row(
-                              //         mainAxisAlignment:
-                              //             MainAxisAlignment.spaceBetween,
-                              //         children: [
-                              //           Text(
-                              //             dropDownTitle ??
-                              //                 "${model.courseDropDownModel![0].className}",
-                              //             style: TextStyle(fontSize: 18),
-                              //           ),
-                              //           Icon(Icons.arrow_drop_down),
-                              //         ],
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
+
                               SizedBox(
-                                height: 15,
+                                height: 10,
                               ),
                               Consumer<CourseViewModel>(
                                   builder: (context, data, child) {
                                 // print("hello ${data.courseModel?.length}");
                                 return Container(
-                                  color: Colors.white,
+                                 // color: Colors.amber,
                                   height:
                                       MediaQuery.of(context).size.height * 0.7,
                                   padding: EdgeInsets.only(top: 8, bottom: 8),
@@ -229,7 +167,6 @@ var classBatchData;
                                         return Column(
                                           children: [
                                             Container(
-                                              height: 110,
                                               child: Card(
                                                 elevation: 5,
                                                 child: Padding(
@@ -240,13 +177,20 @@ var classBatchData;
                                                         CrossAxisAlignment.start,
                                                     children: [
                                                       Flexible(
-                                                        child: Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 5),
-                                                            width: 40,
-                                                            child: Icon(
-                                                                Icons.ac_unit)),
+                                                        child:
+                                                        Container(
+                                                          margin: EdgeInsets.only(left: 5),
+                                                          height: 40,
+                                                          width: 40.0,
+                                                          decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    'assets/images/m_course_.jpg'),
+                                                                fit: BoxFit.fill),
+                                                            // shape: BoxShape.circle,
+                                                          ),
+                                                        ),
+                                                       // Image.asset("assets/images/m_course_.jpg",height: 40,width: 40,),
                                                       ),
                                                       Container(
                                                         padding: EdgeInsets.only(
@@ -279,7 +223,7 @@ var classBatchData;
                                                                 )),
                                                                 PopupMenuButton(
                                                                   child: Icon(Icons
-                                                                      .more_vert),
+                                                                      .more_vert,color: Color(0xff9B9B9B),),
                                                                   itemBuilder:
                                                                       (context) {
                                                                     return List
@@ -287,6 +231,7 @@ var classBatchData;
                                                                             1,
                                                                             (index) {
                                                                       return PopupMenuItem(
+                                                                        height: 20,
                                                                         padding: EdgeInsets.only(
                                                                             top:
                                                                                 0,
@@ -305,22 +250,20 @@ var classBatchData;
                                                                                 AppRoutes.individualSub);
                                                                           },
                                                                           child:
-                                                                              Container(
-                                                                            padding: EdgeInsets.only(
-                                                                                top: 20,
-                                                                                bottom: 20,
-                                                                                right: 10,
-                                                                                left: 15),
-                                                                            child:
-                                                                                Text(
-                                                                              'View Course Info',
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(left: 10),
+                                                                                child: Text(
+                                                                                'View Course Info',
                                                                                     style: TextStyle(
                                                                                         fontWeight: FontWeight.w400,
                                                                                         fontSize: 12,
                                                                                         fontFamily: 'open-sans',
-                                                                                        color: Color(0xff333333))
+                                                                                        color: Color(0xff333333),
+                                                                                    )
+                                                                                    ,
+                                                                                  textAlign: TextAlign.center,
                                                                             ),
-                                                                          ),
+                                                                              ),
                                                                         ),
                                                                       );
                                                                     });
@@ -328,13 +271,19 @@ var classBatchData;
                                                                 ),
                                                               ],
                                                             ),
-                                                            Text(
-                                                                "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
-                                                                fontWeight: FontWeight.w400,
-                                                                fontSize: 14,
-                                                                fontFamily: 'open-sans',
-                                                                color: Color(0xff333333)
-                                                            )),
+                                                            Container(
+                                                             // color: Colors.amber,
+                                                              width: MediaQuery.of(context).size.width/2,
+                                                              child: Text(
+                                                                  "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
+                                                                  fontWeight: FontWeight.w400,
+                                                                  fontSize: 14,
+                                                                  fontFamily: 'open-sans',
+                                                                  color: Color(0xff333333)
+                                                              ),
+                                                                maxLines: 2,
+                                                              ),
+                                                            ),
                                                             Divider(
                                                               color: Colors.grey,
                                                             ),
@@ -390,7 +339,7 @@ var classBatchData;
                                                                                 color: Color(0xff9B9B9B))),
                                                                         TextSpan(
                                                                             text:
-                                                                                ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits ?? ""}',
+                                                                                ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits.toString().substring(0,1) ?? ""}',
                                                                             style: TextStyle(
                                                                                 fontWeight: FontWeight.w500,
                                                                                 fontSize: 12,
@@ -400,8 +349,10 @@ var classBatchData;
                                                                     ),
                                                                   ),
                                                                 ),
+
                                                               ],
-                                                            )
+                                                            ),
+                                                            SizedBox(height: 10,)
                                                           ],
                                                         ),
                                                       )
