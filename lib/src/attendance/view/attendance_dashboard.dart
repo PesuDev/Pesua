@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
@@ -6,6 +8,7 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
 
 class AttendanceDashboard extends StatefulWidget {
@@ -177,13 +180,18 @@ color: Color(0xff9B9B9B),
                                             color: Color(0xff999999),
                                           ),
                                           onPressed: (){
+                                            print("object${value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses }");
+                                            if(value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses ==null || value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses == 0 ){
+
+                                              CustomWidgets.getToast(message: "No Data Available", color:  Color(0xff273746));
+                                            }else{
                                             Navigator.pushNamed(context, AppRoutes.detailedAttendance,arguments: DetailedArguments(
                                               subjectCode: value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode,
                                               subjectName: value.attendanceListModel?.aTTENDANCELIST?[index].subjectName,
                                               attendance: "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses}",
                                               percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString()
                                             ));
-                                          },
+                                          }},
                                         )),
                                       ],
                                     ),

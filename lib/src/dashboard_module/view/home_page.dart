@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   AnnouncementViewModel? announcementViewModel;
   late SeatingInfoViewModel _viewModel;
 
-  String currentDate = DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
+  String currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   // String currentDate = DateFormat('29-MM-yyyy').format(DateTime.now());
   // String Time=("7:45 PM");
 
@@ -878,50 +878,113 @@ class _HomePageState extends State<HomePage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Date & Time',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff9B9B9B),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w500),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Date & Time",       style: TextStyle(
+                               backgroundColor: Color(0xffFFFFFF),
+                            color: Color(0xfff9B9B9B),
+                            fontSize: 14,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w500),),
+                                    Row(
+                                      children: [
+                                        Text( ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}"","), style: TextStyle(
+                                            backgroundColor: Color(0xffFFFFFF),
+                                            color: Color(0xfff333333),
+                                            fontSize: 16,
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w400),),
+                  Text(
+                        ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
+
+                        style: TextStyle(
+                                backgroundColor: Color(0xffFFFFFF),
+                                color: Color(0xfff333333),
+                                fontSize: 16,
+                                fontFamily: 'Open Sans',
+                                fontWeight: FontWeight.w400),
+                      ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  'Terminal',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff9B9B9B),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
+                                Column(
+                                  children: [
+                                    Text("Terminal", style: TextStyle(
+                               backgroundColor: Color(0xffFFFFFF),
+                            color: Color(0xfff9B9B9B),
+                            fontSize: 14,
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w400),),
+                                    Text( model.terminalName ?? 'S401',  style: TextStyle(
+                                        backgroundColor: Color(0xffFFFFFF),
+                                        color: Color(0xfff333333),
+                                        fontSize: 16,
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w400),),
+                                  ],
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' ??
-                                      'Terminal',
-                                  style: TextStyle(
-                                      backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff333333),
-                                      fontSize: 16,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  model.terminalName ?? 'S401',
-                                  style: TextStyle(
-                                      //   backgroundColor: Color(0xffFFFFFF),
-                                      color: Color(0xfff333333),
-                                      fontSize: 14,
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Text(
+                            //       'Date & Time',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff9B9B9B),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w500),
+                            //     ),
+                            //     Text(
+                            //       'Terminal',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff9B9B9B),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //
+                            //   children: [
+                            //     Text(
+                            //       ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}"",") ?? "",
+                            //
+                            //       style: TextStyle(
+                            //           backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 16,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //     Text(
+                            //       ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
+                            //
+                            //       style: TextStyle(
+                            //           backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 16,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //
+                            //     Text(
+                            //       model.terminalName ?? 'S401',
+                            //       style: TextStyle(
+                            //           //   backgroundColor: Color(0xffFFFFFF),
+                            //           color: Color(0xfff333333),
+                            //           fontSize: 14,
+                            //           fontFamily: 'Open Sans',
+                            //           fontWeight: FontWeight.w400),
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 4,
                             ),
