@@ -13,6 +13,7 @@ import '../../../utils/constants/color_consts.dart';
 import '../../../utils/view/widget.dart';
 import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
+import 'course_dashboard.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   const IndividualSubScreen({Key? key}) : super(key: key);
@@ -53,136 +54,55 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return DefaultTabController(
         length: 4,
         child: Scaffold(
-          // appBar: AppBar(
-          //   title: Text("Subject"),
-          //   bottom: TabBar(
-          //     indicatorSize: TabBarIndicatorSize.label,
-          //     isScrollable: true,
-          //     controller: _tabController,
-          //     tabs: [
-          //       Tab(
-          //         child: Text("Content"),
-          //       ),
-          //       Tab(
-          //         child: Text("Objectives"),
-          //       ),
-          //       Tab(
-          //         child: Text("Outcomes"),
-          //       ),
-          //       Tab(
-          //         child: Text("References"),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          appBar: sideNavAppBar("TimeTable"),
-
-          body:
-          Column(
-              children: [
-
-                Container(
-                  color: headingColor,
-                  width: double.infinity,
-                  child:
-                  TabBar(
-
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.white.withOpacity(0.9),
-                    isScrollable: true,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorColor: Colors.amber,
-
-                    tabs: [
-                      Tab(
-                        child: Container(
-                          child: Text(
-
-                            "Content",
-                            style: TextStyle(
-                              fontFamily: 'Open Sans',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              // color: Color(0xffFFFFFF)
-                            ),
-                            maxLines: 1,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 10,left: 20),
-                            child: Text(
-                              "Objectives",
-                              style: TextStyle(
-                                fontFamily: 'Open Sans',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                //color: Color(0xffFFFFFF)
-                              ),
-                              maxLines: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 10,left: 20),
-                            child: Text(
-                              "Outcomes",
-                              style: TextStyle(
-                                fontFamily: 'Open Sans',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                // color: Color(0xffFFFFFF)
-                              ),
-                              maxLines: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Container(
-                          child: Text(
-                            "References",
-                            style: TextStyle(
-                              fontFamily: 'Open Sans',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              // color: Color(0xffFFFFFF)
-                            ),
-                            maxLines: 1,
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
+          appBar: AppBar(
+            leading:
+              BackButton(
+                onPressed: (){
+                  Navigator.pushNamed(
+                      context,
+                      AppRoutes.Dashboard);
+                },
+              ),
+            title: Text("Subject"),
+            bottom: TabBar(
+              indicatorSize: TabBarIndicatorSize.label,
+              isScrollable: true,
+              controller: _tabController,
+              tabs: [
+                Tab(
+                  child: Text("Content"),
                 ),
-                Expanded(
-                  child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      child:
-                      TabBarView(
-                        //controller:tabController,
-
-                          children: [
-                          Container(
-                            child: content(),
-                          ), Container(
-                            child: objectives(),
-                          ), Container(
-                            child: outcomes(),
-                          ), Container(
-                            child: references(),
-                          ),
-                          ])
-                  ),
+                Tab(
+                  child: Text("Objectives"),
                 ),
-
-              ])
+                Tab(
+                  child: Text("Outcomes"),
+                ),
+                Tab(
+                  child: Text("References"),
+                ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                child: content(),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                child: objectives(),
+              ),
+              Container(
+                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: outcomes()),
+              Container(
+                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: references()),
+            ],
+          ),
         ),
       );
     });
@@ -218,69 +138,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     htmlCode = uriDecode;
 
                     return Column(children: [
-                      /*   Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        print("jjjjjj $expand");
-                        setState(() {
-                          if (expand == false) {
-                            expand = true;
-                          } else if (expand == true) {
-                            expand = false;
-                          }
-                        });
-                        print("jjjjjj $expand");
-                      },
-                      child: Icon(
-                        (expand == false)
-                            ? Icons.add_circle
-                            : Icons.remove_circle_rounded,
-                        color: Colors.blue,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.individualUnit,
-                            arguments: CourseArguments(
-                                data.unitModel?[i].topicTitle ?? ''));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.only(left: 10),
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(data.unitModel?[i].topicTitle ?? ""),
-                            Icon(
-                              Icons.chevron_right,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                (expand == true)
-                    ? Consumer<CourseViewModel>(
-                        builder: (context, model, child) {
-                        String? val1;
-                        if (model.subjectModel?.cOURSECONTENT?[i]
-                                .courseContentTypeId ==
-                            3) {
-                          val1 = htmlCode;
-                        }
-                        return Container(
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: (model.subjectModel?.cOURSECONTENT?[i]
-                                      .courseContentTypeId ==
-                                  3)
-                              ? HtmlWidget(htmlCode!)
-                              : Container(),
-                        );
-                      })
-                    : Container(),*/
                       ExpansionTile(
                         title: InkWell(
                           onTap: () {

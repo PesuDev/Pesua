@@ -23,12 +23,13 @@ class _ISAResultsState extends State<ISAResults> {
   late IsaViewModel _isaViewModel;
   var classBatch;
   var classBatchData;
-
+  var classBatchData1;
+List dropDownData=[];
   @override
   void initState() {
     super.initState();
     initMethod();
-
+drop();
   }
   SharedPreferenceUtil util = SharedPreferenceUtil();
 
@@ -54,6 +55,11 @@ class _ISAResultsState extends State<ISAResults> {
 
     print(">>>>> $classBatch");
   }
+  drop()async{
+    classBatchData=  await util.getString(sp_className);
+    classBatchData1 = classBatchData.toString().substring(0,5);
+    print("object${classBatchData1}");
+  }
 
 
   Widget build(BuildContext context) {
@@ -61,11 +67,16 @@ class _ISAResultsState extends State<ISAResults> {
         appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
         body: SingleChildScrollView(
           child: Consumer<IsaViewModel>(builder: (context, model, child) {
+            if(model.isaDropDownModel != null &&
+                model.isaDropDownModel!.length != 0 &&
+                model.isaResultModel != null){
+              dropDownData=model.isaDropDownModel!.map((e) => e.className).toSet().toList();
+            }
             return Container(
               child: model.isaDropDownModel != null &&
                       model.isaDropDownModel!.length != 0 &&
                       model.isaResultModel != null
-                  ? Container(
+                  ?  Container(
                       padding: EdgeInsets.only(
                           top: 15, left: 15, right: 15, bottom: 8),
                       child: Column(
@@ -77,12 +88,12 @@ class _ISAResultsState extends State<ISAResults> {
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  hint: Text("$classBatchData"),
+                                  hint: Text("$classBatchData1"),
                                   value: classBatch,
-                                  items:model.isaDropDownModel?.map((item) => DropdownMenuItem<String>(
-                                    value: item.className,
-                                    child: Text(item.className.toString(),),
-                                  ))
+                                  items:dropDownData?.map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(item.toString(),),
+                                  )).toSet()
                                       .toList(),
                                   onChanged: (item) {
                                     print("Oye");
@@ -208,6 +219,8 @@ class _ISAResultsState extends State<ISAResults> {
                         ],
                       ),
                     )
+
+
                   : Center(child: CircularProgressIndicator()),
             );
           }),
