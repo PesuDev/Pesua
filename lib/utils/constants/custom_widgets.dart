@@ -7,7 +7,7 @@ class CustomWidgets{
       content: Row(
         children: [
           CircularProgressIndicator(
-              valueColor:AlwaysStoppedAnimation<Color>(Color(0xff7AB02A))),
+              valueColor:AlwaysStoppedAnimation<Color>(Colors.blue)),
           SizedBox(width: 5,),
           Container(
               child: Text('$message...',style: TextStyle(fontFamily: 'Nunito'),)),
@@ -45,6 +45,7 @@ class CustomWidgets{
   static void getToast({required String message, required Color color}) {
     Fluttertoast.showToast(
         msg: message,
+
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

@@ -56,20 +56,23 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
         child: Scaffold(
             appBar: sideNavAppBar("TimeTable"),
 
-            backgroundColor:Colors.white.withOpacity(0.9),
-            body: Column(children: [
+            backgroundColor:Colors.red.withOpacity(0.9),
+            body:
+            Column(
+                children: [
               Container(
                 color: headingColor,
                 width: double.infinity,
-                margin: EdgeInsets.only(left: 10, right: 10, top: 9),
+              //  margin: EdgeInsets.only(left: 10, right: 10, top: 9),
                 child: TabBar(
                   labelColor: Colors.white,
+                  unselectedLabelColor: Colors.white.withOpacity(0.9),
                   isScrollable: true,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
 
                       borderRadius: BorderRadius.circular(0),
-                      color: Colors.blue),
+                      color: Color(0xff0091cd)),
 
                   tabs: [
                     Tab(
@@ -79,9 +82,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "MON",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                             // color: Color(0xffFFFFFF)
                           ),
                           maxLines: 1,
                         ),
@@ -93,9 +96,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "TUE",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              //color: Color(0xffFFFFFF)
                           ),
                           maxLines: 1,
                         ),
@@ -107,9 +110,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "WED",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                             // color: Color(0xffFFFFFF)
                           ),
                           maxLines: 1,
                         ),
@@ -121,9 +124,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "THU",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                             // color: Color(0xffFFFFFF)
                           ),
                           maxLines: 1,
                         ),
@@ -135,9 +138,9 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "FRI",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              //color: Color(0xffFFFFFF)
                           ),
                           maxLines: 1,
                         ),
@@ -149,9 +152,8 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "SAT",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                           ),
                           maxLines: 1,
                         ),
@@ -163,9 +165,8 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                           "SUN",
                           style: TextStyle(
                               fontFamily: 'Open Sans',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xffFFFFFF)
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                           ),
                           maxLines: 1,
                         ),
@@ -174,32 +175,36 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                   ],
                 ),
               ),
-              Container(
-                  height: MediaQuery.of(context).size.height / 1.36,
-                  child:
-                  TabBarView(
-                   //controller:tabController,
+              Expanded(
+                child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child:
+                    TabBarView(
+                     //controller:tabController,
 
-                      children: [
-                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child: TableDetails(day: 'mon',
-                    )),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child: TableDetails(day: 'tuesday',)),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:TableDetails(day: 'wednesday',)),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:TableDetails(day: 'thursday',)),
-                       ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:TableDetails(day: 'friday',)),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:TableDetails(day: 'saturday',)),
-                    ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
-                        child:TableDetails(day: 'sunday',)),
-                  ])
+                        children: [
+                         ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child: TableDetails(day: 'mon',
+                      )),
+                      ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child: TableDetails(day: 'tuesday',)),
+                      ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child:TableDetails(day: 'wednesday',)),
+                      ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child:TableDetails(day: 'thursday',)),
+                         ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child:TableDetails(day: 'friday',)),
+                      ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child:TableDetails(day: 'saturday',)),
+                      ChangeNotifierProvider(create: (BuildContext context) =>TimeTableViewmodel(),
+                          child:TableDetails(day: 'sunday',)),
+                    ])
+                ),
               ),
 
-            ])));
+            ])
+        )
+      );
   }
 
   }

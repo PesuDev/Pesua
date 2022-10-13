@@ -8,6 +8,8 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/services/sharedpreference_utils.dart';
+
 class CourseDashboard extends StatefulWidget {
  bool isFromDashboard;
  CourseDashboard({required this.isFromDashboard});
@@ -22,9 +24,15 @@ class _CourseDashboardState extends State<CourseDashboard> {
   String? dropDownTitle;
   late CourseViewModel _courseDropDownViewModel;
   late CourseViewModel _courseViewModel;
-
+var classBatchData;
+var classBatchData1;
   void initState() {
     super.initState();
+    initMethod();
+  }
+  SharedPreferenceUtil util = SharedPreferenceUtil();
+
+  initMethod()async{
     _courseDropDownViewModel =
         Provider.of<CourseViewModel>(context, listen: false);
     _courseDropDownViewModel.getCourseDropDownDetails(
@@ -46,356 +54,330 @@ class _CourseDashboardState extends State<CourseDashboard> {
         randomNum: 0.26757885412517934);
     print(
         "dddddddddddddddd ${_courseDropDownViewModel.courseDropDownModel?.length}");
+    // classBatchData= await util.getString(sp_className);
+    // classBatchData.toString().substring(0,5);
+    my();
+
+    print(">>>>> $classBatch");
   }
-var classBatch;
+my()async{
+  classBatchData= await util.getString(sp_className);
+  classBatchData1=classBatchData.toString().substring(0,5);
+  print("my1 $classBatchData1");
+
+}
+
+  var classBatch;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:widget.isFromDashboard?sideNavAppBarForDashboard("My Courses"): sideNavAppBar("My Courses"),
-        body: Consumer<CourseViewModel>(builder: (context, model, child) {
-          return Container(
-            child:
-                model.courseDropDownModel != null &&
-                        model.courseDropDownModel!.length != 0
-                    ? Container(
-                        padding: EdgeInsets.only(
-                            top: 15, left: 15, right: 15, bottom: 3),
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blueGrey)
-                              ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButtonFormField<String>(
-                                    value: classBatch,
-                                    items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
-                                      value: item.className,
-                                      child: Text(item.className.toString(),),
-                                    ))
-                                        .toList(),
-                                    onChanged: (item) {
-                                      print("Oye");
-                                      var batchClassId;
-                                      var classBatchSectionId;
-                                      var classId;
-                                      var programId;
-                                      setState(() {
-                                         classBatch=item;
-                                        // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-                                        //   if(item==itemValue.subjectName){
-                                        //     return itemValue.subjectCode.toString();
-                                        //   }
-                                        //
-                                        // });
+        body: SingleChildScrollView(
+          child: Consumer<CourseViewModel>(builder: (context, model, child) {
+            return Container(
+              child:
+                  model.courseDropDownModel != null &&
+                          model.courseDropDownModel!.length != 0
+                      ? Container(
+                          padding: EdgeInsets.only(
+                              top: 15, left: 15, right: 15, bottom: 3),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 34,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blueGrey)
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButtonFormField<String>(
+                                      decoration: InputDecoration.collapsed(hintText: ''),
 
-                                        for (var subjectData in model.courseDropDownModel!){
-                                          if(subjectData.className==item){
-                                            batchClassId=subjectData.batchClassId;
-                                            classBatchSectionId = subjectData.classBatchSectionId;
-                                            classId = subjectData.classId;
 
+                                      hint: Padding(
+                                        padding: const EdgeInsets.only(top: 7,left: 10),
+                                        child: Text("$classBatchData1"),
+                                      ),
+                                      value: classBatch,
+                                      items:model.courseDropDownModel?.map((item) => DropdownMenuItem<String>(
+                                        value: item.className,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 7,left: 5),
+                                          child: Text(item.className.toString(),),
+                                        ),
+                                      ))
+                                          .toList(),
+                                      onChanged: (item) {
+                                        print("Oye");
+                                        var batchClassId;
+                                        var classBatchSectionId;
+                                        var classId;
+                                        var programId;
+                                        setState(() {
+                                           classBatch=item;
+                                          // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                                          //   if(item==itemValue.subjectName){
+                                          //     return itemValue.subjectCode.toString();
+                                          //   }
+                                          //
+                                          // });
+
+                                          for (var subjectData in model.courseDropDownModel!){
+                                            if(subjectData.className==item){
+                                              batchClassId=subjectData.batchClassId;
+                                              classBatchSectionId = subjectData.classBatchSectionId;
+                                              classId = subjectData.classId;
+
+                                            }
                                           }
-                                        }
-                                      });
-                                      _courseViewModel.dropdownGetCourseDetails(
-                                          action: 18,
-                                          mode: 2,
-                                          batchClassId: batchClassId,
-                                          classBatchSectionId: classBatchSectionId,
-                                        programId: 1,
-                                        classId: classId,
-                                          semIndexVal: 0,
-                                          randomNum: 0.26757885412517934,  );
-                                      print("Hoye");
-                                      //       print(">>>>  $subjectCode");
-                                      //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
-                                    }),
+                                        });
+                                        _courseViewModel.dropdownGetCourseDetails(
+                                            action: 18,
+                                            mode: 2,
+                                            batchClassId: batchClassId,
+                                            classBatchSectionId: classBatchSectionId,
+                                          programId: 1,
+                                          classId: classId,
+                                            semIndexVal: 0,
+                                            randomNum: 0.26757885412517934,  );
+                                        print("Hoye");
+                                        //       print(">>>>  $subjectCode");
+                                        //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
+                                      }),
+                                ),
                               ),
-                            ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     print("set $isSemSelected");
-                            //     isSemSelected = true;
-                            //     print("reset $isSemSelected");
-                            //     // _semBottomSheet();
-                            //     showDialog(
-                            //       context: context,
-                            //       builder: (context) {
-                            //         return Dialog(
-                            //           backgroundColor: Colors.black45,
-                            //           shape: RoundedRectangleBorder(
-                            //               borderRadius:
-                            //                   BorderRadius.circular(20)),
-                            //           elevation: 16,
-                            //           child: Container(
-                            //             child: ListView.separated(
-                            //               itemCount: model.courseDropDownModel
-                            //                       ?.length ??
-                            //                   0,
-                            //               itemBuilder: (context, index) {
-                            //                 print("bbbbbb $dropDownTitle");
-                            //                 return Column(
-                            //                   children: [
-                            //                     _buildRow(model
-                            //                             .courseDropDownModel?[
-                            //                                 index]
-                            //                             .className ??
-                            //                         ""),
-                            //                   ],
-                            //                 );
-                            //               },
-                            //               separatorBuilder: (context, index) {
-                            //                 return Divider(
-                            //                   color: Colors.white60,
-                            //                   endIndent: 5.0,
-                            //                   indent: 5.0,
-                            //                 );
-                            //               },
-                            //               shrinkWrap: true,
-                            //             ),
-                            //           ),
-                            //         );
-                            //       },
-                            //     );
-                            //   },
-                            //   child: Container(
-                            //     decoration: BoxDecoration(
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //             offset: Offset(2, 2),
-                            //             blurRadius: 8,
-                            //             color: (isSemSelected == true)
-                            //                 ? Colors.blue
-                            //                 : Colors.white)
-                            //       ],
-                            //       border: Border.all(
-                            //           color: (isSemSelected == true)
-                            //               ? Colors.blueAccent
-                            //               : Colors.grey),
-                            //       borderRadius: BorderRadius.circular(2),
-                            //     ),
-                            //     child: Container(
-                            //       color: Colors.white,
-                            //       padding: EdgeInsets.only(
-                            //           left: 5, right: 5, top: 5, bottom: 5),
-                            //       child: Row(
-                            //         mainAxisAlignment:
-                            //             MainAxisAlignment.spaceBetween,
-                            //         children: [
-                            //           Text(
-                            //             dropDownTitle ??
-                            //                 "${model.courseDropDownModel![0].className}",
-                            //             style: TextStyle(fontSize: 18),
-                            //           ),
-                            //           Icon(Icons.arrow_drop_down),
-                            //         ],
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Consumer<CourseViewModel>(
-                                builder: (context, data, child) {
-                              // print("hello ${data.courseModel?.length}");
-                              return Container(
-                                color: Colors.white,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.7,
-                                padding: EdgeInsets.only(top: 8, bottom: 8),
-                                child: ListView.builder(
-                                    itemCount: data.courseModel?.sTUDENTSUBJECTS
-                                            ?.length ??
-                                        0,
-                                    itemBuilder: (context, index) {
-                                      print(
-                                          "sssssssssssssss  ${data.courseModel?.sTUDENTSUBJECTS?[index].subjectCode}");
-                                      return Column(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            child: Card(
-                                              elevation: 5,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 10, bottom: 10),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 5),
-                                                        width: 40,
-                                                        child: Icon(
-                                                            Icons.ac_unit)),
-                                                    Container(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.8,
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              Text(data
-                                                                      .courseModel
-                                                                      ?.sTUDENTSUBJECTS?[
-                                                                          index]
-                                                                      .subjectCode ??
-                                                                  ""),
-                                                              PopupMenuButton(
-                                                                child: Icon(Icons
-                                                                    .more_vert),
-                                                                itemBuilder:
-                                                                    (context) {
-                                                                  return List
-                                                                      .generate(
-                                                                          1,
-                                                                          (index) {
-                                                                    return PopupMenuItem(
-                                                                      padding: EdgeInsets.only(
-                                                                          top:
-                                                                              0,
-                                                                          bottom:
-                                                                              0,
-                                                                          right:
-                                                                              0,
-                                                                          left:
-                                                                              0),
-                                                                      child:
-                                                                          InkWell(
-                                                                        onTap:
-                                                                            () {
-                                                                          Navigator.pushNamed(
-                                                                              context,
-                                                                              AppRoutes.individualSub);
-                                                                        },
+
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Consumer<CourseViewModel>(
+                                  builder: (context, data, child) {
+                                // print("hello ${data.courseModel?.length}");
+                                return Container(
+                                 // color: Colors.amber,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.7,
+                                  padding: EdgeInsets.only(top: 8, bottom: 8),
+                                  child: ListView.builder(
+                                      itemCount: data.courseModel?.sTUDENTSUBJECTS
+                                              ?.length ??
+                                          0,
+                                      itemBuilder: (context, index) {
+                                        print(
+                                            "sssssssssssssss  ${data.courseModel?.sTUDENTSUBJECTS?[index].subjectCode}");
+                                        return Column(
+                                          children: [
+                                            Container(
+                                              child: Card(
+                                                elevation: 5,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 10,),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      Flexible(
+                                                        child:
+                                                        Container(
+                                                          margin: EdgeInsets.only(left: 5),
+                                                          height: 40,
+                                                          width: 40.0,
+                                                          decoration: BoxDecoration(
+                                                            image: DecorationImage(
+                                                                image: AssetImage(
+                                                                    'assets/images/m_course_.jpg'),
+                                                                fit: BoxFit.fill),
+                                                            // shape: BoxShape.circle,
+                                                          ),
+                                                        ),
+                                                       // Image.asset("assets/images/m_course_.jpg",height: 40,width: 40,),
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.only(
+                                                            left: 10),
+                                                        width:
+                                                            MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                0.8,
+                                                        child: Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(data
+                                                                        .courseModel
+                                                                        ?.sTUDENTSUBJECTS?[
+                                                                            index]
+                                                                        .subjectCode ??
+                                                                    "",style: TextStyle(
+                                                                  fontWeight: FontWeight.w400,
+                                                                  fontSize: 14,
+                                                                  fontFamily: 'open-sans',
+                                                                  color: Color(0xff9B9B9B)
+                                                                )),
+                                                                PopupMenuButton(
+                                                                  child: Icon(Icons
+                                                                      .more_vert,color: Color(0xff9B9B9B),),
+                                                                  itemBuilder:
+                                                                      (context) {
+                                                                    return List
+                                                                        .generate(
+                                                                            1,
+                                                                            (index) {
+                                                                      return PopupMenuItem(
+                                                                        height: 20,
+                                                                        padding: EdgeInsets.only(
+                                                                            top:
+                                                                                0,
+                                                                            bottom:
+                                                                                0,
+                                                                            right:
+                                                                                0,
+                                                                            left:
+                                                                                0),
                                                                         child:
-                                                                            Container(
-                                                                          padding: EdgeInsets.only(
-                                                                              top: 20,
-                                                                              bottom: 20,
-                                                                              right: 10,
-                                                                              left: 15),
+                                                                            InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            Navigator.pushNamed(
+                                                                                context,
+                                                                                AppRoutes.individualSub);
+                                                                          },
                                                                           child:
-                                                                              Text(
-                                                                            'View Details',
-                                                                            style:
-                                                                                TextStyle(fontSize: 14),
-                                                                          ),
+                                                                              Padding(
+                                                                                padding: const EdgeInsets.only(left: 10),
+                                                                                child: Text(
+                                                                                'View Course Info',
+                                                                                    style: TextStyle(
+                                                                                        fontWeight: FontWeight.w400,
+                                                                                        fontSize: 12,
+                                                                                        fontFamily: 'open-sans',
+                                                                                        color: Color(0xff333333),
+                                                                                    )
+                                                                                    ,
+                                                                                  textAlign: TextAlign.center,
+                                                                            ),
+                                                                              ),
                                                                         ),
-                                                                      ),
-                                                                    );
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                              "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}"),
-                                                          Divider(
-                                                            color: Colors.grey,
-                                                          ),
-                                                          Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              RichText(
-                                                                text: TextSpan(
-                                                                  children: <
-                                                                      TextSpan>[
-                                                                    TextSpan(
-                                                                        text:
-                                                                            'Type:',
-                                                                        style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .normal,
-                                                                            fontSize:
-                                                                                14,
-                                                                            color:
-                                                                                Colors.grey)),
-                                                                    TextSpan(
-                                                                        text:
-                                                                            " ${data.courseModel?.sTUDENTSUBJECTS?[index].name}",
-                                                                        style: TextStyle(
-                                                                            fontWeight: FontWeight
-                                                                                .bold,
-                                                                            fontSize:
-                                                                                14,
-                                                                            color:
-                                                                                Colors.blueGrey)),
-                                                                  ],
+                                                                      );
+                                                                    });
+                                                                  },
                                                                 ),
+                                                              ],
+                                                            ),
+                                                            Container(
+                                                             // color: Colors.amber,
+                                                              width: MediaQuery.of(context).size.width/2,
+                                                              child: Text(
+                                                                  "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
+                                                                  fontWeight: FontWeight.w400,
+                                                                  fontSize: 14,
+                                                                  fontFamily: 'open-sans',
+                                                                  color: Color(0xff333333)
                                                               ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        right:
-                                                                            50),
-                                                                child: RichText(
-                                                                  text:
-                                                                      TextSpan(
+                                                                maxLines: 2,
+                                                              ),
+                                                            ),
+                                                            Divider(
+                                                              color: Colors.grey,
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                RichText(
+                                                                  text: TextSpan(
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
                                                                           text:
-                                                                              'Credits:',
+                                                                              'Type:',
                                                                           style: TextStyle(
-                                                                              fontWeight: FontWeight.normal,
-                                                                              fontSize: 14,
-                                                                              color: Colors.grey)),
+                                                                              fontWeight: FontWeight.w400,
+                                                                              fontFamily: 'open-sans',
+                                                                              fontSize: 12,
+                                                                              color: Color(0xff9B9B9B)
+                                                                          )),
                                                                       TextSpan(
                                                                           text:
-                                                                              ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits ?? ""}',
+                                                                              " ${data.courseModel?.sTUDENTSUBJECTS?[index].name}",
                                                                           style: TextStyle(
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 14,
-                                                                              color: Colors.blueGrey)),
+                                                                              fontWeight: FontWeight
+                                                                                  .w500,
+                                                                              fontSize:
+                                                                                  12,
+                                                                              color:
+                                                                                  Color(0xff333333))),
                                                                     ],
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .only(
+                                                                          right:
+                                                                              50),
+                                                                  child: RichText(
+                                                                    text:
+                                                                        TextSpan(
+                                                                      children: <
+                                                                          TextSpan>[
+                                                                        TextSpan(
+                                                                            text:
+                                                                                'Credits:',
+                                                                            style: TextStyle(
+                                                                                fontWeight: FontWeight.w400,
+                                                                                fontSize: 12,
+                                                                                fontFamily: 'open-sans',
+                                                                                color: Color(0xff9B9B9B))),
+                                                                        TextSpan(
+                                                                            text:
+                                                                                ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits.toString().substring(0,1) ?? ""}',
+                                                                            style: TextStyle(
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 12,
+                                                                                fontFamily: 'open-sans',
+                                                                                color: Color(0xff333333))),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+
+                                                              ],
+                                                            ),
+                                                            SizedBox(height: 10,)
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                        ],
-                                      );
-                                    }),
-                              );
-                            })
-                          ],
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                          ],
+                                        );
+                                      }),
+                                );
+                              })
+                            ],
+                          ),
+                        )
+                      : Center(
+                          child: CircularProgressIndicator(),
                         ),
-                      )
-                    : Center(
-                        child: CircularProgressIndicator(),
-                      ),
-          );
-        }));
+            );
+          }),
+        ));
   }
 
   Widget _buildRow(

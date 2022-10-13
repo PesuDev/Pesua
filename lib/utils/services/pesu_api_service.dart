@@ -12,6 +12,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
+import '../constants/custom_widgets.dart';
 import '../constants/sp_constants.dart';
 
 class PesuApiService {
@@ -75,6 +76,7 @@ class PesuApiService {
 
           if (response1.statusCode == 301) {
 
+
             final urlString2=Uri.parse("${response1.headers["location"]}");
             final response3 = await http.post(  urlString2
             );
@@ -105,6 +107,14 @@ class PesuApiService {
                   responseJson = await  _response(response5);
 
                   return responseJson;
+                }
+                if(response4.statusCode==301){
+                  CustomWidgets.getToast(message: "Invalid username or password", color:Color(0xff273746));
+
+                }
+                else{
+                  return responseJson;
+
                 }
               }
 

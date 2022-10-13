@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/constants/color_consts.dart';
 import '../../../utils/view/widget.dart';
+import '../../attendance/model/attendance_arguments.dart';
 import '../viewmodel/Esa_viewmodel.dart';
 
 class ProvisionalPage extends StatefulWidget {
@@ -53,15 +54,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.cyan[100],
-                                      border: Border.all(
-                                        color: Color(0xffFFFFFF),
-                                        width: 8,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
+                                    color:Colors.cyan[100],
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -123,28 +116,31 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 ?.results?[
                                                                     index]
                                                                 .subjectCode ??
-                                                            'jwdn',
+                                                            '',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
-                                                                    .normal,
+                                                                    .w400,
                                                             fontSize: 16,
                                                             color: Color(
-                                                                0xff000000))),
+                                                                0xff9B9B9B))),
                                                   ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          Text(
-                                            data.esaModel1?.results?[index]
-                                                    .semester ??
-                                                'jwdn',
-                                            style: TextStyle(
-                                                fontFamily: 'Open Sans',
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 15,
-                                                color: Color(0xff9B9B9B)),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 6.0),
+                                            child: Text(
+                                              data.esaModel1?.results?[index]
+                                                      .semester ??
+                                                  '',
+                                              style: TextStyle(
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 15,
+                                                  color: Color(0xff333333)),
+                                            ),
                                           ),
                                           Divider(
                                             thickness: 3,
@@ -152,11 +148,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                           Text(
                                             data.esaModel1?.results?[index]
                                                     .info ??
-                                                'jwdn',
+                                                '',
                                             style: TextStyle(
                                                 fontFamily: 'Open Sans',
-                                                fontWeight: FontWeight.normal,
-                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
                                                 color: Color(0xff666666)),
                                           ),
                                           Divider(
@@ -165,31 +161,6 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                           Row(
                                             //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                             children: [
-                                              RichText(
-                                                text: TextSpan(
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                        text: 'SRN:',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 15,
-                                                            color: Color(
-                                                                0xff9B9B9B))),
-                                                    TextSpan(
-                                                        text: 'PES1234556g',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 16,
-                                                            color: Color(
-                                                                0xff000000))),
-                                                  ],
-                                                ),
-                                              ),
-                                              Spacer(),
                                               RichText(
                                                 text: TextSpan(
                                                   children: <TextSpan>[
@@ -203,16 +174,41 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
+                                                        text: 'PES1234556g',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                            fontSize: 16,
+                                                            color: Color(
+                                                                0xff000000))),
+                                                  ],
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                        text: 'Credits:',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                            fontSize: 15,
+                                                            color: Color(
+                                                                0xff9B9B9B))),
+                                                    TextSpan(
                                                         text: data
                                                                 .esaModel1
                                                                 ?.results?[
                                                                     index]
                                                                 .grade ??
-                                                            'jwdn',
+                                                            '',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
-                                                                    .normal,
+                                                                    .w400,
                                                             fontSize: 16,
                                                             color: Color(
                                                                 0xff000000))),
@@ -226,7 +222,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                     ),
                                   ),
                                   Container(
-                                    margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
+                                    // margin: EdgeInsets.fromLTRB(15, 5, 15, 0),
                                     color: Color(0xffFFFFFF),
                                     child: Column(
                                       children: [
@@ -260,13 +256,24 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                         ?.results?[
                                                                             index]
                                                                         .subjectCode ??
-                                                                    'jwdn',
+                                                                    '',
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .normal,
+                                                                            .w400,
                                                                     fontSize:
                                                                         14,
+                                                                    color: Color(
+                                                                        0xff9B9B9B))),
+                                                            TextSpan(
+                                                                text:
+                                                                    '-',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                    fontSize:
+                                                                    14,
                                                                     color: Color(
                                                                         0xff9B9B9B))),
                                                             TextSpan(
@@ -279,7 +286,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .normal,
+                                                                            .w400,
                                                                     fontSize:
                                                                         16,
                                                                     color: Color(
@@ -306,7 +313,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                       FontWeight
                                                                           .normal,
                                                                   color: Color(
-                                                                      0xff666666),
+                                                                      0xff9B9B9B),
                                                                   fontFamily:
                                                                       'Open Sans',
                                                                 ),
@@ -320,10 +327,10 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                     "A",
                                                                 style:
                                                                     TextStyle(
-                                                                  fontSize: 14,
+                                                                  fontSize: 16,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .bold,
+                                                                          .w400,
                                                                   color: Color(
                                                                       0xff000000),
                                                                   fontFamily:
@@ -337,7 +344,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                               Navigator.pushNamed(
                                                                   context,
                                                                   AppRoutes
-                                                                      .esaGraph);
+                                                                      .esaGraph,arguments: DetailedArguments(subjectCode:  data
+                                                                  .esaModel1
+                                                                  ?.results?[
+                                                              index]
+                                                                  .subjectCode));
                                                             },
                                                             icon: const Icon(
                                                                 Icons
@@ -355,10 +366,12 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                               );
                                             },
                                           ),
+
                                         ),
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 20,)
                                 ],
                               );
                             }),
@@ -373,9 +386,37 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("*TAL-To be announced later"),
                   Text(
-                      "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations")
+                    "*TAL-To be announced later",
+                    style: TextStyle(
+                        color: Color(0xff000000),
+                        fontFamily: 'Open Sans',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Disclaimer:",
+                        style: TextStyle(
+                            color: Color(0xffff0000),
+                            fontFamily: 'Open Sans',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "In case of any discrepancies please contact Controller of Examination,PES University",
+                          style: TextStyle(
+                              color: Color(0xff666666),
+                              fontFamily: 'Open Sans',
+                              fontWeight: FontWeight.normal,
+                              fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             )

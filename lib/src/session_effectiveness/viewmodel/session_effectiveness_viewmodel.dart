@@ -59,7 +59,7 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
     String? BatchClassId=await preferenceUtil.getString(sp_batchClassId);
     String? ClassBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
     String? ClassId=await preferenceUtil.getString(sp_classId);
-    String? DepartmentId=await preferenceUtil.getString(sp_DepartmentId);
+  //  String? DepartmentId=await preferenceUtil.getString(sp_DepartmentId);
 
 
 
@@ -71,7 +71,7 @@ class SessionEffectivenessViewmodel extends ChangeNotifier {
         BatchClassId: int.parse(BatchClassId.toString()),
         ClassBatchSectionId: int.parse(ClassBatchSectionId.toString()),
         ClassId: int.parse(ClassId.toString()),
-        DepartmentId: int.parse(DepartmentId.toString()),
+        DepartmentId: DepartmentId,
         ProgramId: ProgramId,
         isLocallySavedData: isLocallySavedData,
         subjectCode: subjectCode,

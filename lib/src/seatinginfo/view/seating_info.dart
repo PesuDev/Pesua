@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/seatinginfo/model/seating_info_model.dart';
@@ -16,6 +17,8 @@ class SeatingInfo extends StatefulWidget {
 
 class _SeatingInfoState extends State<SeatingInfo> {
   late SeatingInfoViewModel _viewModel;
+  Timestamp? time;
+
 
   @override
   void initState() {
@@ -58,12 +61,12 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Assesment",
+                                      "Assessment",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.blue),
+                                          color: Color(0xff008DC9)),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -72,8 +75,8 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                       model.assessmentName ?? "",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.normal,
                                           color: Color(0xffFFFFFF)),
                                     ),
                                     SizedBox(
@@ -85,7 +88,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                           fontFamily: 'Open Sans',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.blue),
+                                          color: Color(0xff008DC9)),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -94,7 +97,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                       model.roomName ?? "",
                                       style: TextStyle(
                                           fontFamily: 'Open Sans',
-                                          fontSize: 18,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color(0xffFFFFFF)),
                                     ),
@@ -111,11 +114,11 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   Text(
-                                    "Subject",
+                                    "SUBJECT",
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                   Text(
@@ -123,7 +126,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                   Text(
@@ -131,7 +134,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                     style: TextStyle(
                                         fontFamily: 'Open Sans',
                                         fontSize: 18,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                         color: Color(0xffFFFFFF)),
                                   ),
                                 ],
@@ -192,7 +195,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                             fontWeight:
                                                                 FontWeight.w400,
                                                             color: Color(
-                                                                0xff666666)),
+                                                                0xff8b8b8b)),
                                                       ),
                                                     ],
                                                   ),
@@ -205,10 +208,11 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      '${DateTimeUtil.convertTimeIntodate(model.testStartTime!.toInt())}' 
+                                                      '${DateTimeUtil.convertDate(model.testStartTime!.toInt())}'
                                                           "",
                                                       maxLines: 5,
                                                       textAlign:
+
                                                           TextAlign.start,
                                                       style: TextStyle(
                                                           fontFamily:
@@ -217,10 +221,10 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                           fontWeight:
                                                               FontWeight.w400,
                                                           color: Color(
-                                                              0xff000000)),
+                                                              0xff333333)),
                                                     ),
                                                     Text(
-                                                      "09:00 AM",
+                                                      ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
                                                       maxLines: 5,
                                                       textAlign:
                                                           TextAlign.start,
@@ -249,7 +253,7 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                                               'Open Sans',
                                                           fontSize: 16,
                                                           fontWeight:
-                                                              FontWeight.w400,
+                                                              FontWeight.w500,
                                                           color: Color(
                                                               0xff000000)),
                                                     ),

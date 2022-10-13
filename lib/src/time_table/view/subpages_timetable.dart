@@ -49,153 +49,158 @@ class _TableDetailsState extends State<TableDetails> {
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.only(top: 10),
-          height: MediaQuery.of(context).size.height * 1.5,
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 1.4,
-                child: Consumer<TimeTableViewmodel>(
-                  builder: (context, data, child) {
-                    return data.timeTableModel != null &&
-                        data.timeTableModel!.isNotEmpty
-                        ? ListView.builder(
-                        itemCount: data.timeTableModel?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          TimeTableModel model = data.timeTableModel![index];
+          height: MediaQuery.of(context).size.height ,
+        // color: Colors.amber,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.white,
 
-                          print("mon ${model.subjectName}");
-                          return model.day == 1
-                              ? Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(0),
-                                    border:
-                                    Border.all(color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            3,
-                                        child: Text(
-                                          ("${model.startTime}-${model.endTime}"),
-                                          // data.timeTableModel?.startTime ?? "",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.normal),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              width:
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.50,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    model.subjectName ??
-                                                        "",
-                                                    maxLines: 3,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            0xff000000),
-                                                        fontFamily:
-                                                        'Open Sans',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .normal),
-                                                  ),
-                                                ],
-                                              )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            model.subjectCode ?? "",
+                  height: MediaQuery.of(context).size.height/1.25 ,
+                  child: Consumer<TimeTableViewmodel>(
+                    builder: (context, data, child) {
+                      return data.timeTableModel != null &&
+                          data.timeTableModel!.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: data.timeTableModel?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            TimeTableModel model = data.timeTableModel![index];
+
+                            print("mon ${model.subjectName}");
+                            return model.day == 1
+                                ? Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(0),
+                                      border:
+                                      Border.all(color: Colors.grey)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              3,
+                                          child: Text(
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
+                                            // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
-                                                color:
-                                                Color(0xff666666),
+                                                color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight:
-                                                FontWeight.w400),
+                                                FontWeight.normal),
                                           ),
-                                        ],
-                                      ),
-                                    ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.50,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      model.subjectName ??
+                                                          "",
+                                                      maxLines: 3,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xff000000),
+                                                          fontFamily:
+                                                          'Open Sans',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              model.subjectCode ?? "",
+                                              style: TextStyle(
+                                                  color:
+                                                  Color(0xff666666),
+                                                  fontFamily: 'Open Sans',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              model.timeTableTemplateStatus
-                                  .toString() ==
-                                  "1"
-                                  ? Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                color: Color(0xff9E9E9E80),
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height /
-                                    17,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10),
-                                  child: Text(
-                                    model.timeTableTemplateStatus
-                                        .toString() ==
-                                        "1"
-                                        ? "Break"
-                                        : "",
-                                    //"BREAK",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xff333333),
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        fontWeight:
-                                        FontWeight.normal),
+                                model.timeTableTemplateStatus
+                                    .toString() ==
+                                    1
+                                    ? Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  color: Color(0xff9E9E9E80),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      17,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10),
+                                    child: Text(
+                                      model.timeTableTemplateStatus
+                                          .toString() ==
+                                          1
+                                          ? "BREAK"
+                                          : "hhh",
+                                      //"BREAK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xff333333),
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.normal),
+                                    ),
                                   ),
+                                )
+                                    : Container(
                                 ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                              : Container();
-                        })
-                        : Center(child: CircularProgressIndicator());
-                  },
+                              ],
+                            )
+                                : Container();
+                          })
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -207,153 +212,155 @@ class _TableDetailsState extends State<TableDetails> {
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.only(top: 10),
-          height: MediaQuery.of(context).size.height * 1.5,
+          height: MediaQuery.of(context).size.height ,
           color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 1.4,
-                child: Consumer<TimeTableViewmodel>(
-                  builder: (context, data, child) {
-                    return data.timeTableModel != null &&
-                        data.timeTableModel!.isNotEmpty
-                        ? ListView.builder(
-                        itemCount: data.timeTableModel?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          TimeTableModel model = data.timeTableModel![index];
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height/1.25 ,
+                  child: Consumer<TimeTableViewmodel>(
+                    builder: (context, data, child) {
+                      return data.timeTableModel != null &&
+                          data.timeTableModel!.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: data.timeTableModel?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            TimeTableModel model = data.timeTableModel![index];
 
-                          print("mot ${model.subjectName}");
-                          return model.day == 2
-                              ? Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(0),
-                                    border:
-                                    Border.all(color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            3,
-                                        child: Text(
-                                          ("${model.startTime}-${model.endTime}"),
-                                          // data.timeTableModel?.startTime ?? "",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.normal),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              width:
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.50,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    model.subjectName ??
-                                                        "",
-                                                    maxLines: 3,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            0xff000000),
-                                                        fontFamily:
-                                                        'Open Sans',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .normal),
-                                                  ),
-                                                ],
-                                              )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            model.subjectCode ?? "",
+                            print("mot ${model.subjectName}");
+                            return model.day == 2
+                                ? Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(0),
+                                      border:
+                                      Border.all(color: Colors.grey)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              3,
+                                          child: Text(
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
+                                            // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
-                                                color:
-                                                Color(0xff666666),
+                                                color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight:
-                                                FontWeight.w400),
+                                                FontWeight.normal),
                                           ),
-                                        ],
-                                      ),
-                                    ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.50,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      model.subjectName ??
+                                                          "",
+                                                      maxLines: 3,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xff000000),
+                                                          fontFamily:
+                                                          'Open Sans',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              model.subjectCode ?? "",
+                                              style: TextStyle(
+                                                  color:
+                                                  Color(0xff666666),
+                                                  fontFamily: 'Open Sans',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              model.timeTableTemplateStatus
-                                  .toString() ==
-                                  "1"
-                                  ? Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                color: Color(0xff9E9E9E80),
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height /
-                                    17,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10),
-                                  child: Text(
-                                    model.timeTableTemplateStatus
-                                        .toString() ==
-                                        "1"
-                                        ? "Break"
-                                        : "",
-                                    //"BREAK",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xff333333),
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        fontWeight:
-                                        FontWeight.normal),
+                                model.timeTableTemplateStatus
+                                    .toString() ==
+                                    "1"
+                                    ? Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  color: Color(0xff9E9E9E80),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      17,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10),
+                                    child: Text(
+                                      model.timeTableTemplateStatus
+                                          .toString() ==
+                                          "1"
+                                          ? "Break"
+                                          : "",
+                                      //"BREAK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xff333333),
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.normal),
+                                    ),
                                   ),
-                                ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                              : Container();
-                        })
-                        : Center(child: CircularProgressIndicator());
-                  },
+                                )
+                                    : Container(),
+                              ],
+                            )
+                                : Container();
+                          })
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -365,153 +372,156 @@ class _TableDetailsState extends State<TableDetails> {
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.only(top: 10),
-          height: MediaQuery.of(context).size.height * 1.5,
+          height: MediaQuery.of(context).size.height,
           color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 1.4,
-                child: Consumer<TimeTableViewmodel>(
-                  builder: (context, data, child) {
-                    return data.timeTableModel != null &&
-                        data.timeTableModel!.isNotEmpty
-                        ? ListView.builder(
-                        itemCount: data.timeTableModel?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          TimeTableModel model = data.timeTableModel![index];
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height/1.25 ,
+                  child:
+                  Consumer<TimeTableViewmodel>(
+                    builder: (context, data, child) {
+                      return data.timeTableModel != null &&
+                          data.timeTableModel!.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: data.timeTableModel?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            TimeTableModel model = data.timeTableModel![index];
 
-                          print("mot ${model.subjectName}");
-                          return model.day == 3
-                              ? Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(0),
-                                    border:
-                                    Border.all(color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            3,
-                                        child: Text(
-                                          ("${model.startTime}-${model.endTime}"),
-                                          // data.timeTableModel?.startTime ?? "",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.normal),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              width:
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.50,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    model.subjectName ??
-                                                        "",
-                                                    maxLines: 3,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            0xff000000),
-                                                        fontFamily:
-                                                        'Open Sans',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .normal),
-                                                  ),
-                                                ],
-                                              )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            model.subjectCode ?? "",
+                            print("mot ${model.subjectName}");
+                            return model.day == 3
+                                ? Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(0),
+                                      border:
+                                      Border.all(color: Colors.grey)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              3,
+                                          child: Text(
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
+                                            // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
-                                                color:
-                                                Color(0xff666666),
+                                                color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight:
-                                                FontWeight.w400),
+                                                FontWeight.normal),
                                           ),
-                                        ],
-                                      ),
-                                    ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.50,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      model.subjectName ??
+                                                          "",
+                                                      maxLines: 3,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xff000000),
+                                                          fontFamily:
+                                                          'Open Sans',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              model.subjectCode ?? "",
+                                              style: TextStyle(
+                                                  color:
+                                                  Color(0xff666666),
+                                                  fontFamily: 'Open Sans',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              model.timeTableTemplateStatus
-                                  .toString() ==
-                                  "1"
-                                  ? Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                color: Color(0xff9E9E9E80),
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height /
-                                    17,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10),
-                                  child: Text(
-                                    model.timeTableTemplateStatus
-                                        .toString() ==
-                                        "1"
-                                        ? "Break"
-                                        : "",
-                                    //"BREAK",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xff333333),
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        fontWeight:
-                                        FontWeight.normal),
+                                model.timeTableTemplateStatus
+                                    .toString() ==
+                                    "1"
+                                    ? Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  color: Color(0xff9E9E9E80),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      17,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10),
+                                    child: Text(
+                                      model.timeTableTemplateStatus
+                                          .toString() ==
+                                          "1"
+                                          ? "Break"
+                                          : "",
+                                      //"BREAK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xff333333),
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.normal),
+                                    ),
                                   ),
-                                ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                              : Container();
-                        })
-                        : Center(child: CircularProgressIndicator());
-                  },
+                                )
+                                    : Container(),
+                              ],
+                            )
+                                : Container();
+                          })
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -524,153 +534,156 @@ class _TableDetailsState extends State<TableDetails> {
       child: Scaffold(
         body: Container(
           margin: EdgeInsets.only(top: 10),
-          height: MediaQuery.of(context).size.height * 1.5,
+          height: MediaQuery.of(context).size.height,
           color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 1.4,
-                child: Consumer<TimeTableViewmodel>(
-                  builder: (context, data, child) {
-                    return data.timeTableModel != null &&
-                        data.timeTableModel!.isNotEmpty
-                        ? ListView.builder(
-                        itemCount: data.timeTableModel?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          TimeTableModel model = data.timeTableModel![index];
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height/1.25 ,
+                  child:
+                  Consumer<TimeTableViewmodel>(
+                    builder: (context, data, child) {
+                      return data.timeTableModel != null &&
+                          data.timeTableModel!.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: data.timeTableModel?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            TimeTableModel model = data.timeTableModel![index];
 
-                          print("mot ${model.subjectName}");
-                          return model.day == 4
-                              ? Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(0),
-                                    border:
-                                    Border.all(color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            3,
-                                        child: Text(
-                                          ("${model.startTime}-${model.endTime}"),
-                                          // data.timeTableModel?.startTime ?? "",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.normal),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              width:
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.50,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    model.subjectName ??
-                                                        "",
-                                                    maxLines: 3,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            0xff000000),
-                                                        fontFamily:
-                                                        'Open Sans',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .normal),
-                                                  ),
-                                                ],
-                                              )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            model.subjectCode ?? "",
+                            print("mot ${model.subjectName}");
+                            return model.day == 4
+                                ? Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(0),
+                                      border:
+                                      Border.all(color: Colors.grey)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              3,
+                                          child: Text(
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
+                                            // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
-                                                color:
-                                                Color(0xff666666),
+                                                color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight:
-                                                FontWeight.w400),
+                                                FontWeight.normal),
                                           ),
-                                        ],
-                                      ),
-                                    ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.50,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      model.subjectName ??
+                                                          "",
+                                                      maxLines: 3,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xff000000),
+                                                          fontFamily:
+                                                          'Open Sans',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              model.subjectCode ?? "",
+                                              style: TextStyle(
+                                                  color:
+                                                  Color(0xff666666),
+                                                  fontFamily: 'Open Sans',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              model.timeTableTemplateStatus
-                                  .toString() ==
-                                  "1"
-                                  ? Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                color: Color(0xff9E9E9E80),
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height /
-                                    17,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10),
-                                  child: Text(
-                                    model.timeTableTemplateStatus
-                                        .toString() ==
-                                        "1"
-                                        ? "Break"
-                                        : "",
-                                    //"BREAK",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xff333333),
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        fontWeight:
-                                        FontWeight.normal),
+                                model.timeTableTemplateStatus
+                                    .toString() ==
+                                    "1"
+                                    ? Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  color: Color(0xff9E9E9E80),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      17,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10),
+                                    child: Text(
+                                      model.timeTableTemplateStatus
+                                          .toString() ==
+                                          "1"
+                                          ? "Break"
+                                          : "",
+                                      //"BREAK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xff333333),
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.normal),
+                                    ),
                                   ),
-                                ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                              : Container();
-                        })
-                        : Center(child: CircularProgressIndicator());
-                  },
+                                )
+                                    : Container(),
+                              ],
+                            )
+                                : Container();
+                          })
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -684,153 +697,155 @@ class _TableDetailsState extends State<TableDetails> {
         body:
         Container(
           margin: EdgeInsets.only(top: 10),
-          height: MediaQuery.of(context).size.height * 1.5,
+          height: MediaQuery.of(context).size.height,
           color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 1.4,
-                child: Consumer<TimeTableViewmodel>(
-                  builder: (context, data, child) {
-                    return data.timeTableModel != null &&
-                        data.timeTableModel!.isNotEmpty
-                        ? ListView.builder(
-                        itemCount: data.timeTableModel?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          TimeTableModel model = data.timeTableModel![index];
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height/1.25 ,
+                  child: Consumer<TimeTableViewmodel>(
+                    builder: (context, data, child) {
+                      return data.timeTableModel != null &&
+                          data.timeTableModel!.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: data.timeTableModel?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            TimeTableModel model = data.timeTableModel![index];
 
-                          print("mot ${model.subjectName}");
-                          return model.day == 5
-                              ? Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(0),
-                                    border:
-                                    Border.all(color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: MediaQuery.of(context)
-                                            .size
-                                            .width /
-                                            3,
-                                        child: Text(
-                                          ("${model.startTime}-${model.endTime}"),
-                                          // data.timeTableModel?.startTime ?? "",
-                                          style: TextStyle(
-                                              color: Color(0xff000000),
-                                              fontFamily: 'Open Sans',
-                                              fontSize: 16,
-                                              fontWeight:
-                                              FontWeight.normal),
-                                        ),
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              width:
-                                              MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                                  0.50,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    model.subjectName ??
-                                                        "",
-                                                    maxLines: 3,
-                                                    overflow:
-                                                    TextOverflow
-                                                        .ellipsis,
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            0xff000000),
-                                                        fontFamily:
-                                                        'Open Sans',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                        FontWeight
-                                                            .normal),
-                                                  ),
-                                                ],
-                                              )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            model.subjectCode ?? "",
+                            print("mot ${model.subjectName}");
+                            return model.day == 5
+                                ? Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                      BorderRadius.circular(0),
+                                      border:
+                                      Border.all(color: Colors.grey)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width /
+                                              3,
+                                          child: Text(
+                                            ("${model.startTime?.substring(0,5)} - ${model.endTime?.substring(0,5)}"),
+                                            // data.timeTableModel?.startTime ?? "",
                                             style: TextStyle(
-                                                color:
-                                                Color(0xff666666),
+                                                color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight:
-                                                FontWeight.w400),
+                                                FontWeight.normal),
                                           ),
-                                        ],
-                                      ),
-                                    ],
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                                width:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    0.50,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: [
+                                                    Text(
+                                                      model.subjectName ??
+                                                          "",
+                                                      maxLines: 3,
+                                                      overflow:
+                                                      TextOverflow
+                                                          .ellipsis,
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xff000000),
+                                                          fontFamily:
+                                                          'Open Sans',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .normal),
+                                                    ),
+                                                  ],
+                                                )),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              model.subjectCode ?? "",
+                                              style: TextStyle(
+                                                  color:
+                                                  Color(0xff666666),
+                                                  fontFamily: 'Open Sans',
+                                                  fontSize: 14,
+                                                  fontWeight:
+                                                  FontWeight.w400),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              model.timeTableTemplateStatus
-                                  .toString() ==
-                                  "1"
-                                  ? Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.only(
-                                    left: 10, right: 10),
-                                color: Color(0xff9E9E9E80),
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height /
-                                    17,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10),
-                                  child: Text(
-                                    model.timeTableTemplateStatus
-                                        .toString() ==
-                                        "1"
-                                        ? "Break"
-                                        : "",
-                                    //"BREAK",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Color(0xff333333),
-                                        fontFamily: 'Open Sans',
-                                        fontSize: 18,
-                                        fontWeight:
-                                        FontWeight.normal),
+                                model.timeTableTemplateStatus
+                                    .toString() ==
+                                    "1"
+                                    ? Container(
+                                  width: double.infinity,
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  color: Color(0xff9E9E9E80),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      17,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10),
+                                    child: Text(
+                                      model.timeTableTemplateStatus
+                                          .toString() ==
+                                          "1"
+                                          ? "Break"
+                                          : "",
+                                      //"BREAK",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Color(0xff333333),
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 14,
+                                          fontWeight:
+                                          FontWeight.normal),
+                                    ),
                                   ),
-                                ),
-                              )
-                                  : Container(),
-                            ],
-                          )
-                              : Container();
-                        })
-                        : Center(child: CircularProgressIndicator());
-                  },
+                                )
+                                    : Container(),
+                              ],
+                            )
+                                : Container();
+                          })
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -855,7 +870,7 @@ class _TableDetailsState extends State<TableDetails> {
               child: Center(
                 child: Text('NO CLASSES AVAILABLE ',
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xff717171),
                         fontWeight: FontWeight.w600)),
               ),
@@ -871,7 +886,7 @@ class _TableDetailsState extends State<TableDetails> {
             ),
             Text("Refresh",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 14,
                   color: Color(0xff0091cd),
                 )),
           ],
@@ -898,7 +913,7 @@ class _TableDetailsState extends State<TableDetails> {
               child: Center(
                 child: Text('NO CLASSES AVAILABLE ',
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Color(0xff717171),
                         fontWeight: FontWeight.w600)),
               ),
@@ -914,7 +929,7 @@ class _TableDetailsState extends State<TableDetails> {
             ),
             Text("Refresh",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 14,
                   color: Color(0xff0091cd),
                 )),
           ],

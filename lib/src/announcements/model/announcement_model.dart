@@ -13,15 +13,15 @@ class AnnouncementModel {
   int? instId;
   String? instituteName;
   int? deptId;
-  Null? deptName;
+  String? deptName;
   String? userId;
   String? loginId;
   int? createddate;
- int? modifiedDate;
+  int? modifiedDate;
   int? announcementDocId;
   String? documentPath;
   int? isReusedIcon;
-  Null? batchClassId;
+  int? batchClassId;
   int? announcementPriority;
   String? announcementPriorityName;
   String? createdDateFrSorting;

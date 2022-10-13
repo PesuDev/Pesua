@@ -17,6 +17,16 @@ class DateTimeUtil{
 
     return formattedDate;
   }
+ ////////
+  static String converDateIntoTime(int timeStamp){
+    int timeInMillis = timeStamp;
+    var date = DateTime.fromMillisecondsSinceEpoch(timeInMillis);
+    var formattedTime =  DateFormat("h:mm a").format(date);
+
+    return formattedTime;
+  }
+
+
   static String convertDate(int timeStamp){
     int timeInMillis = timeStamp;
     var date = DateTime.fromMillisecondsSinceEpoch(timeInMillis);

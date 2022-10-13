@@ -21,11 +21,12 @@ class EsaViewModel extends ChangeNotifier {
       {required int action,
         required int mode,
         required double randomNum,}) async {
-    String? userId=await preferenceUtil.getString(sp_userId);
+    String? departmentId=await preferenceUtil.getString(sp_DepartmentId);
+
     final data = await _apiService.fetchEsaInfoDetails(
         action: action,
         mode: mode,
-        userId: userId.toString(),
+        userId: departmentId.toString(),
         randomNum: randomNum,);
 
     esaModel1 = data;

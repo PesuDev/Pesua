@@ -83,7 +83,7 @@ class _PreviousSemState extends State<PreviousSem> {
                 child: SingleChildScrollView(
                   child: Column(children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                      margin: EdgeInsets.fromLTRB(0, 2, 0, 0),
                       decoration: BoxDecoration(
                         color: Color(0xffFFFFFF),
                         border: Border.all(
@@ -101,8 +101,8 @@ class _PreviousSemState extends State<PreviousSem> {
                                 "Earned Credits",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff000000),
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff9B9B9B),
                                   fontFamily: 'Open Sans',
                                 ),
                               ),
@@ -111,28 +111,28 @@ class _PreviousSemState extends State<PreviousSem> {
                                     "116/116",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xff666666),
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xff333333),
                                   fontFamily: 'Open Sans',
                                 ),
                               ),
                             ],
                           ),
-                          const VerticalDivider(
-                            width: 20,
-                            thickness: 8,
-                            indent: 20,
-                            endIndent: 0,
-                            color: Colors.black,
-                          ),
+                          // const VerticalDivider(
+                          //   width: 20,
+                          //   thickness: 8,
+                          //   indent: 20,
+                          //   endIndent: 0,
+                          //   color: Colors.red,
+                          // ),
                           Column(
                             children: [
                               Text(
                                 "Current CGPA",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff000000),
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff9B9B9B),
                                   fontFamily: 'Open Sans',
                                 ),
                               ),
@@ -142,8 +142,8 @@ class _PreviousSemState extends State<PreviousSem> {
                                     "116/116",
                                 style: TextStyle(
                                   fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xff666666),
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xff000000),
                                   fontFamily: 'Open Sans',
                                 ),
                               ),
@@ -185,7 +185,7 @@ class _PreviousSemState extends State<PreviousSem> {
 
                     Container(
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+                        padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
                         child: Column(
                           // mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -253,14 +253,14 @@ class _PreviousSemState extends State<PreviousSem> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 20, 15, 0),
+                      margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
                       decoration: BoxDecoration(
                         // color: const Color(0xff7c94b6),
                         border: Border.all(
                           color: Colors.grey,
                           width: 1,
                         ),
-                        borderRadius: BorderRadius.circular(5),
+                        borderRadius: BorderRadius.circular(0),
                       ),
                       child: ListView.builder(
                           itemCount:
@@ -318,7 +318,8 @@ class _PreviousSemState extends State<PreviousSem> {
                       height: 5,
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                      color: Color(0xffFFFFFF),
+                      margin: EdgeInsets.only(top:10),
                       child: ListTileTheme.merge(
                         child: ListView.builder(
                             shrinkWrap: true,
@@ -328,7 +329,7 @@ class _PreviousSemState extends State<PreviousSem> {
                             itemBuilder: (context, index) {
                               return Column(children: [
                                 Container(
-                                  color: Colors.cyan[400],
+                                  color: Colors.cyan[100],
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.start,
@@ -345,7 +346,7 @@ class _PreviousSemState extends State<PreviousSem> {
                                               "",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w400,
                                             color: Color(0xff000000),
                                             fontFamily: 'Open Sans',
                                           ),
@@ -361,9 +362,9 @@ class _PreviousSemState extends State<PreviousSem> {
                                             Text(
                                               "SGPA:",
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff000000),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                                color: Color(0xff9B9B9B),
                                                 fontFamily: 'Open Sans',
                                               ),
                                             ),
@@ -386,9 +387,9 @@ class _PreviousSemState extends State<PreviousSem> {
                                             Text(
                                               "Credits :",
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff000000),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color(0xff9B9B9B),
                                                 fontFamily: 'Open Sans',
                                               ),
                                             ),
@@ -406,9 +407,9 @@ class _PreviousSemState extends State<PreviousSem> {
                                             Text(
                                               "CGPA :",
                                               style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color(0xff000000),
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                                color: Color(0xff9B9B9B),
                                                 fontFamily: 'Open Sans',
                                               ),
                                             ),
@@ -421,7 +422,7 @@ class _PreviousSemState extends State<PreviousSem> {
                                                   ""),
                                               style: TextStyle(
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w400,
                                                 color: Color(0xff000000),
                                                 fontFamily: 'Open Sans',
                                               ),
@@ -450,14 +451,36 @@ class _PreviousSemState extends State<PreviousSem> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Text(
-                                                      "${data.esaModel4?.rESULTS?[index].subjectCode ?? ""} : ${data.esaModel4?.rESULTS?[index].subjectName ?? ""}",
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(left:
+                                                                8.0,top: 8,bottom: 8),
+                                                        child: Text(
+                                                          "${data.esaModel4?.rESULTS?[index].subjectCode ?? ""} ",style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Color(0xff9B9B9B),
+                                                          fontWeight: FontWeight.w300,
+                                                          overflow: TextOverflow.ellipsis,
+
+                                                        ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          "- ${data.esaModel4?.rESULTS?[index].subjectName ?? ""}",style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Color(0xff333333),
+                                                          fontWeight: FontWeight.w400,
+                                                          overflow: TextOverflow.ellipsis,
+
+                                                        ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
+
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -466,23 +489,39 @@ class _PreviousSemState extends State<PreviousSem> {
                                                       children: [
                                                         Column(
                                                           children: [
-                                                            Text("Credits"),
+                                                            Text("Credits",style: TextStyle(
+                                                                fontWeight: FontWeight.w300,
+                                                                fontSize: 16,
+                                                                color: Color(0xff9B9B9B)
+                                                            ),),
                                                             Text(
                                                               ("${data.esaModel4?.rESULTS?[index].earnedCredit.toString()}/${data.esaModel4?.rESULTS?[index].credits.toString()}") ??
-                                                                  "SGPA",
+                                                                  "SGPA",style: TextStyle(
+                                                              fontWeight: FontWeight.w400,
+                                                              fontSize: 16,
+                                                              color: Color(0xff333333)
+                                                            ),
                                                             ),
                                                           ],
                                                         ),
                                                         Spacer(),
                                                         Column(
                                                           children: [
-                                                            Text("Grade"),
+                                                            Text("Grade",style: TextStyle(
+                                                                fontWeight: FontWeight.w300,
+                                                                fontSize: 16,
+                                                                color: Color(0xff9B9B9B)
+                                                            ),),
                                                             Text(data
                                                                     .esaModel4
                                                                     ?.rESULTS?[
                                                                         index]
                                                                     .grade ??
-                                                                "data"),
+                                                                "data",style: TextStyle(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 16,
+                                                                color: Color(0xff000000)
+                                                            ),),
                                                           ],
                                                         ),
                                                         Spacer(),
@@ -526,16 +565,31 @@ class _PreviousSemState extends State<PreviousSem> {
                             style: TextStyle(
                                 color: Color(0xff000000),
                                 fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400,
+                                fontWeight: FontWeight.w700,
                                 fontSize: 14),
                           ),
-                          Text(
-                            "*NMS-Not Meeting Standars.The student must get in touch with the controller of Examinations",
-                            style: TextStyle(
-                                color: Color(0xff000000),
-                                fontFamily: 'Open Sans',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Disclaimer:",
+                                style: TextStyle(
+                                    color: Color(0xffff0000),
+                                    fontFamily: 'Open Sans',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  "In case of any discrepancies please contact Controller of Examination,PES University",
+                                  style: TextStyle(
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14),
+                                ),
+                              ),
+                            ],
                           )
                         ],
                       ),

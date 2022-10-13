@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class EsaGraph extends StatefulWidget {
-  EsaGraph({Key? key}) : super(key: key);
+  String subjectCode;
+  EsaGraph({ required this.subjectCode});
 
   @override
   _EsaGraphState createState() => _EsaGraphState();
@@ -30,7 +31,7 @@ class _EsaGraphState extends State<EsaGraph> {
     viewModel.getGraphData(
       action: 7,
       mode: 4,
-      subjectCode: 'UM21MB641A',
+      subjectCode: '${widget.subjectCode}',
       randomNum: 0.19526425584906115,
     );
   }

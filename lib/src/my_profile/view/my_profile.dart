@@ -2,12 +2,14 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:typed_data';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/my_profile/model/update_detail_model.dart';
 import 'package:pesu/src/my_profile/model/update_password_model.dart';
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
@@ -50,15 +52,15 @@ class _MyProfileState extends State<MyProfile> {
         callMethod: 'background',
         isProfileRequest: true);
     profileViewmodel!.getProfileDetailsData(
-        action: 27,
-        mode: 1,
-       // userId: "PES1202002878",
-        randomNum: 0.5799475622899326,
-        callMethod: 'background',
-       // loginId: "PES1202002878",
-        searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
-        userType: 1,
-       // userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760'
+      action: 27,
+      mode: 1,
+      // userId: "PES1202002878",
+      randomNum: 0.5799475622899326,
+      callMethod: 'background',
+      // loginId: "PES1202002878",
+      searchUserId: "7b14a7f5-13a7-4c1c-a17d-42e7ac9a147f",
+      userType: 1,
+      // userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760'
     );
 
 
@@ -68,6 +70,9 @@ class _MyProfileState extends State<MyProfile> {
 
 
   bool edit = false;
+  bool show = false;
+  String _errorMessage = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,15 +106,16 @@ class _MyProfileState extends State<MyProfile> {
                         children: [
                           myImage != null && myImage.isNotEmpty
                               ? Container(
-                            width: 110,
-                            height: 110,
+                            width: 100,
+                            height: 100,
                             decoration: BoxDecoration(
                               borderRadius:
                               BorderRadius.circular(100),
                               image: new DecorationImage(
+
                                   fit: BoxFit.fill,
-                                  image: MemoryImage(myImage,
-                                      scale: 0.5)),
+                                  image: MemoryImage(myImage
+                                  )),
                             ),
                           )
                               :
@@ -136,7 +142,7 @@ class _MyProfileState extends State<MyProfile> {
                                   //"Student401",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18),
+                                      fontSize: 14,fontWeight: FontWeight.w300),
                                 ),
                                 Row(
                                   children: [
@@ -144,16 +150,16 @@ class _MyProfileState extends State<MyProfile> {
                                       'PESU ID : ',
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight:
-                                          FontWeight.w400),
+                                          FontWeight.w300),
                                     ),
                                     Text(
                                       data.profileModel?.loginId ??
                                           "",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16),
+                                          fontSize: 14,fontWeight: FontWeight.w300),
                                     ),
                                   ],
                                 ),
@@ -163,9 +169,9 @@ class _MyProfileState extends State<MyProfile> {
                                       'SRN: ',
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight:
-                                          FontWeight.w400),
+                                          FontWeight.w300),
                                     ),
                                     Text(
                                       data.profileModel
@@ -173,7 +179,7 @@ class _MyProfileState extends State<MyProfile> {
                                           "",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontSize: 16),
+                                          fontSize: 14,fontWeight: FontWeight.w300),
                                     ),
                                   ],
                                 ),
@@ -181,15 +187,15 @@ class _MyProfileState extends State<MyProfile> {
                                   "${data.profileModel?.program ?? ""} | ${data.profileModel?.branch ?? ""}",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w300),
                                 ),
                                 Text(
                                   data.profileModel?.className ?? "",
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w300),
                                 ),
                               ],
                             ),
@@ -240,8 +246,8 @@ class _MyProfileState extends State<MyProfile> {
                                     borderRadius:
                                     BorderRadius.circular(12),
                                     color: (edit == false)
-                                        ? Colors.blueGrey
-                                        : Colors.orangeAccent,
+                                        ? Color(0xff286090)
+                                        : Color(0xfff36b15),
                                     /*    boxShadow: [
                                   BoxShadow(
                                       color: Colors.blueGrey, spreadRadius: 3),
@@ -251,7 +257,7 @@ class _MyProfileState extends State<MyProfile> {
                                     (edit == false) ? "Edit" : "Cancel",
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -264,21 +270,15 @@ class _MyProfileState extends State<MyProfile> {
                               child: Text(
                                 "Email ID",
                                 style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 18),
+                                    color: Color(0xff999999),
+                                    fontSize: 14),
                               )),
                           (edit == false)
                               ? Text(
                             data.profileModel?.email ?? "",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 14),
                           )
                               :  TextFormField(
-
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'Please Enter Valid Email-id';
-                              }
-                            },
                             // autofocus: true,
                             controller: emailController,
                             decoration: new InputDecoration(
@@ -287,7 +287,7 @@ class _MyProfileState extends State<MyProfile> {
                               // hintText: data.profileModel?.email,
                               hintStyle: TextStyle(
                                 fontFamily: "Nunito",
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Colors.black,
                               ),
                               border: new OutlineInputBorder(
@@ -298,26 +298,33 @@ class _MyProfileState extends State<MyProfile> {
                                 ),
                               ),
                             ),
-                            onChanged: (text) {
+                            onChanged: (val) {
+                              validateEmail(val);
                               setState(() {
 
                               });
+
                             },
                           ),
+                          (edit==true)?
+                          Padding(
+                            padding: const EdgeInsets.only(top:5),
+                            child: Text(_errorMessage, style: TextStyle(color: Colors.red),),
+                          ):Text(""),
 
                           Container(
                               padding:
-                              EdgeInsets.only(top: 20, bottom: 10),
+                              EdgeInsets.only(top: 5, bottom: 10),
                               child: Text(
                                 "Contact No",
                                 style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 18),
+                                    color: Color(0xff999999),
+                                    fontSize: 14),
                               )),
                           (edit == false)
                               ? Text(
                             data.profileModel?.phone ?? "",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 14),
                           )
 
                               :  TextFormField(
@@ -391,6 +398,7 @@ class _MyProfileState extends State<MyProfile> {
                                       // updateDetailPopUp();
                                       _updateBottomSheet();
                                     }
+
                                   }
 
                                 },
@@ -434,7 +442,7 @@ class _MyProfileState extends State<MyProfile> {
                                           child: Text(
                                             "Change Password",
                                             style:
-                                            TextStyle(fontSize: 18),
+                                            TextStyle(fontSize: 16),
                                           )),
                                     ],
                                   ),
@@ -451,7 +459,7 @@ class _MyProfileState extends State<MyProfile> {
                                     children: [
                                       Icon(
                                         Icons.logout,
-                                        size: 18,
+                                        size: 16,
                                       ),
                                       Container(
                                           padding:
@@ -479,10 +487,10 @@ class _MyProfileState extends State<MyProfile> {
                             left: 16,
                           ),
                           child: Text(
-                            "OtherInformation",
+                            "Other Information",
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.black),
                           )),
                       Container(
@@ -502,7 +510,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "SSLC Marks :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -512,7 +520,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -521,7 +529,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "PUC Marks :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -531,7 +539,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -540,7 +548,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Date Of Birth :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -550,7 +558,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -559,7 +567,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Blood Group:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -569,7 +577,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -589,8 +597,8 @@ class _MyProfileState extends State<MyProfile> {
                           child: Text(
                             "Qualifying Examination",
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.black),
                           )),
                       Container(
@@ -608,7 +616,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "EXAM",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   SizedBox(
                                     height: 5,
@@ -621,7 +629,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -635,7 +643,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Rank",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   SizedBox(
                                     height: 5,
@@ -648,7 +656,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -665,7 +673,7 @@ class _MyProfileState extends State<MyProfile> {
                                       "Score",
                                       style: TextStyle(
                                           color: Colors.grey,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                     SizedBox(
                                       height: 5,
@@ -678,7 +686,7 @@ class _MyProfileState extends State<MyProfile> {
                                       //"Student401",
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                   ],
                                 ),
@@ -697,10 +705,10 @@ class _MyProfileState extends State<MyProfile> {
                             left: 16,
                           ),
                           child: Text(
-                            "Parent Detail",
+                            "Parent Details",
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.black),
                           )),
 
@@ -719,7 +727,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 "Father",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                    color:Colors.black, fontSize: 18),
                               ),
                               Row(
                                 children: [
@@ -736,7 +744,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -748,7 +756,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Mobile :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   InkWell(
                                     onTap: (){
@@ -762,7 +770,7 @@ class _MyProfileState extends State<MyProfile> {
                                       //"Student401",
                                       style: TextStyle(
                                           color: Colors.blue,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                   ),
                                 ],
@@ -775,7 +783,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Email :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   InkWell(
                                     onTap: (){
@@ -790,7 +798,7 @@ class _MyProfileState extends State<MyProfile> {
                                       //"Student401",
                                       style: TextStyle(
                                           color: Colors.blue,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                   ),
                                 ],
@@ -803,7 +811,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Occupation:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -813,7 +821,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -825,7 +833,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Qualification:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -835,7 +843,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -847,7 +855,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Designation:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -857,7 +865,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -869,7 +877,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Employer:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -879,7 +887,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -893,7 +901,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 "Mother",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                    color:Colors.black, fontSize: 18),
                               ),
                               SizedBox(
                                 height: 5,
@@ -903,7 +911,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Name :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -913,7 +921,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -925,7 +933,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Mobile :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   InkWell(
                                     onTap: (){
@@ -940,7 +948,7 @@ class _MyProfileState extends State<MyProfile> {
                                       //"Student401",
                                       style: TextStyle(
                                           color: Colors.blue,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                   ),
                                 ],
@@ -953,7 +961,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Email :",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   InkWell(
                                     onTap: (){
@@ -968,7 +976,7 @@ class _MyProfileState extends State<MyProfile> {
                                       //"Student401",
                                       style: TextStyle(
                                           color: Colors.blue,
-                                          fontSize: 18),
+                                          fontSize: 14),
                                     ),
                                   ),
                                 ],
@@ -981,7 +989,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Occupation:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color:Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -991,7 +999,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -1003,7 +1011,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Qualification:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color:Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -1013,7 +1021,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -1025,7 +1033,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Designation:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color:Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -1035,7 +1043,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -1047,7 +1055,7 @@ class _MyProfileState extends State<MyProfile> {
                                   Text(
                                     "Employer:",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
+                                        color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
                                   Text(
                                     data.profileDetailModel?.sTUDENTINFO
@@ -1057,7 +1065,7 @@ class _MyProfileState extends State<MyProfile> {
                                     //"Student401",
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 18),
+                                        fontSize: 14),
                                   ),
                                 ],
                               ),
@@ -1080,8 +1088,8 @@ class _MyProfileState extends State<MyProfile> {
                           child: Text(
                             "Address",
                             style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.black),
                           )),
                       Container(
@@ -1097,7 +1105,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 "Present Address",
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 18),
+                                    color: Color(0xff9B9B9B), fontSize: 14),
                               ),
                               SizedBox(
                                 height: 5,
@@ -1109,7 +1117,7 @@ class _MyProfileState extends State<MyProfile> {
 
                                 //"Student401",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                    color: Colors.black, fontSize: 14),
                               ),
                               SizedBox(
                                 height: 5,
@@ -1121,7 +1129,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 "Permanent Address",
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 18),
+                                    color:Color(0xff9B9B9B), fontSize: 14),
                               ),
                               SizedBox(
                                 height: 5,
@@ -1133,7 +1141,7 @@ class _MyProfileState extends State<MyProfile> {
 
                                 //"Student401",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
+                                    color: Colors.black, fontSize: 14),
                               ),
                             ],
                           ),
@@ -1255,7 +1263,12 @@ class _MyProfileState extends State<MyProfile> {
                                   validator: (String? value) {
                                     if (value!.trim().isEmpty) {
                                       return "Please Enter New Password";
-                                    } else {
+                                    } else if(value.length<6 ) {
+                                      return "Please Enter at least 6 characters";
+                                    }
+                                    else if(value.length>20){
+                                      return "Password length more than 20 characters";
+                                    }else{
                                       return null;
                                     }
                                   },
@@ -1342,6 +1355,10 @@ class _MyProfileState extends State<MyProfile> {
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context).pop();
+                                  currentPasswordController.clear();
+                                  confirmPasswordController.clear();
+                                  newPasswordController.clear();
+
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -1367,28 +1384,23 @@ class _MyProfileState extends State<MyProfile> {
                                 onTap: () async {
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
-                                    // UpdatePasswordModel model =
-                                    // UpdatePasswordModel(
-                                    //   action: 10,
-                                    //   mode: 1,
-                                    //   oldPass: currentPasswordController.text,
-                                    //   newPass: newPasswordController.text,
-                                    //   newPass1: confirmPasswordController.text,
-                                    //   userId: 1604,
-                                    //   loginId: 'PES1201900270',
-                                    //   randomNum: 0.47685889613355137,
-                                    // );
-                                    await profileViewmodel
-                                        ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
-                                        newPass1: confirmPasswordController.text);
-                                    Navigator.pop(context);
-                                    // if(response!=null){
-                                    //   CustomWidgets.getToast(message: "Passworf updated", color:  Colors.green);
-                                    //   Navigator.pushReplacementNamed(context, AppRoutes.myProfile);
-                                    // }else{
-                                    //   Navigator.pop(context);
-                                    //   CustomWidgets.getToast(message: "Could not Update the Password ", color:  Colors.red);
-                                    // }
+                                    if(sp_password==newPasswordController.text){
+                                      CustomWidgets.getToast(message: "New password can't be same as old password", color:  Colors.grey);
+                                    }else if(sp_password==currentPasswordController.text && currentPasswordController.text.isNotEmpty&&newPasswordController.text.isNotEmpty&&currentPasswordController.text.isNotEmpty){
+                                      await profileViewmodel
+                                          ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
+                                          newPass1: confirmPasswordController.text);
+                                      Navigator.pop(context);
+                                      CustomWidgets.getToast(message: "Passworf updated", color:  Colors.grey);
+                                      Navigator.pushReplacementNamed(
+                                          context, AppRoutes.myProfile);
+
+                                    }else if(sp_password!=currentPasswordController){
+                                      CustomWidgets.getToast(message: "Old password entered does not match the password on record", color:  Colors.grey);
+
+                                    }
+                                    // Navigator.pop(context);
+
 
                                   }
                                 },
@@ -1423,6 +1435,7 @@ class _MyProfileState extends State<MyProfile> {
 
 
   void _updateBottomSheet() {
+
     showModalBottomSheet(
         context: context,
         builder: (builder) {
@@ -1502,7 +1515,9 @@ class _MyProfileState extends State<MyProfile> {
                                 randomNum: 0.03338104178082224
                             );
                             Navigator.pushReplacementNamed(
-                                      context, AppRoutes.myProfile);
+                                context, AppRoutes.myProfile);
+                            CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.grey);
+
 
                             // if(response=='1001'){
                             //   CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
@@ -1531,6 +1546,25 @@ class _MyProfileState extends State<MyProfile> {
                 )),
           );
         });
+
+
+
+  }
+  void validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email can not be empty";
+      });
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Invalid Email Address";
+      });
+    }else{
+      setState(() {
+
+        _errorMessage = "";
+      });
+    }
   }
 
   void _logOutBottomSheet() {
@@ -1576,26 +1610,7 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         InkWell(
                           onTap: () async{
-                            SharedPreferenceUtil util = SharedPreferenceUtil();
-                          //  print("class Id:  ${await util.getString(sp_classBatchSectionId)}");
-                            CustomWidgets.showLoaderDialog(context: context, message: "Loging Out");
-                            //     SharedPreferenceUtil util = SharedPreferenceUtil();
-
-
-
-                            bool dataalue = await util.clearAll();
-
-                            print("?????${dataalue}");
-
-                            if (dataalue) {
-                            CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
                             Navigator.pop(context);
-                            Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
-
-                            }
-                            else{
-                            CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
-                            }
                           },
                           child: Container(
                             color: Colors.white,
@@ -1627,7 +1642,7 @@ class _MyProfileState extends State<MyProfile> {
 
                               Navigator.pushNamedAndRemoveUntil(
                                   context,
-                                  AppRoutes.Dashboard,
+                                  AppRoutes.login,
                                       (route) => false);
                               await SharedPreferenceUtil()
                                   .clearAll();

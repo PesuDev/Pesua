@@ -26,7 +26,7 @@ class _ESAResultsState extends State<ESAResults> {
             body: SingleChildScrollView(
               child: Column(children: [
                 Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
+                    padding: const EdgeInsets.only(top: 1.0),
                     child: Container(
                       color: Color(0xff055287),
                       width: double.infinity,
@@ -42,6 +42,7 @@ class _ESAResultsState extends State<ESAResults> {
                                 "Provisional",
                                 style: TextStyle(
                                   fontFamily: 'Open Sans',
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xffFFFFFF)
                                 ),
@@ -52,9 +53,10 @@ class _ESAResultsState extends State<ESAResults> {
                           Tab(
                             child: Container(
                               child: Text(
-                                "PreviousSemesters",
+                                "Previous Semesters",
                                 style: TextStyle(
                                     fontFamily: 'Open Sans',
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                     color: Color(0xffFFFFFF)
                                 ),
@@ -68,6 +70,7 @@ class _ESAResultsState extends State<ESAResults> {
 
                 Container(
                   height: MediaQuery.of(context).size.height/1.29,
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TabBarView(
                     children: [
                       ChangeNotifierProvider.value(value : Provider.of<EsaViewModel>(context),

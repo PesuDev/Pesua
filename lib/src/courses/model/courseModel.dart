@@ -65,8 +65,8 @@ class STUDENTSUBJECTS {
   int? subjectTypeId;
   String? name;
   String? description;
-  Null? feedBackUserId;
-  Null? response;
+  String? feedBackUserId;
+  String? response;
   int? departmentId;
   int? batchClassId;
   int? classId;
