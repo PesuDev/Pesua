@@ -83,16 +83,25 @@ drop();
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
+                            height: 35,
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blueGrey)
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  hint: Text("$classBatchData1"),
+                                  decoration: InputDecoration.collapsed(hintText: ''),
+                                  hint: Padding(
+                                    padding: const EdgeInsets.only(top:7,left: 10),
+                                    child: Text("$classBatchData1"),
+                                  ),
                                   value: classBatch,
                                   items:dropDownData?.map((item) => DropdownMenuItem<String>(
                                     value: item,
-                                    child: Text(item.toString(),),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 7,left: 5),
+
+                                      child: Text(item.toString(),),
+                                    ),
                                   )).toSet()
                                       .toList(),
                                   onChanged: (item) {

@@ -21,10 +21,10 @@ sideNavAppBar(String title) {
 
 sideNavAppBarForDashboard( String title) {
   return AppBar(
-    backgroundColor: Color(0xff0091CD),
+    backgroundColor: Color(0xff0091cd),
     titleSpacing: 0,
-    leading:   Padding(
-      padding: const EdgeInsets.only(right: 10.1),
+    elevation: 0,
+    leading:   BackButton(
     ),
     title: Row(
       children: [
