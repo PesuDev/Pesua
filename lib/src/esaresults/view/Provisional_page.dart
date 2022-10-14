@@ -361,9 +361,6 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                   ?.results?[
                                                               index]
                                                                   .subjectCode));
-                                                            },
-                                                            icon: const Icon(
-                                                                      .esaGraph);
                                                             }},
                                                             icon: (data
                                                                 .esaModel1
