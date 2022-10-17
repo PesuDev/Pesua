@@ -5,6 +5,7 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/view/widget.dart';
 import '../../attendance/model/attendance_arguments.dart';
 import '../viewmodel/Esa_viewmodel.dart';
@@ -324,7 +325,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                         ?.results?[
                                                                             index]
                                                                         .grade ??
-                                                                    "A",
+                                                                    "",
                                                                 style:
                                                                     TextStyle(
                                                                   fontSize: 16,
@@ -341,6 +342,17 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                           ),
                                                           TextButton.icon(
                                                             onPressed: () {
+                                                              if(data
+                                                                  .esaModel1
+                                                                  ?.results?[
+                                                              index]
+                                                                  .grade!=null && data
+                                                                  .esaModel1
+                                                                  ?.results?[
+                                                              index]
+                                                                  .grade == "TAL" ){
+                                                                CustomWidgets.getToast(message: "No Data Available", color:  Color(0xff273746));
+                                                              }else{
                                                               Navigator.pushNamed(
                                                                   context,
                                                                   AppRoutes
@@ -349,8 +361,16 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                   ?.results?[
                                                               index]
                                                                   .subjectCode));
-                                                            },
-                                                            icon: const Icon(
+                                                            }},
+                                                            icon: (data
+                                                                .esaModel1
+                                                                ?.results?[
+                                                            index]
+                                                                .grade!=null && data
+                                                                .esaModel1
+                                                                ?.results?[
+                                                            index]
+                                                                .grade == "TAL" )?Text("NA"):Icon(
                                                                 Icons
                                                                     .bar_chart),
                                                             label: Text(""),
