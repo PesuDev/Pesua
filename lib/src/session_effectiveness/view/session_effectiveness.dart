@@ -155,7 +155,7 @@ var sessionTime;
                                 setState(() {
                                   subject=item;
                                    time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
-                                    if(itemValueTera.day==5 &&itemValueTera.subjectName==item){
+                                    if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
                                       print("subject>>${itemValueTera.subjectName}");
                                       print("item>>${item}");
 

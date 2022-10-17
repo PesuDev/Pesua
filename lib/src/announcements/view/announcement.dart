@@ -3,6 +3,7 @@ import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/view/widget.dart';
@@ -45,124 +46,207 @@ class _AnnouncementState extends State<Announcement> {
     return Scaffold(
         appBar: sideNavAppBar("Announcement"),
         backgroundColor: Colors.white.withOpacity(0.9),
-        body: Consumer<AnnouncementViewModel>(builder: (context, value, child) {
+        body: GestureDetector(
+          onTap: (){
+            Navigator.of(context).pop();
+          },
+          child: Consumer<AnnouncementViewModel>(builder: (context, value, child) {
 
-          String? htmlCode;
+            String? htmlCode;
 
-          return value.announcementBannerModel != null &&
-              value.announcementBannerModel?.length != 0
-              ?
-          Container(
-              width: double.infinity,
-              color: Colors.grey[20],
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
-              child: Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
-                  child: ListView.builder(
-                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: value.announcementBannerModel?.length,
-                      itemBuilder: (BuildContext context, int index) {
+            return value.announcementBannerModel != null &&
+                value.announcementBannerModel?.length != 0
+                ?
+            Container(
+                width: double.infinity,
+                color: Colors.grey[20],
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height,
+                child: Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: ListView.builder(
+                         physics: NeverScrollableScrollPhysics(),
+                        itemCount: value.announcementBannerModel?.length,
+                        itemBuilder: (BuildContext context, int index) {
 
-                        String? base64Image = (value.announcementBannerModel?[index].pictureIconPath);
-                        final UriData? mydata = Uri.parse(base64Image.toString()).data;
-                        Uint8List? myImage = mydata?.contentAsBytes();
+                          String? base64Image = (value.announcementBannerModel?[index].pictureIconPath);
+                          final UriData? mydata = Uri.parse(base64Image.toString()).data;
+                          Uint8List? myImage = mydata?.contentAsBytes();
 
-                        String? uriString =
-                            value.announcementBannerModel?[index].description;
-                        String uriDecode = Uri.decodeFull(uriString!);
-                        htmlCode = uriDecode;
+                          String? uriString =
+                              value.announcementBannerModel?[index].description;
+                          String uriDecode = Uri.decodeFull(uriString!);
+                          htmlCode = uriDecode;
 
-                        return
-                          Container(
-                          color: Colors.white,
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5,top: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  value.announcementBannerModel?[index].announcementName??""
-                                  ,
-                                  style: TextStyle(fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      color: Color(0xff191D6E)),
-                                ),
+                          return
+                            Container(
+                            color: Colors.white,
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5,top: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    value.announcementBannerModel?[index].announcementName??""
+                                    ,
+                                    style: TextStyle(fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                        color: Color(0xff191D6E)),
+                                  ),
 
-                                myImage !=null && value.announcementBannerModel?[index].isBannerImage==1?
-                                Container(
-                                  margin: EdgeInsets.only(right: 5,top: 10),
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      image: DecorationImage(
-                                        image: MemoryImage(
-                                            myImage
+                                  myImage !=null && value.announcementBannerModel?[index].isBannerImage==1?
+                                  GestureDetector(
+                                    onTap: (){
+                                      showDialog(
+                                          context: context,
+                                          barrierDismissible: true,
+                                          builder: (BuildContext context) {
+                                            return
+                                              SafeArea(
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Stack(
+                                                    children:[
+                                                     GestureDetector(
+                                                       onTap: (){
+                                                        Navigator.of(context).pop();
+
+                                                       },
+
+                                                       child: Align(
+                                                         alignment: Alignment.topRight,
+                                                         child: Icon(
+                                                             Icons.cancel,
+                                                           size: 40,
+                                                         ),
+                                                       ),
+                                                     ),
+                                                      Center(
+                                                        child: Container(
+                                                          margin: EdgeInsets.only(top: 40,bottom: 40),
+
+                                                          color: Colors.transparent,
+                                                         // height:200,
+                                                        width:double.infinity,
+                                                        child: PhotoView(
+                                                            maxScale: 100.0,
+                                                            backgroundDecoration: BoxDecoration(
+                                                            border: Border.all(color: Colors.transparent),
+                                                          ),
+
+                                                          imageProvider:MemoryImage(
+                                                            myImage,
+                                                          )
+                                            ),
+                                                    ),
+                                                      ),
+                                            ]
+                                                  ),
+                                                ),
+                                              );
+
+                                            //   AlertDialog(
+                                            //   insetPadding: EdgeInsets.zero,
+                                            //   contentPadding: EdgeInsets.zero,
+                                            //   clipBehavior: Clip.antiAliasWithSaveLayer,
+                                            //   content: Container(
+                                            //     height:200,
+                                            //     width: 500,
+                                            //     color: Colors.transparent,
+                                            //     child:
+                                            //     PhotoView(
+                                            //
+                                            //         backgroundDecoration: BoxDecoration(
+                                            //           border: Border.all(color: Colors.transparent),
+                                            //         ),
+                                            //
+                                            //       imageProvider:MemoryImage(
+                                            //         myImage,
+                                            //       )
+                                            //     ),
+                                            //
+                                            //   ),
+                                            // );
+                                          }
+                                      );
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 5,top: 10),
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          image: DecorationImage(
+                                            image: MemoryImage(
+                                                myImage
+                                            ),
+                                            fit: BoxFit.fill,
+                                          )),
+                                    ),
+                                  ):Container(),
+                                  SizedBox(height: 10,),
+
+                                  Text(
+                                    value.announcementBannerModel?[index].createdDateFrSorting??''
+                                    ,
+                                    style: TextStyle(fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                        color: Color(0xff191D6E)),
+                                  ),
+                                  Divider(
+                                    color: Colors.black,
+                                  ),
+
+                                          GestureDetector(
+                                            onTap: ()async{
+                                              PDFDocument doc = await PDFDocument.fromURL('http://www.africau.edu/images/default/sample.pdf') ;
+                                              PDFViewer(document: doc);
+                                              // File file  = File(value.announcementBannerModel?[index].files);
+                                              // PDFDocument doc = await PDFDocument.fromFile(file);
+
+
+                                            },
+                                            child: Row(
+                                            children: [
+                                              Container(
+                                                  //margin: EdgeInsets.only(top: 10,left: 10),
+                                                  child:
+                                                  Text(
+
+                                                   //value.announcementBannerModel?[index].documentPath,
+                                                    "ST_Labs_Swayam_May_2022_converted.pdf",
+                                                    style: TextStyle(color: Color(0xff333333),fontSize: 14),)),
+                                              Spacer(),
+                                              Transform.rotate(
+                                                  angle: 180 * math.pi / 140,
+                                              child: Icon(Icons.attach_file,color: Colors.grey,))
+
+                                            ],
                                         ),
-                                        fit: BoxFit.fill,
-                                      )),
-                                ):Container(),
-                                SizedBox(height: 10,),
+                                          ),
 
-                                Text(
-                                  value.announcementBannerModel?[index].createdDateFrSorting??''
-                                  ,
-                                  style: TextStyle(fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      color: Color(0xff191D6E)),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
+                                  Divider(
+                                    color: Colors.black,
+                                  ),
 
-                                        GestureDetector(
-                                          onTap: ()async{
-                                            PDFDocument doc = await PDFDocument.fromURL('http://www.africau.edu/images/default/sample.pdf') ;
-                                            PDFViewer(document: doc);
-                                            // File file  = File(value.announcementBannerModel?[index].files);
-                                            // PDFDocument doc = await PDFDocument.fromFile(file);
+                                  HtmlWidget(htmlCode!)
 
-
-                                          },
-                                          child: Row(
-                                          children: [
-                                            Container(
-                                                //margin: EdgeInsets.only(top: 10,left: 10),
-                                                child:
-                                                Text(
-
-                                                 //value.announcementBannerModel?[index].documentPath,
-                                                  "ST_Labs_Swayam_May_2022_converted.pdf",
-                                                  style: TextStyle(color: Color(0xff333333),fontSize: 14),)),
-                                            Spacer(),
-                                            Transform.rotate(
-                                                angle: 180 * math.pi / 140,
-                                            child: Icon(Icons.attach_file,color: Colors.grey,))
-
-                                          ],
-                                      ),
-                                        ),
-
-                                Divider(
-                                  color: Colors.black,
-                                ),
-
-                                HtmlWidget(htmlCode!)
-
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
 
-                        );
-                      })
-              )
+                          );
+                        })
+                )
 
-          )
-              : Center(child: CircularProgressIndicator());
-        }));
+            )
+                : Center(child: CircularProgressIndicator());
+          }),
+        ));
 
 
     //       Container(

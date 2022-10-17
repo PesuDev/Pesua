@@ -46,6 +46,7 @@ dependencies:
   advance_pdf_viewer: ^2.0.1
   avoid_keyboard: ^0.3.0
   email_validator: ^2.1.17
+  photo_view: ^0.14.0
 
 
 
