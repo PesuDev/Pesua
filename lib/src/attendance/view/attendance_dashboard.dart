@@ -64,16 +64,26 @@ print(">>>>> $classBatch");
               children: [
 
                 Container(
+                  height: 35,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blueGrey)
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButtonFormField<String>(
-                      hint: Text("$classBatchData1"),
+                        decoration: InputDecoration.collapsed(hintText: ''),
+
+                        hint: Padding(
+                        padding:  EdgeInsets.only(left:10,top: 7),
+                        child: Text("$classBatchData1"),
+                      ),
                         value: classBatch,
                         items:value.attendanceDropDownModel?.map((item) => DropdownMenuItem<String>(
                           value: item.className,
-                          child: Text(item.className.toString(),),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 7,left: 5),
+
+                            child: Text(item.className.toString(),),
+                          ),
                         ))
                             .toList(),
                         onChanged: (item) {

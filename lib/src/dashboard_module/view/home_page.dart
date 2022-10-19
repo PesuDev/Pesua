@@ -938,8 +938,8 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   SeatingInfoModel model = seatingInfoModel[index];
                   var mydate=DateTimeUtil.convertDate(model.testStartTime!.toInt());
-                  print("ApiDate==${mydate}");
-                  print("MyDate==${currentDate}");
+                  // print("ApiDate==${mydate}");
+                  // print("MyDate==${currentDate}");
                   // print("MyTime==${Time}");
                   // print("MyDADA==${live}");
 
