@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../model/esa_model.dart';
 import '../viewmodel/Esa_viewmodel.dart';
 
@@ -191,6 +192,7 @@ class _PreviousSemState extends State<PreviousSem> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SfCartesianChart(
+
                                 primaryXAxis: CategoryAxis(),
                                 title:
                                     ChartTitle(text: "Students Marks Graph"),
@@ -209,9 +211,12 @@ class _PreviousSemState extends State<PreviousSem> {
                                             int.tryParse(
                                                 sales.credits.toString()),
                                     dataLabelSettings:
-                                        DataLabelSettings(isVisible: true),
+                                        DataLabelSettings(isVisible: true,
+
+                                        ),
                                   )
                                 ]),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
@@ -354,7 +355,14 @@ print("Oye single subject ${subjectName}");
                                     InkWell(
                                       onTap: () {
                                         Navigator.pushNamed(
-                                            context, AppRoutes.isaResultsGraph);
+                                            context, AppRoutes.isaResultsGraph,
+                                        arguments: DetailedArguments(
+
+                                            subjectId:model.isaResultModel?[j].subjectId,
+                                  subjectCode:model.isaResultModel?[j].subjectCode,
+                                            subjectName:model.isaResultModel?[j].subjectName,
+                                        )
+                                        );
                                       },
                                       child: Container(
                                           width: MediaQuery.of(context)

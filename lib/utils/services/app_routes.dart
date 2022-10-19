@@ -45,7 +45,7 @@ import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
 
-import '../../src/announcements/view/announcement.dart';
+import '../../src/announcements/view/announcement_details.dart';
 import '../../src/announcements/view_model/announcement_arguments.dart';
 import '../../src/dashboard_module/view/dashboard_page.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';
@@ -126,7 +126,7 @@ data(RouteSettings settings) {
       case AppRoutes.announcement:
       return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
         create: (_) =>AnnouncementViewModel(),
-        child: Announcement(),
+        child: AnnouncementDetails(),
       ));
     case AppRoutes.login:
       return MaterialPageRoute(
@@ -147,9 +147,11 @@ data(RouteSettings settings) {
                 child: ISAResults(isFromDashboard: false,),
               ));
     case AppRoutes.isaResultsGraph:
+      final args = settings.arguments as DetailedArguments;
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
-              create: (_) => IsaViewModel(), child: IsaResultGraph()));
+              create: (_) => IsaViewModel(), child: IsaResultGraph( subjectName: args.subjectName.toString(),
+            subjectId: args.subjectId, subjectCode: args.subjectCode.toString(),)));
     case AppRoutes.myProfile:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
