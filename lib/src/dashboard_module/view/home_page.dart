@@ -409,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                         context) =>
                                                             AnnouncementViewModel(),
-                                                        child: AnnouncementDetails(
+                                                        child: Announcement(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                             index]
@@ -534,7 +534,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                                 context) =>
                                                             AnnouncementViewModel(),
-                                                        child: AnnouncementDetails(
+                                                        child: Announcement(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                                     index]
@@ -715,7 +715,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                                 context) =>
                                                             AnnouncementViewModel(),
-                                                        child: AnnouncementDetails(
+                                                        child: Announcement(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                                     index]
@@ -903,7 +903,7 @@ class _HomePageState extends State<HomePage> {
                                       create: (BuildContext
                                       context) =>
                                           AnnouncementViewModel(),
-                                      child: AnnouncementDetails(
+                                      child: Announcement(
                                           announcementId: data
                                               .announcementModel?[
                                           index]

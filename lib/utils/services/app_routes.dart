@@ -45,8 +45,7 @@ import 'package:pesu/src/time_table/view/time_table_dashboard.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
-
-import '../../src/announcements/view/announcement.dart';
+import '../../src/announcements/view/announcement_details.dart';
 import '../../src/announcements/view_model/announcement_arguments.dart';
 import '../../src/dashboard_module/view/dashboard_page.dart';
 import '../../src/esaresults/viewmodel/Esa_viewmodel.dart';

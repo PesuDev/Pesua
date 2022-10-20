@@ -72,7 +72,7 @@ class _AnnouncementsState extends State<Announcements> {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) =>
                                             ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                                child: AnnouncementDetails(announcementId:value.announcementModel?[index].announcementId ))
+                                                child: Announcement(announcementId:value.announcementModel?[index].announcementId ))
                                     ));
 
                                   },
