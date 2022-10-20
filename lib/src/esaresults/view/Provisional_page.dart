@@ -109,6 +109,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 FontWeight
                                                                     .normal,
                                                             fontSize: 15,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
@@ -122,6 +124,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             fontSize: 16,
                                                             color: Color(
                                                                 0xff9B9B9B))),
@@ -171,6 +175,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             fontWeight:
                                                                 FontWeight
                                                                     .normal,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             fontSize: 15,
                                                             color: Color(
                                                                 0xff9B9B9B))),
@@ -180,6 +186,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             fontSize: 16,
                                                             color: Color(
                                                                 0xff000000))),
@@ -196,6 +204,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             fontWeight:
                                                                 FontWeight
                                                                     .normal,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             fontSize: 15,
                                                             color: Color(
                                                                 0xff9B9B9B))),
@@ -210,6 +220,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400,
+                                                            fontFamily:
+                                                            'Open Sans',
                                                             fontSize: 16,
                                                             color: Color(
                                                                 0xff000000))),
@@ -262,6 +274,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w400,
+                                                                    fontFamily:
+                                                                    'Open Sans',
                                                                     fontSize:
                                                                         14,
                                                                     color: Color(
@@ -273,6 +287,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                     fontWeight:
                                                                     FontWeight
                                                                         .w400,
+                                                                    fontFamily:
+                                                                    'Open Sans',
                                                                     fontSize:
                                                                     14,
                                                                     color: Color(
@@ -288,6 +304,8 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w400,
+                                                                    fontFamily:
+                                                                    'Open Sans',
                                                                     fontSize:
                                                                         16,
                                                                     color: Color(

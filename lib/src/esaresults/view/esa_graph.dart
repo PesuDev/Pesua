@@ -10,7 +10,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class EsaGraph extends StatefulWidget {
   String subjectCode;
-  EsaGraph({ required this.subjectCode});
+
+  EsaGraph({required this.subjectCode});
 
   @override
   _EsaGraphState createState() => _EsaGraphState();
@@ -54,8 +55,8 @@ class _EsaGraphState extends State<EsaGraph> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
-                      child:
-                          Text("UE20CS251 - ${model.graphModel?.subjectName}"),
+                      child: Text("${widget.subjectCode}"
+                          " ${model.graphModel?.subjectName}"),
                     ),
                     SfCartesianChart(
                         backgroundColor: Colors.white,
@@ -71,7 +72,6 @@ class _EsaGraphState extends State<EsaGraph> {
                               dataSource: model.graphModel?.data ?? [],
                               xValueMapper: (Data data, _) => data.grade,
                               yValueMapper: (Data data, _) => data.y,
-                              name: 'Grade - d Marks -1',
                               // Enable data label
                               dataLabelSettings: DataLabelSettings(
                                 isVisible: true,
@@ -79,22 +79,40 @@ class _EsaGraphState extends State<EsaGraph> {
                         ]),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-                      child: Text("Summary"),
+                      child: Text("Summary",style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          fontFamily:
+                          'Open Sans',
+                          color: Color(0xff333333)
+                      ),),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [Text("Your Score"), Text("-1")],
-                        ),
-                        SizedBox(
-                          width: 40,
-                        ),
-                        Column(
-                          children: [Text("Average"), Text("24")],
-                        )
-                      ],
-                    )
+                    Container(
+                        height:18,
+                        child: ListTileTheme.merge(
+                          dense: true,
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: model.graphModel!.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("Your Score :",style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      fontFamily:
+                                      'Open Sans',
+                                      color: Color(0xff333333)
+                                    ),),
+                                    Text(model.graphModel?.data?[index].grade
+                                            .toString() ??
+                                        "-1"),
+                                  ],
+                                );
+                              }),
+                        ))
                   ],
                 ),
               )

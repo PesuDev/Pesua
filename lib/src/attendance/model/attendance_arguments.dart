@@ -4,6 +4,8 @@ class DetailedArguments{
   String? subjectName;
   String? percentage;
   String? attendance;
+  int? subjectId;
+  String?   fetchId;
 
-DetailedArguments({this.subjectCode,this.subjectName,this.attendance,this.percentage});
+DetailedArguments({this.fetchId,this.subjectId,this.subjectCode,this.subjectName,this.attendance,this.percentage});
 }

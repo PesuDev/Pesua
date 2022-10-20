@@ -16,19 +16,23 @@ import '../viewModel/courseViewModel.dart';
 import 'course_dashboard.dart';
 
 class IndividualSubScreen extends StatefulWidget {
-  const IndividualSubScreen({Key? key}) : super(key: key);
-
   @override
   State<IndividualSubScreen> createState() => _IndividualSubScreenState();
 }
 
 class _IndividualSubScreenState extends State<IndividualSubScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   CourseViewModel _subjectViewModel = CourseViewModel();
   CourseViewModel _unitViewModel = CourseViewModel();
   int? selected;
+  int? tabValue;
+  bool _customTileExpanded = true;
+  Map<String, bool> expansionState = Map();
   late final _tabController =
-      TabController(length: 4, initialIndex: 0, vsync: this);
+      TabController(initialIndex: 0, vsync: this, length: 4);
+
+/*  late final _tabController =
+      TabController(initialIndex: 0, vsync: this, length: 4);*/
 
   @override
   void initState() {
@@ -51,47 +55,74 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
   Widget build(BuildContext context) {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
-      return DefaultTabController(
+      var subjectCode = model.subjectModel?.cOURSECONTENT
+          ?.map((e) => e.courseContentTypeId)
+          .toSet()
+          .toList();
+      /*late final _tabController = TabController(
+          initialIndex: 0, vsync: this, length: subjectCode?.length ?? 0);*/
+      return
+          /*DefaultTabController(
         length: 4,
+        initialIndex: 0,
         child: Scaffold(
-          appBar:
-          AppBar(
-            leading:
-              BackButton(
-                onPressed: (){
-                  Navigator.pushNamed(
-                      context,
-                      AppRoutes.Dashboard);
-                },
-              ),
+          appBar: AppBar(
             title: Text("Subject"),
-            bottom: TabBar(
-              indicatorSize: TabBarIndicatorSize.label,
-              isScrollable: true,
-              controller: _tabController,
-              tabs: [
-                Tab(
-                  child: Text("Content"),
-                ),
-                Tab(
-                  child: Text("Objectives"),
-                ),
-                Tab(
-                  child: Text("Outcomes"),
-                ),
-                Tab(
-                  child: Text("References"),
-                ),
-              ],
-            ),
+            bottom: TabBar(labelColor: Colors.white, tabs: [
+              (subjectCode!.contains(1))
+                  ? Tab(
+                      child: Text("Content"),
+                    )
+                  : (subjectCode!.contains(2))
+                      ? Tab(
+                          child: Text("Objectives"),
+                        )
+                      : (subjectCode!.contains(3))
+                          ? Tab(
+                              child: Text("OutComes"),
+                            )
+                          : (subjectCode!.contains(5))
+                              ? Tab(
+                                  child: Text("References"),
+                                )
+                              : Container(),
+              Tab(
+                child: Text("References"),
+              ),
+              Tab(
+                child: Text("References"),
+              ),
+              Tab(
+                child: Text("References"),
+              )
+            ]),
           ),
           body: TabBarView(
-            controller: _tabController,
+            physics: NeverScrollableScrollPhysics(),
             children: [
-              Container(
-                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                child: content(),
-              ),
+              (subjectCode!.contains(1))
+                  ? Container(
+                      padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                      child: content(),
+                    )
+                  : (subjectCode!.contains(2))
+                      ? Container(
+                          padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                          child: objectives(),
+                        )
+                      : (subjectCode!.contains(3))
+                          ? Container(
+                              padding:
+                                  EdgeInsets.only(top: 8, left: 8, right: 8),
+                              child: outcomes(),
+                            )
+                          : (subjectCode!.contains(5))
+                              ? Container(
+                                  padding: EdgeInsets.only(
+                                      top: 8, left: 8, right: 8),
+                                  child: references(),
+                                )
+                              : Container(),
               Container(
                 padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                 child: objectives(),
@@ -99,12 +130,94 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
               Container(
                   padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                   child: outcomes()),
-              Container(
-                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                  child: references()),
+              (subjectCode!.contains(5))
+                  ? Container(
+                      padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                      child: references())
+                  : Container(),
             ],
           ),
         ),
+      );*/
+          DefaultTabController(
+        length: 4,
+        child: (model.subjectModel?.cOURSECONTENT != null &&
+                model.subjectModel?.cOURSECONTENT?.length != 0)
+            ? Scaffold(
+                appBar: AppBar(
+                  leading: BackButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.Dashboard);
+                    },
+                  ),
+                  title: Text("Subject"),
+                  bottom: TabBar(
+                    indicatorSize: TabBarIndicatorSize.label,
+                    isScrollable: true,
+                    controller: _tabController,
+                    tabs: /* model.subjectModel?.cOURSECONTENT
+                  ?.map((e) => Tab(text:e.courseContentType))
+                  .toSet()
+                  .toList();*/
+                        // model.subjectModel!.cOURSECONTENT?.map((e) => Tab(text: e)).toList()),
+                        [
+                      (subjectCode!.contains(1))
+                          ? Tab(
+                              child: Text("Content"),
+                            )
+                          : Container(),
+                      (subjectCode!.contains(2))
+                          ? Tab(
+                              child: Text("Objectives"),
+                            )
+                          : Container(),
+                      (subjectCode!.contains(3))
+                          ? Tab(
+                              child: Text("Outcomes"),
+                            )
+                          : Container(),
+                      (subjectCode!.contains(5))
+                          ? Tab(
+                              child: Text("References"),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ),
+                body: TabBarView(
+                  controller: _tabController,
+                  children:
+                      /*   model.subjectModel?.cOURSECONTENT
+                ?.map((e) => Center(child: Text(e.courseContentOrder),))
+                .toSet()
+                .toList();*/
+                      [
+                    (subjectCode!.contains(1))
+                        ? Container(
+                            padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                            child: content(),
+                          )
+                        : Container(),
+                    (subjectCode!.contains(2))
+                        ? Container(
+                            padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                            child: objectives(),
+                          )
+                        : Container(),
+                    (subjectCode!.contains(3))
+                        ? Container(
+                            padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                            child: outcomes())
+                        : Container(),
+                    (subjectCode!.contains(5))
+                        ? Container(
+                            padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                            child: references())
+                        : Container(),
+                  ],
+                ),
+              )
+            : Container(),
       );
     });
   }
@@ -122,6 +235,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   Widget? content() {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
       return Consumer<CourseViewModel>(builder: (context, data, child) {
+        /* data.subjectModel.forEach((name) {
+          expansionState.putIfAbsent(name, () => true);
+        });*/
         String? htmlCode;
         return model.subjectModel != null &&
                 data.unitModel != null &&
@@ -163,7 +279,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         ),
                         // subtitle: Text('Leading expansion arrow icon'),
                         controlAffinity: ListTileControlAffinity.leading,
-                        onExpansionChanged: ((newState) {
+                        /*     onExpansionChanged: ((newState) {
                           if (newState)
                             setState(() {
                               selected = i;
@@ -172,15 +288,17 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                             setState(() {
                               selected = -1;
                             });
-                        }),
+                        }),*/
+                        onExpansionChanged: (bool expanded) {
+                          setState(() => _customTileExpanded = expanded);
+                        },
+
                         // initiallyExpanded: i == selected,
-                        leading: Container(
-                            child: Icon(
-                          selected == i
-                              ? Icons.remove_circle_rounded
-                              : Icons.add_circle,
-                          color: Colors.blue,
-                        )),
+                        leading: Icon(
+                          _customTileExpanded
+                              ? Icons.arrow_drop_down_circle
+                              : Icons.arrow_drop_down,
+                        ),
                         // tilePadding: EdgeInsets.zero,
                         children: <Widget>[
                           ListTile(
@@ -230,7 +348,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
-            color: Colors.white,
+              color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length,
@@ -248,18 +366,18 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.85,
-                                padding: EdgeInsets.only(left: 5, top: 5),
+                                width: MediaQuery.of(context).size.width * 0.78,
+                                padding: EdgeInsets.only(top: 5, right: 5),
                                 child: HtmlWidget(
                                   htmlCode,
                                 ),
@@ -280,7 +398,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return model.subjectModel != null &&
               model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
-        color: Colors.white,
+              color: Colors.white,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               child: ListView.builder(
                   itemCount: model.subjectModel?.cOURSECONTENT?.length ?? 0,
@@ -298,17 +416,17 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.85,
+                                width: MediaQuery.of(context).size.width * 0.78,
                                 padding: EdgeInsets.only(left: 5, top: 5),
                                 child: HtmlWidget(htmlCode),
                               )
@@ -323,7 +441,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
   Widget? references() {
     return Container(
-      color: Colors.white,
+        color: Colors.white,
         padding: EdgeInsets.only(top: 8, bottom: 8),
         child: Consumer<CourseViewModel>(builder: (context, model, child) {
           return model.subjectModel != null &&
@@ -344,16 +462,15 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),
                               ),
-
                               Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,

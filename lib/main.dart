@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pesu/src/announcements/view/announcement.dart';
+import 'package:pesu/src/announcements/view/announcement_details.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'package:pesu/src/dashboard_module/view/home_page.dart';
