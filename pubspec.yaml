@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
   flutter_switch: ^0.3.2
   syncfusion_flutter_charts:  ^20.2.40
-  charts_flutter: 0.12.0
+
   shared_preferences: ^2.0.15
   http: ^0.13.4
   dio: ^4.0.6
@@ -43,7 +43,7 @@ dependencies:
   intl: 0.17.0
   fluttertoast: ^8.0.8
   flutter_widget_from_html:
-  fl_chart: 0.45.1
+  fl_chart: 0.55.1
   advance_pdf_viewer: ^2.0.1
   avoid_keyboard: ^0.3.0
   email_validator: ^2.1.17

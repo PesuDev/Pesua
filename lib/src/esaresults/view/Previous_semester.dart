@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/esaresults/model/previous_sem_graph.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
@@ -17,7 +19,7 @@ class PreviousSem extends StatefulWidget {
 class _PreviousSemState extends State<PreviousSem> {
   late EsaViewModel _viewModel;
   var batch;
-
+var graphType=0;
   //
   // Future<void> _submittedRefreshList() async {
   //   _viewModel.getSubjectData(
@@ -43,6 +45,9 @@ class _PreviousSemState extends State<PreviousSem> {
       action: 7,
       mode: 6,
       // userId : 'PES1201700290',
+      randomNum: 0.9575638746600124,
+    );
+    _viewModel.getESADataForGraph(
       randomNum: 0.9575638746600124,
     );
     _viewModel.getSubjectData(
@@ -75,10 +80,9 @@ class _PreviousSemState extends State<PreviousSem> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer<EsaViewModel>(builder: (context, data, child) {
-        return data.esaModel2 != null &&
-                data.esaModel2!.studentCGPAWISE!.isNotEmpty &&
-                data.esaModel4 != null &&
-                data.esaModel4!.rESULTS!.isNotEmpty
+
+        return data.lengthData!>=0 &&
+               data.lengthData4 !>=0
 
             ? SafeArea(
                 child: SingleChildScrollView(
@@ -191,65 +195,90 @@ class _PreviousSemState extends State<PreviousSem> {
                           // mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SfCartesianChart(
-
-                                primaryXAxis: CategoryAxis(),
-                                title:
-                                    ChartTitle(text: "Students Marks Graph"),
-                                // legend: Legend(isVisible: true),
-                                tooltipBehavior:
-                                    TooltipBehavior(enable: true),
-                                series: <ChartSeries>[
-                                  LineSeries<StudentCGPAWISE, dynamic>(
-                                    dataSource:
-                                        data.esaModel2?.studentCGPAWISE ?? [],
-                                    xValueMapper: (StudentCGPAWISE sales,
-                                            _) =>
-                                        int.tryParse(sales.cGPA.toString()),
-                                    yValueMapper:
-                                        (StudentCGPAWISE sales, _) =>
-                                            int.tryParse(
-                                                sales.credits.toString()),
-                                    dataLabelSettings:
-                                        DataLabelSettings(isVisible: true,
-
-                                        ),
-                                  )
-                                ]),
+                     graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
+                            graphUiForSgpa(data.esaGraphModeData):graphUi(data.esaGraphModeData)
+                            ,
+                            // SfCartesianChart(
+                            //
+                            //     primaryXAxis: CategoryAxis(),
+                            //     title:
+                            //         ChartTitle(text: "Students Marks Graph"),
+                            //     // legend: Legend(isVisible: true),
+                            //     tooltipBehavior:
+                            //         TooltipBehavior(enable: true),
+                            //     series: <ChartSeries>[
+                            //       LineSeries<StudentSemester, dynamic>(
+                            //         dataSource:
+                            //             data.esaGraphModeData?.studentSemester ?? [],
+                            //         xValueMapper: (StudentSemester data,
+                            //                 _) =>
+                            //             int.tryParse(data.cGPA.toString()),
+                            //         yValueMapper:
+                            //             (StudentSemester sales, _) =>
+                            //                 int.tryParse(
+                            //                     sales.sGPA.toString()),
+                            //         dataLabelSettings:
+                            //             DataLabelSettings(isVisible: true,
+                            //
+                            //             ),
+                            //       )
+                            //     ]),
 
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextButton.icon(
-                                  onPressed: null,
-                                  icon: const Icon(Icons.bar_chart),
-                                  label: Text(""),
-                                ),
-                                Text(
-                                  "CGPA",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff666666),
-                                    fontFamily: 'Open Sans',
+                                  onPressed: (){
+                                    setState(() {
+                                      if(graphType==1){
+                                        graphType=0;
+                                      }
+                                      else {
+                                        graphType = 1;
+                                      }
+
+                                    });
+                                  },
+                                  icon: Icon(Icons.bar_chart,
+                                  color: graphType==0 || graphType==1? Colors.blueAccent:Colors.grey,
                                   ),
+                                  label: Text("CGPA",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                  ),
+                                ),
                                 ),
                                 SizedBox(
                                   width: 20,
                                 ),
                                 TextButton.icon(
-                                  onPressed: null,
-                                  icon: const Icon(Icons.bar_chart),
-                                  label: Text(""),
-                                ),
-                                Text(
-                                  "SGPA",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff666666),
-                                    fontFamily: 'Open Sans',
+                                  onPressed: (){
+                                    setState(() {
+                                      if(graphType==2){
+                                        graphType=0;
+                                      }
+                                      else {
+                                        graphType = 2;
+                                      }
+
+                                    });
+                                  },
+                                  icon:  Icon(Icons.bar_chart,
+
+                                  color: graphType==0 || graphType==2? Colors.orangeAccent:Colors.grey,
                                   ),
+                                  label: Text("SGPA",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff666666),
+                                      fontFamily: 'Open Sans',
+                                  ),
+                                ),
+
                                 ),
                               ],
                             )
@@ -606,6 +635,89 @@ class _PreviousSemState extends State<PreviousSem> {
                 child: CircularProgressIndicator(),
               );
       }),
+    );
+  }
+
+  Widget graphUi( esaGraphModel? dataGraph){
+    return Container(
+      height: 300,
+      child: LineChart(
+
+        LineChartData(
+lineBarsData: [
+  LineChartBarData(
+    isCurved: false,
+      color: Colors.blueAccent,
+
+      dotData: FlDotData(show: true),
+      spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+          double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+
+  ),
+  LineChartBarData(
+      isCurved: false,
+      color: Colors.orange,
+      dotData: FlDotData(show: true),
+      spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+
+  ),
+
+]
+        ),
+        swapAnimationDuration: Duration(seconds: 1),
+      ),
+    );
+  }
+
+  Widget graphUiForCgpa( esaGraphModel? dataGraph){
+    return Container(
+      height: 300,
+      child: LineChart(
+
+        LineChartData(
+            lineBarsData: [
+              LineChartBarData(
+                  isCurved: false,
+                  color: Colors.blueAccent,
+                  dotData: FlDotData(show: true),
+                  spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+
+                      double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+
+              ),
+
+
+            ]
+        ),
+        swapAnimationDuration: Duration(seconds: 1),
+      ),
+    );
+  }
+
+  Widget graphUiForSgpa( esaGraphModel? dataGraph){
+    return Container(
+      height: 300,
+
+      child: LineChart(
+
+        LineChartData(
+
+            lineBarsData: [
+
+              LineChartBarData(
+                  isCurved: false,
+                  color: Colors.orange,
+                  dotData: FlDotData(show: true),
+                  spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+
+                      double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+
+              ),
+
+            ]
+        ),
+        swapAnimationDuration: Duration(seconds: 1),
+      ),
     );
   }
 }

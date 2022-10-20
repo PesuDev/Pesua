@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
@@ -122,10 +123,12 @@ class _AnnouncementDetailsState extends State<AnnouncementDetails> {
 
                                         GestureDetector(
                                           onTap: ()async{
+                                            log("WWW");
                                             PDFDocument doc = await PDFDocument.fromURL('http://www.africau.edu/images/default/sample.pdf') ;
                                             PDFViewer(document: doc);
                                             // File file  = File(value.announcementBannerModel?[index].files);
                                             // PDFDocument doc = await PDFDocument.fromFile(file);
+                                            log("WhhhWW");
 
 
                                           },
@@ -137,7 +140,7 @@ class _AnnouncementDetailsState extends State<AnnouncementDetails> {
                                                 Text(
 
                                                  //value.announcementBannerModel?[index].documentPath,
-                                                  "",
+                                                  "    jjj",
                                                   style: TextStyle(color: Color(0xff333333),fontSize: 14),)),
                                             Spacer(),
                                             Transform.rotate(
@@ -145,7 +148,7 @@ class _AnnouncementDetailsState extends State<AnnouncementDetails> {
                                             child: InkWell(
                                                 onTap: (){
 
-                                            //      OpenFile.open("${value.announcementBannerModel?[index].files}");
+                                      //           OpenFile.open("${value.announcementBannerModel?[index].files}");
                                                 },
                                                 child: Icon(Icons.attach_file,color: Colors.grey,)))
 
