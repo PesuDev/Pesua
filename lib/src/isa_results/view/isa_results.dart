@@ -96,20 +96,26 @@ class _ISAResultsState extends State<ISAResults> {
                                 border: Border.all(color: Colors.blueGrey)),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  decoration: InputDecoration.collapsed(hintText: ''),
+                                  decoration:
+                                      InputDecoration.collapsed(hintText: ''),
                                   hint: Padding(
-                                    padding: const EdgeInsets.only(top:7,left: 10),
+                                    padding:
+                                        const EdgeInsets.only(top: 7, left: 10),
                                     child: Text("$classBatchData1"),
                                   ),
                                   value: classBatch,
-                                  items:dropDownData?.map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 7,left: 5),
-
-                                      child: Text(item.toString(),),
-                                    ),
-                                  )).toSet()
+                                  items: dropDownData
+                                      ?.map((item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7, left: 5),
+                                              child: Text(
+                                                item.toString(),
+                                              ),
+                                            ),
+                                          ))
+                                      .toSet()
                                       .toList(),
                                   onChanged: (item) {
                                     print("Oye");
@@ -284,13 +290,16 @@ class _ISAResultsState extends State<ISAResults> {
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, AppRoutes.isaResultsGraph,
-                                        arguments: DetailedArguments(
-
-                                            subjectId:model.isaResultModel?[j].subjectId,
-                                  subjectCode:model.isaResultModel?[j].subjectCode,
-                                            subjectName:model.isaResultModel?[j].subjectName,
-                                        )
-                                        );
+                                            arguments: DetailedArguments(
+                                              subjectId: model
+                                                  .isaResultModel?[j].subjectId,
+                                              subjectCode: model
+                                                  .isaResultModel?[j]
+                                                  .subjectCode,
+                                              subjectName: model
+                                                  .isaResultModel?[j]
+                                                  .subjectName,
+                                            ));
                                       },
                                       child: Container(
                                           width: MediaQuery.of(context)
