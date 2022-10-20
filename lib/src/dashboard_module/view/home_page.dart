@@ -159,15 +159,14 @@ class _HomePageState extends State<HomePage> {
                                         Uint8List? myImage =
                                         mydata?.contentAsBytes();
                                         return
+                                        value.announcementModel![index].announcementPriority==3?
                                           Container(
 
                                             width:MediaQuery.of(context).size.width,
                                             color: Colors.white,
                                             child: Row(
                                               children: [
-                                                myImage != null && (value
-                                                    .announcementModel![index]
-                                                    .pictureIconPath)!.isNotEmpty
+                                                myImage != null
                                                     ?
                                                 Container(
                                                   margin: EdgeInsets.only(
@@ -266,7 +265,9 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ],
                                             ),
-                                          );
+                                          ):Container(
+                                          width: 0,
+                                        );
                                       }, itemCount: value.announcementModel!.length,
 
                                     )
