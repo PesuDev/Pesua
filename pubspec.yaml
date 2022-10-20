@@ -43,10 +43,12 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter_widget_from_html:
   fl_chart: 0.45.1
-  advance_pdf_viewer: ^2.0.1
   avoid_keyboard: ^0.3.0
   email_validator: ^2.1.17
   photo_view: ^0.14.0
+  flutter_cached_pdfview: ^0.4.1
+  carousel_slider: ^4.1.1
+
 
 
 

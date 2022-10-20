@@ -80,7 +80,20 @@ class _MyProfileState extends State<MyProfile> {
         resizeToAvoidBottomInset:false,
 
         backgroundColor: Colors.grey[200],
-        appBar: sideNavAppBar("My Profile"),
+        appBar:AppBar(
+          elevation: 0,
+          backgroundColor: Color(0xff0091cd),
+          leading:  BackButton(
+            onPressed: (){
+              Navigator.pushNamed(
+                  context,
+                  AppRoutes.Dashboard);
+            },
+          ),
+          title: Text("My Profile"),
+        ),
+
+
         body:Consumer<ProfileViewmodel>(builder: (context, data, child) {
           String? base64Image = (data.profileModel?.photo);
           final UriData? mydata = Uri.parse(base64Image.toString()).data;

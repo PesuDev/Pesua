@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
    int? currentIndex;
    int? myLength;
    int? count;
+   int ?length;
 
   //DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
   // DateFormat('dd-MM-yyyy HH:MM').format(DateTime.now());
@@ -57,7 +59,9 @@ class _HomePageState extends State<HomePage> {
     announcementViewModel =
         Provider.of<AnnouncementViewModel>(context, listen: false);
 
-    announcementViewModel?.getAnnouncementListInfo();
+    announcementViewModel?.getAnnouncementListInfo(
+
+    );
     _viewModel = Provider.of<SeatingInfoViewModel>(context, listen: false);
     _viewModel.getSeatingInfoDetails(
         action: 13,
@@ -129,10 +133,154 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child:
                               sp_token !=null?  getDrawerDetails(context: context):Text("")),
-                            SizedBox(
-                              height: _mainHeight * 0.01,
-                            ),
-                            Container(
+
+                                Container(
+                                    margin: EdgeInsets.only(top: 5),
+
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 60,
+                                    child:
+
+                                    CarouselSlider.builder(
+                                      options: CarouselOptions(
+                                        enableInfiniteScroll: true,
+                                        reverse: false,
+                                        autoPlay: true,
+                                        autoPlayAnimationDuration: Duration(milliseconds: 8000),
+                                        autoPlayCurve: Curves.decelerate,
+                                      ),
+                                      itemBuilder: (BuildContext context, int index,_){
+                                        String? base64Image = (value
+                                            .announcementModel![index]
+                                            .pictureIconPath);
+                                        final UriData? mydata =
+                                            Uri.parse(base64Image.toString())
+                                                .data;
+                                        Uint8List? myImage =
+                                        mydata?.contentAsBytes();
+                                        return
+                                          Container(
+
+                                            width:MediaQuery.of(context).size.width,
+                                            color: Colors.white,
+                                            child: Row(
+                                              children: [
+                                                myImage != null && (value
+                                                    .announcementModel![index]
+                                                    .pictureIconPath)!.isNotEmpty
+                                                    ?
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 7,
+                                                  ),
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        0),
+                                                    image:
+                                                    new DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image:
+                                                        MemoryImage(
+                                                            myImage,
+                                                            scale:
+                                                            0.5)),
+                                                  ),
+                                                ):Text(""),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Container(
+                                                          //color: Colors.blue,
+                                                          width: MediaQuery.of(context).size.width/1.7,
+                                                          child:   Text(
+                                                            value
+                                                                .announcementModel?[
+                                                            index]
+                                                                .announcementName ??
+                                                                'No Name',
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff337ab7),
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                'Open Sans',
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .normal),
+                                                            maxLines: 2,
+                                                          ),
+
+                                                        ),
+                                                        SizedBox(width: 5,),
+                                                        Icon(Icons.circle,
+                                                            color:
+                                                            Color(0xff337ab7),
+                                                            size: 10),
+
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          // color: Colors.blue,
+                                                          width: MediaQuery.of(context).size.width/1.7,
+                                                          child:   Text(
+                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    0xff333333),
+                                                                fontSize: 14,
+                                                                fontFamily:
+                                                                'Open Sans',
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .normal),
+                                                            maxLines: 2,
+                                                          ),
+
+                                                        ),
+                                                        SizedBox(width: 5,),
+                                                        Icon(Icons.arrow_forward_ios_rounded,
+                                                            color:
+                                                            Color(0xff337ab7),
+                                                            size: 10),
+
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                      }, itemCount: value.announcementModel!.length,
+
+                                    )
+                                ),
+
+
+
+
+
+
+
+                                SizedBox(height: 10,),
+
+                                Container(
                               color: Colors.white,
                               padding: EdgeInsets.only(
                                   right: MediaQuery.of(context).size.width/22,
@@ -270,7 +418,8 @@ class _HomePageState extends State<HomePage> {
                                       child: Stack(
                                         children: [
                                           myImage != null && value.announcementModel?[index].announcementType==2
-                                              ? Container(
+                                              ?
+                                          Container(
                                             height: _mainHeight * 0.27,
 
                                             decoration: BoxDecoration(
@@ -364,7 +513,8 @@ class _HomePageState extends State<HomePage> {
                                     margin: EdgeInsets.only(top: 5),
                                     //color: Colors.blue,
                                     height: 46,
-                                    child: Swiper(
+                                    child:
+                                    Swiper(
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         String? base64Image = (value
@@ -375,7 +525,8 @@ class _HomePageState extends State<HomePage> {
                                                 .data;
                                         Uint8List? myImage =
                                             mydata?.contentAsBytes();
-                                        return GestureDetector(
+                                        return 
+                                          GestureDetector(
                                           onTap: () {
                                             Navigator.of(context).push(MaterialPageRoute(
                                                 builder: (context) =>
@@ -446,7 +597,8 @@ class _HomePageState extends State<HomePage> {
                                                                   .width /
                                                               1.3,
                                                           // height:MediaQuery.of(context).size.height/40,
-                                                          child: Text(
+                                                          child:
+                                                          Text(
                                                             value
                                                                     .announcementModel?[
                                                                         index]
@@ -727,7 +879,8 @@ class _HomePageState extends State<HomePage> {
       builder: (context, data, child) {
         return data.announcementModel != null &&
             data.announcementModel!.isNotEmpty
-            ? ListView.builder(
+            ?
+        ListView.builder(
             itemCount: data.announcementModel?.length ?? 0,
             itemBuilder: (context, index) {
               AnnouncementModel model = data.announcementModel![index];

@@ -54,7 +54,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
       return DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: AppBar(
+          appBar:
+          AppBar(
             leading:
               BackButton(
                 onPressed: (){

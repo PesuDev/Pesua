@@ -5,6 +5,8 @@ import 'package:pesu/src/time_table/model/time_table_model.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/services/app_routes.dart';
+
 class TableDetails extends StatefulWidget {
   String? day;
 
@@ -69,7 +71,8 @@ class _TableDetailsState extends State<TableDetails> {
 
                             print("mon ${model.subjectName}");
                             return model.day == 1
-                                ? Column(
+                                ?
+                            Column(
                               children: [
                                 Container(
                                   width: double.infinity,
@@ -223,14 +226,16 @@ class _TableDetailsState extends State<TableDetails> {
                     builder: (context, data, child) {
                       return data.timeTableModel != null &&
                           data.timeTableModel!.isNotEmpty
-                          ? ListView.builder(
+                          ?
+                      ListView.builder(
                           itemCount: data.timeTableModel?.length ?? 0,
                           itemBuilder: (context, index) {
                             TimeTableModel model = data.timeTableModel![index];
 
                             print("mot ${model.subjectName}");
                             return model.day == 2
-                                ? Column(
+                                ?
+                            Column(
                               children: [
                                 Container(
                                   width: double.infinity,
@@ -353,7 +358,8 @@ class _TableDetailsState extends State<TableDetails> {
                                     : Container(),
                               ],
                             )
-                                : Container();
+                                : Container(
+                            );
                           })
                           : Center(child: CircularProgressIndicator());
                     },
@@ -854,7 +860,7 @@ class _TableDetailsState extends State<TableDetails> {
   }
   Widget Saturday(){
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffF8F9F9),
       body:
       Center(
         child: Column(
@@ -862,6 +868,7 @@ class _TableDetailsState extends State<TableDetails> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
+              height: 30,
               width: 380,
               margin: const EdgeInsets.all(19.0),
               // padding: EdgeInsets.only(left: 50, top: 5),
@@ -875,20 +882,38 @@ class _TableDetailsState extends State<TableDetails> {
                         fontWeight: FontWeight.w600)),
               ),
             ),
-            CircleAvatar(
-              radius: 23,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.refresh,
-                color: Color(0xff0091cd),
-                size: 30.0,
+            GestureDetector(
+              onTap: (){
+                CircularProgressIndicator();
+
+                // Navigator.pushNamed(
+                //     context,
+                //     AppRoutes.timeTable);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.white
+                ),
+                child: CircleAvatar(
+                  radius: 23,
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.refresh,
+                    color: Color(0xff0091cd),
+                    size: 30.0,
+                  ),
+                ),
               ),
             ),
-            Text("Refresh",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xff0091cd),
-                )),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Text("Refresh",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xff0091cd),
+                  )),
+            ),
           ],
         ),
       ),
@@ -940,7 +965,54 @@ class _TableDetailsState extends State<TableDetails> {
   }
 
 
-
+Widget noClass(){
+    return  Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: 30,
+            width: 380,
+            margin: const EdgeInsets.all(19.0),
+            // padding: EdgeInsets.only(left: 50, top: 5),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300)),
+            child: Center(
+              child: Text('NO CLASSES AVAILABLE ',
+                  style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xff717171),
+                      fontWeight: FontWeight.w600)),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.white
+            ),
+            child: CircleAvatar(
+              radius: 23,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.refresh,
+                color: Color(0xff0091cd),
+                size: 30.0,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Text("Refresh",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xff0091cd),
+                )),
+          ),
+        ],
+      ),
+    );
+}
 }
 
 
