@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view/announcements.dart';
+import 'package:pesu/src/announcements/view/open_pdf.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/src/assignment/view/assigment_dashboard.dart';
 import 'package:pesu/src/assignment/view/detailed_assignment.dart';
@@ -44,7 +45,6 @@ import 'package:pesu/src/time_table/view/time_table_dashboard.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:pesu/src/transport/view/transport_dashboard.dart';
 import 'package:provider/provider.dart';
-
 import '../../src/announcements/view/announcement_details.dart';
 import '../../src/announcements/view_model/announcement_arguments.dart';
 import '../../src/dashboard_module/view/dashboard_page.dart';
@@ -124,9 +124,17 @@ data(RouteSettings settings) {
         child: Announcements(announcementId: args?.announcementId,),
       ));
       case AppRoutes.announcement:
+        final AnnouncementArguments? args = settings.arguments as AnnouncementArguments?;
+
+        return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
+        create: (_) =>AnnouncementViewModel(),
+        child: Announcement(announcementId: args?.announcementId,),
+      ));
+
+      case AppRoutes.opnPdf:
       return MaterialPageRoute(  builder: (_) => ChangeNotifierProvider(
         create: (_) =>AnnouncementViewModel(),
-        child: AnnouncementDetails(),
+        child: OpenPdf(),
       ));
     case AppRoutes.login:
       return MaterialPageRoute(
@@ -185,6 +193,7 @@ data(RouteSettings settings) {
               ));
     case AppRoutes.calendarDashboard:
       return MaterialPageRoute(builder: (_) => CalendarDashboard());
+
       case AppRoutes.Dashboard:
       return MaterialPageRoute(builder: (_) => DashboardScreen());
   }
@@ -221,4 +230,5 @@ class AppRoutes {
   static const String esaGraph = "esaGraph";
   static const String calendarDashboard = "calendarDashboard";
   static const String Dashboard = "Dashboard";
+  static const String opnPdf = "openPdf";
 }

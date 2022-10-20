@@ -11,7 +11,7 @@ import '../viewmodel/isaViewModel.dart';
 
 class ISAResults extends StatefulWidget {
   bool isFromDashboard;
-ISAResults({required this.isFromDashboard});
+  ISAResults({required this.isFromDashboard});
 
   @override
   State<ISAResults> createState() => _ISAResultsState();
@@ -25,22 +25,24 @@ class _ISAResultsState extends State<ISAResults> {
   var classBatch;
   var classBatchData;
   var classBatchData1;
-List dropDownData=[];
+  List dropDownData = [];
   @override
   void initState() {
     super.initState();
     initMethod();
-drop();
+    drop();
   }
+
   SharedPreferenceUtil util = SharedPreferenceUtil();
 
-  initMethod()async{
+  initMethod() async {
     isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
     isaViewModel.getIsaDropDownDetails(
         action: 6,
         mode: 5,
         whichObjectId: "clickHome_pesuacademy_myresults",
-        title: "ISA Results", deviceType: 1,
+        title: "ISA Results",
+        deviceType: 1,
         serverMode: 0,
         redirectValue: "redirect:/a/ad",
         randomNum: 0.1629756694316884);
@@ -52,32 +54,37 @@ drop();
         classBatchSectionId: 4164,
         fetchId: "1400-4164",
         randomNum: 0.4054309131337863);
-    classBatchData= await util.getString(sp_className);
+    classBatchData = await util.getString(sp_className);
 
     print(">>>>> $classBatch");
   }
-  drop()async{
-    classBatchData=  await util.getString(sp_className);
-    classBatchData1 = classBatchData.toString().substring(0,5);
+
+  drop() async {
+    classBatchData = await util.getString(sp_className);
+    classBatchData1 = classBatchData.toString().substring(0, 5);
     print("object${classBatchData1}");
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: widget.isFromDashboard?sideNavAppBarForDashboard("ISA Results"):sideNavAppBar("ISA Results"),
+        appBar: widget.isFromDashboard
+            ? sideNavAppBarForDashboard("ISA Results")
+            : sideNavAppBar("ISA Results"),
         body: SingleChildScrollView(
           child: Consumer<IsaViewModel>(builder: (context, model, child) {
-            if(model.isaDropDownModel != null &&
+            if (model.isaDropDownModel != null &&
                 model.isaDropDownModel!.length != 0 &&
-                model.isaResultModel != null){
-              dropDownData=model.isaDropDownModel!.map((e) => e.className).toSet().toList();
+                model.isaResultModel != null) {
+              dropDownData = model.isaDropDownModel!
+                  .map((e) => e.className)
+                  .toSet()
+                  .toList();
             }
             return Container(
               child: model.isaDropDownModel != null &&
                       model.isaDropDownModel!.length != 0 &&
                       model.isaResultModel != null
-                  ?  Container(
+                  ? Container(
                       padding: EdgeInsets.only(
                           top: 15, left: 15, right: 15, bottom: 8),
                       child: Column(
@@ -86,35 +93,43 @@ drop();
                           Container(
                             height: 35,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blueGrey)
-                            ),
+                                border: Border.all(color: Colors.blueGrey)),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  decoration: InputDecoration.collapsed(hintText: ''),
+                                  decoration:
+                                      InputDecoration.collapsed(hintText: ''),
                                   hint: Padding(
-                                    padding: const EdgeInsets.only(top:7,left: 10),
+                                    padding:
+                                        const EdgeInsets.only(top: 7, left: 10),
                                     child: Text("$classBatchData1"),
                                   ),
                                   value: classBatch,
-                                  items:dropDownData?.map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 7,left: 5),
-
-                                      child: Text(item.toString(),),
-                                    ),
-                                  )).toSet()
+                                  items: dropDownData
+                                      ?.map((item) => DropdownMenuItem<String>(
+                                            value: item,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 7, left: 5),
+                                              child: Text(
+                                                item.toString(),
+                                              ),
+                                            ),
+                                          ))
+                                      .toSet()
                                       .toList(),
                                   onChanged: (item) {
                                     print("Oye");
                                     var batchClassId;
                                     var classBatchSectionId;
                                     setState(() {
-                                      classBatch=item;
-                                      for (var subjectData in model.isaDropDownModel!){
-                                        if(subjectData.className==item){
-                                          batchClassId=subjectData.batchClassId;
-                                          classBatchSectionId = subjectData.classBatchSectionId;
+                                      classBatch = item;
+                                      for (var subjectData
+                                          in model.isaDropDownModel!) {
+                                        if (subjectData.className == item) {
+                                          batchClassId =
+                                              subjectData.batchClassId;
+                                          classBatchSectionId =
+                                              subjectData.classBatchSectionId;
                                         }
                                       }
                                     });
@@ -123,7 +138,9 @@ drop();
                                       mode: 10,
                                       batchClassId: batchClassId,
                                       classBatchSectionId: classBatchSectionId,
-                                      fetchId: "1400-4164",                                    randomNum: 0.26757885412517934,  );
+                                      fetchId: "1400-4164",
+                                      randomNum: 0.26757885412517934,
+                                    );
                                     print("Hoye");
                                   }),
                             ),
@@ -138,8 +155,6 @@ drop();
                         ],
                       ),
                     )
-
-
                   : Center(child: CircularProgressIndicator()),
             );
           }),
@@ -184,16 +199,17 @@ drop();
 
   Widget resultDetails() {
     return Consumer<IsaViewModel>(builder: (context, model, child) {
-      var subjectName=model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
+      var subjectName =
+          model.isaResultModel?.map((e) => e.subjectName).toSet().toList();
       return ListView.builder(
           itemCount: subjectName?.length,
           itemBuilder: (context, int i) {
             /*List<int> items = model.isaResultModel?[i].subjectId as List<int>;
             print("jjjjjjjjjjjjjjjjjjjjjj $items}");*/
             String? titleCode = model.isaResultModel?[i].subjectCode;
-      //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
+            //     var subjectCode = model.isaResultModel?.map((e) => e.subjectCode).toSet().toList();
 
-print("Oye single subject ${subjectName}");
+            print("Oye single subject ${subjectName}");
 
             return Container(
               padding: EdgeInsets.only(bottom: 10),
@@ -274,13 +290,16 @@ print("Oye single subject ${subjectName}");
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, AppRoutes.isaResultsGraph,
-                                        arguments: DetailedArguments(
-
-                                            subjectId:model.isaResultModel?[j].subjectId,
-                                  subjectCode:model.isaResultModel?[j].subjectCode,
-                                            subjectName:model.isaResultModel?[j].subjectName,
-                                        )
-                                        );
+                                            arguments: DetailedArguments(
+                                              subjectId: model
+                                                  .isaResultModel?[j].subjectId,
+                                              subjectCode: model
+                                                  .isaResultModel?[j]
+                                                  .subjectCode,
+                                              subjectName: model
+                                                  .isaResultModel?[j]
+                                                  .subjectName,
+                                            ));
                                       },
                                       child: Container(
                                           width: MediaQuery.of(context)
@@ -297,9 +316,9 @@ print("Oye single subject ${subjectName}");
                               )
                             : Container();
                       }),
-              SizedBox(
-                height: 10,
-              )
+                  SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             );
