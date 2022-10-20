@@ -70,7 +70,7 @@ class IsaResultApiService {
   Future<IsaGraphModel?> fetchIsaGraphDetails(
       {required int action,
       required int mode,
-      required int subjectId,
+ int? subjectId,
       required String fetchId,
       required String subjectCode,
       required String subjectName,
@@ -90,6 +90,7 @@ class IsaResultApiService {
       'randomNum': randomNum
     });
     if (data != null) {
+      //log("Data >>>   $data}");
       return IsaGraphModel.fromJson(data);
     }
     log("IsaResultsLog $data");

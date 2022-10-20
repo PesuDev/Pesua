@@ -11,7 +11,12 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class IsaResultGraph extends StatefulWidget {
-  const IsaResultGraph({Key? key}) : super(key: key);
+ int? subjectId;
+
+  String subjectCode;
+  String subjectName;
+  IsaResultGraph({required this.subjectCode,
+    this.subjectId,required this.subjectName});
 
   @override
   State<IsaResultGraph> createState() => _IsaResultGraphState();
@@ -34,10 +39,10 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     isaViewModel?.getIsaGraphDetails(
         action: 6,
         mode: 8,
-        subjectId: 13451,
-        fetchId: "1116-3385-2",
-        subjectCode: "UE19CS303",
-        subjectName: "Machine Intelligence",
+        subjectId: widget.subjectId,
+        fetchId:"1400-4164",
+        subjectCode: widget.subjectCode,
+        subjectName: widget.subjectName,
         randomNum: 0.5177486893384107);
   }
 
@@ -53,7 +58,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text("UE20CS251 - Design and Analysis of Algorithms"),
+                child: Text("${widget.subjectCode} - ${widget.subjectName}"),
               ),
               //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
               /*   Container(

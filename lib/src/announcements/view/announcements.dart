@@ -7,7 +7,7 @@ import 'package:pesu/utils/services/date_time.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/view/widget.dart';
-import 'announcement.dart';
+import 'announcement_details.dart';
 
 class Announcements extends StatefulWidget {
   var announcementId;
@@ -72,7 +72,7 @@ class _AnnouncementsState extends State<Announcements> {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) =>
                                             ChangeNotifierProvider(create: (BuildContext context) =>AnnouncementViewModel(),
-                                                child: Announcement(announcementId:value.announcementModel?[index].announcementId ))
+                                                child: AnnouncementDetails(announcementId:value.announcementModel?[index].announcementId ))
                                     ));
 
                                   },

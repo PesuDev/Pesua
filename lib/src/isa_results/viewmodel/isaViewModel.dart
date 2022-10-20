@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:pesu/src/isa_results/model/isaResultModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
@@ -93,7 +95,7 @@ class IsaViewModel extends ChangeNotifier {
   void getIsaGraphDetails(
       {required int action,
       required int mode,
-      required int subjectId,
+      int? subjectId,
       required String fetchId,
       required String subjectCode,
       required String subjectName,
@@ -101,7 +103,7 @@ class IsaViewModel extends ChangeNotifier {
     String? userId=await preferenceUtil.getString(sp_userId);
     String? loginId=await preferenceUtil.getString(sp_loginId);
 
-    final data = await _isaResultApiService.fetchIsaGraphDetails(
+    final dataVal = await _isaResultApiService.fetchIsaGraphDetails(
         action: action,
         mode: mode,
         subjectId: subjectId,
@@ -111,8 +113,8 @@ class IsaViewModel extends ChangeNotifier {
         userId: userId.toString(),
         loginId: loginId.toString(),
         randomNum: randomNum);
-    isaGraphModel = data;
-
+    isaGraphModel = dataVal;
+log("Graph data >>>>  ${dataVal.toString()}");
     notifyListeners();
   }
 }

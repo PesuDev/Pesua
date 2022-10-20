@@ -3,6 +3,7 @@ import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+import 'package:open_file/open_file.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/view/widget.dart';
@@ -11,20 +12,20 @@ import 'dart:math' as math;
 
 import '../view_model/announcement_viewmodel.dart';
 
-class Announcement extends StatefulWidget {
+class AnnouncementDetails extends StatefulWidget {
 
   var announcementId;
-  Announcement({this.announcementId});
+  AnnouncementDetails({this.announcementId});
 
   // const Announcement({Key? key}) : super(key: key);
 
   @override
-  State<Announcement> createState() => _AnnouncementState();
+  State<AnnouncementDetails> createState() => _AnnouncementDetailsState();
 }
 
 
 
-class _AnnouncementState extends State<Announcement> {
+class _AnnouncementDetailsState extends State<AnnouncementDetails> {
   late AnnouncementViewModel _announcementViewModel;
 
 
@@ -103,7 +104,8 @@ class _AnnouncementState extends State<Announcement> {
                                             myImage
                                         ),
                                         fit: BoxFit.fill,
-                                      )),
+                                      )
+                                  ),
                                 ):Container(),
                                 SizedBox(height: 10,),
 
@@ -135,12 +137,17 @@ class _AnnouncementState extends State<Announcement> {
                                                 Text(
 
                                                  //value.announcementBannerModel?[index].documentPath,
-                                                  "ST_Labs_Swayam_May_2022_converted.pdf",
+                                                  "",
                                                   style: TextStyle(color: Color(0xff333333),fontSize: 14),)),
                                             Spacer(),
                                             Transform.rotate(
                                                 angle: 180 * math.pi / 140,
-                                            child: Icon(Icons.attach_file,color: Colors.grey,))
+                                            child: InkWell(
+                                                onTap: (){
+
+                                            //      OpenFile.open("${value.announcementBannerModel?[index].files}");
+                                                },
+                                                child: Icon(Icons.attach_file,color: Colors.grey,)))
 
                                           ],
                                       ),

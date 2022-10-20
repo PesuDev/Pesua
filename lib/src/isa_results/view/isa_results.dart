@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
@@ -90,36 +91,32 @@ class _ISAResultsState extends State<ISAResults> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
+                            height: 35,
                             decoration: BoxDecoration(
                                 border: Border.all(color: Colors.blueGrey)),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButtonFormField<String>(
-                                  hint: Text("$classBatchData1"),
+                                  decoration: InputDecoration.collapsed(hintText: ''),
+                                  hint: Padding(
+                                    padding: const EdgeInsets.only(top:7,left: 10),
+                                    child: Text("$classBatchData1"),
+                                  ),
                                   value: classBatch,
-                                  items: dropDownData
-                                      ?.map((item) => DropdownMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item.toString(),
-                                            ),
-                                          ))
-                                      .toSet()
+                                  items:dropDownData?.map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 7,left: 5),
+
+                                      child: Text(item.toString(),),
+                                    ),
+                                  )).toSet()
                                       .toList(),
                                   onChanged: (item) {
                                     print("Oye");
                                     var batchClassId;
                                     var classBatchSectionId;
-                                    var fetchId;
-                                    var programId;
                                     setState(() {
                                       classBatch = item;
-                                      // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
-                                      //   if(item==itemValue.subjectName){
-                                      //     return itemValue.subjectCode.toString();
-                                      //   }
-                                      //
-                                      // });
-
                                       for (var subjectData
                                           in model.isaDropDownModel!) {
                                         if (subjectData.className == item) {
@@ -127,8 +124,6 @@ class _ISAResultsState extends State<ISAResults> {
                                               subjectData.batchClassId;
                                           classBatchSectionId =
                                               subjectData.classBatchSectionId;
-                                          // fetchId = subjectData.;
-
                                         }
                                       }
                                     });
@@ -141,89 +136,9 @@ class _ISAResultsState extends State<ISAResults> {
                                       randomNum: 0.26757885412517934,
                                     );
                                     print("Hoye");
-                                    //       print(">>>>  $subjectCode");
-                                    //_viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
                                   }),
                             ),
                           ),
-                          // InkWell(
-                          //   onTap: () {
-                          //     print("set $isSemSelected");
-                          //     isSemSelected = true;
-                          //     print("reset $isSemSelected");
-                          //     // _semBottomSheet();
-                          //     showDialog(
-                          //       context: context,
-                          //       builder: (context) {
-                          //         return Dialog(
-                          //           backgroundColor: Colors.black45,
-                          //           shape: RoundedRectangleBorder(
-                          //               borderRadius: BorderRadius.circular(20)),
-                          //           elevation: 16,
-                          //           child: Container(
-                          //             child: ListView.separated(
-                          //               itemCount:
-                          //                   model.isaDropDownModel?.length ?? 0,
-                          //               itemBuilder: (context, index) {
-                          //                 print("bbbbbb $dropDownTitle");
-                          //                 return Column(
-                          //                   children: [
-                          //                     _buildRow(model
-                          //                             .isaDropDownModel?[index]
-                          //                             .className ??
-                          //                         ""),
-                          //                   ],
-                          //                 );
-                          //               },
-                          //               separatorBuilder: (context, index) {
-                          //                 return Divider(
-                          //                   color: Colors.white60,
-                          //                   endIndent: 5.0,
-                          //                   indent: 5.0,
-                          //                 );
-                          //               },
-                          //               shrinkWrap: true,
-                          //             ),
-                          //           ),
-                          //         );
-                          //       },
-                          //     );
-                          //   },
-                          //   child: Container(
-                          //     decoration: BoxDecoration(
-                          //       boxShadow: [
-                          //         BoxShadow(
-                          //             offset: Offset(2, 2),
-                          //             blurRadius: 8,
-                          //             color: (isSemSelected == true)
-                          //                 ? Colors.blue
-                          //                 : Colors.white)
-                          //       ],
-                          //       border: Border.all(
-                          //           color: (isSemSelected == true)
-                          //               ? Colors.blueAccent
-                          //               : Colors.grey),
-                          //       borderRadius: BorderRadius.circular(2),
-                          //     ),
-                          //     child: Container(
-                          //       color: Colors.white,
-                          //       padding: EdgeInsets.only(
-                          //           left: 5, right: 5, top: 5, bottom: 5),
-                          //       child: Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceBetween,
-                          //         children: [
-                          //           Text(
-                          //             dropDownTitle ??
-                          //                 "${model.isaDropDownModel![0].className}",
-                          //             style: TextStyle(fontSize: 18),
-                          //           ),
-                          //           Icon(Icons.arrow_drop_down),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 15,
                           ),
@@ -368,7 +283,14 @@ class _ISAResultsState extends State<ISAResults> {
                                     InkWell(
                                       onTap: () {
                                         Navigator.pushNamed(
-                                            context, AppRoutes.isaResultsGraph);
+                                            context, AppRoutes.isaResultsGraph,
+                                        arguments: DetailedArguments(
+
+                                            subjectId:model.isaResultModel?[j].subjectId,
+                                  subjectCode:model.isaResultModel?[j].subjectCode,
+                                            subjectName:model.isaResultModel?[j].subjectName,
+                                        )
+                                        );
                                       },
                                       child: Container(
                                           width: MediaQuery.of(context)

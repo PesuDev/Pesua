@@ -366,11 +366,11 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),
@@ -416,11 +416,11 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),
@@ -462,11 +462,11 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               Container(
                                 margin: EdgeInsets.only(left: 5),
                                 height: 40,
-                                width: 40.0,
+                                width: 26.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage(
-                                          'assets/images/pesu_logo.png'),
+                                          'assets/images/m_course_.jpg'),
                                       fit: BoxFit.cover),
                                   // shape: BoxShape.circle,
                                 ),

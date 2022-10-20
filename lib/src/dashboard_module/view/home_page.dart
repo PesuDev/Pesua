@@ -15,7 +15,7 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/services/date_time.dart';
-import '../../announcements/view/announcement.dart';
+import '../../announcements/view/announcement_details.dart';
 import '../../my_profile/profile_viewmodel/profile_viewmodel.dart';
 import '../../seatinginfo/model/seating_info_model.dart';
 import '../../seatinginfo/viewmodel/seating_info_viewmodel.dart';
@@ -261,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                         context) =>
                                                             AnnouncementViewModel(),
-                                                        child: Announcement(
+                                                        child: AnnouncementDetails(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                             index]
@@ -383,7 +383,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                                 context) =>
                                                             AnnouncementViewModel(),
-                                                        child: Announcement(
+                                                        child: AnnouncementDetails(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                                     index]
@@ -563,7 +563,7 @@ class _HomePageState extends State<HomePage> {
                                                         create: (BuildContext
                                                                 context) =>
                                                             AnnouncementViewModel(),
-                                                        child: Announcement(
+                                                        child: AnnouncementDetails(
                                                             announcementId: value
                                                                 .announcementModel?[
                                                                     index]
@@ -750,7 +750,7 @@ class _HomePageState extends State<HomePage> {
                                       create: (BuildContext
                                       context) =>
                                           AnnouncementViewModel(),
-                                      child: Announcement(
+                                      child: AnnouncementDetails(
                                           announcementId: data
                                               .announcementModel?[
                                           index]
@@ -938,8 +938,8 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   SeatingInfoModel model = seatingInfoModel[index];
                   var mydate=DateTimeUtil.convertDate(model.testStartTime!.toInt());
-                  print("ApiDate==${mydate}");
-                  print("MyDate==${currentDate}");
+                  // print("ApiDate==${mydate}");
+                  // print("MyDate==${currentDate}");
                   // print("MyTime==${Time}");
                   // print("MyDADA==${live}");
 
