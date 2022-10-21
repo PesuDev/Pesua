@@ -692,27 +692,46 @@ lineBarsData: [
 
   Widget graphUiForCgpa( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height/2.5,
       child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Row(
+            children: [
+            Expanded(
 
-          LineChartData(
-              lineBarsData: [
-                LineChartBarData(
-                    isCurved: false,
-                    color: Colors.blueAccent,
-                    dotData: FlDotData(show: true),
-                    spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+            flex: 1,
+            child: Transform.rotate(angle: 55,
+                child: Text("GPA",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                  ),
+                )
+            )
+        ),
+        Expanded(
+          flex: 11,
+    child:        LineChart(
 
-                        double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+              LineChartData(
+                  lineBarsData: [
+                    LineChartBarData(
+                        isCurved: false,
+                        color: Colors.blueAccent,
+                        dotData: FlDotData(show: true),
+                        spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
 
-                ),
+                            double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+
+                    ),
 
 
-              ]
-          ),
-          swapAnimationDuration: Duration(seconds: 1),
+                  ]
+              ),
+              swapAnimationDuration: Duration(seconds: 1),
+            ),
+        ),
+          ],
         ),
       ),
 
@@ -721,29 +740,45 @@ lineBarsData: [
 
   Widget graphUiForSgpa( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
-
-      child:Card(
+      height: MediaQuery.of(context).size.height/2.5,
+      child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Row(
+            children: [
+            Expanded(
 
-          LineChartData(
+            flex: 1,
+            child: Transform.rotate(angle: 55,
+                child: Text("GPA",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
+                  ),
+                ))),
+        Expanded(
+          flex: 11,
+    child:        LineChart(
 
-              lineBarsData: [
+              LineChartData(
 
-                LineChartBarData(
-                    isCurved: false,
-                    color: Colors.orange,
-                    dotData: FlDotData(show: true),
-                    spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+                  lineBarsData: [
 
-                        double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+                    LineChartBarData(
+                        isCurved: false,
+                        color: Colors.orange,
+                        dotData: FlDotData(show: true),
+                        spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
 
-                ),
+                            double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
 
-              ]
-          ),
-          swapAnimationDuration: Duration(seconds: 1),
+                    ),
+
+                  ]
+              ),
+              swapAnimationDuration: Duration(seconds: 1),
+            ),
+        ),
+          ],
         ),
       ),
     );
