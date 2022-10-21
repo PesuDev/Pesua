@@ -159,7 +159,7 @@ data(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
               create: (_) => IsaViewModel(), child: IsaResultGraph( subjectName: args.subjectName.toString(),
-            subjectId: args.subjectId, subjectCode: args.subjectCode.toString(),)));
+            subjectId: args.subjectId,classBatchSectionId : args.classBatchSectionId ,subjectCode: args.subjectCode.toString(), iSAMarksMasterId: args.iSAMarksMasterId,batchClassId: args.batchClassId,)));
     case AppRoutes.myProfile:
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(

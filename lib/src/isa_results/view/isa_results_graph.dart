@@ -12,17 +12,22 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class IsaResultGraph extends StatefulWidget {
  int? subjectId;
-
+ String? classBatchSectionId;
+ int? iSAMarksMasterId;
+ int? batchClassId;
   String subjectCode;
   String subjectName;
   IsaResultGraph({required this.subjectCode,
-    this.subjectId,required this.subjectName});
+    this.subjectId,required this.subjectName, required this.classBatchSectionId,required this.batchClassId,required this.iSAMarksMasterId});
+
 
   @override
   State<IsaResultGraph> createState() => _IsaResultGraphState();
 }
 
 class _IsaResultGraphState extends State<IsaResultGraph> {
+
+
   late IsaViewModel? isaViewModel;
   List<_SalesData> data = [
     _SalesData('Jan', 35),
@@ -32,18 +37,29 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     _SalesData('May', 40)
   ];
 
+
   @override
   void initState() {
+    var passid=("${widget.batchClassId}-${widget.classBatchSectionId}-${widget.iSAMarksMasterId}");
+    print("mypass${passid}");
+
     super.initState();
     isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
     isaViewModel?.getIsaGraphDetails(
         action: 6,
         mode: 8,
         subjectId: widget.subjectId,
-        fetchId:"1400-4164",
+        fetchId: passid,
         subjectCode: widget.subjectCode,
         subjectName: widget.subjectName,
         randomNum: 0.5177486893384107);
+    isaViewModel?.getIsaResultDetails(
+        action: 6,
+        mode: 10,
+        batchClassId: 1400,
+        classBatchSectionId: 4164,
+        fetchId: "1400-4164",
+        randomNum: 0.4054309131337863);
   }
 
   Widget build(BuildContext context) {
