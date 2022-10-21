@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:pesu/src/esaresults/model/graph_model.dart';
 import 'package:pesu/src/esaresults/viewmodel/graph_viewmodel.dart';

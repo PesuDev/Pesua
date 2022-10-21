@@ -102,7 +102,7 @@ var sessionTime;
     });
   }
 
-  List<String?>? time=[];
+  List<String> time=[];
 
 
 
@@ -154,20 +154,27 @@ var sessionTime;
                                 print("Oye");
                                 setState(() {
                                   subject=item;
-                                   time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
-                                    if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
-                                      print("subject>>${itemValueTera.subjectName}");
-                                      print("item>>${item}");
+                               for(var dataVal in data!.sessionEffectivenessModel!.timetableList!){
+                                    if(dataVal.day==1 &&dataVal.subjectName==item){
 
-                                        print("dedo>>${itemValueTera.startTiming}");
-                                        return itemValueTera.startTiming;
-
-                                    }else{
+                                      return time.add(dataVal.startTiming.toString());
 
                                     }
-
-
-                                  }).toList();
+                                  }
+                                  //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
+                                  //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
+                                  //     print("subject>>${itemValueTera.subjectName}");
+                                  //     print("item>>${item}");
+                                  //
+                                  //       print("dedo>>${itemValueTera.startTiming}");
+                                  //       return itemValueTera.startTiming;
+                                  //
+                                  //   }else{
+                                  //
+                                  //   }
+                                  //
+                                  //
+                                  // }).toList();
                               var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                               if(item==itemValue.subjectName){
                               return itemValue.subjectCode.toString();
@@ -238,16 +245,15 @@ var sessionTime;
                                   .startTiming ?? ""),
                             ),
                             value: sessionTime,
-                            items: data.items1
-                                .map((item) =>
-                                DropdownMenuItem<String>(
-                                  value: item,
-                                  child:
-                                  Text(
-                                    item
-                                  ),
-                                ))
-                                .toList(),
+                            items:
+                          time.map((e) =>       DropdownMenuItem<String>(
+                            value: e,
+                            child:
+                            Text(
+                                e
+                            ),
+                          )
+                            ,).toList(),
                             onChanged: (item) {
 
                             }),

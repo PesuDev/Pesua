@@ -7,13 +7,17 @@ import '../../../utils/constants/sp_constants.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
 import '../api/esa_api.dart';
 import '../model/esa_model.dart';
+import '../model/previous_sem_graph.dart';
 
 
 class EsaViewModel extends ChangeNotifier {
   late final EsaApi _apiService = EsaApi();
   List<String> items = [];
+esaGraphModel ?esaGraphModeData;
    ESAModel1? esaModel1;
    ESAModel2? esaModel2;
+   int? lengthData=-1;
+   int? lengthData4=-1;
   ESAModel4? esaModel4;
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
@@ -46,8 +50,39 @@ class EsaViewModel extends ChangeNotifier {
       randomNum: randomNum,);
     this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
     esaModel2 = data;
+     lengthData=data?.studentCGPAWISE?.length;
+
     notifyListeners();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  void  getESADataForGraph(
+      {
+
+        required double randomNum,}) async {
+    String? departmentId=await preferenceUtil.getString(sp_DepartmentId);
+    final data = await _apiService.esafetchGraph(
+
+      userId: departmentId.toString(),
+      randomNum: randomNum,);
+   this.esaGraphModeData=data;
+   print("dataLLLL  ${data}");
+    notifyListeners();
+  }
+
+
+
 
 
   Future  getSubjectData(
@@ -71,6 +106,7 @@ print("object $BatchClassId");
       randomNum: randomNum,);
 
     esaModel4 = data;
+    lengthData4=data?.cGPASEMESTERWISE?.length;
     notifyListeners();
     print("motu$BatchClassId");
   }
@@ -93,6 +129,7 @@ print("object $BatchClassId");
       randomNum: randomNum,);
 
     esaModel4 = data;
+    lengthData4=data?.cGPASEMESTERWISE?.length;
     notifyListeners();
     print("motu$BatchClassId");
   }
