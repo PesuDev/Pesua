@@ -640,33 +640,50 @@ var graphType=0;
 
   Widget graphUi( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height/2.5,
       child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Row(
+          children: [
+            Expanded(
 
-          LineChartData(
+                flex: 1,
+                child: Transform.rotate(angle: 55,
+                child: Text("GPA",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                ),
+                ))),
+            Expanded(
+              flex: 11,
+              child: LineChart(
+
+                LineChartData(
 lineBarsData: [
   LineChartBarData(
     isCurved: false,
-        color: Colors.blueAccent,
+              color: Colors.blueAccent,
 
-        dotData: FlDotData(show: true),
-        spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
-            double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+              dotData: FlDotData(show: true),
+              spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+                  double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
 
   ),
   LineChartBarData(
-        isCurved: false,
-        color: Colors.orange,
-        dotData: FlDotData(show: true),
-        spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+              isCurved: false,
+              color: Colors.orange,
+              dotData: FlDotData(show: true),
+              spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
 
   ),
 
 ]
-          ),
-          swapAnimationDuration: Duration(seconds: 1),
+                ),
+                swapAnimationDuration: Duration(seconds: 1),
+              ),
+            ),
+          ],
         ),
       ),
 

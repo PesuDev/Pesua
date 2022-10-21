@@ -57,25 +57,28 @@ class _EsaGraphState extends State<EsaGraph> {
                       child: Text("${widget.subjectCode}"
                           " ${model.graphModel?.subjectName}"),
                     ),
-                    SfCartesianChart(
-                        backgroundColor: Colors.white,
-                        primaryXAxis:
-                            CategoryAxis(title: AxisTitle(text: 'Grade')),
-                        primaryYAxis: NumericAxis(
-                          title: AxisTitle(text: 'Marks'),
-                        ),
-                        isTransposed: true,
-                        tooltipBehavior: TooltipBehavior(enable: true),
-                        series: <ChartSeries<Data, String>>[
-                          BarSeries<Data, String>(
-                              dataSource: model.graphModel?.data ?? [],
-                              xValueMapper: (Data data, _) => data.grade,
-                              yValueMapper: (Data data, _) => data.y,
-                              // Enable data label
-                              dataLabelSettings: DataLabelSettings(
-                                isVisible: true,
-                              ))
-                        ]),
+                    Card(
+                      elevation: 3,
+                      child: SfCartesianChart(
+                          backgroundColor: Colors.white,
+                          primaryXAxis:
+                              CategoryAxis(title: AxisTitle(text: 'Grade')),
+                          primaryYAxis: NumericAxis(
+                            title: AxisTitle(text: 'Marks'),
+                          ),
+                          isTransposed: true,
+                          tooltipBehavior: TooltipBehavior(enable: true),
+                          series: <ChartSeries<Data, String>>[
+                            BarSeries<Data, String>(
+                                dataSource: model.graphModel?.data ?? [],
+                                xValueMapper: (Data data, _) => data.grade,
+                                yValueMapper: (Data data, _) => data.y,
+                                // Enable data label
+                                dataLabelSettings: DataLabelSettings(
+                                  isVisible: true,
+                                ))
+                          ]),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
                       child: Text("Summary",style: TextStyle(
