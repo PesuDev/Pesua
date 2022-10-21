@@ -50,6 +50,7 @@ class _SessionEffectState extends State<SessionEffect> {
     //selectedRadio;
     // selectValue;
     dates();
+    days();
 
   }
 
@@ -66,6 +67,7 @@ class _SessionEffectState extends State<SessionEffect> {
 var subject;
 var subjectCode;
 var sessionTime;
+var todayDasy;
 
   setSelectedRadio(int val) {
     setState(() {
@@ -100,6 +102,18 @@ var sessionTime;
       print('jaa$todayDate');
 
     });
+  }
+
+
+   days(){
+    todayDasy=DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?1:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?2:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="wednesday"?3:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="thursday"?4:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="friday"?5:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="saturday"?6:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?7:0;
+
   }
 
   List<String> time=[];
@@ -140,7 +154,7 @@ var sessionTime;
                           child: DropdownButtonFormField<String>(
                               decoration: InputDecoration.collapsed(hintText: ''),
 
-                              hint: Text(""),
+                              hint: Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??""),
                               value:subject,
                               items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
                                 value: item.subjectName,
@@ -155,7 +169,7 @@ var sessionTime;
                                 setState(() {
                                   subject=item;
                                for(var dataVal in data!.sessionEffectivenessModel!.timetableList!){
-                                    if(dataVal.day==1 &&dataVal.subjectName==item){
+                                    if(dataVal.day==todayDasy &&dataVal.subjectName==item){
 
                                       return time.add(dataVal.startTiming.toString());
 
@@ -210,21 +224,24 @@ var sessionTime;
 
                         Row(
                           children: [
+                            subjectCode !=null?
                             Text(
                           "${subjectCode}",
 
-                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),),
+                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectCode??""),
                             SizedBox(
                               width: 5,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width/1.4,
-                              child: Text(
+                              child:
+                                  subject !=null?
+                              Text(
                                 "${subject}" ,style: TextStyle(
                                 fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black
                               ),
                                 maxLines: 2,
-                              ),
+                              ):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??""),
                             ),
                           ],
                         ),
@@ -241,8 +258,11 @@ var sessionTime;
 
                             hint: Padding(
                               padding: const EdgeInsets.only(top: 5, left: 5),
-                              child: Text(data.sessionEffectivenessModel?.timetableList?[0]
-                                  .startTiming ?? ""),
+                              child:
+                              data.sessionEffectivenessModel?.timetableList?[0]
+                                  .startTiming !=null?
+                              Text(data.sessionEffectivenessModel?.timetableList?[0]
+                                  .startTiming ?? ""):Text(""),
                             ),
                             value: sessionTime,
                             items:
@@ -262,7 +282,7 @@ var sessionTime;
 
 
 
-                        data.sessionEffectivenessModel!.timetableList!=null?
+                        data.sessionEffectivenessModel!.timetableList!=null ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
 
