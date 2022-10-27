@@ -38,11 +38,11 @@ class AnnouncementApiServices {
         }
     );
 
-    log("response:${data.toString()}");
+   // log("response:${data.toString()}");
     if (data != null && data.toString().length>0) {
       //log("hhhhh $data");
       final Iterable json = data;
-      log("Am going");
+    //  log("Am going");
       return json.map((orderModel) => AnnouncementModel.fromJson(orderModel))
           .toList();
 
@@ -78,7 +78,7 @@ class AnnouncementApiServices {
     if (data != null && data.toString().length>0) {
 
       final Iterable json = data;
-      log("Am going");
+  //    log("Am going");
 
       return json.map((orderModel) => Announcement_marqueModel.fromJson(orderModel))
           .toList();
@@ -112,7 +112,7 @@ class AnnouncementApiServices {
     if (data != null && data.toString().length>0) {
 
       final Iterable json = data;
-      log("Am going");
+ //     log("Am going");
 
       return json.map((orderModel) => AnnouncementImportantModel.fromJson(orderModel))
           .toList();
@@ -143,7 +143,7 @@ class AnnouncementApiServices {
     if (data != null && data.toString().length>0) {
 
       final Iterable json = data;
-      log("Am going");
+    //  log("Am going");
 
       return json.map((orderModel) => AnnouncementBannerDashModel.fromJson(orderModel))
           .toList();
@@ -174,11 +174,11 @@ class AnnouncementApiServices {
         }
     );
 
-    log("response:${data.toString()}");
+ //   log("response:${data.toString()}");
     if (data != null && data.toString().length>0) {
-      log("hhhhh $data");
+    //  log("hhhhh $data");
       final Iterable json = data;
-      log("Am going");
+     // log("Am going");
       return json.map((orderModel) => AnnouncementBannerModel.fromJson(orderModel))
           .toList();
 

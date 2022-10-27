@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                                                 });
                                               },
                                             itemBuilder: (BuildContext context, int index){
-                                              print("latika jain  ${value.announcementMarque?.length}");
+                                     //         print("latika jain  ${value.announcementMarque?.length}");
                                               String? base64Image = (value
                                                   .announcementMarque![index]
                                                   .pictureIconPath);

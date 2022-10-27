@@ -32,7 +32,7 @@ Future <List<AnnouncementModel>?>getAnnouncementListInfo() async {
   announcementMarque=[];
   for(var bannerData in marqueData!){
     if(bannerData.announcementPriority==3){
-      print("data>>>>>> latika   ${bannerData.announcementId}");
+ //     print("data>>>>>> latika   ${bannerData.announcementId}");
 
       announcementMarque?.add(bannerData);
 
