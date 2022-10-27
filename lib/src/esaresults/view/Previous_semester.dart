@@ -640,83 +640,130 @@ var graphType=0;
 
   Widget graphUi( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
-      child: LineChart(
+      height: MediaQuery.of(context).size.height/2.5,
+      child: Card(
+        elevation: 3,
+        child: LineChart(
 
-        LineChartData(
+               LineChartData(
+                   titlesData: FlTitlesData(
+                       bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                           axisNameWidget: Text("Semester")
+                       ),AxisTitles(axisNameSize: 14,
+                           axisNameWidget: Text("Semester")
+                       ),6) ,
+                       leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                           axisNameWidget: Text("GPA")
+                       ),AxisTitles(axisNameSize: 14,
+                           axisNameWidget: Text("GPA")
+                       ),6)
+                   ),
 lineBarsData: [
   LineChartBarData(
     isCurved: false,
-      color: Colors.blueAccent,
+             color: Colors.blueAccent,
 
-      dotData: FlDotData(show: true),
-      spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
-          double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+             dotData: FlDotData(show: true),
+             spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+                 double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
 
   ),
   LineChartBarData(
-      isCurved: false,
-      color: Colors.orange,
-      dotData: FlDotData(show: true),
-      spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+             isCurved: false,
+             color: Colors.orange,
+             dotData: FlDotData(show: true),
+             spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
 
   ),
 
 ]
-        ),
-        swapAnimationDuration: Duration(seconds: 1),
+               ),
+               swapAnimationDuration: Duration(seconds: 1),
+             ),
       ),
+
     );
   }
 
   Widget graphUiForCgpa( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
-      child: LineChart(
+      height: MediaQuery.of(context).size.height/2.5,
+      child: Card(
+        elevation: 3,
+        child: LineChart(
 
-        LineChartData(
-            lineBarsData: [
-              LineChartBarData(
-                  isCurved: false,
-                  color: Colors.blueAccent,
-                  dotData: FlDotData(show: true),
-                  spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+             LineChartData(
+               backgroundColor: Colors.white.withOpacity(0.4),
+                 titlesData: FlTitlesData(
+                     bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                         axisNameWidget: Text("hhh")
+                     ),AxisTitles(axisNameSize: 14,
+                         axisNameWidget: Text("Semester")
+                     ),6) ,
+                     leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                         axisNameWidget: Text("")
+                     ),AxisTitles(axisNameSize: 14,
+                         axisNameWidget: Text("GPA")
+                     ),6)
+                 ),
+                 lineBarsData: [
+                   LineChartBarData(
+                       isCurved: false,
+                       color: Colors.blueAccent,
+                       dotData: FlDotData(show: true),
+                       spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
 
-                      double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+                           double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
 
-              ),
+                   ),
 
 
-            ]
-        ),
-        swapAnimationDuration: Duration(seconds: 1),
+                 ]
+             ),
+             swapAnimationDuration: Duration(seconds: 1),
+           ),
       ),
+
     );
   }
 
   Widget graphUiForSgpa( esaGraphModel? dataGraph){
     return Container(
-      height: 300,
+      height: MediaQuery.of(context).size.height/2.5,
+      child: Card(
+        elevation: 3,
+        child: LineChart(
 
-      child: LineChart(
+                LineChartData(
+titlesData: FlTitlesData(
+  bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+        axisNameWidget: Text("Semester")
+  ),AxisTitles(axisNameSize: 14,
+        axisNameWidget: Text("Semester")
+  ),6) ,
+  leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+  axisNameWidget: Text("GPA")
+  ),AxisTitles(axisNameSize: 14,
+        axisNameWidget: Text("GPA")
+  ),6)
+),
 
-        LineChartData(
+                    lineBarsData: [
 
-            lineBarsData: [
+                      LineChartBarData(
+                          isCurved: false,
+                          color: Colors.orange,
+                          dotData: FlDotData(show: true),
+                          spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
 
-              LineChartBarData(
-                  isCurved: false,
-                  color: Colors.orange,
-                  dotData: FlDotData(show: true),
-                  spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+                              double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
 
-                      double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+                      ),
 
+                    ]
+                ),
+                swapAnimationDuration: Duration(seconds: 1),
               ),
-
-            ]
-        ),
-        swapAnimationDuration: Duration(seconds: 1),
       ),
     );
   }

@@ -299,6 +299,9 @@ class _ISAResultsState extends State<ISAResults> {
                                               subjectName: model
                                                   .isaResultModel?[j]
                                                   .subjectName,
+                                              batchClassId: model.isaResultModel?[j].batchClassId,
+                                              classBatchSectionId: model.isaResultModel?[j].classBatchSectionId,
+                                              iSAMarksMasterId: model.isaResultModel?[j].iSAMarksMasterId
                                             ));
                                       },
                                       child: Container(

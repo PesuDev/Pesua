@@ -32,13 +32,13 @@ class IsaGraphModel {
 }
 
 class Data {
-  int? x;
+  double? x;
   int? y;
   String? usn;
   String? color;
   int? avg;
-  int? tolal;
-  int? total;
+  double? tolal;
+  double? total;
   Null? grade;
   Null? subjectName;
 

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/isa_results/model/isaGraphModel.dart';
@@ -12,17 +13,22 @@ import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class IsaResultGraph extends StatefulWidget {
  int? subjectId;
-
+ String? classBatchSectionId;
+ int? iSAMarksMasterId;
+ int? batchClassId;
   String subjectCode;
   String subjectName;
   IsaResultGraph({required this.subjectCode,
-    this.subjectId,required this.subjectName});
+    this.subjectId,required this.subjectName, required this.classBatchSectionId,required this.batchClassId,required this.iSAMarksMasterId});
+
 
   @override
   State<IsaResultGraph> createState() => _IsaResultGraphState();
 }
 
 class _IsaResultGraphState extends State<IsaResultGraph> {
+
+
   late IsaViewModel? isaViewModel;
   List<_SalesData> data = [
     _SalesData('Jan', 35),
@@ -32,25 +38,36 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     _SalesData('May', 40)
   ];
 
+
   @override
   void initState() {
+    var passid=("${widget.batchClassId}-${widget.classBatchSectionId}-${widget.iSAMarksMasterId}");
+    print("mypass${passid}");
+
     super.initState();
     isaViewModel = Provider.of<IsaViewModel>(context, listen: false);
     isaViewModel?.getIsaGraphDetails(
         action: 6,
         mode: 8,
         subjectId: widget.subjectId,
-        fetchId:"1400-4164",
+        fetchId: passid,
         subjectCode: widget.subjectCode,
         subjectName: widget.subjectName,
         randomNum: 0.5177486893384107);
+    // isaViewModel?.getIsaResultDetails(
+    //     action: 6,
+    //     mode: 10,
+    //     batchClassId: 1400,
+    //     classBatchSectionId: 4164,
+    //     fetchId: "1400-4164",
+    //     randomNum: 0.4054309131337863);
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: sideNavAppBar("ISA Results graph"),
       body: Consumer<IsaViewModel>(builder: (context, model, child) {
-        return Container(
+        return  model.isaGraphModel !=null?Container(
           padding: EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -74,15 +91,17 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
                   ),
                   isTransposed: true,
                   tooltipBehavior: TooltipBehavior(enable: true),
-                  series: <ChartSeries<Data, int>>[
-                    BarSeries<Data, int>(
+                  series: <ChartSeries<Data, String>>[
+                    BarSeries<Data, String>(
                         dataSource: model.isaGraphModel?.data ?? [],
-                        xValueMapper: (Data isaGraph, _) => isaGraph.x,
+                        xValueMapper: (Data isaGraph, _) =>isaGraph.x.toString(),
                         yValueMapper: (Data isaGraph, _) => isaGraph.y,
                         name: 'Sales',
                         // Enable data label
                         dataLabelSettings: DataLabelSettings(isVisible: true))
                   ]),
+
+
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
                 child: Text("Summary"),
@@ -103,7 +122,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
               )
             ],
           ),
-        );
+        ):Container(child: Text("hh"),);
       }),
     );
   }

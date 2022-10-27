@@ -90,6 +90,7 @@ class IsaResultApiService {
       'randomNum': randomNum
     });
     if (data != null) {
+      log("Data came");
       //log("Data >>>   $data}");
       return IsaGraphModel.fromJson(data);
     }
