@@ -174,7 +174,8 @@ var todayDasy;
                                       return time.add(dataVal.startTiming.toString());
 
                                     }
-                                  }
+
+                               }
                                   //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
                                   //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
                                   //     print("subject>>${itemValueTera.subjectName}");
@@ -213,6 +214,8 @@ var todayDasy;
 
                                 });
                                 print("Hoye");
+                                print("sesso${sessionTime}");
+                                print("tii${time}");
 
                               }),
                         ),
@@ -266,12 +269,13 @@ var todayDasy;
                             ),
                             value: sessionTime,
                             items:
-                          time.map((e) =>       DropdownMenuItem<String>(
-                            value: e,
+                          time.map((droptime) => DropdownMenuItem<String>(
+                            value: droptime,
                             child:
+                                droptime.isNotEmpty?
                             Text(
-                                e
-                            ),
+                                droptime
+                            ):Text(""),
                           )
                             ,).toList(),
                             onChanged: (item) {
@@ -282,7 +286,8 @@ var todayDasy;
 
 
 
-                        data.sessionEffectivenessModel!.timetableList!=null ?
+
+                        data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
 
