@@ -15,6 +15,7 @@ class IsaViewModel extends ChangeNotifier {
   final IsaResultApiService _isaResultApiService = IsaResultApiService();
   List<IsaResultModel>? isaResultModel;
   IsaGraphModel? isaGraphModel;
+
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
 
