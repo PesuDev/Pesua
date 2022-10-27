@@ -40,6 +40,8 @@ class _HomePageState extends State<HomePage> {
   // late String live=currentDate + " " + Time;
 
    int? currentIndex;
+   int? currentIndexMarque;
+   int? currentIndexImportant;
    int? myLength;
    int? count;
    int ?length;
@@ -85,6 +87,8 @@ class _HomePageState extends State<HomePage> {
         Provider.of<AnnouncementViewModel>(context, listen: false);
 
     announcementViewModel?.getAnnouncementListInfo();
+    announcementViewModel?.getAnnouncementListInfoForMarquee();
+
     _viewModel = Provider.of<SeatingInfoViewModel>(context, listen: false);
     _viewModel.getSeatingInfoDetails(
         action: 13,
@@ -134,142 +138,166 @@ class _HomePageState extends State<HomePage> {
                                 child:
                               sp_token !=null?  getDrawerDetails(context: context):Text("")),
 
-                                Container(
-                                    margin: EdgeInsets.only(top: 5),
+                                value.announcementMarque !=null?        Container(
 
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 60,
-                                    child:
-
-                                    CarouselSlider.builder(
-                                      options: CarouselOptions(
-                                        enableInfiniteScroll: true,
-                                        reverse: false,
-                                        autoPlay: true,
-                                        autoPlayAnimationDuration: Duration(milliseconds: 8000),
-                                        autoPlayCurve: Curves.decelerate,
-                                      ),
-                                      itemBuilder: (BuildContext context, int index,_){
-                                        String? base64Image = (value
-                                            .announcementModel![index]
-                                            .pictureIconPath);
-                                        final UriData? mydata =
-                                            Uri.parse(base64Image.toString())
-                                                .data;
-                                        Uint8List? myImage =
-                                        mydata?.contentAsBytes();
-                                        return
-                                          Container(
-
-                                            width:MediaQuery.of(context).size.width,
-                                            color: Colors.white,
-                                            child: Row(
-                                              children: [
-                                                myImage != null && (value
-                                                    .announcementModel![index]
-                                                    .pictureIconPath)!.isNotEmpty
-                                                    ?
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                    left: 7,
-                                                  ),
-                                                  width: 50,
-                                                  height: 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        0),
-                                                    image:
-                                                    new DecorationImage(
-                                                        fit: BoxFit.fill,
-                                                        image:
-                                                        MemoryImage(
-                                                            myImage,
-                                                            scale:
-                                                            0.5)),
-                                                  ),
-                                                ):Text(""),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Container(
-                                                          //color: Colors.blue,
-                                                          width: MediaQuery.of(context).size.width/1.7,
-                                                          child:   Text(
-                                                            value
-                                                                .announcementModel?[
-                                                            index]
-                                                                .announcementName ??
-                                                                'No Name',
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xff337ab7),
-                                                                fontSize: 14,
-                                                                fontFamily:
-                                                                'Open Sans',
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .normal),
-                                                            maxLines: 2,
-                                                          ),
-
-                                                        ),
-                                                        SizedBox(width: 5,),
-                                                        Icon(Icons.circle,
-                                                            color:
-                                                            Color(0xff337ab7),
-                                                            size: 10),
-
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          // color: Colors.blue,
-                                                          width: MediaQuery.of(context).size.width/1.7,
-                                                          child:   Text(
-                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xff333333),
-                                                                fontSize: 14,
-                                                                fontFamily:
-                                                                'Open Sans',
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .normal),
-                                                            maxLines: 2,
-                                                          ),
-
-                                                        ),
-                                                        SizedBox(width: 5,),
-                                                        Icon(Icons.arrow_forward_ios_rounded,
-                                                            color:
-                                                            Color(0xff337ab7),
-                                                            size: 10),
-
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                      height: MediaQuery.of(context).size.height / 9,
+                                      color: Colors.white,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 7,top: 4),
+                                            child: Text(
+                                              "${"Marque Announcement"}  (${currentIndexMarque ??""}/${value.announcementMarque?.length ?? ""})",
+                                              style: TextStyle(
+                                                  color: Color(0xfffd981b),
+                                                  fontSize: 14,
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w600),
                                             ),
-                                          );
-                                      }, itemCount: value.announcementModel!.length,
+                                          ),
+                                      Container(
+                                          margin: EdgeInsets.only(top: 5),
 
-                                    )
+                                          width: MediaQuery.of(context).size.width,
+                                          height: 60,
+                                          child:
+
+                                          Swiper(
+                                            autoplay: true,
+                                              onIndexChanged: (int index) {
+                                                setState(() {
+                                                  currentIndexMarque = index+1;
+
+                                                });
+                                              },
+                                            itemBuilder: (BuildContext context, int index){
+                                              print("latika jain  ${value.announcementMarque?.length}");
+                                              String? base64Image = (value
+                                                  .announcementMarque![index]
+                                                  .pictureIconPath);
+                                              final UriData? mydata =
+                                                  Uri.parse(base64Image.toString())
+                                                      .data;
+                                              Uint8List? myImage =
+                                              mydata?.contentAsBytes();
+                                              return
+                                                Container(
+
+                                                  width:MediaQuery.of(context).size.width,
+                                                  color: Colors.white,
+                                                  child: Row(
+                                                    children: [
+                                                      myImage != null && (value
+                                                          .announcementMarque![index]
+                                                          .pictureIconPath)!.isNotEmpty
+                                                          ?
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                          left: 7,
+                                                        ),
+                                                        width: 50,
+                                                        height: 50,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
+                                                          BorderRadius.circular(
+                                                              0),
+                                                          image:
+                                                          new DecorationImage(
+                                                              fit: BoxFit.fill,
+                                                              image:
+                                                              MemoryImage(
+                                                                  myImage,
+                                                                  scale:
+                                                                  0.5)),
+                                                        ),
+                                                      ):Text(""),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+
+                                                      Column(
+                                                        children: [
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Row(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Container(
+                                                                //color: Colors.blue,
+                                                                width: MediaQuery.of(context).size.width/1.7,
+                                                                child:   Text(
+                                                                  value
+                                                                      .announcementMarque?[
+                                                                  index] .announcementName.toString()??
+                                                                      'No Name',
+                                                                  style: TextStyle(
+                                                                      color: Color(
+                                                                          0xff337ab7),
+                                                                      fontSize: 14,
+                                                                      fontFamily:
+                                                                      'Open Sans',
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .normal),
+                                                                  maxLines: 2,
+                                                                ),
+
+                                                              ),
+                                                              SizedBox(width: 5,),
+                                                              Icon(Icons.circle,
+                                                                  color:
+                                                                  Color(0xff337ab7),
+                                                                  size: 10),
+
+                                                            ],
+                                                          ),
+                                                          SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Container(
+                                                                // color: Colors.blue,
+                                                                width: MediaQuery.of(context).size.width/1.7,
+                                                                child:   Text(
+                                                                  "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementMarque?[index].startdate}"))} ",
+                                                                  style: TextStyle(
+                                                                      color: Color(
+                                                                          0xff333333),
+                                                                      fontSize: 14,
+                                                                      fontFamily:
+                                                                      'Open Sans',
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .normal),
+                                                                  maxLines: 2,
+                                                                ),
+
+                                                              ),
+                                                              SizedBox(width: 5,),
+                                                              Icon(Icons.arrow_forward_ios_rounded,
+                                                                  color:
+                                                                  Color(0xff337ab7),
+                                                                  size: 10),
+
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                            },
+                                            itemCount: value.announcementMarque?.length ??0,
+
+                                          )
+                                      ),
+                                    ],
+                                  ),
+                                ):Container(
+                                  child:Text("")
                                 ),
 
 
@@ -395,7 +423,7 @@ class _HomePageState extends State<HomePage> {
                                   // List<AnnouncementModel> name=((value.announcementModel?[index].announcementType==2)?value.announcementModel![index].batchClassId:"hh");
                                   // print("bababa$name");
                                   String? base64Image =
-                                  (value.announcementModel?[index].iconPath);
+                                  (value.announcementBannerDashModel?[index].iconPath);
                                   final UriData? mydata =
                                       Uri.parse(base64Image.toString()).data;
                                   Uint8List? myImage = mydata?.contentAsBytes();
@@ -411,13 +439,13 @@ class _HomePageState extends State<HomePage> {
                                                             AnnouncementViewModel(),
                                                         child: Announcement(
                                                             announcementId: value
-                                                                .announcementModel?[
+                                                                .announcementBannerDashModel?[
                                                             index]
                                                                 .announcementId))));
                                       },
                                       child: Stack(
                                         children: [
-                                          myImage != null && value.announcementModel?[index].announcementType==2
+                                          myImage != null && value.announcementBannerDashModel?[index].announcementType==2
                                               ?
                                           Container(
                                             height: _mainHeight * 0.27,
@@ -455,7 +483,7 @@ class _HomePageState extends State<HomePage> {
                                                         bottom: 5),
                                                     child: Text(
                                                       value
-                                                          .announcementModel?[
+                                                          .announcementBannerDashModel?[
                                                       index]
                                                           .announcementName ??
                                                           "",
@@ -473,7 +501,7 @@ class _HomePageState extends State<HomePage> {
                                   );
                                 },
                                 autoplay: true,
-                                itemCount: value.announcementModel!.length,
+                                itemCount: value.announcementBannerDashModel!.length,
                                 //  itemCount: imageList.length,
                               ),
                             ),
@@ -501,7 +529,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Important Announcement"}  (${currentIndex ??""}/${value.announcementModel?.length ?? ""})",
+                                      "${"Important Announcement"}  (${currentIndexImportant ??""}/${value.announcementImportant?.length ?? ""})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -518,7 +546,7 @@ class _HomePageState extends State<HomePage> {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         String? base64Image = (value
-                                            .announcementModel![index]
+                                            .announcementImportant![index]
                                             .pictureIconPath);
                                         final UriData? mydata =
                                             Uri.parse(base64Image.toString())
@@ -536,7 +564,7 @@ class _HomePageState extends State<HomePage> {
                                                             AnnouncementViewModel(),
                                                         child: Announcement(
                                                             announcementId: value
-                                                                .announcementModel?[
+                                                                .announcementImportant?[
                                                                     index]
                                                                 .announcementId))));
                                           },
@@ -600,7 +628,7 @@ class _HomePageState extends State<HomePage> {
                                                           child:
                                                           Text(
                                                             value
-                                                                    .announcementModel?[
+                                                                    .announcementImportant?[
                                                                         index]
                                                                     .announcementName ??
                                                                 'No Name',
@@ -631,7 +659,7 @@ class _HomePageState extends State<HomePage> {
                                                               1.3,
                                                           // height:MediaQuery.of(context).size.height/40,
                                                           child: Text(
-                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
+                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementImportant?[index].startdate}"))} ",
                                                             style: TextStyle(
                                                                 color: Color(
                                                                     0xff333333),
@@ -659,10 +687,10 @@ class _HomePageState extends State<HomePage> {
                                         );
                                       },
                                       autoplay: true,
-                                      itemCount: value.announcementModel!.length,
+                                      itemCount: value.announcementImportant!.length,
                                         onIndexChanged: (int index) {
                                           setState(() {
-                                              currentIndex = index;
+                                              currentIndexImportant = index+1;
 
                                           });
                                         }
@@ -851,7 +879,7 @@ class _HomePageState extends State<HomePage> {
                                         // },
           onIndexChanged: (int index) {
             setState(() {
-              currentIndex = index;
+              currentIndex = index+1;
 
             });
           }

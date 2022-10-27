@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:pesu/src/announcements/api_services/announcment_api_services.dart';
+import 'package:pesu/src/announcements/model/announcement_dashboard_banner.dart';
+import 'package:pesu/src/announcements/model/announcement_important_model.dart';
+import 'package:pesu/src/announcements/model/announcement_marque.dart';
 import 'package:pesu/src/announcements/model/announcement_model.dart';
 import 'package:pesu/src/attendance/api_services/attendace_api_services.dart';
 import 'package:pesu/src/attendance/model/attendance_dropdown_model.dart';
@@ -14,17 +17,61 @@ class AnnouncementViewModel extends ChangeNotifier {
   late final AnnouncementApiServices _apiService = AnnouncementApiServices();
 List<AnnouncementModel> ?announcementModel;
 List<AnnouncementBannerModel> ?announcementBannerModel;
+List<Announcement_marqueModel>? announcementMarque;
+List<AnnouncementImportantModel>? announcementImportant;
+List<AnnouncementBannerDashModel>? announcementBannerDashModel;
 
-
-Future <List<AnnouncementModel>?>getAnnouncementListInfo(
-
-      ) async {
+Future <List<AnnouncementModel>?>getAnnouncementListInfo() async {
     log("annuncement");
     final data = await _apiService.fetchAnnouncement();
     log("hey i came");
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
    announcementModel= data;
-   log("Announcement data: ${data}");
+    final marqueData=await _apiService.fetchAnnouncementMarque();
+//   log("Announcement data: ${data}");
+  announcementMarque=[];
+  for(var bannerData in marqueData!){
+    if(bannerData.announcementPriority==3){
+      print("data>>>>>> latika   ${bannerData.announcementId}");
+
+      announcementMarque?.add(bannerData);
+
+    }
+
+
+  }
+  final importantData=await _apiService.fetchAnnouncementImportant();
+  announcementImportant=[];
+  for(var important in importantData!){
+    if(important.announcementType==1){
+//      print("data>>>>>> latika   ${i.announcementId}");
+announcementImportant?.add(important);
+     // announcementMarque?.add(bannerData);
+
+    }
+
+
+  }
+
+  final bannerDashData=await _apiService.fetchAnnouncementBannerDash();
+ announcementBannerDashModel=[];
+  for(var important in bannerDashData!){
+    if(important.announcementType==2){
+//      print("data>>>>>> latika   ${i.announcementId}");
+      announcementBannerDashModel?.add(important);
+      // announcementMarque?.add(bannerData);
+
+    }
+
+
+  }
+
+  //print("????????????????   ${announcementMarque?.toList().toSet()}  ${announcementMarque?.toList().length}");
+    notifyListeners();
+  }
+Future <List<AnnouncementModel>?>getAnnouncementListInfoForMarquee() async {
+
+
     notifyListeners();
   }
 
