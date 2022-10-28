@@ -1,3 +1,5 @@
+
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,9 @@ class Announcement extends StatefulWidget {
 
 class _AnnouncementState extends State<Announcement> {
   late AnnouncementViewModel _announcementViewModel;
-
+  // bool _connectionStatus = true;
+  // final Connectivity _connectivity = Connectivity();
+  // StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
