@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
@@ -11,8 +10,7 @@ import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
-import 'package:pesu/utils/view/app_drawer_screen.dart';
-import 'package:pesu/utils/view/widget.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../../utils/services/date_time.dart';
@@ -1031,7 +1029,8 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     myImage != null
-                        ? Container(
+                        ?
+                    Container(
                       margin: EdgeInsets.only(left: 10),
                             width: 50,
                             height: 50,
@@ -1039,7 +1038,7 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(100),
                               image: new DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: MemoryImage(myImage, scale: 0.5)),
+                                  image: MemoryImage(myImage, scale: 0.5,)),
                             ),
                           )
                         : CircleAvatar(
@@ -1092,10 +1091,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   SeatingInfoModel model = seatingInfoModel[index];
                   var mydate=DateTimeUtil.convertDate(model.testStartTime!.toInt());
-                  // print("ApiDate==${mydate}");
-                  // print("MyDate==${currentDate}");
-                  // print("MyTime==${Time}");
-                  // print("MyDADA==${live}");
+
 
 
                   return mydate ==
