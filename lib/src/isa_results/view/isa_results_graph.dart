@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/isa_results/model/isaGraphModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
+import 'package:pesu/src/isa_results/model/isa_graph_formatter.dart';
+
 import 'package:pesu/src/isa_results/viewmodel/isaViewModel.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +33,7 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
 
 
   late IsaViewModel? isaViewModel;
-  List<_SalesData> data = [
-    _SalesData('Jan', 35),
-    _SalesData('Feb', 28),
-    _SalesData('Mar', 34),
-    _SalesData('Apr', 32),
-    _SalesData('May', 40)
-  ];
+
 
 
   @override
@@ -67,62 +64,82 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     return Scaffold(
       appBar: sideNavAppBar("ISA Results graph"),
       body: Consumer<IsaViewModel>(builder: (context, model, child) {
-        return  model.isaGraphModel !=null?Container(
-          padding: EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text("${widget.subjectCode} - ${widget.subjectName}"),
-              ),
-              //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
-              /*   Container(
+
+        if(model.isaGraphFormatterModel !=null){
+
+// ISAGraphFormatterModel dataVal=ISAGraphFormatterModel();
+print("Graph status>>>>  ${model.isaGraphFormatterModel?.last.y}");
+          // List<GraphISA> graphData = [
+          //   GraphISA(x: "76-88",
+          //       colorCode: Color(0xffEBB47A),
+          //       y: model.isaGraphModel!.gRAPHSTATUS!.map((e) => e.i7688Rgba1221822356).toString()),
+          //
+          //   GraphISA(x: "88-100",
+          //       colorCode: Color(0xff057d10),
+          //       y: model.isaGraphModel!.gRAPHSTATUS!.map((e) => e.i88100Rgba512516).toString())
+          // ];
+          // log("Data $graphData");
+return Container(
+  padding: EdgeInsets.all(12.0),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Text("${widget.subjectCode} - ${widget.subjectName}"),
+      ),
+      //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
+      /*   Container(
                 color: Colors.white,
                 height: MediaQuery.of(context).size.height * 0.5,
               ),*/
-              SfCartesianChart(
-                  backgroundColor: Colors.white,
-                  primaryXAxis:
-                      CategoryAxis(title: AxisTitle(text: 'Students')),
-                  primaryYAxis: NumericAxis(
-                    title: AxisTitle(text: 'Marks'),
-                  ),
-                  isTransposed: true,
-                  tooltipBehavior: TooltipBehavior(enable: true),
-                  series: <ChartSeries<Data, String>>[
-                    BarSeries<Data, String>(
-                        dataSource: model.isaGraphModel?.data ?? [],
-                        xValueMapper: (Data isaGraph, _) =>isaGraph.x.toString(),
-                        yValueMapper: (Data isaGraph, _) => isaGraph.y,
-                        name: 'Sales',
-                        // Enable data label
-                        dataLabelSettings: DataLabelSettings(isVisible: true))
-                  ]),
-
-
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-                child: Text("Summary"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [Text("Your Score"), Text("-1")],
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Column(
-                    children: [Text("Average"), Text("24")],
-                  )
-                ],
-              )
-            ],
+      SfCartesianChart(
+          backgroundColor: Colors.white,
+          primaryXAxis:
+          CategoryAxis(title: AxisTitle(text: 'Students')),
+          primaryYAxis: NumericAxis(
+            title: AxisTitle(text: 'Marks'),
           ),
-        ):Container(child: Text("hh"),);
+          isTransposed: true,
+          tooltipBehavior: TooltipBehavior(enable: true),
+          series: <ChartSeries<ISAGraphFormatterModel, String>>[
+            BarSeries<ISAGraphFormatterModel, String>(
+                dataSource:model.isaGraphFormatterModel!.toList()??[],
+                xValueMapper: (ISAGraphFormatterModel graph, _) =>graph.x,
+                yValueMapper:  (ISAGraphFormatterModel graph, _) =>int.parse(graph.y.toString()),
+                name: 'Sales',
+                pointColorMapper:(ISAGraphFormatterModel graph, _)=>graph.color ,
+                // Enable data label
+                dataLabelSettings: DataLabelSettings(isVisible: true))
+          ]),
+
+
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
+        child: Text("Summary"),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Column(
+            children: [Text("Your Score"), Text("-1")],
+          ),
+          SizedBox(
+            width: 40,
+          ),
+          Column(
+            children: [Text("Average"), Text("24")],
+          )
+        ],
+      )
+    ],
+  ),
+);
+        }
+      else{
+        return Container(child: Text("hh"),);
+        }
       }),
     );
   }
@@ -138,59 +155,12 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
   }
 }*/
 
-class MyHomePage extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  MyHomePage({Key? key}) : super(key: key);
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+class GraphISA {
+  GraphISA({required this.colorCode,required this.x,required this.y});
 
-class _MyHomePageState extends State<MyHomePage> {
-  List<_SalesData> data = [
-    _SalesData('Jan', 35),
-    _SalesData('Feb', 28),
-    _SalesData('Mar', 34),
-    _SalesData('Apr', 32),
-    _SalesData('May', 40)
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Syncfusion Flutter chart'),
-        ),
-        body: Column(children: [
-          //Initialize the chart widget
-          SfCartesianChart(
-              primaryXAxis: CategoryAxis(title: AxisTitle(text: 'Students')),
-              primaryYAxis: NumericAxis(
-                title: AxisTitle(text: 'Marks'),
-              ),
-              // Chart title
+  final String x;
+  final String y;
+  final Color colorCode;
 
-              // title: ChartTitle(text: 'Half yearly sales analysis'),
-              // Enable legend
-              // legend: Legend(isVisible: true),
-              // Enable tooltip
-              isTransposed: true,
-              tooltipBehavior: TooltipBehavior(enable: true),
-              series: <ChartSeries<_SalesData, String>>[
-                BarSeries<_SalesData, String>(
-                    dataSource: data,
-                    xValueMapper: (_SalesData sales, _) => sales.year,
-                    yValueMapper: (_SalesData sales, _) => sales.sales,
-                    name: 'Sales',
-                    // Enable data label
-                    dataLabelSettings: DataLabelSettings(isVisible: true))
-              ]),
-        ]));
-  }
-}
-
-class _SalesData {
-  _SalesData(this.year, this.sales);
-
-  final String year;
-  final double sales;
 }

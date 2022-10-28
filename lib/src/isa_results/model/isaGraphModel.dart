@@ -81,42 +81,42 @@ class Data {
 }
 
 class GRAPHSTATUS {
-  int? i88100Rgba512516;
-  int? i7688Rgba1221822356;
-  int? i6476Rgba25513606;
-  int? i5060Rgba21046116;
-  int? i4050Rgba10442356;
-  int? i3040Rgba251342386;
-  int? i030Rgba1811811816;
+  int? i88100;
+  int? i7688;
+  int? i6476;
+  int? i5060;
+  int? i4050;
+  int? i3040;
+  int? i030;
 
   GRAPHSTATUS(
-      {this.i88100Rgba512516,
-      this.i7688Rgba1221822356,
-      this.i6476Rgba25513606,
-      this.i5060Rgba21046116,
-      this.i4050Rgba10442356,
-      this.i3040Rgba251342386,
-      this.i030Rgba1811811816});
+      {this.i88100,
+        this.i7688,
+        this.i6476,
+        this.i5060,
+        this.i4050,
+        this.i3040,
+        this.i030});
 
   GRAPHSTATUS.fromJson(Map<String, dynamic> json) {
-    i88100Rgba512516 = json['88-100%||rgba(5, 125, 1, .6)'];
-    i7688Rgba1221822356 = json['76 -88%||rgba(122, 182, 235, 6)'];
-    i6476Rgba25513606 = json['64 -76%||rgba(255, 136, 0, .6) '];
-    i5060Rgba21046116 = json['50 -60%||rgba(210, 46, 11, .6) '];
-    i4050Rgba10442356 = json['40 -50%|| rgba(104, 42, 35, .6)'];
-    i3040Rgba251342386 = json['30 -40%|| rgba(251, 34, 238, .6)'];
-    i030Rgba1811811816 = json['0  -30%|| rgba(181, 181, 181, .6)'];
+    i88100 = json['88-100%'];
+    i7688 = json['76 -88%'];
+    i6476 = json['64 -76%'];
+    i5060 = json['50 -60%'];
+    i4050 = json['40 -50%'];
+    i3040 = json['30 -40%'];
+    i030 = json['0  -30%'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['88-100%||rgba(5, 125, 1, .6)'] = this.i88100Rgba512516;
-    data['76 -88%||rgba(122, 182, 235, 6)'] = this.i7688Rgba1221822356;
-    data['64 -76%||rgba(255, 136, 0, .6) '] = this.i6476Rgba25513606;
-    data['50 -60%||rgba(210, 46, 11, .6) '] = this.i5060Rgba21046116;
-    data['40 -50%|| rgba(104, 42, 35, .6)'] = this.i4050Rgba10442356;
-    data['30 -40%|| rgba(251, 34, 238, .6)'] = this.i3040Rgba251342386;
-    data['0  -30%|| rgba(181, 181, 181, .6)'] = this.i030Rgba1811811816;
+    data['88-100%'] = this.i88100;
+    data['76 -88%'] = this.i7688;
+    data['64 -76%'] = this.i6476;
+    data['50 -60%'] = this.i5060;
+    data['40 -50%'] = this.i4050;
+    data['30 -40%'] = this.i3040;
+    data['0  -30%'] = this.i030;
     return data;
   }
 }
