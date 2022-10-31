@@ -50,6 +50,7 @@ class _SessionEffectState extends State<SessionEffect> {
     //selectedRadio;
     // selectValue;
     dates();
+    days();
 
   }
 
@@ -66,6 +67,7 @@ class _SessionEffectState extends State<SessionEffect> {
 var subject;
 var subjectCode;
 var sessionTime;
+var todayDays;
 
   setSelectedRadio(int val) {
     setState(() {
@@ -102,7 +104,20 @@ var sessionTime;
     });
   }
 
+
+   days(){
+     todayDays=DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?1:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?2:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="wednesday"?3:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="thursday"?4:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="friday"?5:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="saturday"?6:
+    DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?7:0;
+
+  }
+
   List<String> time=[];
+
 
 
 
@@ -126,6 +141,7 @@ var sessionTime;
                  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 5,),
                         Text(
                           '$todayDate',
                           style: TextStyle(
@@ -140,12 +156,15 @@ var sessionTime;
                           child: DropdownButtonFormField<String>(
                               decoration: InputDecoration.collapsed(hintText: ''),
 
-                              hint: Text(""),
+                              hint: Padding(
+                                padding: const EdgeInsets.only(left: 10,top: 5),
+                                child: Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??""),
+                              ),
                               value:subject,
                               items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
                                 value: item.subjectName,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 7,left: 5),
+                                  padding: const EdgeInsets.only(top: 7,left: 10),
                                   child: Text(item.subjectName.toString(),),
                                 ),
                               ))
@@ -154,13 +173,14 @@ var sessionTime;
                                 print("Oye");
                                 setState(() {
                                   subject=item;
-                               for(var dataVal in data!.sessionEffectivenessModel!.timetableList!){
-                                    if(dataVal.day==1 &&dataVal.subjectName==item){
+                               for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
+                                    if(dataVal.day==todayDays &&dataVal.subjectName==item){
 
                                       return time.add(dataVal.startTiming.toString());
 
                                     }
-                                  }
+
+                               }
                                   //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
                                   //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
                                   //     print("subject>>${itemValueTera.subjectName}");
@@ -196,11 +216,18 @@ var sessionTime;
                                       subjectCode=subjectData;
                                       }
                                     }
+                                  time.clear();
+
 
                                 });
                                 print("Hoye");
+                                print("sesso${sessionTime}");
+                                print("tii${time}");
 
-                              }),
+                              },
+                            icon: Icon(Icons.keyboard_arrow_down),
+                            iconSize: 15,
+                              ),
                         ),
 
                         SizedBox(
@@ -209,22 +236,28 @@ var sessionTime;
 
 
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            subjectCode !=null?
                             Text(
                           "${subjectCode}",
 
-                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),),
+                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectCode??""),
                             SizedBox(
                               width: 5,
                             ),
                             Container(
-                              width: MediaQuery.of(context).size.width/1.4,
-                              child: Text(
+                              width: MediaQuery.of(context).size.width/1.5,
+                              child:
+                                  subject !=null?
+                              Text(
                                 "${subject}" ,style: TextStyle(
-                                fontSize: 15,fontWeight: FontWeight.w600,color: Colors.black
+                                fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
                               ),
                                 maxLines: 2,
-                              ),
+                              ):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??"",style:TextStyle(
+                                      fontSize: 15,fontWeight: FontWeight.w400,color: Colors.black
+                                  ) ,),
                             ),
                           ],
                         ),
@@ -236,33 +269,41 @@ var sessionTime;
                             fontWeight: FontWeight.w700,fontSize: 15,
                         ),),
                         SizedBox(height: 10,),
-                        DropdownButtonFormField<String>(
-                            decoration: InputDecoration.collapsed(hintText: ''),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)
+                          ),
+                          height: 34,
+                          child: DropdownButtonFormField<String>(
+                              decoration: InputDecoration.collapsed(hintText: ''),
 
-                            hint: Padding(
-                              padding: const EdgeInsets.only(top: 5, left: 5),
-                              child: Text(data.sessionEffectivenessModel?.timetableList?[0]
-                                  .startTiming ?? ""),
-                            ),
-                            value: sessionTime,
-                            items:
-                          time.map((e) =>       DropdownMenuItem<String>(
-                            value: e,
-                            child:
-                            Text(
-                                e
-                            ),
-                          )
-                            ,).toList(),
-                            onChanged: (item) {
+                              hint: Padding(
+                                padding: const EdgeInsets.only(top: 5, left: 10),
+                                child:
+                                data.sessionEffectivenessModel?.timetableList?[0]
+                                    .startTiming !=null?
+                                Text(data.sessionEffectivenessModel?.timetableList?[0]
+                                    .startTiming ?? ""):Text(""),
+                              ),
+                              value: sessionTime,
+                              items:
+                            time.map((droptime) => DropdownMenuItem<String>(
+                              value: droptime,
+                              child:
+                                  droptime.isNotEmpty?
+                              Text(
+                                  droptime
+                              ):Text(""),
+                            )
+                              ,).toList(),
+                              onChanged: (item) {
 
-                            }),
-
-
-
-
-
-                        data.sessionEffectivenessModel!.timetableList!=null?
+                              }
+                              ,icon: Icon(Icons.keyboard_arrow_down),
+                            iconSize: 15,
+                              ),
+                        ),
+                        data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -541,10 +582,6 @@ var sessionTime;
                            fontSize: 14,color: Colors.red
                          ),),
                        ),
-
-
-
-
                       ],
                     )
 
