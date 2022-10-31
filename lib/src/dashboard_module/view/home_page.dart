@@ -45,6 +45,8 @@ class _HomePageState extends State<HomePage> {
    int? myLength;
    int? count;
    int ?length;
+   var _currentIndex;
+ var  hideIconColor= Color(0xff337ab7);
 
   //DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
   // DateFormat('dd-MM-yyyy HH:MM').format(DateTime.now());
@@ -137,168 +139,339 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child:
                               sp_token !=null?  getDrawerDetails(context: context):Text("")),
+                                value.announcementMarque !=null?
+                                Container(
+                                    margin: EdgeInsets.only(top: 5),
 
-                                value.announcementMarque !=null?        Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 60,
+                                    child:
 
-                                      height: MediaQuery.of(context).size.height / 9,
-                                      color: Colors.white,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 7,top: 4),
-                                            child: Text(
-                                              "${"Marque Announcement"}  (${currentIndexMarque ??""}/${value.announcementMarque?.length ?? ""})",
-                                              style: TextStyle(
-                                                  color: Color(0xfffd981b),
-                                                  fontSize: 14,
-                                                  fontFamily: 'Open Sans',
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                          ),
-                                      Container(
-                                          margin: EdgeInsets.only(top: 5),
+                                    CarouselSlider.builder(
+                                      options: CarouselOptions(
+                                        enableInfiniteScroll: true,
+                                        reverse: false,
+                                        autoPlay: true,
+                                        autoPlayAnimationDuration: Duration(milliseconds: 8000),
+                                        autoPlayCurve: Curves.decelerate,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            _currentIndex = index; //<-- Page index
+                                          });
+                                        },
+                                      ),
+                                      itemBuilder: (BuildContext context, int index,_){
+                                        String? base64Image = (value
+                                            .announcementMarque![index]
+                                            .pictureIconPath);
+                                        final UriData? mydata =
+                                            Uri.parse(base64Image.toString())
+                                                .data;
+                                        Uint8List? myImage =
+                                        mydata?.contentAsBytes();
 
-                                          width: MediaQuery.of(context).size.width,
-                                          height: 60,
-                                          child:
+                                        var hide = Announcement(
+                                            announcementId: value
+                                                .announcementMarque?[
+                                            index]
+                                                .announcementId);
+                                        print("printkaro${_currentIndex}");
+                                        return
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                _currentIndex==hide?hideIconColor=Colors.white:hideIconColor;
+                                              });
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChangeNotifierProvider(
+                                                          create: (BuildContext
+                                                          context) =>
+                                                              AnnouncementViewModel(),
+                                                          child: Announcement(
+                                                              announcementId: value
+                                                                  .announcementMarque?[
+                                                              index]
+                                                                  .announcementId)))
+                                              );
+                                            },
+                                            child: Container(
 
-                                          Swiper(
-                                            autoplay: true,
-                                              onIndexChanged: (int index) {
-                                                setState(() {
-                                                  currentIndexMarque = index+1;
-
-                                                });
-                                              },
-                                            itemBuilder: (BuildContext context, int index){
-                                     //         print("latika jain  ${value.announcementMarque?.length}");
-                                              String? base64Image = (value
-                                                  .announcementMarque![index]
-                                                  .pictureIconPath);
-                                              final UriData? mydata =
-                                                  Uri.parse(base64Image.toString())
-                                                      .data;
-                                              Uint8List? myImage =
-                                              mydata?.contentAsBytes();
-                                              return
-                                                Container(
-
-                                                  width:MediaQuery.of(context).size.width,
-                                                  color: Colors.white,
-                                                  child: Row(
-                                                    children: [
-                                                      myImage != null && (value
-                                                          .announcementMarque![index]
-                                                          .pictureIconPath)!.isNotEmpty
-                                                          ?
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                          left: 7,
-                                                        ),
-                                                        width: 50,
-                                                        height: 50,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius:
-                                                          BorderRadius.circular(
-                                                              0),
+                                              width:MediaQuery.of(context).size.width,
+                                              color: Colors.white,
+                                              child: Row(
+                                                children: [
+                                                  myImage != null
+                                                      ?
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                      left: 7,
+                                                    ),
+                                                    width: 50,
+                                                    height: 50,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          0),
+                                                      image:
+                                                      new DecorationImage(
+                                                          fit: BoxFit.fill,
                                                           image:
-                                                          new DecorationImage(
-                                                              fit: BoxFit.fill,
-                                                              image:
-                                                              MemoryImage(
-                                                                  myImage,
-                                                                  scale:
-                                                                  0.5)),
-                                                        ),
-                                                      ):Text(""),
+                                                          MemoryImage(
+                                                              myImage,
+                                                              scale:
+                                                              0.5)),
+                                                    ),
+                                                  ):Text(""),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+
+                                                  Column(
+                                                    children: [
                                                       SizedBox(
-                                                        width: 10,
+                                                        height: 10,
                                                       ),
-
-                                                      Column(
+                                                      Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: [
-                                                              Container(
-                                                                //color: Colors.blue,
-                                                                width: MediaQuery.of(context).size.width/1.7,
-                                                                child:   Text(
-                                                                  value
-                                                                      .announcementMarque?[
-                                                                  index] .announcementName.toString()??
-                                                                      'No Name',
-                                                                  style: TextStyle(
-                                                                      color: Color(
-                                                                          0xff337ab7),
-                                                                      fontSize: 14,
-                                                                      fontFamily:
-                                                                      'Open Sans',
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .normal),
-                                                                  maxLines: 2,
-                                                                ),
+                                                          Container(
+                                                            //color: Colors.blue,
+                                                            width: MediaQuery.of(context).size.width/1.7,
+                                                            child:   Text(
+                                                              value
+                                                                  .announcementMarque?[
+                                                              index]
+                                                                  .announcementName ??
+                                                                  'No Name',
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xff337ab7),
+                                                                  fontSize: 14,
+                                                                  fontFamily:
+                                                                  'Open Sans',
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .normal),
+                                                              maxLines: 2,
+                                                            ),
 
-                                                              ),
-                                                              SizedBox(width: 5,),
-                                                              Icon(Icons.circle,
-                                                                  color:
-                                                                  Color(0xff337ab7),
-                                                                  size: 10),
-
-                                                            ],
                                                           ),
-                                                          SizedBox(
-                                                            height: 5,
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              Container(
-                                                                // color: Colors.blue,
-                                                                width: MediaQuery.of(context).size.width/1.7,
-                                                                child:   Text(
-                                                                  "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementMarque?[index].startdate}"))} ",
-                                                                  style: TextStyle(
-                                                                      color: Color(
-                                                                          0xff333333),
-                                                                      fontSize: 14,
-                                                                      fontFamily:
-                                                                      'Open Sans',
-                                                                      fontWeight:
-                                                                      FontWeight
-                                                                          .normal),
-                                                                  maxLines: 2,
-                                                                ),
+                                                          SizedBox(width: 5,),
 
-                                                              ),
-                                                              SizedBox(width: 5,),
-                                                              Icon(Icons.arrow_forward_ios_rounded,
-                                                                  color:
-                                                                  Color(0xff337ab7),
-                                                                  size: 10),
 
-                                                            ],
+                                                          Icon(Icons.circle,
+                                                              color:
+                                                              hideIconColor,
+                                                              size: 10),
+
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            // color: Colors.blue,
+                                                            width: MediaQuery.of(context).size.width/1.7,
+                                                            child:   Text(
+                                                              "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementMarque?[index].startdate}"))} ",
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xff333333),
+                                                                  fontSize: 14,
+                                                                  fontFamily:
+                                                                  'Open Sans',
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .normal),
+                                                              maxLines: 2,
+                                                            ),
+
                                                           ),
+                                                          SizedBox(width: 5,),
+                                                          Icon(Icons.arrow_forward_ios_rounded,
+                                                              color:
+                                                              Color(0xff337ab7),
+                                                              size: 10),
+
                                                         ],
                                                       ),
                                                     ],
                                                   ),
-                                                );
-                                            },
-                                            itemCount: value.announcementMarque?.length ??0,
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                      }, itemCount: value.announcementMarque!.length,
 
-                                          )
-                                      ),
-                                    ],
-                                  ),
-                                ):Container(
-                                  child:Text("")
-                                ),
+                                    )
+                                ):Container(),
+
+                                // value.announcementMarque !=null?
+                                // Container(
+                                //
+                                //       height: MediaQuery.of(context).size.height / 9,
+                                //       color: Colors.white,
+                                //       child: Column(
+                                //         crossAxisAlignment: CrossAxisAlignment.start,
+                                //         children: [
+                                //           Padding(
+                                //             padding: const EdgeInsets.only(left: 7,top: 4),
+                                //             child: Text(
+                                //               "${"Marque Announcement"}  (${currentIndexMarque ??""}/${value.announcementMarque?.length ?? ""})",
+                                //               style: TextStyle(
+                                //                   color: Color(0xfffd981b),
+                                //                   fontSize: 14,
+                                //                   fontFamily: 'Open Sans',
+                                //                   fontWeight: FontWeight.w600),
+                                //             ),
+                                //           ),
+                                //       Container(
+                                //           margin: EdgeInsets.only(top: 5),
+                                //
+                                //           width: MediaQuery.of(context).size.width,
+                                //           height: 60,
+                                //           child:
+                                //
+                                //           Swiper(
+                                //             autoplay: true,
+                                //               onIndexChanged: (int index) {
+                                //                 setState(() {
+                                //                   currentIndexMarque = index+1;
+                                //
+                                //                 });
+                                //               },
+                                //             itemBuilder: (BuildContext context, int index){
+                                //      //         print("latika jain  ${value.announcementMarque?.length}");
+                                //               String? base64Image = (value
+                                //                   .announcementMarque![index]
+                                //                   .pictureIconPath);
+                                //               final UriData? mydata =
+                                //                   Uri.parse(base64Image.toString())
+                                //                       .data;
+                                //               Uint8List? myImage =
+                                //               mydata?.contentAsBytes();
+                                //               return
+                                //                 Container(
+                                //
+                                //                   width:MediaQuery.of(context).size.width,
+                                //                   color: Colors.white,
+                                //                   child: Row(
+                                //                     children: [
+                                //                       myImage != null && (value
+                                //                           .announcementMarque![index]
+                                //                           .pictureIconPath)!.isNotEmpty
+                                //                           ?
+                                //                       Container(
+                                //                         margin: EdgeInsets.only(
+                                //                           left: 7,
+                                //                         ),
+                                //                         width: 50,
+                                //                         height: 50,
+                                //                         decoration: BoxDecoration(
+                                //                           borderRadius:
+                                //                           BorderRadius.circular(
+                                //                               0),
+                                //                           image:
+                                //                           new DecorationImage(
+                                //                               fit: BoxFit.fill,
+                                //                               image:
+                                //                               MemoryImage(
+                                //                                   myImage,
+                                //                                   scale:
+                                //                                   0.5)),
+                                //                         ),
+                                //                       ):Text(""),
+                                //                       SizedBox(
+                                //                         width: 10,
+                                //                       ),
+                                //
+                                //                       Column(
+                                //                         children: [
+                                //                           SizedBox(
+                                //                             height: 10,
+                                //                           ),
+                                //                           Row(
+                                //                             crossAxisAlignment: CrossAxisAlignment.start,
+                                //                             children: [
+                                //                               Container(
+                                //                                 //color: Colors.blue,
+                                //                                 width: MediaQuery.of(context).size.width/1.7,
+                                //                                 child:   Text(
+                                //                                   value
+                                //                                       .announcementMarque?[
+                                //                                   index] .announcementName.toString()??
+                                //                                       'No Name',
+                                //                                   style: TextStyle(
+                                //                                       color: Color(
+                                //                                           0xff337ab7),
+                                //                                       fontSize: 14,
+                                //                                       fontFamily:
+                                //                                       'Open Sans',
+                                //                                       fontWeight:
+                                //                                       FontWeight
+                                //                                           .normal),
+                                //                                   maxLines: 2,
+                                //                                 ),
+                                //
+                                //                               ),
+                                //                               SizedBox(width: 5,),
+                                //                               Icon(Icons.circle,
+                                //                                   color:
+                                //                                   Color(0xff337ab7),
+                                //                                   size: 10),
+                                //
+                                //                             ],
+                                //                           ),
+                                //                           SizedBox(
+                                //                             height: 5,
+                                //                           ),
+                                //                           Row(
+                                //                             children: [
+                                //                               Container(
+                                //                                 // color: Colors.blue,
+                                //                                 width: MediaQuery.of(context).size.width/1.7,
+                                //                                 child:   Text(
+                                //                                   "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementMarque?[index].startdate}"))} ",
+                                //                                   style: TextStyle(
+                                //                                       color: Color(
+                                //                                           0xff333333),
+                                //                                       fontSize: 14,
+                                //                                       fontFamily:
+                                //                                       'Open Sans',
+                                //                                       fontWeight:
+                                //                                       FontWeight
+                                //                                           .normal),
+                                //                                   maxLines: 2,
+                                //                                 ),
+                                //
+                                //                               ),
+                                //                               SizedBox(width: 5,),
+                                //
+                                //                               Icon(Icons.arrow_forward_ios_rounded,
+                                //                                   color:
+                                //                                   Color(0xff337ab7),
+                                //                                   size: 10),
+                                //
+                                //                             ],
+                                //                           ),
+                                //                         ],
+                                //                       ),
+                                //                     ],
+                                //                   ),
+                                //                 );
+                                //             },
+                                //             itemCount: value.announcementMarque?.length ??0,
+                                //
+                                //           )
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ):Container(
+                                //   child:Text("")
+                                // ),
 
 
 
