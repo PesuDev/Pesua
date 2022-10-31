@@ -282,7 +282,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                         0xff9B9B9B))),
                                                             TextSpan(
                                                                 text:
-                                                                    '-',
+                                                                    ' - ',
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                     FontWeight

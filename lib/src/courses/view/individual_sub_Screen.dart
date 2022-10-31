@@ -296,8 +296,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                         // initiallyExpanded: i == selected,
                         leading: Icon(
                           _customTileExpanded
-                              ? Icons.arrow_drop_down_circle
-                              : Icons.arrow_drop_down,
+                              ? Icons.remove_circle_rounded
+                              : Icons.add_circle_rounded,
+                          color: Colors.blue,
                         ),
                         // tilePadding: EdgeInsets.zero,
                         children: <Widget>[
