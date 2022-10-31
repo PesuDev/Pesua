@@ -592,6 +592,7 @@ class _HomePageState extends State<HomePage> {
                               height: _mainHeight * 0.27,
 
                               child: Swiper(
+
                                 itemBuilder: (BuildContext context, int index) {
                                   // List<AnnouncementModel> name=((value.announcementModel?[index].announcementType==2)?value.announcementModel![index].batchClassId:"hh");
                                   // print("bababa$name");
@@ -673,8 +674,10 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   );
                                 },
-                                autoplay: true,
+                    autoplay: value.announcementBannerDashModel!.length>1? true:false,
+                             loop: value.announcementBannerDashModel!.length>1? true:false,
                                 itemCount: value.announcementBannerDashModel!.length,
+
                                 //  itemCount: imageList.length,
                               ),
                             ),
