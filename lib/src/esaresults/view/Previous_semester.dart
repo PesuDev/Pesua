@@ -195,9 +195,9 @@ var graphType=0;
                           // mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                     graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
+          data.esaGraphModeData !=null?           graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
                             graphUiForSgpa(data.esaGraphModeData):graphUi(data.esaGraphModeData)
-                            ,
+                        :CircularProgressIndicator()    ,
                             // SfCartesianChart(
                             //
                             //     primaryXAxis: CategoryAxis(),
