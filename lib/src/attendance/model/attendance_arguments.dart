@@ -14,7 +14,7 @@ DetailedArguments({this.fetchId,this.batchClassId,this.iSAMarksMasterId,this.cla
 }
 class CourseArgument{
 
-  String? subjectCode;
+  int? subjectCode;
   String? subjectName;
   int? ccId;
   CourseArgument({this.ccId,this.subjectName,this.subjectCode});

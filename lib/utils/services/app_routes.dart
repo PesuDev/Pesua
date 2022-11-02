@@ -179,7 +179,7 @@ data(RouteSettings settings) {
           builder: (_) => ChangeNotifierProvider(
                 create: (_) => CourseViewModel(),
                 child: IndividualSubScreen(
-                  subjectCode : args.subjectCode.toString(),
+                  subjectCode : args.subjectCode,
                     subjectName:args.subjectName.toString(),
                     ccId:args.ccId??0,
                 ),

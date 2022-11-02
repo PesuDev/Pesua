@@ -18,6 +18,8 @@ class CourseViewModel extends ChangeNotifier {
   CourseModel? courseModel;
   List<STUDENTSUBJECTS>? studentSubjects;
   SubjectModel? subjectModel;
+  int subjectModelLength=-1;
+  int contentModelLength=-1;
   List<COURSECONTENT>? courseContent;
 
   List<UnitModel>? unitModel;
@@ -126,7 +128,8 @@ class CourseViewModel extends ChangeNotifier {
         subjectName: subjectName,
         randomNum: randomNum);
     subjectModel = data;
-
+print(subjectModel);
+subjectModelLength=data?.cOURSECONTENT?.length ?? 0;
     notifyListeners();
   }
 
@@ -143,7 +146,7 @@ class CourseViewModel extends ChangeNotifier {
         ccId: ccId,
         randomNum: randomNum);
     unitModel = data;
-
+contentModelLength=data?.length ?? 0;
     notifyListeners();
   }
 }

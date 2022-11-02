@@ -248,7 +248,10 @@ my()async{
                                                                               () {
                                                                             Navigator.pushNamed(
                                                                                 context,
-                                                                                AppRoutes.individualSub,arguments: CourseArgument(subjectCode: data.courseModel?.sTUDENTSUBJECTS?[index].subjectCode,ccId: 0,subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
+                                                                                AppRoutes.individualSub,arguments: CourseArgument(
+                                                                                subjectCode: data.courseModel?.sTUDENTSUBJECTS?[index].subjectId,
+
+                                                                                ccId: 0,subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
                                                                           },
                                                                           child:
                                                                               Padding(
