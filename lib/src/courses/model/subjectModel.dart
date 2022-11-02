@@ -34,12 +34,12 @@ class COURSECONTENT {
   int? courseContentOrder;
   Null? data1;
   Null? data2;
-  Null? createdBy;
-  Null? createdDate;
-  Null? modifiedby;
-  Null? modifiedDate;
+  String? createdBy;
+  int? createdDate;
+  String? modifiedby;
+  int? modifiedDate;
   int? status;
-  Null? subjectCode;
+  var subjectCode;
   Null? subjectName;
 
   COURSECONTENT(
