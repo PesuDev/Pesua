@@ -64,9 +64,11 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                 model.subjectModel?.cOURSECONTENT?.length != 0)
             ? Scaffold(
                 appBar: AppBar(
+                  titleSpacing: 0,
                   leading: BackButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.Dashboard);
+                      Navigator.pop(context);
+                      // Navigator.pushReplacementNamed(context, AppRoutes.courseDashboard);
                     },
                   ),
                   title: Text("${widget.subjectName}"),
