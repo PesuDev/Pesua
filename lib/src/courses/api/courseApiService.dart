@@ -87,6 +87,7 @@ class CourseApiService {
       'randomNum': randomNum
     });
     if (data != null) {
+      log("SubjectDetail $data");
       return SubjectModel.fromJson(data);
     }
     log("SubjectDetail $data");

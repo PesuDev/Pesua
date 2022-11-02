@@ -173,10 +173,16 @@ data(RouteSettings settings) {
                 child: CourseDashboard(isFromDashboard: false,),
               ));
     case AppRoutes.individualSub:
+      final args = settings.arguments as CourseArgument;
+
       return MaterialPageRoute(
           builder: (_) => ChangeNotifierProvider(
                 create: (_) => CourseViewModel(),
-                child: IndividualSubScreen(),
+                child: IndividualSubScreen(
+                  subjectCode : args.subjectCode,
+                    subjectName:args.subjectName.toString(),
+                    ccId:args.ccId??0,
+                ),
               ));
     case AppRoutes.individualUnit:
       final CourseArguments? args = settings.arguments as CourseArguments?;

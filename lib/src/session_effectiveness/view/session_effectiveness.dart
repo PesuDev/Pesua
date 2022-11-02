@@ -57,6 +57,7 @@ class _SessionEffectState extends State<SessionEffect> {
 
 
   int? selectedRadio;
+  int? timeRadio;
   var selectValue=false;
   var grid1=false;
   var grid2=false;
@@ -297,6 +298,7 @@ var todayDays;
                             )
                               ,).toList(),
                               onChanged: (item) {
+                                _timeBottomSheet();
 
                               }
                               ,icon: Icon(Icons.keyboard_arrow_down),
@@ -594,5 +596,56 @@ var todayDays;
     );
 
   }
+
+  void _timeBottomSheet() {
+
+    showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return
+            new Container(
+             // color: Colors.black,
+              child: ListView(
+                children: [
+                  ListTile(
+                    leading: Radio(
+
+                        value: 1,
+                        groupValue: timeRadio,
+                        onChanged: (int? val){
+                          timeRadio=val;
+                          setState(() {
+
+                          });
+                          print(timeRadio);
+                          // print(val);
+
+                        }),
+                    title: Text('Time',style: TextStyle(color: Colors.black),),
+                  ),
+                  ListTile(
+                    leading: Radio(
+                        value: 1,
+                        groupValue: timeRadio,
+                        onChanged: (int? val){
+                          timeRadio=val;
+                          setState(() {
+
+                          });
+                          print(timeRadio);
+                          // print(val);
+
+                        }),
+                    title: Text('Time',style: TextStyle(color: Colors.black),),
+                  ),
+                ],
+              ),
+            );
+        });
+
+
+
+  }
+
 }
 
