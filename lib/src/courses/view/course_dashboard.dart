@@ -245,6 +245,7 @@ my()async{
                                                                             InkWell(
                                                                           onTap:
                                                                               () {
+                                                                            Navigator.pop(context);
                                                                             Navigator.pushNamed(
                                                                                 context,
                                                                                 AppRoutes.individualSub);

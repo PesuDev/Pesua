@@ -147,7 +147,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                 appBar: AppBar(
                   leading: BackButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.Dashboard);
+                      Navigator.pop(context);
+                      // Navigator.pushReplacementNamed(context, AppRoutes.courseDashboard);
                     },
                   ),
                   title: Text("Subject"),
