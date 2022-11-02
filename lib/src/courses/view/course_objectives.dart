@@ -55,7 +55,7 @@ class _CourseObjectivesState extends State<CourseObjectives> {
                   Container(
                     margin: EdgeInsets.only(left: 5),
                     height: 40,
-                    width: 26.0,
+                    width: 29.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
@@ -65,7 +65,7 @@ class _CourseObjectivesState extends State<CourseObjectives> {
                     ),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.78,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     padding: EdgeInsets.only(top: 5, right: 5),
                     child: HtmlWidget(
                       htmlCode,
