@@ -105,7 +105,7 @@ class _AnnouncementState extends State<Announcement> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
-                                        color: Color(0xff191D6E)),
+                                        color: Color(0xff0091cd)),
                                   ),
 
                                   myImage != null &&
@@ -192,12 +192,12 @@ class _AnnouncementState extends State<Announcement> {
 
                                   Text(
                                     value.announcementBannerModel?[index]
-                                        .createdDateFrSorting ?? ''
+                                        .createdDateFrSorting!.substring(0,11) ?? ''
                                     ,
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 14,
-                                        color: Color(0xff191D6E)),
+                                        color: Colors.grey),
                                   ),
                                   Divider(
                                     color: Colors.black,

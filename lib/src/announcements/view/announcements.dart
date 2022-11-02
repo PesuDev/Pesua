@@ -140,15 +140,15 @@ class _AnnouncementsState extends State<Announcements> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
+                                                    "Date: ${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
                                                     style: TextStyle(
                                                         color: Colors.grey,fontSize: 14),
                                                   ),
-                                                  Text(
-                                                    "to ${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].endDate}"))}",
-                                                    style: TextStyle(
-                                                        color: Colors.grey,fontSize: 14),
-                                                  ),
+                                                  // Text(
+                                                  //   "to ${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].endDate}"))}",
+                                                  //   style: TextStyle(
+                                                  //       color: Colors.grey,fontSize: 14),
+                                                  // ),
                                                 ],
                                               ),
                                               Divider(

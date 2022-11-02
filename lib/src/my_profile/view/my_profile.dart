@@ -6,6 +6,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:pesu/src/my_profile/model/update_detail_model.dart';
 import 'package:pesu/src/my_profile/model/update_password_model.dart';
 import 'package:pesu/src/my_profile/profile_viewmodel/profile_viewmodel.dart';
@@ -350,7 +351,9 @@ class _MyProfileState extends State<MyProfile> {
                               }
                             },
                             keyboardType: TextInputType.number,
-                            maxLength: 10,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],                            maxLength: 10,
                             autofocus: true,
                             controller: phoneController,
                             decoration: new InputDecoration(
