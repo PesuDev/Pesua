@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 class CustomWidgets{
   static void showLoaderDialog({required BuildContext context, required String message}) {
     AlertDialog alert = AlertDialog(
@@ -69,4 +70,13 @@ class CustomWidgets{
     fontSize: 14.0,
     fontFamily: 'Horizon',
   );
+
+  static void libraryUrl(){
+       launch("http://library.pes.edu");
+
+   }
+   static void webUrl(){
+       launch("https://www.pesuacademy.com/Academy/");
+
+   }
 }

@@ -198,7 +198,8 @@ Navigator.pop(context);
 
                     //Announcements
                   } else if (index == 15) {
-                    launch("http://library.pes.edu");
+                   // launch("http://library.pes.edu");
+                    CustomWidgets.libraryUrl();
                     final bottomProvider =
                     Provider.of<BottomNavigationProvider>(context,
                         listen: false);

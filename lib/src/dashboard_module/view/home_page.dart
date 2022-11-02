@@ -169,19 +169,11 @@ class _HomePageState extends State<HomePage> {
                                                 .data;
                                         Uint8List? myImage =
                                         mydata?.contentAsBytes();
-
-                                        var hide = Announcement(
-                                            announcementId: value
-                                                .announcementMarque?[
-                                            index]
-                                                .announcementId);
-                                        print("printkaro${_currentIndex}");
+                                       // print("printkaro${_currentIndex}");
                                         return
                                           GestureDetector(
                                             onTap: () {
-                                              setState(() {
-                                                _currentIndex==hide?hideIconColor=Colors.white:hideIconColor;
-                                              });
+
                                               Navigator.of(context).push(MaterialPageRoute(
                                                   builder: (context) =>
                                                       ChangeNotifierProvider(
@@ -258,7 +250,6 @@ class _HomePageState extends State<HomePage> {
 
                                                           ),
                                                           SizedBox(width: 5,),
-
 
                                                           Icon(Icons.circle,
                                                               color:
