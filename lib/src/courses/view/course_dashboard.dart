@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/courses/view/individual_sub_Screen.dart';
 
 import 'package:pesu/src/courses/viewModel/courseViewModel.dart';
@@ -247,7 +248,7 @@ my()async{
                                                                               () {
                                                                             Navigator.pushNamed(
                                                                                 context,
-                                                                                AppRoutes.individualSub);
+                                                                                AppRoutes.individualSub,arguments: CourseArgument(subjectCode: data.courseModel?.sTUDENTSUBJECTS?[index].subjectCode,ccId: 0,subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
                                                                           },
                                                                           child:
                                                                               Padding(

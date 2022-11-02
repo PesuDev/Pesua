@@ -17,6 +17,10 @@ import 'course_dashboard.dart';
 
 class IndividualSubScreen extends StatefulWidget {
   @override
+  String subjectCode;
+  String subjectName;
+   int? ccId;
+  IndividualSubScreen({required this.subjectName,required this.subjectCode, this.ccId});
   State<IndividualSubScreen> createState() => _IndividualSubScreenState();
 }
 
@@ -45,12 +49,12 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         subjectName: "Electromagnetic Field & Transmission Lines",
         randomNum: 0.9969186291364449);
     _unitViewModel = Provider.of<CourseViewModel>(context, listen: false);
-    _unitViewModel.getUnitDetails(
-        action: 18,
-        mode: 14,
-        subjectId: 456,
-        ccId: 301,
-        randomNum: 0.23423121848145212);
+    // _unitViewModel.getUnitDetails(
+    //     action: 18,
+    //     mode: 14,
+    //     subjectId: 456,
+    //     ccId: 301,
+    //     randomNum: 0.23423121848145212);
   }
 
   Widget build(BuildContext context) {
