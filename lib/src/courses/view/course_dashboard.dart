@@ -254,8 +254,6 @@ my()async{
                                                                                     .courseModel
                                                                                     ?.sTUDENTSUBJECTS?[
                                                                                 index].subjectId,
-
-                                                                                ccId: 0,
                                                                                 subjectName:data
                                                                                     .courseModel
                                                                                     ?.sTUDENTSUBJECTS?[
