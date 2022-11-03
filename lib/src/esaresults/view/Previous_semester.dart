@@ -65,14 +65,6 @@ var graphType=0;
     );
   }
 
-  List<SalesData> data1 = [
-    SalesData('Jan', 400),
-    SalesData('FEB', 43),
-    SalesData('MAR', 134),
-    SalesData('APR', 314),
-    SalesData('MAY', 341),
-  ];
-
   String? selectedItem = "Sem-1";
   int? selectedBatch;
 
@@ -789,11 +781,4 @@ lineBarsData: [
       ),
     );
   }
-}
-
-class SalesData {
-  final String month;
-  final double sales;
-
-  SalesData(this.month, this.sales);
 }

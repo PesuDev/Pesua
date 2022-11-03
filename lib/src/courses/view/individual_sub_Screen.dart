@@ -31,7 +31,6 @@ class IndividualSubScreen extends StatefulWidget {
 class _IndividualSubScreenState extends State<IndividualSubScreen>
     with TickerProviderStateMixin {
   CourseViewModel _subjectViewModel = CourseViewModel();
-  CourseViewModel _unitViewModel = CourseViewModel();
   int? selected;
   int? tabValue;
   late final _tabController =
@@ -46,7 +45,6 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         subjectId: int.parse(widget.subjectCode.toString()),
         subjectName: widget.subjectName,
         randomNum: 0.9969186291364449);
-    _unitViewModel = Provider.of<CourseViewModel>(context, listen: false);
 
   }
 
@@ -56,15 +54,14 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
           ?.map((e) => e.courseContentTypeId)
           .toSet()
           .toList();
-      return
-
-          DefaultTabController(
+      return DefaultTabController(
         length: 4,
         child: (model.subjectModel?.cOURSECONTENT != null &&
                 model.subjectModel?.cOURSECONTENT?.length != 0)
             ? Scaffold(
                 appBar: AppBar(
                   titleSpacing: 0,
+                   backgroundColor: Colors.lightBlue,
                   leading: BackButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -75,6 +72,9 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   bottom: TabBar(
                     indicatorSize: TabBarIndicatorSize.label,
                     isScrollable: true,
+                    indicatorColor: Colors.orange,
+                    indicatorWeight: 6,
+
                     controller: _tabController,
                     tabs: /* model.subjectModel?.cOURSECONTENT
                   ?.map((e) => Tab(text:e.courseContentType))
@@ -87,17 +87,17 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               child: Text("Content"),
                             )
                           : Container(),
-                      (subjectCode!.contains(2))
+                      (subjectCode.contains(2))
                           ? Tab(
                               child: Text("Objectives"),
                             )
                           : Container(),
-                      (subjectCode!.contains(3))
+                      (subjectCode.contains(3))
                           ? Tab(
                               child: Text("Outcomes"),
                             )
                           : Container(),
-                      (subjectCode!.contains(5))
+                      (subjectCode.contains(5))
                           ? Tab(
                               child: Text("References"),
                             )
@@ -113,7 +113,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                 .toSet()
                 .toList();*/
                       [
-                    (subjectCode!.contains(1))
+                    (subjectCode.contains(1))
                         ? Container(
                             padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                             child: CourseContent(
@@ -122,7 +122,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               ccId: model.subjectModel?.cOURSECONTENT?[0].courseContentId,),
                           )
                         : Container(),
-                    (subjectCode!.contains(2))
+                    (subjectCode.contains(2))
                         ? Container(
                             padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                             child: CourseObjectives(subjectName: widget.subjectName,
@@ -131,7 +131,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                     )
 
                         : Container(),
-                    (subjectCode!.contains(3))
+                    (subjectCode.contains(3))
                         ? Container(
                             padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                             child: CourseOutComes(subjectName: widget.subjectName,
