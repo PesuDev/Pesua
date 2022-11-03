@@ -75,8 +75,8 @@ class CustomWidgets{
        launch("http://library.pes.edu");
 
    }
-   static void webUrl(){
-       launch("https://www.pesuacademy.com/Academy/");
+   static   webUrl(){
+     return  launch("https://www.pesuacademy.com/Academy/");
 
    }
 }

@@ -251,8 +251,7 @@ my()async{
                                                                                 context,
                                                                                 AppRoutes.individualSub,arguments: CourseArgument(
                                                                                 subjectCode: data.courseModel?.sTUDENTSUBJECTS?[index].subjectId,
-
-                                                                                ccId: 0,subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
+                                                                                subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
                                                                           },
                                                                           child:
                                                                               Padding(
