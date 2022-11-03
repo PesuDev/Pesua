@@ -230,7 +230,7 @@ my()async{
                                                                     return List
                                                                         .generate(
                                                                             1,
-                                                                            (index) {
+                                                                            (ind) {
                                                                       return PopupMenuItem(
                                                                         height: 20,
                                                                         padding: EdgeInsets.only(
@@ -250,8 +250,16 @@ my()async{
                                                                             Navigator.pushNamed(
                                                                                 context,
                                                                                 AppRoutes.individualSub,arguments: CourseArgument(
-                                                                                subjectCode: data.courseModel?.sTUDENTSUBJECTS?[index].subjectId,
-                                                                                subjectName: data.courseModel?.sTUDENTSUBJECTS?[index].subjectName));
+                                                                                subjectCode: data
+                                                                                    .courseModel
+                                                                                    ?.sTUDENTSUBJECTS?[
+                                                                                index].subjectId,
+
+                                                                                ccId: 0,
+                                                                                subjectName:data
+                                                                                    .courseModel
+                                                                                    ?.sTUDENTSUBJECTS?[
+                                                                                index].subjectName));
                                                                           },
                                                                           child:
                                                                               Padding(

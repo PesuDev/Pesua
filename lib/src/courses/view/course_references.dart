@@ -53,7 +53,7 @@ class _CourseReferencesState extends State<CourseReferences> {
                   Container(
                     margin: EdgeInsets.only(left: 5),
                     height: 40,
-                    width: 26.0,
+                    width: 29.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
@@ -64,7 +64,7 @@ class _CourseReferencesState extends State<CourseReferences> {
                   ),
                   Container(
                       width:
-                      MediaQuery.of(context).size.width * 0.6,
+                      MediaQuery.of(context).size.width * 0.8,
                       padding: EdgeInsets.only(left: 10, top: 5),
                       child: HtmlWidget(htmlCode)),
                 ],

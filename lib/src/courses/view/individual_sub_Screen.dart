@@ -64,6 +64,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                 model.subjectModel?.cOURSECONTENT?.length != 0)
             ? Scaffold(
                 appBar: AppBar(
+                  titleSpacing: 0,
                   leading: BackButton(
                     onPressed: () {
                       Navigator.pop(context);

@@ -195,9 +195,9 @@ var graphType=0;
                           // mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                     graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
+          data.esaGraphModeData !=null?           graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
                             graphUiForSgpa(data.esaGraphModeData):graphUi(data.esaGraphModeData)
-                            ,
+                        :CircularProgressIndicator()    ,
                             // SfCartesianChart(
                             //
                             //     primaryXAxis: CategoryAxis(),
@@ -326,7 +326,8 @@ var graphType=0;
                                           classesId = subjectData.classessId;
                                         }
                                       }
-                                    });
+                                    }
+                                    );
                                     print("batchId${batchId}");
                                     print("classesId${classesId}");
 
@@ -340,6 +341,9 @@ var graphType=0;
                                         isFinalised: 1,
                                         randomNum: 0.2195043762231128,
                                        );
+                                    _viewModel.getESADataForGraph(
+                                      randomNum: 0.9575638746600124,
+                                    );
                                     // log("SEMMMMM${selectedItem}");
                                     // log("MMMM${selectedBatch}");
                                   }),
@@ -640,46 +644,53 @@ var graphType=0;
 
   Widget graphUi( esaGraphModel? dataGraph){
     return Container(
+
       height: MediaQuery.of(context).size.height/2.5,
       child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+          child: LineChart(
 
-               LineChartData(
-                   titlesData: FlTitlesData(
-                       bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-                           axisNameWidget: Text("Semester")
-                       ),AxisTitles(axisNameSize: 14,
-                           axisNameWidget: Text("Semester")
-                       ),6) ,
-                       leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-                           axisNameWidget: Text("GPA")
-                       ),AxisTitles(axisNameSize: 14,
-                           axisNameWidget: Text("GPA")
-                       ),6)
-                   ),
+                 LineChartData(
+                     titlesData: FlTitlesData(
+                         topTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                             axisNameWidget: Padding(
+                               padding: const EdgeInsets.all(8.0),
+                               child: Text("Semester"),
+                             )
+                         ),AxisTitles(axisNameSize: 14,
+                             axisNameWidget: Text("Semester")
+                         ),6) ,
+                         rightTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                             axisNameWidget: Text("GPA")
+                         ),AxisTitles(axisNameSize: 14,
+                             axisNameWidget: Text("GPA")
+                         ),6)
+                     ),
 lineBarsData: [
   LineChartBarData(
     isCurved: false,
-             color: Colors.blueAccent,
+               color: Colors.blueAccent,
 
-             dotData: FlDotData(show: true),
-             spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
-                 double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+               dotData: FlDotData(show: true),
+               spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+                   double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
 
   ),
   LineChartBarData(
-             isCurved: false,
-             color: Colors.orange,
-             dotData: FlDotData(show: true),
-             spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+               isCurved: false,
+               color: Colors.orange,
+               dotData: FlDotData(show: true),
+               spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()), double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
 
   ),
 
 ]
+                 ),
+                 swapAnimationDuration: Duration(seconds: 1),
                ),
-               swapAnimationDuration: Duration(seconds: 1),
-             ),
+        ),
       ),
 
     );
@@ -690,38 +701,43 @@ lineBarsData: [
       height: MediaQuery.of(context).size.height/2.5,
       child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+          child: LineChart(
 
-             LineChartData(
-               backgroundColor: Colors.white.withOpacity(0.4),
-                 titlesData: FlTitlesData(
-                     bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-                         axisNameWidget: Text("hhh")
-                     ),AxisTitles(axisNameSize: 14,
-                         axisNameWidget: Text("Semester")
-                     ),6) ,
-                     leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-                         axisNameWidget: Text("")
-                     ),AxisTitles(axisNameSize: 14,
-                         axisNameWidget: Text("GPA")
-                     ),6)
-                 ),
-                 lineBarsData: [
-                   LineChartBarData(
-                       isCurved: false,
-                       color: Colors.blueAccent,
-                       dotData: FlDotData(show: true),
-                       spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+            LineChartData(
+                titlesData: FlTitlesData(
+                    topTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Semester"),
+                        )
+                    ),AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("Semester")
+                    ),6) ,
+                    rightTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("GPA")
+                    ),AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("GPA")
+                    ),6)
+                ),
+                   lineBarsData: [
+                     LineChartBarData(
+                         isCurved: false,
+                         color: Colors.blueAccent,
+                         dotData: FlDotData(show: true),
+                         spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
 
-                           double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
+                             double.parse(points.cGPA !=null ?points.cGPA.toString():"0"))).toList()
 
-                   ),
+                     ),
 
 
-                 ]
+                   ]
+               ),
+               swapAnimationDuration: Duration(seconds: 1),
              ),
-             swapAnimationDuration: Duration(seconds: 1),
-           ),
+        ),
       ),
 
     );
@@ -732,38 +748,44 @@ lineBarsData: [
       height: MediaQuery.of(context).size.height/2.5,
       child: Card(
         elevation: 3,
-        child: LineChart(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+          child: LineChart(
 
-                LineChartData(
-titlesData: FlTitlesData(
-  bottomTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-        axisNameWidget: Text("Semester")
-  ),AxisTitles(axisNameSize: 14,
-        axisNameWidget: Text("Semester")
-  ),6) ,
-  leftTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
-  axisNameWidget: Text("GPA")
-  ),AxisTitles(axisNameSize: 14,
-        axisNameWidget: Text("GPA")
-  ),6)
-),
-
-                    lineBarsData: [
-
-                      LineChartBarData(
-                          isCurved: false,
-                          color: Colors.orange,
-                          dotData: FlDotData(show: true),
-                          spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
-
-                              double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
-
-                      ),
-
-                    ]
+            LineChartData(
+                titlesData: FlTitlesData(
+                    topTitles:AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Semester"),
+                        )
+                    ),AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("Semester")
+                    ),6) ,
+                    rightTitles: AxisTitles.lerp(AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("GPA")
+                    ),AxisTitles(axisNameSize: 14,
+                        axisNameWidget: Text("GPA")
+                    ),6)
                 ),
-                swapAnimationDuration: Duration(seconds: 1),
-              ),
+
+                      lineBarsData: [
+
+                        LineChartBarData(
+                            isCurved: false,
+                            color: Colors.orange,
+                            dotData: FlDotData(show: true),
+                            spots: dataGraph!.studentSemester!.map((points)=>FlSpot(double.parse(points.classessId.toString()),
+
+                                double.parse(points.sGPA !=null ?points.sGPA.toString():"0"))).toList()
+
+                        ),
+
+                      ]
+                  ),
+                  swapAnimationDuration: Duration(seconds: 1),
+                ),
+        ),
       ),
     );
   }
