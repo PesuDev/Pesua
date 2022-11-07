@@ -168,205 +168,222 @@ my()async{
                                         return Column(
                                           children: [
                                             Container(
-                                              child: Card(
-                                                elevation: 5,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 10,),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Flexible(
-                                                        child:
-                                                        Container(
-                                                          margin: EdgeInsets.only(left: 5),
-                                                          height: 40,
-                                                          width: 40.0,
-                                                          decoration: BoxDecoration(
-                                                            image: DecorationImage(
-                                                                image: AssetImage(
-                                                                    'assets/images/m_course_.jpg'),
-                                                                fit: BoxFit.fill),
-                                                            // shape: BoxShape.circle,
+                                              child: InkWell(
+                                                onTap:
+                                                    () {
+                                                  // Navigator.pop(context);
+                                                  Navigator.pushNamed(
+                                                      context,
+                                                      AppRoutes.individualSub,arguments: CourseArgument(
+                                                      subjectCode: data
+                                                          .courseModel
+                                                          ?.sTUDENTSUBJECTS?[
+                                                      index].subjectId,
+                                                      subjectName:data
+                                                          .courseModel
+                                                          ?.sTUDENTSUBJECTS?[
+                                                      index].subjectName));
+                                                },
+                                                child: Card(
+                                                  elevation: 5,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 10,),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment.start,
+                                                      children: [
+                                                        Flexible(
+                                                          child:
+                                                          Container(
+                                                            margin: EdgeInsets.only(left: 5),
+                                                            height: 40,
+                                                            width: 40.0,
+                                                            decoration: BoxDecoration(
+                                                              image: DecorationImage(
+                                                                  image: AssetImage(
+                                                                      'assets/images/m_course_.jpg'),
+                                                                  fit: BoxFit.fill),
+                                                              // shape: BoxShape.circle,
+                                                            ),
                                                           ),
+                                                         // Image.asset("assets/images/m_course_.jpg",height: 40,width: 40,),
                                                         ),
-                                                       // Image.asset("assets/images/m_course_.jpg",height: 40,width: 40,),
-                                                      ),
-                                                      Container(
-                                                        padding: EdgeInsets.only(
-                                                            left: 10),
-                                                        width:
-                                                            MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                0.8,
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(data
-                                                                        .courseModel
-                                                                        ?.sTUDENTSUBJECTS?[
-                                                                            index]
-                                                                        .subjectCode ??
-                                                                    "",style: TextStyle(
-                                                                  fontWeight: FontWeight.w400,
-                                                                  fontSize: 14,
-                                                                  fontFamily: 'open-sans',
-                                                                  color: Color(0xff9B9B9B)
-                                                                )),
-                                                                PopupMenuButton(
-                                                                  child: Icon(Icons
-                                                                      .more_vert,color: Color(0xff9B9B9B),),
-                                                                  itemBuilder:
-                                                                      (context) {
-                                                                    return List
-                                                                        .generate(
-                                                                            1,
-                                                                            (ind) {
-                                                                      return PopupMenuItem(
-                                                                        height: 20,
-                                                                        padding: EdgeInsets.only(
-                                                                            top:
-                                                                                0,
-                                                                            bottom:
-                                                                                0,
-                                                                            right:
-                                                                                0,
-                                                                            left:
-                                                                                0),
-                                                                        child:
-                                                                            InkWell(
-                                                                          onTap:
-                                                                              () {
-                                                                            Navigator.pop(context);
-                                                                            Navigator.pushNamed(
-                                                                                context,
-                                                                                AppRoutes.individualSub,arguments: CourseArgument(
-                                                                                subjectCode: data
-                                                                                    .courseModel
-                                                                                    ?.sTUDENTSUBJECTS?[
-                                                                                index].subjectId,
-                                                                                subjectName:data
-                                                                                    .courseModel
-                                                                                    ?.sTUDENTSUBJECTS?[
-                                                                                index].subjectName));
-                                                                          },
+                                                        Container(
+                                                          padding: EdgeInsets.only(
+                                                              left: 10),
+                                                          width:
+                                                              MediaQuery.of(context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.8,
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(data
+                                                                          .courseModel
+                                                                          ?.sTUDENTSUBJECTS?[
+                                                                              index]
+                                                                          .subjectCode ??
+                                                                      "",style: TextStyle(
+                                                                    fontWeight: FontWeight.w400,
+                                                                    fontSize: 14,
+                                                                    fontFamily: 'open-sans',
+                                                                    color: Color(0xff9B9B9B)
+                                                                  )),
+                                                                  PopupMenuButton(
+                                                                    child: Icon(Icons
+                                                                        .more_vert,color: Color(0xff9B9B9B),),
+                                                                    itemBuilder:
+                                                                        (context) {
+                                                                      return List
+                                                                          .generate(
+                                                                              1,
+                                                                              (ind) {
+                                                                        return PopupMenuItem(
+                                                                          height: 20,
+                                                                          padding: EdgeInsets.only(
+                                                                              top:
+                                                                                  0,
+                                                                              bottom:
+                                                                                  0,
+                                                                              right:
+                                                                                  0,
+                                                                              left:
+                                                                                  0),
                                                                           child:
-                                                                              Padding(
-                                                                                padding: const EdgeInsets.only(left: 10),
-                                                                                child: Text(
-                                                                                'View Course Info',
-                                                                                    style: TextStyle(
-                                                                                        fontWeight: FontWeight.w400,
-                                                                                        fontSize: 12,
-                                                                                        fontFamily: 'open-sans',
-                                                                                        color: Color(0xff333333),
-                                                                                    )
-                                                                                    ,
-                                                                                  textAlign: TextAlign.center,
-                                                                            ),
+                                                                              InkWell(
+                                                                            onTap:
+                                                                                () {
+                                                                              Navigator.pop(context);
+                                                                              Navigator.pushNamed(
+                                                                                  context,
+                                                                                  AppRoutes.individualSub,arguments: CourseArgument(
+                                                                                  subjectCode: data
+                                                                                      .courseModel
+                                                                                      ?.sTUDENTSUBJECTS?[
+                                                                                  index].subjectId,
+                                                                                  subjectName:data
+                                                                                      .courseModel
+                                                                                      ?.sTUDENTSUBJECTS?[
+                                                                                  index].subjectName));
+                                                                            },
+                                                                            child:
+                                                                                Padding(
+                                                                                  padding: const EdgeInsets.only(left: 10),
+                                                                                  child: Text(
+                                                                                  'View Course Info',
+                                                                                      style: TextStyle(
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          fontSize: 12,
+                                                                                          fontFamily: 'open-sans',
+                                                                                          color: Color(0xff333333),
+                                                                                      )
+                                                                                      ,
+                                                                                    textAlign: TextAlign.center,
                                                                               ),
-                                                                        ),
-                                                                      );
-                                                                    });
-                                                                  },
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Container(
-                                                             // color: Colors.amber,
-                                                              width: MediaQuery.of(context).size.width/2,
-                                                              child: Text(
-                                                                  "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
-                                                                  fontWeight: FontWeight.w400,
-                                                                  fontSize: 14,
-                                                                  fontFamily: 'open-sans',
-                                                                  color: Color(0xff333333)
-                                                              ),
-                                                                maxLines: 2,
-                                                              ),
-                                                            ),
-                                                            Divider(
-                                                              color: Colors.grey,
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                RichText(
-                                                                  text: TextSpan(
-                                                                    children: <
-                                                                        TextSpan>[
-                                                                      TextSpan(
-                                                                          text:
-                                                                              'Type:',
-                                                                          style: TextStyle(
-                                                                              fontWeight: FontWeight.w400,
-                                                                              fontFamily: 'open-sans',
-                                                                              fontSize: 12,
-                                                                              color: Color(0xff9B9B9B)
-                                                                          )),
-                                                                      TextSpan(
-                                                                          text:
-                                                                              " ${data.courseModel?.sTUDENTSUBJECTS?[index].name}",
-                                                                          style: TextStyle(
-                                                                              fontWeight: FontWeight
-                                                                                  .w500,
-                                                                              fontSize:
-                                                                                  12,
-                                                                              color:
-                                                                                  Color(0xff333333))),
-                                                                    ],
+                                                                                ),
+                                                                          ),
+                                                                        );
+                                                                      });
+                                                                    },
                                                                   ),
+                                                                ],
+                                                              ),
+                                                              Container(
+                                                               // color: Colors.amber,
+                                                                width: MediaQuery.of(context).size.width/2,
+                                                                child: Text(
+                                                                    "${data.courseModel?.sTUDENTSUBJECTS?[index].subjectName ?? ""}",style: TextStyle(
+                                                                    fontWeight: FontWeight.w400,
+                                                                    fontSize: 14,
+                                                                    fontFamily: 'open-sans',
+                                                                    color: Color(0xff333333)
                                                                 ),
-                                                                Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              50),
-                                                                  child: RichText(
-                                                                    text:
-                                                                        TextSpan(
+                                                                  maxLines: 2,
+                                                                ),
+                                                              ),
+                                                              Divider(
+                                                                color: Colors.grey,
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  RichText(
+                                                                    text: TextSpan(
                                                                       children: <
                                                                           TextSpan>[
                                                                         TextSpan(
                                                                             text:
-                                                                                'Credits:',
+                                                                                'Type:',
                                                                             style: TextStyle(
                                                                                 fontWeight: FontWeight.w400,
-                                                                                fontSize: 12,
                                                                                 fontFamily: 'open-sans',
-                                                                                color: Color(0xff9B9B9B))),
+                                                                                fontSize: 12,
+                                                                                color: Color(0xff9B9B9B)
+                                                                            )),
                                                                         TextSpan(
                                                                             text:
-                                                                                ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits.toString().substring(0,1) ?? ""}',
+                                                                                " ${data.courseModel?.sTUDENTSUBJECTS?[index].name}",
                                                                             style: TextStyle(
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 12,
-                                                                                fontFamily: 'open-sans',
-                                                                                color: Color(0xff333333))),
+                                                                                fontWeight: FontWeight
+                                                                                    .w500,
+                                                                                fontSize:
+                                                                                    12,
+                                                                                color:
+                                                                                    Color(0xff333333))),
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                                .only(
+                                                                            right:
+                                                                                50),
+                                                                    child: RichText(
+                                                                      text:
+                                                                          TextSpan(
+                                                                        children: <
+                                                                            TextSpan>[
+                                                                          TextSpan(
+                                                                              text:
+                                                                                  'Credits:',
+                                                                              style: TextStyle(
+                                                                                  fontWeight: FontWeight.w400,
+                                                                                  fontSize: 12,
+                                                                                  fontFamily: 'open-sans',
+                                                                                  color: Color(0xff9B9B9B))),
+                                                                          TextSpan(
+                                                                              text:
+                                                                                  ' ${data.courseModel?.sTUDENTSUBJECTS?[index].credits.toString().substring(0,1) ?? ""}',
+                                                                              style: TextStyle(
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  fontSize: 12,
+                                                                                  fontFamily: 'open-sans',
+                                                                                  color: Color(0xff333333))),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
 
-                                                              ],
-                                                            ),
-                                                            SizedBox(height: 10,)
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ],
+                                                                ],
+                                                              ),
+                                                              SizedBox(height: 10,)
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),

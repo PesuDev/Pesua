@@ -64,7 +64,7 @@ List<ISAGraphFormatterModel>? isaGraphFormatterModel;
         mode: mode,
         batchClassId: int.parse(batchClassId.toString()),
         classBatchSectionId: int.parse(classBatchSectionId.toString()),
-        fetchId: fetchId,
+        fetchId:  "${batchClassId}-${classBatchSectionId}}",
         userId: userId.toString(),
         randomNum: randomNum);
     isaResultModel = data;
@@ -87,7 +87,7 @@ List<ISAGraphFormatterModel>? isaGraphFormatterModel;
         mode: mode,
         batchClassId: batchClassId,
         classBatchSectionId: classBatchSectionId,
-        fetchId: fetchId,
+        fetchId:  "${batchClassId}-${classBatchSectionId}}",
         userId: userId.toString(),
         randomNum: randomNum);
     isaResultModel = data;

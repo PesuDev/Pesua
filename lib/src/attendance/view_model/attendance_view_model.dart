@@ -31,10 +31,10 @@ attendanceListModel= data;
   }
 
 
-  void  getDetailedAttendanceModel(
-
+  void getDetailedAttendanceModel(
+  {required bool isDynamic,int? batchId, int? classBatchSectionId,int? subId}
       ) async {
-    final data = await _apiService.subjectAttendance();
+    final data = await _apiService.subjectAttendance(isDynamic: isDynamic,batchId: batchId,classBatchSectionIdnew: classBatchSectionId,subId:subId);
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
    detailedAttendanceModel= data;
    log(">>>>>>>>>>${detailedAttendanceModel?.toList()}");

@@ -10,7 +10,8 @@ class DetailedAttendance extends StatefulWidget {
   String? subjectName;
   String? percentage;
   String? attendance;
-  DetailedAttendance({this.subjectCode,this.subjectName,this.attendance,this.percentage});
+  int? subjectId;
+  DetailedAttendance({this.subjectCode,this.subjectName,this.attendance,this.percentage,this.subjectId});
   @override
   _DetailedAttendanceState createState() => _DetailedAttendanceState();
 }
@@ -23,12 +24,14 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
     _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
     // _viewModel.getAttendanceDropDown(
     // );
-    _viewModel.getDetailedAttendanceModel();
+    _viewModel.getDetailedAttendanceModel(isDynamic: false);
+
+    // _viewModel.getDetailedAttendanceModel(isDynamic: true,batchId: batchClassId,classbatchsectionId: classBatchSectionId);
   }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: sideNavAppBar("Attendance Report"),
-      body: Consumer<AttendanceViewModel>(builder: (context,value,child) {
+         body: Consumer<AttendanceViewModel>(builder: (context,value,child) {
         return value.detailedAttendanceModel != null && value.detailedAttendanceModel?.length != 0 ?
         SingleChildScrollView(
           child: Column(
@@ -152,7 +155,15 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
               ),
             ],
           ),
-        ) : Center(child: CircularProgressIndicator(),);
+        ) : Center(
+          child: value.detailedAttendanceModel!=null && value.detailedAttendanceModel!.isEmpty?Text("No Data Available",
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+              color: Color(0xff000000)
+            ),
+          ):CircularProgressIndicator(),
+        );
       }
       ),
     );
