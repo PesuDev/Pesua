@@ -106,7 +106,7 @@ print(">>>>> $classBatch");
                             for (var subjectData in value.attendanceDropDownModel!){
                               if(subjectData.className==item){
                                batchClassId=subjectData.batchClassId;
-                               classBatchSectionIdnew = subjectData.classBatchSectionId;
+                               classBatchSectionIdnew = int.parse(subjectData.classBatchSectionId.toString());
                               }
                             }
                           });
@@ -188,7 +188,7 @@ fontFamily: 'open sans',
                                           ),
                                         ),
                                         SizedBox(width: 30,),
-                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
+                                        Expanded(child: Text(value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses == 0 || value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses == null ? "NA" : "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
                                         SizedBox(width: 15,),
                                         Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??"NA"}")),
                                         SizedBox(width: 5,),
@@ -207,9 +207,11 @@ fontFamily: 'open sans',
                                               subjectCode: value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode,
                                               subjectName: value.attendanceListModel?.aTTENDANCELIST?[index].subjectName,
                                               attendance: "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses}",
-                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString()
+                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString(),
+                                              classBatchSectionId: classBatchSectionIdnew.toString(),
+                                              batchClassId: batchClassId,
+                                              subjectId: subId,
                                             ));
-                                            _viewModel.getDetailedAttendanceModel(isDynamic: true,batchId: batchClassId,classBatchSectionId:classBatchSectionIdnew,subId: subId);
 
                                           }},
                                         )),

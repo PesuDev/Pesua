@@ -11,7 +11,9 @@ class DetailedAttendance extends StatefulWidget {
   String? percentage;
   String? attendance;
   int? subjectId;
-  DetailedAttendance({this.subjectCode,this.subjectName,this.attendance,this.percentage,this.subjectId});
+  int? batchClassId;
+  int? classBatchSectionId;
+  DetailedAttendance({this.subjectCode,this.subjectName,this.attendance,this.percentage,this.subjectId,this.batchClassId,this.classBatchSectionId});
   @override
   _DetailedAttendanceState createState() => _DetailedAttendanceState();
 }
@@ -24,7 +26,8 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
     _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
     // _viewModel.getAttendanceDropDown(
     // );
-    _viewModel.getDetailedAttendanceModel(isDynamic: false);
+    _viewModel.getDetailedAttendanceModel(isDynamic: true,batchId: widget.batchClassId,classBatchSectionId:widget.classBatchSectionId,subId: widget.subjectId);
+    // _viewModel.getDetailedAttendanceModel(isDynamic: false);
 
     // _viewModel.getDetailedAttendanceModel(isDynamic: true,batchId: batchClassId,classbatchsectionId: classBatchSectionId);
   }
@@ -32,7 +35,7 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
     return Scaffold(
       appBar: sideNavAppBar("Attendance Report"),
          body: Consumer<AttendanceViewModel>(builder: (context,value,child) {
-        return value.detailedAttendanceModel != null && value.detailedAttendanceModel?.length != 0 ?
+        return value.detailedAttendanceModel != null  ?
         SingleChildScrollView(
           child: Column(
             children: [

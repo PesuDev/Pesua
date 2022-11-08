@@ -89,6 +89,9 @@ data(RouteSettings settings) {
                 subjectName: args.subjectName,
                 attendance: args.attendance,
                 percentage: args.percentage,
+                batchClassId: args.batchClassId,
+                classBatchSectionId: int.parse(args.classBatchSectionId.toString()),
+                subjectId: args.subjectId,
               )));
     case AppRoutes.detailedAssignment:
       return MaterialPageRoute(builder: (_) => DetailedAssignment());
