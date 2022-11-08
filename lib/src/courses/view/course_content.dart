@@ -79,23 +79,11 @@ class _CourseContentState extends State<CourseContent> {
                           ],
                         )),
                   ),
-                  // subtitle: Text('Leading expansion arrow icon'),
+
                   controlAffinity: ListTileControlAffinity.leading,
-                  /*     onExpansionChanged: ((newState) {
-                          if (newState)
-                            setState(() {
-                              selected = i;
-                            });
-                          else
-                            setState(() {
-                              selected = -1;
-                            });
-                        }),*/
                   onExpansionChanged: (bool expanded) {
                     setState(() => _customTileExpanded = expanded);
                   },
-
-                  // initiallyExpanded: i == selected,
                   leading: Icon(
                     _customTileExpanded
                         ? Icons.remove_circle_rounded
@@ -114,38 +102,35 @@ class _CourseContentState extends State<CourseContent> {
                   ],
                 )
               ]);
-
-              /* trailing: Container(
-                        color: Colors.blueGrey,
-                        padding:
-                            EdgeInsets.only(top: 8, bottom: 8, left: 0, right: 8),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CourseDashboard()),
-                              );
-                            },
-                            child: Icon(Icons.arrow_forward_ios)),
-                      ),*/
-              /*
-                      children: [
-                        ListTile(
-                          title: Text("Helooo"),
-                        )
-                      ],
-                    )
-                  ],
-                );*/
             },
           ),
         )
-            : Center(child: model.contentModelLength==-1?CircularProgressIndicator():Text("No course available",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20
-          ),));
+            : Center(child: model.contentModelLength==-1?CircularProgressIndicator():Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 0.0),
+              child: Text("E-Learning content is available only on student webportal",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Open Sans',
+                    color: Color(0xff333333),
+                    fontSize: 16
+                ),
+              ),
+            ),
+            SizedBox(height: 5,),
+            Text("click here to visit PesuAcademy web portal",
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff0091cd),
+                  fontFamily: 'Open Sans',
+                  fontSize: 16
+              ),
+            ),
+          ],
+        ));
       });
     });
 

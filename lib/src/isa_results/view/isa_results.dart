@@ -150,7 +150,11 @@ class _ISAResultsState extends State<ISAResults> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.7,
-                            child: resultDetails(),
+                            child: model.isaResultModel!.isNotEmpty ?resultDetails():Center(child: Text("No Data Available",style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 18,
+                                color: Color(0xff000000)
+                            ),),),
                           )
                         ],
                       ),
@@ -279,7 +283,7 @@ class _ISAResultsState extends State<ISAResults> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 6.5,
-                                        child: Text(
+                                        child: Text(model.isaResultModel?[j].marks == "A" ? "A" :
                                             "${model.isaResultModel?[j].marks}/${model.isaResultModel?[j].maxISAMarks}",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w300,

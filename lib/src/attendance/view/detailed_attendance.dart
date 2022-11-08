@@ -95,7 +95,7 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
                 ),
               ),
               SizedBox(height: 3),
-              Column(
+              value.detailedAttendanceModel!.isNotEmpty ?  Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -155,13 +155,20 @@ class _DetailedAttendanceState extends State<DetailedAttendance> {
                     },
                   ),
                 ],
-              ),
+              ):Center(child: Padding(
+                padding: const EdgeInsets.all(38.0),
+                child: Text("No Data Available", style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: Color(0xff000000)
+                ),),
+              )),
             ],
           ),
         ) : Center(
           child: value.detailedAttendanceModel!=null && value.detailedAttendanceModel!.isEmpty?Text("No Data Available",
             style: TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 fontSize: 18,
               color: Color(0xff000000)
             ),
