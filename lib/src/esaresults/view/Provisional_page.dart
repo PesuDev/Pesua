@@ -414,9 +414,15 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                               );
                             }),
                       )
-                    : Center(
-                        child: CircularProgressIndicator(),
-                      );
+                    :  Center(
+                  child: data.esaModel1!=null && data.esaModel1!.results!.isEmpty?Text("No Data Available",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        color: Color(0xff000000)
+                    ),
+                  ):CircularProgressIndicator(),
+                );
               }),
             ),
             Container(

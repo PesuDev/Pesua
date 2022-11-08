@@ -36,10 +36,10 @@ return loginResponseModel;
         required double randomNum,
       })
   async {
-    String? loginId=await preferenceUtil.getString(sp_loginId);
+  //  String? loginId=await preferenceUtil.getString(sp_loginId);
 
     final data = await forgetPasswordApi1.forgetPassword1(
-        action:action,mode:mode,appId:appId,loginId:loginId.toString(),randomNum:randomNum);
+        action:action,mode:mode,appId:appId,loginId:loginId,randomNum:randomNum);
 
 
     notifyListeners();

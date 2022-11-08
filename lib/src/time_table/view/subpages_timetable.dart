@@ -1,10 +1,13 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/time_table/model/time_table_model.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 
 class TableDetails extends StatefulWidget {
@@ -184,7 +187,7 @@ class _TableDetailsState extends State<TableDetails> {
                                         model.timeTableTemplateStatus
                                             .toString() ==
                                             "1"
-                                            ? "Break"
+                                            ? "BREAK"
                                             : "",
                                         //"BREAK",
                                         textAlign: TextAlign.center,
@@ -349,7 +352,7 @@ class _TableDetailsState extends State<TableDetails> {
                                         model.timeTableTemplateStatus
                                             .toString() ==
                                             "1"
-                                            ? "Break"
+                                            ? "BREAK"
                                             : "",
                                         //"BREAK",
                                         textAlign: TextAlign.center,
@@ -514,7 +517,7 @@ class _TableDetailsState extends State<TableDetails> {
                                         model.timeTableTemplateStatus
                                             .toString() ==
                                             "1"
-                                            ? "Break"
+                                            ? "BREAK"
                                             : "",
                                         //"BREAK",
                                         textAlign: TextAlign.center,
@@ -680,7 +683,7 @@ class _TableDetailsState extends State<TableDetails> {
                                       model.timeTableTemplateStatus
                                           .toString() ==
                                           "1"
-                                          ? "Break"
+                                          ? "BREAK"
                                           : "",
                                       //"BREAK",
                                       textAlign: TextAlign.center,
@@ -847,7 +850,7 @@ class _TableDetailsState extends State<TableDetails> {
                                         model.timeTableTemplateStatus
                                             .toString() ==
                                             "1"
-                                            ? "Break"
+                                            ? "BREAK"
                                             : "",
                                         //"BREAK",
                                         textAlign: TextAlign.center,
@@ -903,11 +906,13 @@ class _TableDetailsState extends State<TableDetails> {
             ),
             GestureDetector(
               onTap: (){
-                CircularProgressIndicator();
+                CustomWidgets.showLoaderDialogWithoutText(context: context);
+                Timer(const Duration(milliseconds: 300), () {
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                });
 
-                // Navigator.pushNamed(
-                //     context,
-                //     AppRoutes.timeTable);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -1007,7 +1012,14 @@ Widget noClass(){
           ),
           GestureDetector(
             onTap: (){
-             refres();
+              CustomWidgets.showLoaderDialogWithoutText(context: context);
+              Timer(const Duration(milliseconds: 300), () {
+                if (mounted) {
+                   // widget.day=="mon"? Monday():widget.day=="tuesday"?Tuesday():widget.day=="wednesday"?Wednesday():widget.day=="thursday"?Thursday()
+                   //    :widget.day=="friday"?Friday():widget.day=="saturday"?Saturday():widget.day=="sunday"?Sunday():Container();
+                  Navigator.pop(context);
+                }
+              });
 
             },
             child: Container(

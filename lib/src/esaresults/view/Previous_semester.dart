@@ -188,32 +188,6 @@ var graphType=0;
           data.esaGraphModeData !=null?           graphType==0?       graphUi( data.esaGraphModeData):graphType==1?graphUiForCgpa(data.esaGraphModeData):graphType==2?
                             graphUiForSgpa(data.esaGraphModeData):graphUi(data.esaGraphModeData)
                         :CircularProgressIndicator()    ,
-                            // SfCartesianChart(
-                            //
-                            //     primaryXAxis: CategoryAxis(),
-                            //     title:
-                            //         ChartTitle(text: "Students Marks Graph"),
-                            //     // legend: Legend(isVisible: true),
-                            //     tooltipBehavior:
-                            //         TooltipBehavior(enable: true),
-                            //     series: <ChartSeries>[
-                            //       LineSeries<StudentSemester, dynamic>(
-                            //         dataSource:
-                            //             data.esaGraphModeData?.studentSemester ?? [],
-                            //         xValueMapper: (StudentSemester data,
-                            //                 _) =>
-                            //             int.tryParse(data.cGPA.toString()),
-                            //         yValueMapper:
-                            //             (StudentSemester sales, _) =>
-                            //                 int.tryParse(
-                            //                     sales.sGPA.toString()),
-                            //         dataLabelSettings:
-                            //             DataLabelSettings(isVisible: true,
-                            //
-                            //             ),
-                            //       )
-                            //     ]),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -625,9 +599,14 @@ var graphType=0;
                   ]),
                 ),
               )
-            : Center(
-                child: CircularProgressIndicator(),
-              );
+            :Center(
+              child: data.esaModel2!=null && data.esaModel2!.studentSemesterWise!.isEmpty && data.esaModel2!.studentCGPAWISE!.isEmpty && data.esaModel4!=null && data.esaModel4!.rESULTS!.isEmpty && data.esaModel4!.cGPASEMESTERWISE!.isEmpty?Text("No Data Available",
+          style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+          ),
+        ):CircularProgressIndicator(),
+            );
       }),
     );
   }
@@ -779,11 +758,4 @@ lineBarsData: [
       ),
     );
   }
-}
-
-class SalesData {
-  final String month;
-  final double sales;
-
-  SalesData(this.month, this.sales);
 }

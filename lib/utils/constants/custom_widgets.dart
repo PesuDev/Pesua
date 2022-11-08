@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 class CustomWidgets{
   static void showLoaderDialog({required BuildContext context, required String message}) {
     AlertDialog alert = AlertDialog(
@@ -24,15 +25,12 @@ class CustomWidgets{
   }
   static void showLoaderDialogWithoutText({required BuildContext context}) {
     AlertDialog alert = AlertDialog(
-      content: Row(
-        children: [
-          CircularProgressIndicator(
-              valueColor:AlwaysStoppedAnimation<Color>(Color(0xff7AB02A))),
-          SizedBox(width: 5,),
-          Container(
-              child: Text('',style: TextStyle(fontFamily: 'Nunito'),)),
-        ],
-      ),
+      backgroundColor: Colors.transparent,
+      content:
+      Center(
+            child: CircularProgressIndicator(
+                valueColor:AlwaysStoppedAnimation<Color>(Color(0xff0091CD))),
+          ),
     );
     showDialog(
       barrierDismissible: false,
@@ -69,4 +67,13 @@ class CustomWidgets{
     fontSize: 14.0,
     fontFamily: 'Horizon',
   );
+
+  static void libraryUrl(){
+       launch("http://library.pes.edu");
+
+   }
+   static   webUrl(){
+     return  launch("https://www.pesuacademy.com/Academy/");
+
+   }
 }

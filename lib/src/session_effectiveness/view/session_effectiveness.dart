@@ -610,12 +610,12 @@ print("data ${dataVal}");
                 children: [
                   ListTile(
                     leading: Radio(
-
-                        value: 1,
+                        value: 8,
                         groupValue: timeRadio,
                         onChanged: (int? val){
-                          timeRadio=val;
                           setState(() {
+                            timeRadio=val;
+
 
                           });
                           print(timeRadio);
@@ -626,11 +626,12 @@ print("data ${dataVal}");
                   ),
                   ListTile(
                     leading: Radio(
-                        value: 1,
+                        value: 9,
                         groupValue: timeRadio,
                         onChanged: (int? val){
-                          timeRadio=val;
                           setState(() {
+                            timeRadio=val;
+
 
                           });
                           print(timeRadio);

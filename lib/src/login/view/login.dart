@@ -58,6 +58,7 @@ class _LoginState extends State<Login> {
   }
 
   final _form = GlobalKey<FormState>();
+  final _form1 = GlobalKey<FormState>();
 
   FocusNode _focus = FocusNode();
   FocusNode _focusPass = FocusNode();
@@ -305,6 +306,8 @@ class _LoginState extends State<Login> {
                       onTap: () async {
                         if(usernameController.text.trim().isEmpty || passwordController.text.trim().isEmpty){
                           CustomWidgets.getToast(message: "Please fill all required fields", color:  Color(0xff273746));
+
+
                         }else {
                           LoginModel responseModel =
                           await _viewModel.getLoginDetails(
@@ -312,9 +315,7 @@ class _LoginState extends State<Login> {
                               username: usernameController.text);
 
                           if (responseModel != null) {
-
-
-
+                            CustomWidgets.showLoaderDialogWithoutText(context: context);
                             log("Oye login came");
                             SharedPreferenceUtil util =
                             SharedPreferenceUtil();
@@ -322,6 +323,7 @@ class _LoginState extends State<Login> {
                                 sp_userId, responseModel.userId ?? "");
                             await util.setString(
                                 sp_password, passwordController.text);
+                            print("papap${sp_password}");
                             await util.setString(
                                 sp_classId, "${responseModel.classId}");
                             await util.setString(
@@ -347,12 +349,8 @@ class _LoginState extends State<Login> {
                                 "${responseModel.programId}");
 
 
-                            // await util.setString(
-                            //     sp_userName,responseModel.userParentList);
-                            // await util.setString(sp_token,
-                            //     responseModel.mobileAppTokenError?? '');
+
                             log("Bose 2 ame:  ${await util.getToken()}");
-                            CircularProgressIndicator();
 
                         Timer(const Duration(milliseconds: 1000), () {
                               if (mounted) {
@@ -361,10 +359,7 @@ class _LoginState extends State<Login> {
                               }
                             });
 
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (_) => DashboardScreen()));
+
                             CustomWidgets.getToast(message: "Login Successfully", color:  Color(0xff273746));
 
 
@@ -373,6 +368,9 @@ class _LoginState extends State<Login> {
                             log('Oye am not coming');
                           }
                         }
+
+                      },
+                      onDoubleTap: (){
 
                       },
                       child: Container(
@@ -470,7 +468,7 @@ class _LoginState extends State<Login> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Form(
-                  key:_form,
+                  key:_form1,
                   child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 50,
@@ -487,7 +485,7 @@ class _LoginState extends State<Login> {
                               width: 10,
                             ),
                             Text(
-                              "Forget your Password?",
+                              "Forgot your Password?",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -504,7 +502,7 @@ class _LoginState extends State<Login> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
 
                         validator: (String? value) {
-                          if (value!.isEmpty) {
+                          if (value!.trim().isEmpty) {
                             return 'Please filled the details ';
                           } else{
                             return null;
@@ -539,19 +537,25 @@ class _LoginState extends State<Login> {
                         ),
                         child: TextButton(
                           onPressed: () async {
-                             if (_form.currentState != null) {
-                               _form.currentState?.validate();
-
+                             if (_form1.currentState != null) {
+                               _form1.currentState?.validate();
                                if(forgetPasswordController.text.isEmpty){
-                                   CustomWidgets.getToast(message: "Enter Login ID", color:  Colors.grey);
+                                   CustomWidgets.getToast(message: "Enter Login ID", color:  Color(0xff273746));
                                }else {
                                  await _viewModel.forgetPasswordDetails1(
                                      action: 11,
                                      mode: 1,
                                      loginId: forgetPasswordController.text,
-                                     appId: 1,
+                                     appId: 2,
                                      randomNum: 0.3145632102349487);
                                }
+
+
+                               // if(forgetPasswordController.text.isEmpty){
+                               //     CustomWidgets.getToast(message: "Enter Login ID", color:  Colors.grey);
+                               // }else {
+                               //
+                               // }
 
 
 
@@ -594,6 +598,7 @@ class _LoginState extends State<Login> {
                             border: Border.all(color: Colors.grey)),
                         child: TextButton(
                             onPressed: () {
+                              forgetPasswordController.clear();
                               Navigator.pop(context);
                             },
                             child: Text(

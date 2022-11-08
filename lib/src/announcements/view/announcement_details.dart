@@ -10,6 +10,7 @@ import 'package:pesu/utils/constants/app_urls.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 import '../../../utils/view/widget.dart';
 
@@ -104,7 +105,7 @@ class _AnnouncementState extends State<Announcement> {
                                     ,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 18,
                                         color: Color(0xff0091cd)),
                                   ),
 
@@ -246,6 +247,8 @@ class _AnnouncementState extends State<Announcement> {
                                                                 .announcementModel?[index]
                                                                 .announcementId))
                                             ));
+                                            CustomWidgets.getToast(message: "FIle id Downloaded in ", color:  Color(0xff273746));
+
                                           },
                                           child: Transform.rotate(
                                               angle: 180 * math.pi / 140,
@@ -264,7 +267,8 @@ class _AnnouncementState extends State<Announcement> {
 
                                   HtmlWidget(htmlCode!,
 
-                                  )
+                                  ),
+                                  SizedBox(height: 10,)
 
                                 ],
                               ),

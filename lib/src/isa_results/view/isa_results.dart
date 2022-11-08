@@ -138,7 +138,7 @@ class _ISAResultsState extends State<ISAResults> {
                                       mode: 10,
                                       batchClassId: batchClassId,
                                       classBatchSectionId: classBatchSectionId,
-                                      fetchId: "1400-4164",
+                                      fetchId: "${batchClassId}-${classBatchSectionId}}",
                                       randomNum: 0.26757885412517934,
                                     );
                                     print("Hoye");

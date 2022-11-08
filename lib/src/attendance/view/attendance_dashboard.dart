@@ -25,6 +25,10 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   var classBatch;
   var classBatchData;
   var classBatchData1;
+  var batchClassId;
+  var classBatchSectionIdnew;
+  var subInfo;
+
   void initState() {
     super.initState();
  initMethod();
@@ -33,9 +37,11 @@ class _AttendanceDashboardState extends State<AttendanceDashboard> {
   SharedPreferenceUtil util = SharedPreferenceUtil();
 initMethod()async{
   _viewModel = Provider.of<AttendanceViewModel>(context, listen: false);
+  _viewModel.getDetailedAttendanceModel(isDynamic: false);
   _viewModel.getAttendanceDropDown(
   );
   _viewModel.getAttendanceListInfo(isDynamic: false);
+  _viewModel.getDetailedAttendanceModel(isDynamic: false);
 
   classBatchData= await util.getString(sp_className);
 
@@ -88,7 +94,6 @@ print(">>>>> $classBatch");
                             .toList(),
                         onChanged: (item) {
                           print("Oye");
-                          var batchClassId;
                           setState(() {
                             // subject=item;
                             // var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
@@ -98,13 +103,15 @@ print(">>>>> $classBatch");
                             //
                             // });
 
-                            for (var subjectData in value!.attendanceDropDownModel!){
+                            for (var subjectData in value.attendanceDropDownModel!){
                               if(subjectData.className==item){
                                batchClassId=subjectData.batchClassId;
+                               classBatchSectionIdnew = int.parse(subjectData.classBatchSectionId.toString());
                               }
                             }
                           });
                           print("Hoye");
+                          print("meraclass${classBatchSectionIdnew}");
                           //       print(">>>>  $subjectCode");
                           _viewModel.getAttendanceListInfo(isDynamic: true,batchId: batchClassId);
                         }),
@@ -116,7 +123,7 @@ print(">>>>> $classBatch");
 
                       Container(
                         margin: EdgeInsets.only(top: 15),
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(top: 10,left: 10,bottom: 10,right: 55),
                         decoration: BoxDecoration(
                             color: Color(0xff163269)
                         ),
@@ -147,6 +154,7 @@ print(">>>>> $classBatch");
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: value.attendanceListModel?.aTTENDANCELIST?.length,
                             itemBuilder: (context,index){
+                           var subId=   value.attendanceListModel?.aTTENDANCELIST?[index].subjectId;
                               return Container(
                                 margin: EdgeInsets.only(top: 10),
                                 child: Column(
@@ -154,7 +162,7 @@ print(">>>>> $classBatch");
                                     Row(
                                       children: [
                                         Expanded(
-                                          flex:2,
+                                          flex:4,
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
@@ -163,7 +171,7 @@ print(">>>>> $classBatch");
                                                     fontFamily: 'open sans',
                                                     fontWeight: FontWeight.w500,
                                                     color: Color(0xff333333),
-                                                    fontSize: 12
+                                                    fontSize: 14
                                                 ),
                                               ),
                                               SizedBox(height: 5,),
@@ -171,17 +179,17 @@ print(">>>>> $classBatch");
                                                 maxLines: 4,
                                                 style: TextStyle(
 fontFamily: 'open sans',
-fontWeight: FontWeight.w400,
-color: Color(0xff9B9B9B),
-                                                    fontSize: 12
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Color(0xff333333),
+                                                    fontSize: 13
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        SizedBox(width: 20,),
-                                        Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
-                                        SizedBox(width: 5,),
+                                        SizedBox(width: 30,),
+                                        Expanded(child: Text(value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses == 0 || value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses == null ? "NA" : "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses??0}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses??0}")),
+                                        SizedBox(width: 15,),
                                         Expanded(child: Text("${value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage??"NA"}")),
                                         SizedBox(width: 5,),
                                         Expanded(child: IconButton(
@@ -189,7 +197,7 @@ color: Color(0xff9B9B9B),
                                             size: 30,
                                             color: Color(0xff999999),
                                           ),
-                                          onPressed: (){
+                                          onPressed: ()async{
                                             print("object${value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses }");
                                             if(value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses ==null || value.attendanceListModel!.aTTENDANCELIST![index].attendedClasses == 0 ){
 
@@ -199,8 +207,12 @@ color: Color(0xff9B9B9B),
                                               subjectCode: value.attendanceListModel?.aTTENDANCELIST?[index].subjectCode,
                                               subjectName: value.attendanceListModel?.aTTENDANCELIST?[index].subjectName,
                                               attendance: "${value.attendanceListModel?.aTTENDANCELIST?[index].attendedClasses}/${value.attendanceListModel?.aTTENDANCELIST?[index].totalClasses}",
-                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString()
+                                              percentage: value.attendanceListModel?.aTTENDANCELIST?[index].attendancePercenrage.toString(),
+                                              classBatchSectionId: classBatchSectionIdnew.toString(),
+                                              batchClassId: batchClassId,
+                                              subjectId: subId,
                                             ));
+
                                           }},
                                         )),
                                       ],
