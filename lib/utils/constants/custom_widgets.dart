@@ -25,15 +25,12 @@ class CustomWidgets{
   }
   static void showLoaderDialogWithoutText({required BuildContext context}) {
     AlertDialog alert = AlertDialog(
-      content: Row(
-        children: [
-          CircularProgressIndicator(
-              valueColor:AlwaysStoppedAnimation<Color>(Color(0xff7AB02A))),
-          SizedBox(width: 5,),
-          Container(
-              child: Text('',style: TextStyle(fontFamily: 'Nunito'),)),
-        ],
-      ),
+      backgroundColor: Colors.transparent,
+      content:
+      Center(
+            child: CircularProgressIndicator(
+                valueColor:AlwaysStoppedAnimation<Color>(Color(0xff0091CD))),
+          ),
     );
     showDialog(
       barrierDismissible: false,

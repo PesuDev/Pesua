@@ -35,6 +35,8 @@ class _MyProfileState extends State<MyProfile> {
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   UpdatePasswordModel? updatePasswordModel;
+  SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
+
 
 
   final _formKey = GlobalKey<FormState>();
@@ -118,7 +120,7 @@ class _MyProfileState extends State<MyProfile> {
                       child:
                       Row(
                         children: [
-                          myImage != null && myImage.isNotEmpty
+                          myImage != null
                               ? Container(
                             width: 100,
                             height: 100,
@@ -133,11 +135,8 @@ class _MyProfileState extends State<MyProfile> {
                             ),
                           )
                               :
-                          CircleAvatar(
-                            radius: MediaQuery.of(context).size.height * 0.025,
-                            backgroundImage: NetworkImage(
-                                'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
-                          ),
+                          Icon(Icons.account_circle_sharp,size: 100,color: Colors.white,),
+
                           SizedBox(
                             width: 20,
                           ),
@@ -354,7 +353,7 @@ class _MyProfileState extends State<MyProfile> {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly
                             ],                            maxLength: 10,
-                            autofocus: true,
+                            //autofocus: true,
                             controller: phoneController,
                             decoration: new InputDecoration(
                               contentPadding: EdgeInsets.only(
@@ -410,9 +409,17 @@ class _MyProfileState extends State<MyProfile> {
                                 onTap: () {
                                   if (_formKey1.currentState != null) {
                                     _formKey1.currentState?.validate();
-                                    if(emailController.value.text.isNotEmpty &&phoneController.text.length==10){
+
+                                    if(!EmailValidator.validate(emailController.text, true)){
+                                      setState(() {
+                                        CustomWidgets.getToast(message: "Email is Invalid", color:  Color(0xff273746));
+
+                                      });
+                                    }
+                                    else if(EmailValidator.validate(emailController.text, false)&&phoneController.text.length==10){
                                       // updateDetailPopUp();
-                                      _updateBottomSheet();
+                                      //_updateBottomSheet();
+                                      _updatePopupDialog();
                                     }
 
                                   }
@@ -449,7 +456,7 @@ class _MyProfileState extends State<MyProfile> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.vpn_key_outlined,
+                                        Icons.edit,
                                         size: 18,
                                       ),
                                       Container(
@@ -474,7 +481,7 @@ class _MyProfileState extends State<MyProfile> {
                                   child: Row(
                                     children: [
                                       Icon(
-                                        Icons.logout,
+                                        Icons.lock_open_rounded,
                                         size: 16,
                                       ),
                                       Container(
@@ -510,7 +517,7 @@ class _MyProfileState extends State<MyProfile> {
                                 color: Colors.black),
                           )),
                       Container(
-                        margin: EdgeInsets.only(top: 10),
+                        margin: EdgeInsets.only(top: 10,),
                         width: double.infinity,
                         color: Colors.white,
                         child: Padding(
@@ -597,6 +604,7 @@ class _MyProfileState extends State<MyProfile> {
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 10,),
                             ],
                           ),
                         ),
@@ -745,24 +753,27 @@ class _MyProfileState extends State<MyProfile> {
                                 style: TextStyle(
                                     color:Colors.black, fontSize: 18),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Name :",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 18),
-                                  ),
-                                  Text(
-                                    data.profileDetailModel?.sTUDENTINFO
-                                        ?.fatherName ??
-                                        "",
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Name :",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                    Text(
+                                      data.profileDetailModel?.sTUDENTINFO
+                                          ?.fatherName ??
+                                          "",
 
-                                    //"Student401",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 14),
-                                  ),
-                                ],
+                                      //"Student401",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                               ),
                               SizedBox(
                                 height: 5,
@@ -920,7 +931,7 @@ class _MyProfileState extends State<MyProfile> {
                                     color:Colors.black, fontSize: 18),
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 8,
                               ),
                               Row(
                                 children: [
@@ -1208,7 +1219,7 @@ class _MyProfileState extends State<MyProfile> {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.vpn_key_outlined,
+                                Icons.lock_outline,
                                 size: 20,
                                 color: Colors.white,
                               ),
@@ -1229,7 +1240,8 @@ class _MyProfileState extends State<MyProfile> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Current Password"),
+                              Text("Current Password",
+                                style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
                               Container(
                                 margin: EdgeInsets.only(
                                   top: 3,
@@ -1252,7 +1264,7 @@ class _MyProfileState extends State<MyProfile> {
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
@@ -1270,7 +1282,7 @@ class _MyProfileState extends State<MyProfile> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("New Password"),
+                              Text("New Password", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold)),
                               Container(
                                 margin: EdgeInsets.only(top: 3),
                                 child: TextFormField(
@@ -1297,7 +1309,7 @@ class _MyProfileState extends State<MyProfile> {
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
@@ -1315,7 +1327,7 @@ class _MyProfileState extends State<MyProfile> {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("Confirm Password"),
+                              Text("Confirm Password", style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold)),
                               Container(
                                 margin: EdgeInsets.only(top: 3),
                                 child:
@@ -1339,7 +1351,7 @@ class _MyProfileState extends State<MyProfile> {
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.grey,
                                     ),
                                     border: new OutlineInputBorder(
                                       borderRadius:
@@ -1397,25 +1409,42 @@ class _MyProfileState extends State<MyProfile> {
                                 width: 10,
                               ),
                               InkWell(
+                                onDoubleTap: (){
+
+                                },
                                 onTap: () async {
+                                  var oldPassword =await preferenceUtil.getString(sp_password);
                                   if (_formKey.currentState != null) {
                                     _formKey.currentState?.validate();
-                                    if(sp_password==newPasswordController.text){
-                                      CustomWidgets.getToast(message: "New password can't be same as old password", color:  Colors.grey);
-                                    }else if(sp_password==currentPasswordController.text && currentPasswordController.text.isNotEmpty&&newPasswordController.text.isNotEmpty&&currentPasswordController.text.isNotEmpty){
+                                   if(oldPassword==newPasswordController.text){
+                                    CustomWidgets.getToast(message: "New password can't be same as old password", color:  Color(0xff273746));
+
+                                  }
+                                   else if(oldPassword==currentPasswordController.text){
                                       await profileViewmodel
                                           ?.getUpdatePasswordDetails1(action: 10, mode: 1, randomNum: 0.47685889613355137, oldPass: currentPasswordController.text, newPass:  newPasswordController.text,
                                           newPass1: confirmPasswordController.text);
                                       Navigator.pop(context);
-                                      CustomWidgets.getToast(message: "Passworf updated", color:  Colors.grey);
+                                      CustomWidgets.getToast(message: "Password updated", color:  Color(0xff273746));
                                       Navigator.pushReplacementNamed(
                                           context, AppRoutes.myProfile);
-
-                                    }else if(sp_password!=currentPasswordController){
-                                      CustomWidgets.getToast(message: "Old password entered does not match the password on record", color:  Colors.grey);
+                                   } else if(oldPassword==newPasswordController.text){
+                                        CustomWidgets.getToast(message: "New password can't be same as old password", color:  Color(0xff273746));
 
                                     }
-                                    // Navigator.pop(context);
+
+                                    else if(currentPasswordController.text.isEmpty && newPasswordController.text.isEmpty && confirmPasswordController.text.isEmpty ){
+                                      CustomWidgets.getToast(message: "Please fill all required details", color:  Color(0xff273746));
+
+                                    }else if(newPasswordController.text !=confirmPasswordController.text){
+                                     CustomWidgets.getToast(message: "New password and confirm password not matched", color:  Color(0xff273746));
+
+                                   }
+                                    else{
+                                      CustomWidgets.getToast(message: "Old password not matched", color:  Color(0xff273746));
+
+                                    }
+
 
 
                                   }
@@ -1450,25 +1479,24 @@ class _MyProfileState extends State<MyProfile> {
 
 
 
-  void _updateBottomSheet() {
 
-    showModalBottomSheet(
+
+  void _updatePopupDialog() {
+    showDialog(
         context: context,
-        builder: (builder) {
-          return new Container(
-            height: MediaQuery.of(context).size.height * 0.20,
-            color: Color(0xFF737373),
-            //could change this to Color(0xFF737373),
-            //so you don't have to change MaterialApp canvasColor
-            child: new Container(
-                padding: EdgeInsets.only(top: 20, left: 20),
-                decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(30.0),
-                        topRight: const Radius.circular(30.0))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.only(top: 15,left: 20,right: 20),
+            content: Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/5,
+              child: Padding(
+                padding: const EdgeInsets.all(14),
+                child: new
+                Column(
+                 // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     new Text(
@@ -1489,10 +1517,10 @@ class _MyProfileState extends State<MyProfile> {
                           fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
                           onTap: () {
@@ -1504,7 +1532,7 @@ class _MyProfileState extends State<MyProfile> {
                                 top: 8.0, bottom: 8.0, left: 18, right: 18),
                             child: Text(
                               "No",
-                              style: TextStyle(color: Colors.blue,fontSize: 18),
+                              style: TextStyle(color: Color(0xff00366F),fontSize: 14),
                             ),
                           ),
                         ),
@@ -1514,15 +1542,11 @@ class _MyProfileState extends State<MyProfile> {
                           width: 2,
                         ),
                         InkWell(
+                          onDoubleTap: (){
+
+                          },
                           onTap: ()async{
-                            UpdateDetailModel model = UpdateDetailModel(
-                                action: 12,
-                                mode: 2,
-                                email: emailController.text,
-                                phone: phoneController.text,
-                                userId:
-                                '0163f09a-84d8-43c0-b853-b9846c0e1799',
-                                randomNum: 0.03338104178082224);
+
                             await profileViewmodel?.getUpdateDetails1(
                                 action: 12,
                                 mode: 2,
@@ -1532,18 +1556,8 @@ class _MyProfileState extends State<MyProfile> {
                             );
                             Navigator.pushReplacementNamed(
                                 context, AppRoutes.myProfile);
-                            CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.grey);
+                            CustomWidgets.getToast(message: "Detail updated successfully", color:  Color(0xff273746));
 
-
-                            // if(response=='1001'){
-                            //   CustomWidgets.getToast(message: "Detail updated successfully", color:  Colors.green);
-                            //   Navigator.pushReplacementNamed(
-                            //       context, AppRoutes.myProfile);
-                            // }else{
-                            //   CustomWidgets.getToast(message: "Could not Update the Detail", color:  Colors.red);
-                            //   Navigator.pushReplacementNamed(
-                            //       context, AppRoutes.myProfile);
-                            // }
 
                           },
                           child: Container(
@@ -1552,53 +1566,35 @@ class _MyProfileState extends State<MyProfile> {
                                 top: 8.0, bottom: 8.0, left: 18, right: 18),
                             child: Text(
                               "yes",
-                              style: TextStyle(color: Colors.blue,fontSize: 18),
+                              style: TextStyle(color: Color(0xff00366F),fontSize: 14),
                             ),
                           ),
                         ),
                       ],
                     )
                   ],
-                )),
+                ),
+              ),
+            )
+
           );
         });
-
-
-
   }
-  void validateEmail(String val) {
-    if(val.isEmpty){
-      setState(() {
-        _errorMessage = "Email can not be empty";
-      });
-    }else if(!EmailValidator.validate(val, true)){
-      setState(() {
-        _errorMessage = "Invalid Email Address";
-      });
-    }else{
-      setState(() {
-
-        _errorMessage = "";
-      });
-    }
-  }
-
   void _logOutBottomSheet() {
-    showModalBottomSheet(
+    showDialog(
         context: context,
-        builder: (builder) {
-          return new Container(
-            height: MediaQuery.of(context).size.height * 0.20,
-            color: Color(0xFF737373),
-            child: new Container(
-                padding: EdgeInsets.only(top: 20, left: 20),
-                decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(30.0),
-                        topRight: const Radius.circular(30.0))),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            content: Container(
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              height: MediaQuery.of(context).size.height/5,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20,top: 20,right: 10),
+                child: new
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     new Text(
@@ -1619,10 +1615,10 @@ class _MyProfileState extends State<MyProfile> {
                           fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
                           onTap: () async{
@@ -1672,10 +1668,32 @@ class _MyProfileState extends State<MyProfile> {
                       ],
                     )
                   ],
-                )),
+                )
+
+              ),
+            )
+
           );
         });
   }
+
+  void validateEmail(String val) {
+    if(val.isEmpty){
+      setState(() {
+        _errorMessage = "Email can not be empty";
+      });
+    }else if(!EmailValidator.validate(val, true)){
+      setState(() {
+        _errorMessage = "Invalid Email Address";
+      });
+    }else{
+      setState(() {
+
+        _errorMessage = "";
+      });
+    }
+  }
+
 
 
 

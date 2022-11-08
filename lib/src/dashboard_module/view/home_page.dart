@@ -142,7 +142,6 @@ class _HomePageState extends State<HomePage> {
                                 value.announcementMarque !=null?
                                 Container(
                                     margin: EdgeInsets.only(top: 5),
-
                                     width: MediaQuery.of(context).size.width,
                                     height: 60,
                                     child:
@@ -190,7 +189,6 @@ class _HomePageState extends State<HomePage> {
                                             child: Container(
 
                                               width:MediaQuery.of(context).size.width,
-                                              color: Colors.white,
                                               child: Row(
                                                 children: [
                                                   myImage != null
@@ -765,18 +763,9 @@ class _HomePageState extends State<HomePage> {
                                                   : Padding(
                                                     padding: const EdgeInsets.only(left:5.0),
                                                     child: Container(
-                                                decoration: BoxDecoration(
-                                                      border: Border.all(color: Colors.black)
-                                                ),
-                                                child: Padding(
-                                                    padding: const EdgeInsets.only(left: 5),
-                                                    child: Center(
-                                                      child: Text("   No Image"),
-
-                                                    ),
-                                                ),
-                                                height: 40,
-                                                width: 50,),
+                                                      width: 50,
+                                                      height: 50,
+                                               ),
                                                   ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -946,16 +935,7 @@ class _HomePageState extends State<HomePage> {
                                                   : Padding(
                                                 padding: const EdgeInsets.only(left:7.0),
                                                 child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(color: Colors.black)
-                                                  ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 5),
-                                                    child: Center(
-                                                      child: Text("   No Image"),
 
-                                                    ),
-                                                  ),
                                                   height: 40,
                                                   width: 50,),
                                               ),
@@ -1236,11 +1216,8 @@ class _HomePageState extends State<HomePage> {
                                   image: MemoryImage(myImage, scale: 0.5)),
                             ),
                           )
-                        : CircleAvatar(
-                            radius: MediaQuery.of(context).size.height * 0.025,
-                            backgroundImage: NetworkImage(
-                                'https://tnschools.gov.in/wp-content/themes/TNDS/assets/coloured_icons/2.png'),
-                          ),
+                        :
+                         Icon(Icons.account_circle_outlined,size: 50,),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                     Container(
                       width: _mainWidth * 0.75,

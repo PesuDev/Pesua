@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:pesu/src/login/model/login_redircted_model.dart';
 import 'package:pesu/src/login/model/login_response_model.dart';
 import 'package:pesu/utils/constants/app_urls.dart';
+import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/pesu_api_service.dart';
 
 import '../../../utils/constants/custom_widgets.dart';
@@ -85,11 +86,14 @@ class ForgetPasswordApi1 {
 
 
     });
-    if (data != null) {
-      CustomWidgets.getToast(message: "Contacts details updated successfully", color:  Colors.grey);
+    if (data != null ) {
+     //CustomWidgets.getToast(message: "We have sent the password to ay****as@gmail.com, You will receive your password in next 5 minute", color:  Colors.grey);
 
       // return UpdatePasswordModel.fromJson(data);
       log("msg$data");
+
+    }
+    else{
 
     }
 

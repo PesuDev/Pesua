@@ -64,7 +64,8 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
                 color: headingColor,
                 width: double.infinity,
               //  margin: EdgeInsets.only(left: 10, right: 10, top: 9),
-                child: TabBar(
+                child:
+                TabBar(
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.white.withOpacity(0.9),
                   isScrollable: true,

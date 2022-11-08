@@ -35,6 +35,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   int? tabValue;
   late final _tabController =
       TabController(initialIndex: 0, vsync: this, length: 4);
+  var subjectCode;
   @override
   void initState() {
     super.initState();
@@ -50,7 +51,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
   Widget build(BuildContext context) {
     return Consumer<CourseViewModel>(builder: (context, model, child) {
-      var subjectCode = model.subjectModel?.cOURSECONTENT
+       subjectCode = model.subjectModel?.cOURSECONTENT
           ?.map((e) => e.courseContentTypeId)
           .toSet()
           .toList();
@@ -82,11 +83,12 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                   .toList();*/
                         // model.subjectModel!.cOURSECONTENT?.map((e) => Tab(text: e)).toList()),
                         [
-                      (subjectCode!.contains(1))
+                      (subjectCode.contains(1))
                           ? Tab(
                               child: Text("Content"),
                             )
-                          : Container(),
+                          : Container(color: Colors.red,
+                      child: Text('ff'),),
                       (subjectCode.contains(2))
                           ? Tab(
                               child: Text("Objectives"),
@@ -139,7 +141,7 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                               ccId: model.subjectModel?.cOURSECONTENT?[2].courseContentId,),
                     )
                         : Container(),
-                    (subjectCode!.contains(5))
+                    (subjectCode.contains(5))
                         ? Container(
                             padding: EdgeInsets.only(top: 8, left: 8, right: 8),
                             child: CourseReferences(subjectName: widget.subjectName,

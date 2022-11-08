@@ -92,7 +92,7 @@ class _MenuPageState extends State<MenuPage> {
                     print("?????${dataalue}");
 
                      if (dataalue) {
-                      CustomWidgets.getToast(message: "Logout was successful ", color: Colors.green);
+                      CustomWidgets.getToast(message: "Logout was successful ", color: Color(0xff273746));
 Navigator.pop(context);
                       Navigator.pushNamedAndRemoveUntil(context, AppRoutes.login, (route) => false);
                       final bottomProvider =
@@ -101,7 +101,7 @@ Navigator.pop(context);
                       bottomProvider.selectBottomIndex(bottomIndex: 0);
                    }
                     else{
-                 CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Colors.red);
+                 CustomWidgets.getToast(message: "Logout was unsuccessful ", color: Color(0xff273746));
                     }
                   }
                   else if (index == 1) {

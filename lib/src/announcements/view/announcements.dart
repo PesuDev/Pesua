@@ -98,18 +98,7 @@ class _AnnouncementsState extends State<Announcements> {
                                           )
                                               : Container(
                                            // color: Colors.amber,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(color: Colors.black)
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(left: 5),
-                                              child: Center(
-                                                child: Text("   No Image"),
 
-                                              ),
-                                            ),
-                                            height: 50,
-                                            width: 50,
                                           ),
                                           SizedBox(
                                             width: 10,
@@ -131,9 +120,9 @@ class _AnnouncementsState extends State<Announcements> {
                                                         .announcementName ??
                                                     "Seatinginformation_24.05.2022",style: TextStyle(fontSize: 14),),
                                               ),
-                                              Text(value.announcementModel?[index]
-                                                      .instituteName ??
-                                                  "_AS_RRCampus",style: TextStyle(fontSize: 14),),
+                                              // Text(value.announcementModel?[index]
+                                              //         .instituteName ??
+                                              //     "_AS_RRCampus",style: TextStyle(fontSize: 14),),
                                               SizedBox(
                                                 height: 5,
                                               ),
