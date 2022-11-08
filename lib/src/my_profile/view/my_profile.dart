@@ -121,21 +121,23 @@ class _MyProfileState extends State<MyProfile> {
                       Row(
                         children: [
                           myImage != null
-                              ? Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                              BorderRadius.circular(100),
-                              image: new DecorationImage(
+                              ? ClipOval(
 
+
+                                child: Image.memory(
+                            myImage,
+                            gaplessPlayback: true,
+                            height: 100,
+                            width: 100,
                                   fit: BoxFit.fill,
-                                  image: MemoryImage(myImage
-                                  )),
-                            ),
-                          )
+
+
+                          ),
+
+                              )
                               :
                           Icon(Icons.account_circle_sharp,size: 100,color: Colors.white,),
+
 
                           SizedBox(
                             width: 20,
@@ -1541,7 +1543,7 @@ class _MyProfileState extends State<MyProfile> {
                           thickness: 2,
                           width: 2,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onDoubleTap: (){
 
                           },
@@ -1643,7 +1645,7 @@ class _MyProfileState extends State<MyProfile> {
                           color: Colors.white,
                           padding: EdgeInsets.only(
                               top: 8.0, bottom: 8.0, left: 18, right: 18),
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: () async{
                               final provider =
                               Provider.of<GoogleSignInProvider>(context, listen: false);
