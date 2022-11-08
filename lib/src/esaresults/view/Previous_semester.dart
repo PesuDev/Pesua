@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/esaresults/model/previous_sem_graph.dart';
@@ -64,15 +63,6 @@ var graphType=0;
       randomNum: 0.2195043762231128,
     );
   }
-
-  List<SalesData> data1 = [
-    SalesData('Jan', 400),
-    SalesData('FEB', 43),
-    SalesData('MAR', 134),
-    SalesData('APR', 314),
-    SalesData('MAY', 341),
-  ];
-
   String? selectedItem = "Sem-1";
   int? selectedBatch;
 
