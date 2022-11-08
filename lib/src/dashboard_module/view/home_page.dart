@@ -166,8 +166,10 @@ class _HomePageState extends State<HomePage> {
                                         final UriData? mydata =
                                             Uri.parse(base64Image.toString())
                                                 .data;
-                                        Uint8List? myImage =
+
+                                        Uint8List? data =
                                         mydata?.contentAsBytes();
+                                     var   myImage=data;
                                        // print("printkaro${_currentIndex}");
                                         return
                                           GestureDetector(
@@ -203,14 +205,11 @@ class _HomePageState extends State<HomePage> {
                                                       borderRadius:
                                                       BorderRadius.circular(
                                                           0),
-                                                      image:
-                                                      new DecorationImage(
-                                                          fit: BoxFit.fill,
-                                                          image:
-                                                          MemoryImage(
-                                                              myImage,
-                                                              scale:
-                                                              0.5)),
+
+                                                    ),
+                                                    child: Image.memory(
+                                                     myImage,
+                                                      gaplessPlayback: true,
                                                     ),
                                                   ):Text(""),
                                                   SizedBox(
@@ -616,11 +615,11 @@ class _HomePageState extends State<HomePage> {
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                 BorderRadius.circular(5),
-                                                image: DecorationImage(
-                                                  image:
-                                                  MemoryImage(myImage),
-                                                  fit: BoxFit.fill,
-                                                )),
+                                            ),
+                                            child:    Image.memory(
+                                        myImage,
+                                        gaplessPlayback: true,
+                                      ),
                                                 )
                                               : Container(
                                           ),
@@ -750,16 +749,14 @@ class _HomePageState extends State<HomePage> {
                                                         borderRadius:
                                                             BorderRadius.circular(
                                                                 0),
-                                                        image:
-                                                            new DecorationImage(
-                                                                fit: BoxFit.fill,
-                                                                image:
-                                                                    MemoryImage(
-                                                                        myImage,
-                                                                        scale:
-                                                                            0.5)),
-                                                      ),
-                                                    )
+
+
+                                                    ),
+                                                child: Image.memory(
+                                                  myImage,
+                                                  gaplessPlayback: true,
+                                                ),
+                                              )
                                                   : Padding(
                                                     padding: const EdgeInsets.only(left:5.0),
                                                     child: Container(
@@ -922,15 +919,12 @@ class _HomePageState extends State<HomePage> {
                                                         borderRadius:
                                                             BorderRadius.circular(
                                                                 0),
-                                                        image:
-                                                            new DecorationImage(
-                                                                fit: BoxFit.fill,
-                                                                image:
-                                                                    MemoryImage(
-                                                                        myImage,
-                                                                        scale:
-                                                                            0.5)),
+
                                                       ),
+                                                child: Image.memory(
+                                                  myImage,
+                                                  gaplessPlayback: true,
+                                                ),
                                                     )
                                                   : Padding(
                                                 padding: const EdgeInsets.only(left:7.0),
@@ -1092,10 +1086,11 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                               borderRadius:
                               BorderRadius.circular(5),
-                              image: DecorationImage(
-                                image: MemoryImage(myImage),
-                                fit: BoxFit.fill,
-                              )),
+                         ),
+                          child: Image.memory(
+                            myImage,
+                            gaplessPlayback: true,
+                          ),
                         )
                             : Container(),
                         Positioned(
@@ -1211,10 +1206,12 @@ class _HomePageState extends State<HomePage> {
                             height: 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: MemoryImage(myImage, scale: 0.5)),
+
                             ),
+                      child: Image.memory(
+                        myImage,
+                        gaplessPlayback: true,
+                      ),
                           )
                         :
                          Icon(Icons.account_circle_outlined,size: 50,),

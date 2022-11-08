@@ -172,10 +172,13 @@ var todayDays;
                                   .toList(),
                               onChanged: (item) {
                                 print("Oye");
+                                time=[];
                                 setState(() {
                                   subject=item;
+
                                for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
                                     if(dataVal.day==todayDays &&dataVal.subjectName==item){
+print("data ${dataVal}");
 
                                       return time.add(dataVal.startTiming.toString());
 
@@ -270,7 +273,7 @@ var todayDays;
                             fontWeight: FontWeight.w700,fontSize: 15,
                         ),),
                         SizedBox(height: 10,),
-                        Container(
+                    time.length>0?    Container(
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)
                           ),
@@ -281,30 +284,28 @@ var todayDays;
                               hint: Padding(
                                 padding: const EdgeInsets.only(top: 5, left: 10),
                                 child:
-                                data.sessionEffectivenessModel?.timetableList?[0]
-                                    .startTiming !=null?
-                                Text(data.sessionEffectivenessModel?.timetableList?[0]
-                                    .startTiming ?? ""):Text(""),
+
+                                Text("data")
                               ),
-                              value: sessionTime,
+
                               items:
                             time.map((droptime) => DropdownMenuItem<String>(
                               value: droptime,
                               child:
-                                  droptime.isNotEmpty?
+
                               Text(
-                                  droptime
-                              ):Text(""),
+                              "${droptime.toString()}"
+                              ),
                             )
                               ,).toList(),
                               onChanged: (item) {
-                                _timeBottomSheet();
+                                // _timeBottomSheet();
 
                               }
                               ,icon: Icon(Icons.keyboard_arrow_down),
                             iconSize: 15,
                               ),
-                        ),
+                        ):Container(),
                         data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
