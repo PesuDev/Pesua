@@ -309,6 +309,7 @@ class _LoginState extends State<Login> {
 
 
                         }else {
+                          CustomWidgets.showLoaderDialog(context: context, message: "Signing In....");
                           LoginModel responseModel =
                           await _viewModel.getLoginDetails(
                               password: passwordController.text,
@@ -352,12 +353,11 @@ class _LoginState extends State<Login> {
 
                             log("Bose 2 ame:  ${await util.getToken()}");
 
-                        Timer(const Duration(milliseconds: 1000), () {
-                              if (mounted) {
+
+                                Navigator.pop(context);
                                 Navigator.push(
                                     context, MaterialPageRoute(builder: (_) => DashboardScreen()));
-                              }
-                            });
+
 
 
                             CustomWidgets.getToast(message: "Login Successfully", color:  Color(0xff273746));
@@ -365,6 +365,9 @@ class _LoginState extends State<Login> {
 
 
                           } else {
+                            Navigator.pop(context);
+                            CustomWidgets.getToast(message: "Login Unsuccessfully", color:  Color(0xff273746));
+
                             log('Oye am not coming');
                           }
                         }
