@@ -163,11 +163,31 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
 
           ),
           body: Center(
-            child: model.subjectModelLength==0?Text("No course available",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20
-            ),
+            child: model.subjectModelLength==0?Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 0.0),
+                  child: Text("E-Learning content is available only on student webportal",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                      fontFamily: 'Open Sans',
+color: Color(0xff333333),
+                      fontSize: 16
+                  ),
+                  ),
+                ),
+                SizedBox(height: 5,),
+                Text("click here to visit PesuAcademy web portal",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff0091cd),
+                      fontFamily: 'Open Sans',
+                      fontSize: 16
+                  ),
+                ),
+              ],
             ):CircularProgressIndicator(),
           ),
         ),

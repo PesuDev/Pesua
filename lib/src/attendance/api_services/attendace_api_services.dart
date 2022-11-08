@@ -73,24 +73,26 @@ class AttendanceApiServices {
 
 
 
-  Future<List<DetailedAttendanceModel>?> subjectAttendance(
+  Future<List<DetailedAttendanceModel>?> subjectAttendance({required bool isDynamic,int? batchId,int? classBatchSectionIdnew,int? subId}
       // int subjectId,int batchClassId,int classBatchId,
       ) async {
     String url = AppUrls.commonUrl;
     String? userId=await preferenceUtil.getString(sp_userId);
     String? batchClassId=await preferenceUtil.getString(sp_batchClassId);
     String? classBatchSectionId=await preferenceUtil.getString(sp_classBatchSectionId);
+    print("iski${classBatchSectionId}");
+    print("othername${batchClassId}");
 
 
     final data = await _pesuApiService.postApiCall(endPoint: url,
         params: {
           "action":18,
           "mode":16,
-          "subjectId":13892,
+          "subjectId":isDynamic?subId:13892,
           "idType":1,
           "userId":userId,
-         "batchClassId":int.parse(batchClassId.toString()),
-          "classBatchSectionId":int.parse(classBatchSectionId.toString()),
+         "batchClassId":isDynamic?batchId:int.parse(batchClassId.toString()),
+          "classBatchSectionId":isDynamic?classBatchSectionIdnew:classBatchSectionId,
          " subjectInfo":"1503&&4378&&42&&46&&UE21EC642A&&Analog VLSI &&91.3",
           "randomNum":0.8549240905984299
         }

@@ -89,11 +89,7 @@ return Container(
         padding: const EdgeInsets.only(bottom: 8.0),
         child: Text("${widget.subjectCode} - ${widget.subjectName}"),
       ),
-      //https://www.digitalocean.com/community/tutorials/flutter-bar-charts GO TO THIS LINK
-      /*   Container(
-                color: Colors.white,
-                height: MediaQuery.of(context).size.height * 0.5,
-              ),*/
+      model.isaGraphFormatterModel !=null?
       SfCartesianChart(
           backgroundColor: Colors.white,
           primaryXAxis:
@@ -112,7 +108,7 @@ return Container(
                 pointColorMapper:(ISAGraphFormatterModel graph, _)=>graph.color ,
                 // Enable data label
                 dataLabelSettings: DataLabelSettings(isVisible: true))
-          ]),
+          ]):CircularProgressIndicator(),
 
 
       Padding(
@@ -138,7 +134,7 @@ return Container(
 );
         }
       else{
-        return Container(child: Text("hh"),);
+        return Center(child: Container(child: CircularProgressIndicator(),));
         }
       }),
     );
