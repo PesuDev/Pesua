@@ -261,7 +261,7 @@ class _MyProfileState extends State<MyProfile> {
                                     borderRadius:
                                     BorderRadius.circular(12),
                                     color: (edit == false)
-                                        ? Color(0xff286090)
+                                        ? Color(0xff0091cd)
                                         : Color(0xfff36b15),
                                     /*    boxShadow: [
                                   BoxShadow(
@@ -640,7 +640,7 @@ class _MyProfileState extends State<MyProfile> {
                               Column(
                                 children: [
                                   Text(
-                                    "EXAM",
+                                    "Exam",
                                     style: TextStyle(
                                         color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
@@ -1257,7 +1257,7 @@ class _MyProfileState extends State<MyProfile> {
                                       return null;
                                     }
                                   },
-                                  autofocus: true,
+                                  //autofocus: true,
                                   controller: currentPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
@@ -1302,12 +1302,12 @@ class _MyProfileState extends State<MyProfile> {
                                       return null;
                                     }
                                   },
-                                  autofocus: true,
+                                  //autofocus: true,
                                   controller: newPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
                                         top: 1, left: 4, bottom: 1, right: 4),
-                                    hintText: "Enter Your New Password",
+                                    hintText: "Enter New Password",
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
@@ -1344,12 +1344,12 @@ class _MyProfileState extends State<MyProfile> {
                                       return 'Password Does not match';
                                     }
                                   },
-                                  autofocus: true,
+                                 // autofocus: true,
                                   controller: confirmPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
                                         top: 1, left: 4, bottom: 1, right: 4),
-                                    hintText: "Enter Your Confirm Password",
+                                    hintText: "Enter Confirm Password",
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
@@ -1489,6 +1489,9 @@ class _MyProfileState extends State<MyProfile> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
             contentPadding: EdgeInsets.only(top: 15,left: 20,right: 20),
             content: Container(
               width: MediaQuery.of(context).size.width,
@@ -1588,8 +1591,13 @@ class _MyProfileState extends State<MyProfile> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
-            contentPadding: EdgeInsets.all(0),
-            content: Container(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
+           // contentPadding: EdgeInsets.all(0),
+              contentPadding: EdgeInsets.only(top: 15,left: 20,right: 20),
+
+              content: Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               height: MediaQuery.of(context).size.height/5,
