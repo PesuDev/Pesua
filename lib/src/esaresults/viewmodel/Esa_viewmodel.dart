@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:pesu/utils/services/app_routes.dart';
 
 
 import '../../../utils/constants/sp_constants.dart';
@@ -26,7 +27,7 @@ esaGraphModel ?esaGraphModeData;
         required int mode,
         required double randomNum,}) async {
     String? departmentId=await preferenceUtil.getString(sp_DepartmentId);
-
+    var info;
     final data = await _apiService.fetchEsaInfoDetails(
         action: action,
         mode: mode,
@@ -34,6 +35,7 @@ esaGraphModel ?esaGraphModeData;
         randomNum: randomNum,);
 
     esaModel1 = data;
+
     notifyListeners();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pesu/src/esaresults/model/esa_model.dart';
@@ -40,14 +42,30 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
         child: Column(
           children: [
             Container(
-              child: Consumer<EsaViewModel>(builder: (context, data, child) {
-                return data.esaModel1 != null &&
-                        data.esaModel1!.results!.isNotEmpty
+              child: Consumer<EsaViewModel>(builder: (context, dataInfo, child) {
+               List<Results> modelValue=[];
+                var info;
+                if(dataInfo.esaModel1 !=null) {
+                  for (var dataVal in dataInfo.esaModel1!.results!) {
+                    if(dataVal.info!=info){
+                      print("info  $info");
+                      info=dataVal.info;
+
+                      modelValue.add(dataVal);
+                    }
+                  }
+                }
+
+                print("hell no ${modelValue.toString()}");
+                print("normal length ${dataInfo.esaModel1?.results?.length}         formatted ${modelValue.length}");
+var data=modelValue;
+                return dataInfo.esaModel1 != null &&
+                        dataInfo.esaModel1!.results!.isNotEmpty
                     ? Container(
                         // margin: EdgeInsets.only(top: 10),
                         child: ListView.builder(
                             shrinkWrap: true,
-                            itemCount: data.esaModel1?.results?.length ?? 0,
+                            itemCount: data.length ?? 0,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               // ESAModel1 model = data.esaModel1;
@@ -82,8 +100,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 0xff9B9B9B))),
                                                     TextSpan(
                                                         text: data
-                                                                .esaModel1
-                                                                ?.results?[
+                                                               [
                                                                     index]
                                                                 .srn ??
                                                             '',
@@ -115,8 +132,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 0xff9B9B9B))),
                                                     TextSpan(
                                                         text: data
-                                                                .esaModel1
-                                                                ?.results?[
+                                                            [
                                                                     index]
                                                                 .subjectCode ??
                                                             '',
@@ -137,7 +153,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                           Padding(
                                             padding: const EdgeInsets.only(top: 6.0),
                                             child: Text(
-                                              data.esaModel1?.results?[index]
+                                              data[index]
                                                       .semester ??
                                                   '',
                                               style: TextStyle(
@@ -151,7 +167,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             thickness: 3,
                                           ),
                                           Text(
-                                            data.esaModel1?.results?[index]
+                                            data[index]
                                                     .info ??
                                                 '',
                                             style: TextStyle(
@@ -211,8 +227,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 0xff9B9B9B))),
                                                     TextSpan(
                                                         text: data
-                                                                .esaModel1
-                                                                ?.results?[
+                                                              [
                                                                     index]
                                                                 .grade ??
                                                             '',
@@ -246,10 +261,10 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
                                             itemCount:
-                                                data.esaModel1!.results!.length,
+                                                dataInfo.esaModel1!.results!.length,
                                             itemBuilder: (BuildContext context,
                                                 int index) {
-                                              // ESAModel1 model = data.esaModel1![index];
+                                              // ESAModel1 model = dataInfo.esaModel1![index];
 
                                               return Container(
                                                 child: Padding(
@@ -264,7 +279,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                         text: TextSpan(
                                                           children: <TextSpan>[
                                                             TextSpan(
-                                                                text: data
+                                                                text: dataInfo
                                                                         .esaModel1
                                                                         ?.results?[
                                                                             index]
@@ -294,12 +309,12 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                     color: Color(
                                                                         0xff9B9B9B))),
                                                             TextSpan(
-                                                                text: data
+                                                                text: dataInfo
                                                                         .esaModel1
                                                                         ?.results?[
                                                                             index]
                                                                         .subjectName ??
-                                                                    'Python for Computational Problem Solving',
+                                                                    ' ',
                                                                 style: TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
@@ -338,7 +353,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                                 ),
                                                               ),
                                                               Text(
-                                                                data
+                                                                dataInfo
                                                                         .esaModel1
                                                                         ?.results?[
                                                                             index]
@@ -360,11 +375,11 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                           ),
                                                           TextButton.icon(
                                                             onPressed: () {
-                                                              if(data
+                                                              if(dataInfo
                                                                   .esaModel1
                                                                   ?.results?[
                                                               index]
-                                                                  .grade!=null && data
+                                                                  .grade!=null && dataInfo
                                                                   .esaModel1
                                                                   ?.results?[
                                                               index]
@@ -374,17 +389,17 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                                                               Navigator.pushNamed(
                                                                   context,
                                                                   AppRoutes
-                                                                      .esaGraph,arguments: DetailedArguments(subjectCode:  data
+                                                                      .esaGraph,arguments: DetailedArguments(subjectCode:  dataInfo
                                                                   .esaModel1
                                                                   ?.results?[
                                                               index]
                                                                   .subjectCode));
                                                             }},
-                                                            icon: (data
+                                                            icon: (dataInfo
                                                                 .esaModel1
                                                                 ?.results?[
                                                             index]
-                                                                .grade!=null && data
+                                                                .grade!=null && dataInfo
                                                                 .esaModel1
                                                                 ?.results?[
                                                             index]
@@ -415,7 +430,7 @@ class _ProvisionalPageState extends State<ProvisionalPage> {
                             }),
                       )
                     :  Center(
-                  child: data.esaModel1!=null && data.esaModel1!.results!.isEmpty?Text("No Data Available",
+                  child: data !=null && data.isEmpty?Text("No Data Available",
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
