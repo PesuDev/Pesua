@@ -197,7 +197,7 @@ var data=modelValue;
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
-                                                        text: 'PES1234556g',
+                                                        text: '${dataInfo.sgpa}',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -226,10 +226,7 @@ var data=modelValue;
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
-                                                        text: data
-                                                              [
-                                                                    index] .grade??
-                                                            '',
+                                                        text: "${dataInfo.earnedCredit} / ${dataInfo.totalCredit}",
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
