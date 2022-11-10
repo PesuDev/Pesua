@@ -228,8 +228,7 @@ var data=modelValue;
                                                     TextSpan(
                                                         text: data
                                                               [
-                                                                    index]
-                                                                .grade ??
+                                                                    index] .grade??
                                                             '',
                                                         style: TextStyle(
                                                             fontWeight:
@@ -266,7 +265,11 @@ var data=modelValue;
                                                 int index) {
                                               // ESAModel1 model = dataInfo.esaModel1![index];
 
-                                              return Container(
+                                              return dataInfo
+                                                  .esaModel1
+                                                  ?.results?[
+                                              index]
+                                                  .subjectName !=null?Container(
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -416,7 +419,7 @@ var data=modelValue;
                                                     ],
                                                   ),
                                                 ),
-                                              );
+                                              ):Container();
                                             },
                                           ),
 
