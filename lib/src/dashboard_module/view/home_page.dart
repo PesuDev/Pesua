@@ -1260,12 +1260,6 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   SeatingInfoModel model = seatingInfoModel[index];
                   var mydate=DateTimeUtil.convertDate(model.testStartTime!.toInt());
-                  // print("ApiDate==${mydate}");
-                  // print("MyDate==${currentDate}");
-                  // print("MyTime==${Time}");
-                  // print("MyDADA==${live}");
-
-
                   return mydate ==
                           currentDate
                       ? Column(
@@ -1358,64 +1352,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     Text(
-                            //       'Date & Time',
-                            //       style: TextStyle(
-                            //           //   backgroundColor: Color(0xffFFFFFF),
-                            //           color: Color(0xfff9B9B9B),
-                            //           fontSize: 14,
-                            //           fontFamily: 'Open Sans',
-                            //           fontWeight: FontWeight.w500),
-                            //     ),
-                            //     Text(
-                            //       'Terminal',
-                            //       style: TextStyle(
-                            //           //   backgroundColor: Color(0xffFFFFFF),
-                            //           color: Color(0xfff9B9B9B),
-                            //           fontSize: 14,
-                            //           fontFamily: 'Open Sans',
-                            //           fontWeight: FontWeight.w400),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Row(
-                            //
-                            //   children: [
-                            //     Text(
-                            //       ("${DateTimeUtil.convertDate(model.testStartTime!.toInt())}"",") ?? "",
-                            //
-                            //       style: TextStyle(
-                            //           backgroundColor: Color(0xffFFFFFF),
-                            //           color: Color(0xfff333333),
-                            //           fontSize: 16,
-                            //           fontFamily: 'Open Sans',
-                            //           fontWeight: FontWeight.w400),
-                            //     ),
-                            //     Text(
-                            //       ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
-                            //
-                            //       style: TextStyle(
-                            //           backgroundColor: Color(0xffFFFFFF),
-                            //           color: Color(0xfff333333),
-                            //           fontSize: 16,
-                            //           fontFamily: 'Open Sans',
-                            //           fontWeight: FontWeight.w400),
-                            //     ),
-                            //
-                            //     Text(
-                            //       model.terminalName ?? 'S401',
-                            //       style: TextStyle(
-                            //           //   backgroundColor: Color(0xffFFFFFF),
-                            //           color: Color(0xfff333333),
-                            //           fontSize: 14,
-                            //           fontFamily: 'Open Sans',
-                            //           fontWeight: FontWeight.w400),
-                            //     ),
-                            //   ],
-                            // ),
                             SizedBox(
                               height: 4,
                             ),
@@ -1443,9 +1379,6 @@ class _HomePageState extends State<HomePage> {
                           ],
                         )
                       : Container();
-                  // SizedBox(
-                  //         height: 0,
-                  //       );
                 },
               ),
             ),

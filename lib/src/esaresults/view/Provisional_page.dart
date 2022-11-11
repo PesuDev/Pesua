@@ -134,7 +134,7 @@ var data=modelValue;
                                                         text: data
                                                             [
                                                                     index]
-                                                                .subjectCode ??
+                                                                .srn ??
                                                             '',
                                                         style: TextStyle(
                                                             fontWeight:
@@ -226,10 +226,8 @@ var data=modelValue;
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
-                                                        text: data
-                                                              [
-                                                                    index]
-                                                                .grade ??
+                                                        text: dataInfo.esaModel1?.results?[index].grade
+                                                            ??
                                                             '',
                                                         style: TextStyle(
                                                             fontWeight:

@@ -14,6 +14,7 @@ import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/view/widget.dart';
 import '../model/subjectModel.dart';
 import '../viewModel/courseViewModel.dart';
@@ -179,12 +180,17 @@ color: Color(0xff333333),
                   ),
                 ),
                 SizedBox(height: 5,),
-                Text("click here to visit PesuAcademy web portal",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff0091cd),
-                      fontFamily: 'Open Sans',
-                      fontSize: 16
+                InkWell(
+                  onTap: (){
+                    CustomWidgets.webUrl();
+                  },
+                  child: Text("click here to visit PesuAcademy web portal",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff0091cd),
+                        fontFamily: 'Open Sans',
+                        fontSize: 16
+                    ),
                   ),
                 ),
               ],
