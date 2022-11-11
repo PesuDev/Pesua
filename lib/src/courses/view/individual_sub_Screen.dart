@@ -88,8 +88,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
                           ? Tab(
                               child: Text("Content"),
                             )
-                          : Container(color: Colors.red,
-                      child: Text('ff'),),
+                          : Container(
+                      ),
                       (subjectCode.contains(2))
                           ? Tab(
                               child: Text("Objectives"),

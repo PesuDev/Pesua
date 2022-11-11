@@ -631,32 +631,28 @@ class _HomePageState extends State<HomePage> {
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
                                                   color: Colors.black54,
-                                                  borderRadius: BorderRadius.only(
-                                                      bottomLeft:
-                                                      Radius.circular(5),
-                                                      bottomRight:
-                                                      Radius.circular(5)),
+                                                  // borderRadius: BorderRadius.only(
+                                                  //     bottomLeft:
+                                                  //     Radius.circular(5),
+                                                  //     bottomRight:
+                                                  //     Radius.circular(5)),
                                                 ),
                                                 height: 25,
                                                 child: Align(
-                                                  alignment: Alignment.center,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        bottom: 5),
-                                                    child: Text(
-                                                      value
-                                                          .announcementBannerDashModel?[
-                                                      index]
-                                                          .announcementName ??
-                                                          "",
-                                                      // "Invitation to Participate from dated - 07 June 2022",
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.white),
-                                                    ),
+                                                  alignment: Alignment.topCenter,
+                                                  child: Text(
+                                                    value
+                                                        .announcementBannerDashModel?[
+                                                    index]
+                                                        .announcementName ??
+                                                        "",
+                                                    // "Invitation to Participate from dated - 07 June 2022",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white),
                                                   ),
                                                 )),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -1200,19 +1196,19 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     myImage != null
-                        ? Container(
-                      margin: EdgeInsets.only(left: 10),
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
+                        ? Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: ClipOval(
+                            child: Image.memory(
+                              myImage,
+                              gaplessPlayback: true,
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.fill,
 
                             ),
-                      child: Image.memory(
-                        myImage,
-                        gaplessPlayback: true,
-                      ),
-                          )
+                          ),
+                        )
                         :
                          Icon(Icons.account_circle_outlined,size: 50,),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
