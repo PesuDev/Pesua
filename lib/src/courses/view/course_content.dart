@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 import '../viewModel/courseArgument.dart';
 import '../viewModel/courseViewModel.dart';
@@ -121,12 +122,17 @@ class _CourseContentState extends State<CourseContent> {
               ),
             ),
             SizedBox(height: 5,),
-            Text("click here to visit PesuAcademy web portal",
-              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff0091cd),
-                  fontFamily: 'Open Sans',
-                  fontSize: 16
+            InkWell(
+              onTap: (){
+                CustomWidgets.webUrl();
+              },
+              child: Text("click here to visit PesuAcademy web portal",
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff0091cd),
+                    fontFamily: 'Open Sans',
+                    fontSize: 16
+                ),
               ),
             ),
           ],
