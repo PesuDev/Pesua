@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
+import 'package:pesu/utils/constants/shimmer_effect.dart';
 import 'package:pesu/utils/services/date_time.dart';
 import 'package:provider/provider.dart';
 
@@ -204,7 +205,7 @@ class _AnnouncementsState extends State<Announcements> {
 
                   ],
                 )
-              : value.announcementLength==0?Center(child: Text("No Announcements Available"),):Center(child: CircularProgressIndicator()):Container(child: Center(child: Text("No Announcements Available"),),);
+              : value.announcementLength==0?Center(child: Text("No Announcements Available"),):attendanceList():Container(child: Center(child: Text("No Announcements Available"),),);
         })
     );
   }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/attendance/model/attendance_arguments.dart';
 import 'package:pesu/src/attendance/view_model/attendance_view_model.dart';
+import 'package:pesu/utils/constants/shimmer_effect.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/widget.dart';
@@ -231,7 +232,7 @@ fontFamily: 'open sans',
 
             ),
           ),
-        ):Center(child: CircularProgressIndicator(),);
+        ):attendanceList();
       },
 
       ),
