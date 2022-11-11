@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:pesu/src/announcements/model/announcement_model.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/constants/shimmer_effect.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
@@ -294,7 +295,7 @@ class _HomePageState extends State<HomePage> {
 
                                     )
                                 ): value.marqueLength ==0?Container():
-                                CircularProgressIndicator():Container(),
+                                shimmerUi():Container(),
                                 // value.announcementMarque !=null?
                                 // Container(
                                 //
@@ -662,7 +663,7 @@ class _HomePageState extends State<HomePage> {
                                 //  itemCount: imageList.length,
                               ),
                             ): value.marqueLength ==0?Container():
-                     CircularProgressIndicator():Container(),
+                     shimmerUi():Container(),
                             SizedBox(
                               height: 10,
                             ),
@@ -847,7 +848,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ): value.importantAnnouncementLength ==0?Container():
-                CircularProgressIndicator():Container(),
+                shimmerUiForAnnouncement():Container(),
                             SizedBox(
                               height: 10,
                             ),
@@ -1026,7 +1027,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ): value.announcementLength ==0?Container():
-                                CircularProgressIndicator():Container(),
+                                shimmerUiForAnnouncement():Container(),
                           ])))
 
               //drawer: AppDrawerScreen(),
@@ -1133,7 +1134,7 @@ class _HomePageState extends State<HomePage> {
 
                Container();
             })
-            : Center(child: CircularProgressIndicator());
+            : Center(child: shimmerUiForAnnouncement());
       },
     );
   }
@@ -1237,7 +1238,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               )
-            : Center(child: CircularProgressIndicator());
+            : shimmerUiForProfile();
       }),
     );
   }
