@@ -165,6 +165,7 @@ Navigator.pop(context);
                     //     listen: false);
                     // bottomProvider.selectBottomIndex(bottomIndex: 0);
                     //class room videos
+                    CustomWidgets.webUrl();
                   } else if (index == 10) {
                     Navigator.pushNamed(context, AppRoutes.backLog);
                   //  final bottomProvider =
@@ -173,22 +174,22 @@ Navigator.pop(context);
                     // bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 11) {
                     Navigator.pushNamed(context, AppRoutes.onlinePayments);
-                    final bottomProvider =
-                    Provider.of<BottomNavigationProvider>(context,
-                        listen: false);
-                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+                //    final bottomProvider =
+                    // Provider.of<BottomNavigationProvider>(context,
+                    //     listen: false);
+                    // bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 12) {
                     Navigator.pushNamed(context, AppRoutes.placement);
-                    final bottomProvider =
-                    Provider.of<BottomNavigationProvider>(context,
-                        listen: false);
-                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+                    // final bottomProvider =
+                    // Provider.of<BottomNavigationProvider>(context,
+                    //     listen: false);
+                    // bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 13) {
                     Navigator.pushNamed(context, AppRoutes.calendarDashboard);
-                    final bottomProvider =
-                    Provider.of<BottomNavigationProvider>(context,
-                        listen: false);
-                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+                    // final bottomProvider =
+                    // Provider.of<BottomNavigationProvider>(context,
+                    //     listen: false);
+                    // bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 14) {
                     Navigator.pushNamed(context, AppRoutes.announcements);
                     // final bottomProvider =
@@ -208,10 +209,10 @@ Navigator.pop(context);
                   } else if (index == 16) {
 
                     Navigator.pushNamed(context, AppRoutes.transport);
-                    final bottomProvider =
-                    Provider.of<BottomNavigationProvider>(context,
-                        listen: false);
-                    bottomProvider.selectBottomIndex(bottomIndex: 0);
+                    // final bottomProvider =
+                    // Provider.of<BottomNavigationProvider>(context,
+                    //     listen: false);
+                    // bottomProvider.selectBottomIndex(bottomIndex: 0);
                   } else if (index == 17) {
                    CustomWidgets.webUrl();
                     // final bottomProvider =
