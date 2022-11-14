@@ -496,7 +496,7 @@ print("data ${dataVal}");
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20,),
+                            SizedBox(height: 40,),
 
                             GestureDetector(
                               onTap: (){
@@ -576,6 +576,8 @@ print("data ${dataVal}");
                                     ]
 
                                 )),
+
+                            SizedBox(height: 70,),
                           ],
                         ):
                        Container(
