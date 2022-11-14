@@ -134,7 +134,7 @@ var data=modelValue;
                                                         text: data
                                                             [
                                                                     index]
-                                                                .subjectCode ??
+                                                                .srn ??
                                                             '',
                                                         style: TextStyle(
                                                             fontWeight:
