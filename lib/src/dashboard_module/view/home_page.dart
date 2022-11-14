@@ -9,12 +9,14 @@ import 'package:intl/intl.dart';
 import 'package:pesu/src/announcements/model/announcement_model.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
 import 'package:pesu/utils/constants/color_consts.dart';
+import 'package:pesu/utils/constants/shimmer_effect.dart';
 import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:pesu/utils/view/app_drawer_screen.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../../utils/services/date_time.dart';
 import '../../announcements/view/announcement_details.dart';
 import '../../my_profile/profile_viewmodel/profile_viewmodel.dart';
@@ -123,9 +125,7 @@ class _HomePageState extends State<HomePage> {
                 elevation: 0,
               ),
               // backgroundColor: Colors.grey,
-              body: (value.announcementModel != null &&
-                      value.announcementModel?.length != 0)
-                  ? Padding(
+              body: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: SingleChildScrollView(
                           child: Column(
@@ -139,14 +139,13 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 child:
                               sp_token !=null?  getDrawerDetails(context: context):Text("")),
-                                value.announcementMarque !=null?
-                                Container(
+
+                                value.marqueLength!=-1? value.marqueLength>=1?         Container(
                                     margin: EdgeInsets.only(top: 5),
                                     width: MediaQuery.of(context).size.width,
                                     height: 60,
                                     child:
-
-                                    CarouselSlider.builder(
+                                 CarouselSlider.builder(
                                       options: CarouselOptions(
                                         enableInfiniteScroll: true,
                                         reverse: false,
@@ -295,8 +294,8 @@ class _HomePageState extends State<HomePage> {
                                       }, itemCount: value.announcementMarque!.length,
 
                                     )
-                                ):Container(),
-
+                                ): value.marqueLength ==0?Container():
+                                shimmerUi():Container(),
                                 // value.announcementMarque !=null?
                                 // Container(
                                 //
@@ -460,13 +459,6 @@ class _HomePageState extends State<HomePage> {
                                 // ):Container(
                                 //   child:Text("")
                                 // ),
-
-
-
-
-
-
-
                                 SizedBox(height: 10,),
 
                                 Container(
@@ -491,8 +483,10 @@ class _HomePageState extends State<HomePage> {
                                         color: Color(0xffE3E7FD),
                                         text: 'My Courses',
                                         callback: () {
-                                          Navigator.pushNamed(
-                                              context, AppRoutes.courseDashboard);
+                                          final bottomProvider =
+                                          Provider.of<BottomNavigationProvider>(context,
+                                              listen: false);
+                                          bottomProvider.selectBottomIndex(bottomIndex: 1);
                                         }),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width/17,
@@ -502,8 +496,10 @@ class _HomePageState extends State<HomePage> {
                                         color: Color(0xffFDECE3),
                                         text: 'ISA Results',
                                         callback: () {
-                                          Navigator.pushNamed(
-                                              context, AppRoutes.isaResults);
+                                          final bottomProvider =
+                                          Provider.of<BottomNavigationProvider>(context,
+                                              listen: false);
+                                          bottomProvider.selectBottomIndex(bottomIndex: 2);
                                         }),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width/17,
@@ -513,8 +509,10 @@ class _HomePageState extends State<HomePage> {
                                         color: Color(0xffE3FDE3),
                                         text: 'Attendance',
                                         callback: () {
-                                          Navigator.pushNamed(
-                                              context, AppRoutes.attendance);
+                                          final bottomProvider =
+                                          Provider.of<BottomNavigationProvider>(context,
+                                              listen: false);
+                                          bottomProvider.selectBottomIndex(bottomIndex: 3);
                                         }),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width/17,
@@ -576,7 +574,7 @@ class _HomePageState extends State<HomePage> {
                               height: _mainHeight * 0.01,
                             ),
 
-                            Container(
+                     value.bannerLength==-1?   value.bannerLength>=1?    Container(
                               height: _mainHeight * 0.27,
 
                               child: Swiper(
@@ -664,7 +662,8 @@ class _HomePageState extends State<HomePage> {
 
                                 //  itemCount: imageList.length,
                               ),
-                            ),
+                            ): value.marqueLength ==0?Container():
+                     shimmerUi():Container(),
                             SizedBox(
                               height: 10,
                             ),
@@ -680,7 +679,8 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 8,
                             ),
-                            Container(
+                     value.importantAnnouncementLength==-1?value.importantAnnouncementLength>=1?
+                     Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
                               child: Column(
@@ -847,11 +847,12 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ): value.importantAnnouncementLength ==0?Container():
+                shimmerUiForAnnouncement():Container(),
                             SizedBox(
                               height: 10,
                             ),
-                            Container(
+                                value.announcementLength==-1?value.announcementLength>=1?    Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
                               child: Column(
@@ -1025,11 +1026,10 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ): value.announcementLength ==0?Container():
+                                shimmerUiForAnnouncement():Container(),
                           ])))
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    ),
+
               //drawer: AppDrawerScreen(),
             ),
           );
@@ -1134,7 +1134,7 @@ class _HomePageState extends State<HomePage> {
 
                Container();
             })
-            : Center(child: CircularProgressIndicator());
+            : Center(child: shimmerUiForAnnouncement());
       },
     );
   }
@@ -1238,7 +1238,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               )
-            : Center(child: CircularProgressIndicator());
+            : shimmerUiForProfile();
       }),
     );
   }

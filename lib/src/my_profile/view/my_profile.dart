@@ -14,9 +14,12 @@ import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import '../../../utils/constants/color_consts.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
 import '../../login/view/login.dart';
 
 
@@ -83,6 +86,25 @@ class _MyProfileState extends State<MyProfile> {
         resizeToAvoidBottomInset:false,
 
         backgroundColor: Colors.grey[200],
+        bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+          builder: (context, value, child) {
+            return BottomNavigationBar(
+                currentIndex: value.selectedIndex,
+                fixedColor: appThemeColor,
+                items:CustomWidgets.getNavBarItems(),
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                type: BottomNavigationBarType.fixed,
+                onTap: (index) {
+
+                  value.selectBottomIndex(bottomIndex: index);
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                }
+
+            );
+          },
+        ),
         appBar:AppBar(
           elevation: 0,
           backgroundColor: Color(0xff0091cd),
