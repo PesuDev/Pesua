@@ -162,138 +162,123 @@ class _SeatingInfoState extends State<SeatingInfo> {
                                 ],
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(10, 8, 10, 0),
-                              color: Color(0xffFFFFFF),
-                              child: ListTileTheme.merge(
-                                dense: true,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: data.seatingInfoModel?.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    SeatingInfoModel model =
-                                        data.seatingInfoModel![index];
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                            Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Flexible(
+                                        child: Container(
+                                          width: 100,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start,
                                             children: [
-                                              Flexible(
-                                                child: Container(
-                                                  width: 100,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        model.subjectCode ?? "",
-                                                        maxLines: 5,
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Open Sans',
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Color(
-                                                                0xff000000)),
-                                                      ),
-                                                      Text(
-                                                        model.subjectName ?? "",
-                                                        maxLines: 5,
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Open Sans',
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Color(
-                                                                0xff8b8b8b)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                              Text(
+                                                model.subjectCode ?? "",
+                                                maxLines: 5,
+                                                textAlign:
+                                                TextAlign.start,
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                    'Open Sans',
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w400,
+                                                    color: Color(
+                                                        0xff000000)),
                                               ),
-                                              Container(
-                                                width: 100,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      '${DateTimeUtil.convertDate(model.testStartTime!.toInt())}'
-                                                          "",
-                                                      maxLines: 5,
-                                                      textAlign:
-
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Color(
-                                                              0xff333333)),
-                                                    ),
-                                                    Text(
-                                                      ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
-                                                      maxLines: 5,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Color(
-                                                              0xff000000)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 100,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      model.terminalName ?? "",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color(
-                                                              0xff000000)),
-                                                    ),
-                                                  ],
-                                                ),
+                                              Text(
+                                                model.subjectName ?? "",
+                                                maxLines: 5,
+                                                textAlign:
+                                                TextAlign.start,
+                                                style: TextStyle(
+                                                    fontFamily:
+                                                    'Open Sans',
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                    FontWeight.w400,
+                                                    color: Color(
+                                                        0xff8b8b8b)),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        Divider(
-                                          thickness: 3,
+                                      ),
+                                      Container(
+                                        width: 100,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${DateTimeUtil.convertDate(model.testStartTime!.toInt())}'
+                                                  "",
+                                              maxLines: 5,
+                                              textAlign:
+
+                                              TextAlign.start,
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                  'Open Sans',
+                                                  fontSize: 16,
+                                                  fontWeight:
+                                                  FontWeight.w400,
+                                                  color: Color(
+                                                      0xff333333)),
+                                            ),
+                                            Text(
+                                              ("${DateTimeUtil.converDateIntoTime(model.testStartTime!.toInt())}-${DateTimeUtil.converDateIntoTime(model.testEndTime!.toInt())}") ?? "",
+                                              maxLines: 5,
+                                              textAlign:
+                                              TextAlign.start,
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                  'Open Sans',
+                                                  fontSize: 16,
+                                                  fontWeight:
+                                                  FontWeight.w400,
+                                                  color: Color(
+                                                      0xff000000)),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    );
-                                  },
+                                      ),
+                                      Container(
+                                        width: 100,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              model.terminalName ?? "",
+                                              style: TextStyle(
+                                                  fontFamily:
+                                                  'Open Sans',
+                                                  fontSize: 16,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  color: Color(
+                                                      0xff000000)),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ),
+                                Divider(
+                                  thickness: 3,
+                                ),
+                              ],
+                            )
+
                           ],
                         );
                       }),
