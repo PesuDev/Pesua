@@ -1221,7 +1221,7 @@ class _MyProfileState extends State<MyProfile> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   content: Container(
-                    height: MediaQuery.of(context).size.height / 1.9,
+                    height: MediaQuery.of(context).size.height / 1.8,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(7),

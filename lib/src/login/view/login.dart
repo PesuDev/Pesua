@@ -316,7 +316,6 @@ class _LoginState extends State<Login> {
                               username: usernameController.text);
 
                           if (responseModel != null) {
-                            CustomWidgets.showLoaderDialogWithoutText(context: context);
                             log("Oye login came");
                             SharedPreferenceUtil util =
                             SharedPreferenceUtil();
