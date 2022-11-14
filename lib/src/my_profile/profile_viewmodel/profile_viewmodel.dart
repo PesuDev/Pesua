@@ -94,17 +94,4 @@ notifyListeners();
 }
 
 
-// dynamic getUpdatePasswordDetails(
-//     {required UpdatePasswordModel updatePasswordModel}) async {
-//   final data = await updatePasswordApi.updatePasswordDetails(
-//       updatePasswordModel: updatePasswordModel);
-//   return data;
-// }
-// dynamic getUpdateDetails(
-//     {required UpdateDetailModel updateDetailModel}) async {
-//   final data = await updateDetailApi.updateDetails(
-//       updateDetailModel: updateDetailModel);
-//   return data;
-// }
-
 }
