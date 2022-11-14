@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/custom_widgets.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
 
 class Examination extends StatefulWidget {
   const Examination({Key? key}) : super(key: key);
@@ -11,6 +17,25 @@ class _ExaminationState extends State<Examination> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+        builder: (context, value, child) {
+          return BottomNavigationBar(
+              currentIndex: value.selectedIndex,
+              fixedColor: appThemeColor,
+              items:CustomWidgets.getNavBarItems(),
+              selectedFontSize: 10,
+              unselectedFontSize: 10,
+              type: BottomNavigationBarType.fixed,
+              onTap: (index) {
+
+                value.selectBottomIndex(bottomIndex: index);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+              }
+
+          );
+        },
+      ),
       appBar: AppBar(
         title: Text("Examination Grievance Redressal Sysytem",overflow: TextOverflow.ellipsis,maxLines: 1,),
       ),

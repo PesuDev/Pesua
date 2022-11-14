@@ -153,7 +153,7 @@ my()async{
 
                            // color: Colors.amber,
                             height:
-                                MediaQuery.of(context).size.height/1.35,
+                                MediaQuery.of(context).size.height/1.47,
                             padding: EdgeInsets.only(top: 8, bottom: 8),
                             child: ListView.builder(
                                 itemCount: model.courseModel?.sTUDENTSUBJECTS

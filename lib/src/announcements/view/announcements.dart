@@ -3,10 +3,15 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pesu/src/announcements/view_model/announcement_viewmodel.dart';
+import 'package:pesu/utils/constants/shimmer_effect.dart';
 import 'package:pesu/utils/services/date_time.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/custom_widgets.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../../utils/view/widget.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
 import 'announcement_details.dart';
 
 class Announcements extends StatefulWidget {
@@ -36,12 +41,30 @@ class _AnnouncementsState extends State<Announcements> {
 
           appBar: sideNavAppBar("Announcements"),
 
+        bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+          builder: (context, value, child) {
+            return BottomNavigationBar(
+                currentIndex: value.selectedIndex,
+                fixedColor: appThemeColor,
+                items:CustomWidgets.getNavBarItems(),
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                type: BottomNavigationBarType.fixed,
+                onTap: (index) {
 
+                  value.selectBottomIndex(bottomIndex: index);
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                }
+
+            );
+          },
+        ),
         body:
         Consumer<AnnouncementViewModel>(builder: (context, value, child) {
-          return value.announcementModel != null &&
-                  value.announcementModel?.length != 0
-              ? Column(
+          return value.announcementLength== -1?
+                  value.announcementLength>=1?
+               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
@@ -182,7 +205,7 @@ class _AnnouncementsState extends State<Announcements> {
 
                   ],
                 )
-              : Center(child: CircularProgressIndicator());
+              : value.announcementLength==0?Center(child: Text("No Announcements Available"),):attendanceList():Container(child: Center(child: Text("No Announcements Available"),),);
         })
     );
   }

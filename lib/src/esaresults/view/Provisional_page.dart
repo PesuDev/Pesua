@@ -134,7 +134,7 @@ var data=modelValue;
                                                         text: data
                                                             [
                                                                     index]
-                                                                .subjectCode ??
+                                                                .srn ??
                                                             '',
                                                         style: TextStyle(
                                                             fontWeight:
@@ -197,7 +197,7 @@ var data=modelValue;
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
-                                                        text: 'PES1234556g',
+                                                        text: '${dataInfo.sgpa}',
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -226,11 +226,7 @@ var data=modelValue;
                                                             color: Color(
                                                                 0xff9B9B9B))),
                                                     TextSpan(
-                                                        text: data
-                                                              [
-                                                                    index]
-                                                                .grade ??
-                                                            '',
+                                                        text: "${dataInfo.earnedCredit} / ${dataInfo.totalCredit}",
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight
@@ -266,7 +262,11 @@ var data=modelValue;
                                                 int index) {
                                               // ESAModel1 model = dataInfo.esaModel1![index];
 
-                                              return Container(
+                                              return dataInfo
+                                                  .esaModel1
+                                                  ?.results?[
+                                              index]
+                                                  .subjectName !=null?Container(
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -416,7 +416,7 @@ var data=modelValue;
                                                     ],
                                                   ),
                                                 ),
-                                              );
+                                              ):Container();
                                             },
                                           ),
 

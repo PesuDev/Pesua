@@ -20,6 +20,9 @@ esaGraphModel ?esaGraphModeData;
    int? lengthData=-1;
    int? lengthData4=-1;
   ESAModel4? esaModel4;
+  var sgpa;
+  var totalCredit;
+  var earnedCredit;
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
   void  getESAResults(
@@ -35,6 +38,20 @@ esaGraphModel ?esaGraphModeData;
         randomNum: randomNum,);
 
     esaModel1 = data;
+    for (var valueData in esaModel1!.results!){
+      if(valueData.subjectCode=="TAKEN"){
+        totalCredit=valueData.grade;
+      }
+      else if(valueData.subjectCode=="EARNED"){
+        earnedCredit=valueData.grade;
+      }
+      else if (valueData.subjectCode=="SGPA"){
+        sgpa=valueData.grade;
+      }
+    }
+    esaModel1?.results?.map((e) {
+
+    });
 
     notifyListeners();
   }

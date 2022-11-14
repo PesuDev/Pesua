@@ -16,17 +16,24 @@ import '../model/announcement_banner_model.dart';
 class AnnouncementViewModel extends ChangeNotifier {
   late final AnnouncementApiServices _apiService = AnnouncementApiServices();
 List<AnnouncementModel> ?announcementModel;
+
 List<AnnouncementBannerModel> ?announcementBannerModel;
 List<Announcement_marqueModel>? announcementMarque;
+int marqueLength=-1;
+int importantAnnouncementLength=-1;
+int  announcementLength=-1;
 List<AnnouncementImportantModel>? announcementImportant;
 List<AnnouncementBannerDashModel>? announcementBannerDashModel;
+int bannerLength=-1;
 
 Future <List<AnnouncementModel>?>getAnnouncementListInfo() async {
     log("annuncement");
     final data = await _apiService.fetchAnnouncement();
     log("hey i came");
+
     // this.items = data?.studentSemesterWise?.map((e) => e.className.toString()).toList() ?? <String>[];
    announcementModel= data;
+   announcementLength=announcementModel?.length??0;
     final marqueData=await _apiService.fetchAnnouncementMarque();
 //   log("Announcement data: ${data}");
   announcementMarque=[];
@@ -38,7 +45,7 @@ Future <List<AnnouncementModel>?>getAnnouncementListInfo() async {
 
     }
 
-
+marqueLength=announcementMarque?.length ?? 0 ;
   }
   final importantData=await _apiService.fetchAnnouncementImportant();
   announcementImportant=[];
@@ -52,6 +59,7 @@ announcementImportant?.add(important);
 
 
   }
+  importantAnnouncementLength=announcementImportant?.length??0;
 
   final bannerDashData=await _apiService.fetchAnnouncementBannerDash();
  announcementBannerDashModel=[];
@@ -65,7 +73,7 @@ announcementImportant?.add(important);
 
 
   }
-
+bannerLength=announcementBannerDashModel?.length ??0;
   //print("????????????????   ${announcementMarque?.toList().toSet()}  ${announcementMarque?.toList().length}");
     notifyListeners();
   }

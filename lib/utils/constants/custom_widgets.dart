@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'color_consts.dart';
 class CustomWidgets{
   static void showLoaderDialog({required BuildContext context, required String message}) {
     AlertDialog alert = AlertDialog(
@@ -76,4 +78,61 @@ class CustomWidgets{
      return  launch("https://www.pesuacademy.com/Academy/");
 
    }
+
+ static  List<BottomNavigationBarItem> getNavBarItems() {
+    return [
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home_outlined,
+            color: Colors.black54,
+          ),
+          label: 'HOME',
+          backgroundColor: Colors.green.shade50,
+          activeIcon: Icon(
+            Icons.home_outlined,
+            color: appThemeColor,
+          )),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.wysiwyg_outlined,
+            color: Colors.black54,
+          ),
+          label: 'MY COURSES',
+          activeIcon: Icon(
+            Icons.wysiwyg_outlined,
+            color: appThemeColor,
+          )),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.add_chart,
+            color: Colors.black54,
+          ),
+          label: 'ISA RESULTS',
+          activeIcon: Icon(
+            Icons.add_chart,
+            color: appThemeColor,
+          )),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.access_time,
+            color: Colors.black54,
+          ),
+          label: 'ATTENDANCE',
+          activeIcon: Icon(
+            Icons.access_time,
+            color: appThemeColor,
+          )),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.menu,
+          color: Colors.black54,
+        ),
+        label: 'MENU',
+        activeIcon: Icon(
+          Icons.menu,
+          color: appThemeColor,
+        ),
+      ),
+    ];
+  }
 }

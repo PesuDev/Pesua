@@ -14,9 +14,12 @@ import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import '../../../utils/constants/color_consts.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../../utils/services/sharedpreference_utils.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
 import '../../login/view/login.dart';
 
 
@@ -83,6 +86,25 @@ class _MyProfileState extends State<MyProfile> {
         resizeToAvoidBottomInset:false,
 
         backgroundColor: Colors.grey[200],
+        bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+          builder: (context, value, child) {
+            return BottomNavigationBar(
+                currentIndex: value.selectedIndex,
+                fixedColor: appThemeColor,
+                items:CustomWidgets.getNavBarItems(),
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                type: BottomNavigationBarType.fixed,
+                onTap: (index) {
+
+                  value.selectBottomIndex(bottomIndex: index);
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                }
+
+            );
+          },
+        ),
         appBar:AppBar(
           elevation: 0,
           backgroundColor: Color(0xff0091cd),
@@ -261,7 +283,7 @@ class _MyProfileState extends State<MyProfile> {
                                     borderRadius:
                                     BorderRadius.circular(12),
                                     color: (edit == false)
-                                        ? Color(0xff286090)
+                                        ? Color(0xff0091cd)
                                         : Color(0xfff36b15),
                                     /*    boxShadow: [
                                   BoxShadow(
@@ -640,7 +662,7 @@ class _MyProfileState extends State<MyProfile> {
                               Column(
                                 children: [
                                   Text(
-                                    "EXAM",
+                                    "Exam",
                                     style: TextStyle(
                                         color: Color(0xff9B9B9B), fontSize: 14),
                                   ),
@@ -1257,7 +1279,7 @@ class _MyProfileState extends State<MyProfile> {
                                       return null;
                                     }
                                   },
-                                  autofocus: true,
+                                  //autofocus: true,
                                   controller: currentPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
@@ -1302,12 +1324,12 @@ class _MyProfileState extends State<MyProfile> {
                                       return null;
                                     }
                                   },
-                                  autofocus: true,
+                                  //autofocus: true,
                                   controller: newPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
                                         top: 1, left: 4, bottom: 1, right: 4),
-                                    hintText: "Enter Your New Password",
+                                    hintText: "Enter New Password",
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
@@ -1344,12 +1366,12 @@ class _MyProfileState extends State<MyProfile> {
                                       return 'Password Does not match';
                                     }
                                   },
-                                  autofocus: true,
+                                 // autofocus: true,
                                   controller: confirmPasswordController,
                                   decoration: new InputDecoration(
                                     contentPadding: EdgeInsets.only(
                                         top: 1, left: 4, bottom: 1, right: 4),
-                                    hintText: "Enter Your Confirm Password",
+                                    hintText: "Enter Confirm Password",
                                     hintStyle: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
@@ -1489,6 +1511,9 @@ class _MyProfileState extends State<MyProfile> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
             contentPadding: EdgeInsets.only(top: 15,left: 20,right: 20),
             content: Container(
               width: MediaQuery.of(context).size.width,
@@ -1588,8 +1613,13 @@ class _MyProfileState extends State<MyProfile> {
         barrierDismissible: true,
         builder: (BuildContext context) {
           return AlertDialog(
-            contentPadding: EdgeInsets.all(0),
-            content: Container(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
+           // contentPadding: EdgeInsets.all(0),
+              contentPadding: EdgeInsets.only(top: 15,left: 20,right: 20),
+
+              content: Container(
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
               height: MediaQuery.of(context).size.height/5,

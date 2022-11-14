@@ -5,7 +5,10 @@ import 'package:pesu/src/seatinginfo/model/seating_info_model.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/constants/color_consts.dart';
+import '../../../utils/constants/custom_widgets.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../../utils/services/date_time.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
 import '../viewmodel/seating_info_viewmodel.dart';
 
 class SeatingInfo extends StatefulWidget {
@@ -36,6 +39,25 @@ class _SeatingInfoState extends State<SeatingInfo> {
     return Scaffold(
         appBar: sideNavAppBar("Seating Info"),
         backgroundColor: Colors.white.withOpacity(0.9),
+        bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+          builder: (context, value, child) {
+            return BottomNavigationBar(
+                currentIndex: value.selectedIndex,
+                fixedColor: appThemeColor,
+                items:CustomWidgets.getNavBarItems(),
+                selectedFontSize: 10,
+                unselectedFontSize: 10,
+                type: BottomNavigationBarType.fixed,
+                onTap: (index) {
+
+                  value.selectBottomIndex(bottomIndex: index);
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                }
+
+            );
+          },
+        ),
         body: Consumer<SeatingInfoViewModel>(builder: (context, data, child) {
           return data.seatingInfoModel != null &&
                   data.seatingInfoModel!.isNotEmpty

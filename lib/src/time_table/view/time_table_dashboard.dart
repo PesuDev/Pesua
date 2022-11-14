@@ -8,6 +8,10 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
+import '../../../utils/constants/custom_widgets.dart';
+import '../../../utils/services/bottom_navigaton_provider.dart';
+import '../../dashboard_module/view/dashboard_page.dart';
+
 
 class TimeTable extends StatefulWidget {
    TimeTable({this.indexvalue});
@@ -57,6 +61,25 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
             appBar: sideNavAppBar("TimeTable"),
 
             backgroundColor:Colors.red.withOpacity(0.9),
+            bottomNavigationBar:    Consumer<BottomNavigationProvider>(
+            builder: (context, value, child) {
+      return BottomNavigationBar(
+      currentIndex: value.selectedIndex,
+      fixedColor: appThemeColor,
+      items:CustomWidgets.getNavBarItems(),
+      selectedFontSize: 10,
+      unselectedFontSize: 10,
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+
+       value.selectBottomIndex(bottomIndex: index);
+       Navigator.push(
+           context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+      }
+
+      );
+      },
+      ),
             body:
             Column(
                 children: [
