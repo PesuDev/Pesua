@@ -39,7 +39,7 @@ class _SessionEffectState extends State<SessionEffect> {
       DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="saturday"?6:
       DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?7:0,
     );
-    sessionEffectivenessViewmodel!.feedbackDetails(timeTableTemplateDetailsId: '2c9d24fd-a1bc-11e7-8ecc-79e925fb7f88', BatchId: 26, mode: 2,
+    sessionEffectivenessViewmodel?.feedbackDetails(timeTableTemplateDetailsId: '2c9d24fd-a1bc-11e7-8ecc-79e925fb7f88', BatchId: 26, mode: 2,
         subjectCode: 'UM21MB651B', action: 39,
         BatchClassId: 1498,
         isLocallySavedData: 'FALSE',
@@ -328,7 +328,7 @@ print("data ${dataVal}");
                             iconSize: 15,
                               ),
                         ):Container(),
-                        data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
+                        data.sessionEffectivenessModel!.timetableList !=null && time.length>0 ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -521,25 +521,27 @@ print("data ${dataVal}");
                             SizedBox(height: 40,),
 
                             GestureDetector(
-                              onTap: (){
-                                onPressed: ()async{
-                                  await sessionEffectivenessViewmodel?.feedbackDetails(
-                                      timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
-                                      BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
-                                      mode: 2,
-                                      // subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
-                                      subjectCode: subjectCode??'',
-                                      action: 39,
-                                      BatchClassId: data.sessionEffectivenessModel?.subjectlist?[0].batchClassId ??0,
-                                      isLocallySavedData: 'FALSE',
-                                      subjectId:data.sessionEffectivenessModel?.subjectlist?[0].subjectId ??0 ,
-                                      ClassId: data.sessionEffectivenessModel?.subjectlist?[0].classId ??0,
-                                      ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[0].classBatchSectionId ??0,
-                                      DepartmentId: data.sessionEffectivenessModel?.subjectlist?[0].departmentId ??0,
-                                      status: selectedRadio??0,
-                                      randomNum: 0.0780400788501232,
-                                      ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
-                                };
+                              onTap: ()async{
+                                await sessionEffectivenessViewmodel?.feedbackDetails(
+                                timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
+                                BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
+                                mode: 2,
+                                //subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                 subjectCode: subjectCode??'',
+                                action: 39,
+                                BatchClassId: data.sessionEffectivenessModel?.subjectlist?[0].batchClassId ??0,
+                                isLocallySavedData: 'FALSE',
+                                subjectId:data.sessionEffectivenessModel?.subjectlist?[0].subjectId ??0 ,
+                                ClassId: data.sessionEffectivenessModel?.subjectlist?[0].classId ??0,
+                                ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[0].classBatchSectionId ??0,
+                                DepartmentId: data.sessionEffectivenessModel?.subjectlist?[0].departmentId ??0,
+                                status: selectedRadio??0,
+                                randomNum: 0.0780400788501232,
+                                ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
+
+                              },
+                              onDoubleTap: (){
+
                               },
                               child: Container(
                                 height: 34,
