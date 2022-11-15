@@ -1,8 +1,14 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/cheking_network.dart';
 import '../viewModel/courseViewModel.dart';
 
 class CourseOutComes extends StatefulWidget {
@@ -17,10 +23,17 @@ class CourseOutComes extends StatefulWidget {
 
 class _CourseOutComesState extends State<CourseOutComes> {
   CourseViewModel _unitViewModel = CourseViewModel();
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     _unitViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _unitViewModel.getUnitDetails(
         action: 18,
@@ -29,9 +42,53 @@ class _CourseOutComesState extends State<CourseOutComes> {
         ccId:int.parse( widget.ccId.toString()),
         randomNum: 0.23423121848145212);
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return Consumer<CourseViewModel>(builder: (context, model, child) {
+    return  _connectionStatus == true
+        ?
+      Consumer<CourseViewModel>(builder: (context, model, child) {
       return model.subjectModel != null &&
           model.subjectModel?.cOURSECONTENT?.length != 0
           ? Container(
@@ -77,6 +134,7 @@ class _CourseOutComesState extends State<CourseOutComes> {
             fontWeight: FontWeight.bold,
             fontSize: 20
         ),));
-    });
+    }):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
 }

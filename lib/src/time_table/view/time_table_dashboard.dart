@@ -1,5 +1,10 @@
 
+import 'dart:async';
+import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pesu/src/time_table/view/subpages_timetable.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
@@ -8,6 +13,7 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'dart:developer';
 
+import '../../../utils/constants/cheking_network.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/bottom_navigaton_provider.dart';
 import '../../dashboard_module/view/dashboard_page.dart';
@@ -28,6 +34,47 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   late TabController tabController;
   late TimeTableViewmodel _viewModel;
 
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
+
 
 
 
@@ -37,17 +84,26 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
   DateTime date = DateTime.now();
    @override
   void initState() {
+     initConnectivity();
+     _connectivitySubscription =
+         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     // TODO: implement initState
     super.initState();
 
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
 
 
 
-   @override
+
+  @override
   Widget build(BuildContext context) {
 
-    return
+     return _connectionStatus == true
+         ?
       DefaultTabController(
         initialIndex: DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?0:
         DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?1:
@@ -228,7 +284,8 @@ class _TimeTableState extends State<TimeTable>  with SingleTickerProviderStateMi
 
             ])
         )
-      );
+      ):WillPopScope(onWillPop: () {return exit(0);
+     }, child: NoNetworkWidget());
   }
 
   }

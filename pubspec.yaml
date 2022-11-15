@@ -31,7 +31,6 @@ dependencies:
   dio: ^4.0.6
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
-  connectivity_plus:
   shimmer: ^2.0.0
   open_file: ^3.2.1
   flutter_swiper_null_safety: ^1.0.2
@@ -52,6 +51,8 @@ dependencies:
   flutter_cached_pdfview: ^0.4.1
   carousel_slider: ^4.1.1
   extended_image: 3.0.0
+  data_connection_checker_tv: ^0.3.4-nullsafety
+  connectivity_plus: 1.4.0
 
 
 

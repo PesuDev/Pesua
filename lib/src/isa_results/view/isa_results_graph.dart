@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
+import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pesu/src/isa_results/model/isaGraphModel.dart';
 import 'package:pesu/src/isa_results/model/isa_dropdown_model.dart';
 import 'package:pesu/src/isa_results/model/isa_graph_formatter.dart';
@@ -13,6 +17,8 @@ import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
+import '../../../utils/constants/cheking_network.dart';
 
 class IsaResultGraph extends StatefulWidget {
  int? subjectId;
@@ -33,11 +39,55 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
 
 
   late IsaViewModel? isaViewModel;
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
 
 
 
   @override
   void initState() {
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     var passid=("${widget.batchClassId}-${widget.classBatchSectionId}-${widget.iSAMarksMasterId}");
     print("mypass${passid}");
 
@@ -59,9 +109,14 @@ class _IsaResultGraphState extends State<IsaResultGraph> {
     //     fetchId: "1400-4164",
     //     randomNum: 0.4054309131337863);
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _connectionStatus == true
+        ?      Scaffold(
       appBar: sideNavAppBar("ISA Results graph"),
       body: Consumer<IsaViewModel>(builder: (context, model, child) {
 
@@ -137,7 +192,8 @@ return Container(
         return Center(child: Container(child: CircularProgressIndicator(),));
         }
       }),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
 }
 

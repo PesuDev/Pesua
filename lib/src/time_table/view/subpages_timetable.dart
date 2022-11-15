@@ -1,12 +1,16 @@
 
 import 'dart:async';
+import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:pesu/src/time_table/model/time_table_model.dart';
 import 'package:pesu/src/time_table/viewmodel/timetable_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/cheking_network.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
 
@@ -23,9 +27,53 @@ class _TableDetailsState extends State<TableDetails> {
   late TimeTableViewmodel _viewModel;
   TimeTableModel? timeTableModel;
 
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
+
   @override
   void initState() {
-
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
     refres();
 
@@ -36,6 +84,11 @@ class _TableDetailsState extends State<TableDetails> {
         randomNum: 0.8235991550065647,
         callMethod: 'background');
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+
 
   Future<void>refres()async{
     _viewModel.getTimeTableDetails(
@@ -52,7 +105,8 @@ class _TableDetailsState extends State<TableDetails> {
         :widget.day=="friday"?Friday():widget.day=="saturday"?Saturday():widget.day=="sunday"?Sunday():Container();
   }
   Widget Monday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ? Scaffold(
       body:
       RefreshIndicator(
 
@@ -214,10 +268,12 @@ class _TableDetailsState extends State<TableDetails> {
           ),
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
   Widget Tuesday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?      Scaffold(
       body:
       RefreshIndicator(
 
@@ -379,10 +435,12 @@ class _TableDetailsState extends State<TableDetails> {
           ),
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
   Widget Wednesday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?        Scaffold(
       body:
       RefreshIndicator(
 
@@ -544,11 +602,13 @@ class _TableDetailsState extends State<TableDetails> {
           ),
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
 
   }
   Widget Thursday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?       Scaffold(
       body:
       RefreshIndicator(
 
@@ -710,12 +770,14 @@ class _TableDetailsState extends State<TableDetails> {
           ),
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
 
   }
 
   Widget Friday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?       Scaffold(
       body:
       RefreshIndicator(
 
@@ -877,11 +939,14 @@ class _TableDetailsState extends State<TableDetails> {
           ),
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
 
   }
   Widget Saturday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?
+    Scaffold(
       backgroundColor: Color(0xffF8F9F9),
       body:
       Center(
@@ -941,11 +1006,14 @@ class _TableDetailsState extends State<TableDetails> {
           ],
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
 
   }
   Widget Sunday(){
-    return Scaffold(
+    return _connectionStatus == true
+        ?
+      Scaffold(
       backgroundColor: Colors.white,
       body:
       Center(
@@ -984,7 +1052,8 @@ class _TableDetailsState extends State<TableDetails> {
           ],
         ),
       ),
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
 
   }
 

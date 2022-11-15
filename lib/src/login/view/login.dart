@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:avoid_keyboard/avoid_keyboard.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pesu/src/dashboard_module/view/dashboard_page.dart';
 import 'dart:math' as math;
@@ -18,6 +20,7 @@ import 'package:pesu/utils/services/sharedpreference_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../utils/constants/cheking_network.dart';
 import '../../../utils/constants/custom_widgets.dart';
 
 class Login extends StatefulWidget {
@@ -33,9 +36,53 @@ class _LoginState extends State<Login> {
   late TextEditingController passwordController = TextEditingController();
   late TextEditingController usernameController = TextEditingController();
   late TextEditingController forgetPasswordController = TextEditingController();
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
 
   @override
   void initState() {
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
     _viewModel = Provider.of<LoginViewModel>(context, listen: false);
     _focus.addListener(_onFocusChange);
@@ -51,7 +98,10 @@ class _LoginState extends State<Login> {
     _focusPass.removeListener(_onFocusChange);
     _focus.dispose();
     _focusPass.dispose();
+    _connectivitySubscription.cancel();
+
   }
+
 
   void _onFocusChange() {
     debugPrint("Focus: ${_focus.hasFocus.toString()}");
@@ -66,7 +116,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return _connectionStatus == true
+        ?
+      SafeArea(
         child: Scaffold(
           appBar: AppBar(
               backgroundColor: Colors.white,
@@ -309,13 +361,15 @@ class _LoginState extends State<Login> {
 
 
                         }else {
-                          CustomWidgets.showLoaderDialog(context: context, message: "Signing In....");
+                        //  CustomWidgets.showLoaderDialog(context: context, message: "Signing In....");
                           LoginModel responseModel =
                           await _viewModel.getLoginDetails(
                               password: passwordController.text,
                               username: usernameController.text);
 
                           if (responseModel != null) {
+                            CustomWidgets.showLoaderDialog(context: context, message: "Signing In....");
+
                             log("Oye login came");
                             SharedPreferenceUtil util =
                             SharedPreferenceUtil();
@@ -455,7 +509,8 @@ class _LoginState extends State<Login> {
             )
 
         )
-    );
+    ):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
 
 

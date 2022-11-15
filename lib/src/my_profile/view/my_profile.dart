@@ -1,7 +1,11 @@
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'dart:typed_data';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +18,7 @@ import 'package:pesu/utils/constants/sp_constants.dart';
 import 'package:pesu/utils/view/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import '../../../utils/constants/cheking_network.dart';
 import '../../../utils/constants/color_consts.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/services/app_routes.dart';
@@ -44,10 +49,15 @@ class _MyProfileState extends State<MyProfile> {
 
   final _formKey = GlobalKey<FormState>();
   final _formKey1 = GlobalKey<FormState>();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
 
   @override
   void initState() {
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
 
 
     profileViewmodel = Provider.of<ProfileViewmodel>(context, listen: false);
@@ -68,10 +78,11 @@ class _MyProfileState extends State<MyProfile> {
       userType: 1,
       // userRoleId: '9edf9870-4ff9-4a05-828e-815af70cf760'
     );
-
-
-
-
+  }
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
   }
 
 
@@ -80,9 +91,52 @@ class _MyProfileState extends State<MyProfile> {
   String _errorMessage = '';
 
 
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      _connectionStatus == true
+          ?
+      Scaffold(
         resizeToAvoidBottomInset:false,
 
         backgroundColor: Colors.grey[200],
@@ -1205,7 +1259,8 @@ class _MyProfileState extends State<MyProfile> {
             ),
           )
               : Center(child: CircularProgressIndicator());
-        }));
+        })):WillPopScope(onWillPop: () {return exit(0);
+      }, child: NoNetworkWidget());
   }
 
   void changePasswordPopUp() {

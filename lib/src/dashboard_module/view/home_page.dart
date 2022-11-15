@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:intl/intl.dart';
 import 'package:pesu/src/announcements/model/announcement_model.dart';
@@ -50,6 +53,46 @@ class _HomePageState extends State<HomePage> {
    var _currentIndex;
  var  hideIconColor= Color(0xff337ab7);
 
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
+
   //DateFormat('dd-MM-yyyy').add_jm().format(DateTime.now());
   // DateFormat('dd-MM-yyyy HH:MM').format(DateTime.now());
 
@@ -80,6 +123,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    initConnectivity();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     profileViewmodel = Provider.of<ProfileViewmodel>(context, listen: false);
     profileViewmodel?.getProfileDetails(
         action: 4,
@@ -100,6 +146,10 @@ class _HomePageState extends State<HomePage> {
         randomNum: 0.6803998119716814,
         callMethod: 'background');
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
 
   var _mainHeight;
   var _mainWidth;
@@ -108,7 +158,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
     _mainWidth = MediaQuery.of(context).size.width;
-    return RefreshIndicator(
+    return
+      RefreshIndicator(
       onRefresh: _submittedRefreshList,
       child: Consumer2<AnnouncementViewModel, SeatingInfoViewModel>(
         builder: (context, value, data, child) {

@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:pesu/src/courses/view/course_content.dart';
 import 'package:pesu/src/courses/view/course_objectives.dart';
@@ -13,6 +17,7 @@ import 'package:pesu/src/courses/viewModel/courseArgument.dart';
 import 'package:pesu/utils/services/app_routes.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/constants/cheking_network.dart';
 import '../../../utils/constants/color_consts.dart';
 import '../../../utils/constants/custom_widgets.dart';
 import '../../../utils/view/widget.dart';
@@ -32,6 +37,10 @@ class IndividualSubScreen extends StatefulWidget {
 class _IndividualSubScreenState extends State<IndividualSubScreen>
     with TickerProviderStateMixin {
   CourseViewModel _subjectViewModel = CourseViewModel();
+  bool _connectionStatus = true;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
   int? selected;
   int? tabValue;
   late final _tabController =
@@ -40,6 +49,8 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
   @override
   void initState() {
     super.initState();
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     _subjectViewModel = Provider.of<CourseViewModel>(context, listen: false);
     _subjectViewModel.getSubjectContentDetails(
         action: 18,
@@ -49,9 +60,53 @@ class _IndividualSubScreenState extends State<IndividualSubScreen>
         randomNum: 0.9969186291364449);
 
   }
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
 
+
+
+
+  Future<void> initConnectivity() async {
+    ConnectivityResult result = ConnectivityResult.none;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.mobile:
+        setState(() => _connectionStatus = true);
+        break;
+      case ConnectivityResult.none:
+        setState(() => _connectionStatus = false);
+        break;
+      default:
+        setState(() => _connectionStatus = true);
+        break;
+    }
+  }
   Widget build(BuildContext context) {
-    return Consumer<CourseViewModel>(builder: (context, model, child) {
+    return  _connectionStatus == true
+        ?
+      Consumer<CourseViewModel>(builder: (context, model, child) {
        subjectCode = model.subjectModel?.cOURSECONTENT
           ?.map((e) => e.courseContentTypeId)
           .toSet()
@@ -198,7 +253,8 @@ color: Color(0xff333333),
           ),
         ),
       );
-    });
+    }):WillPopScope(onWillPop: () {return exit(0);
+    }, child: NoNetworkWidget());
   }
 
 }

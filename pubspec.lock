@@ -140,7 +140,7 @@ packages:
       name: connectivity_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.9"
+    version: "1.4.0"
   connectivity_plus_linux:
     dependency: transitive
     description:
@@ -197,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  data_connection_checker_tv:
+    dependency: "direct main"
+    description:
+      name: data_connection_checker_tv
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.5-nullsafety"
   dbus:
     dependency: transitive
     description:
