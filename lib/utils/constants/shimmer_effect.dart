@@ -158,7 +158,7 @@ Container shimmerUiForProfile() {
                 children: [
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
-      width: 40,
+                     width: 40,
                     height: 10,
                     color: Colors.white,
                   ),

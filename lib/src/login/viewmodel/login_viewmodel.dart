@@ -11,7 +11,7 @@ import '../model/login_response_model.dart';
 class LoginViewModel extends ChangeNotifier {
   late final LoginApiService _apiService = LoginApiService();
  // late final ForgetPasswordApi forgetPasswordApi = ForgetPasswordApi();
-  late final ForgetPasswordApi1 forgetPasswordApi1 = ForgetPasswordApi1();
+  //late final ForgetPasswordApi1 forgetPasswordApi1 = ForgetPasswordApi1();
   LoginModel? loginResponseModel;
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
@@ -36,7 +36,7 @@ return loginResponseModel;
         required double randomNum,
       })
   async {
-    final data = await forgetPasswordApi1.forgetPassword1(
+    final data = await _apiService.forgetPassword1(
         action:action,mode:mode,appId:appId,loginId:loginId,randomNum:randomNum);
 
 

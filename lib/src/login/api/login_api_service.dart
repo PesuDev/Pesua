@@ -63,10 +63,6 @@ class LoginApiService {
     }
 
   }
-}
-
-class ForgetPasswordApi1 {
-  late final PesuApiService _pesuApiService = PesuApiService();
 
   Future forgetPassword1({
     required int action,
@@ -87,16 +83,16 @@ class ForgetPasswordApi1 {
 
     });
     if (data != null ) {
-
-      log("msg$data");
-
     }
-    else{
-
-    }
-
+    log("msg$data");
 
 
   }
 }
+
+// class ForgetPasswordApi1 {
+//   late final PesuApiService _pesuApiService = PesuApiService();
+//
+//
+// }
 
