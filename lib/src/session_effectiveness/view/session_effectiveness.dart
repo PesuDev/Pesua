@@ -114,8 +114,9 @@ class _SessionEffectState extends State<SessionEffect> {
 
 
 
+  int? newValue=0;
 
-  int? selectedRadio;
+  int? selectedRadio=0;
   int? timeRadio;
   var selectValue=false;
   var grid1=false;
@@ -139,6 +140,8 @@ var todayDays;
   String year='';
   String weakday='';
   String todayDate='';
+  var my=[1,2,3,4];
+
   void dates(){
     // var today = DateTime.now();
     // var dateFormat = DateFormat('dd-MM-yyyy');
@@ -181,7 +184,8 @@ var todayDays;
 
 
 
-var selectedSessionTime="Please Select Session Time";
+//var selectedSessionTime="Please Select Session Time";
+var selectedSessionTime="";
   @override
   Widget build(BuildContext context) {
     return _connectionStatus == true
@@ -256,10 +260,10 @@ var selectedSessionTime="Please Select Session Time";
 
                                 setState(() {
                                   subject=item;
-time=[];
+time=[                          ];
                                for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
                                     if(dataVal.day==todayDays &&dataVal.subjectName==item){
-print("data ${dataVal}");
+print(                              "data ${dataVal}");
 
                                       return time.add(dataVal.startTiming.toString());
 
@@ -301,13 +305,13 @@ print("data ${dataVal}");
                                       subjectCode=subjectData;
                                       }
                                     }
-                                  time.clear();
 
 
                                 });
                                 print("Hoye");
                                 print("sesso${sessionTime}");
                                 print("tii${time}");
+                                print("myyyyy${subjectCode}");
 
                               },
                             icon: Icon(Icons.keyboard_arrow_down),
@@ -341,7 +345,7 @@ print("data ${dataVal}");
                               ),
                                 maxLines: 2,
                               ):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??"",style:TextStyle(
-                                      fontSize: 15,fontWeight: FontWeight.w400,color: Colors.black
+                                      fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
                                   ) ,),
                             ),
                           ],
@@ -349,39 +353,42 @@ print("data ${dataVal}");
                         SizedBox(
                           height: 10,
                         ),
+                        data.sessionEffectivenessModel!.timetableList!=null && time.length>0 ?
 
-                        Text("Please select a session",style: TextStyle(
-                            fontWeight: FontWeight.w700,fontSize: 15,
-                        ),),
-                        SizedBox(height: 10,),
-                    time.length>0?    InkWell(
-                      onTap: (){
-                        _timeBottomSheet(time: time);
-                      },
-                      child: Container(
-                        width: double.infinity,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey)
-                            ),
-                            height: 34,
-                            child:Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("$selectedSessionTime "),
-                            ),
-                          ),
-                    ):Container(),
-                        data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
-                       Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-
                           children: [
+                            Text("Please select a session",style: TextStyle(
+                                fontWeight: FontWeight.w700,fontSize: 15,
+                            ),),
+
+                            SizedBox(height: 10,),
+                            time.length>0?    InkWell(
+                              onTap: (){
+                                _timeBottomSheet(time: time);
+                              },
+                              child:
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey)
+                                ),
+                                height: 34,
+                                child:Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                  selectedSessionTime.trim().isNotEmpty? Text("$selectedSessionTime "):Text("Please Select Session Time"),
+                                ),
+                              ),
+                            ):Container(),
+
                             Container(
                               margin: EdgeInsets.only(top: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("Please provide Session Effectiveness Feedback Below",style: TextStyle(
-                                    fontSize: 14
+                                      fontSize: 14
                                   ),),
                                   SizedBox(height: 10,),
                                   Row(
@@ -564,22 +571,49 @@ print("data ${dataVal}");
 
                             GestureDetector(
                               onTap: ()async{
-                                await sessionEffectivenessViewmodel?.feedbackDetails(
-                                timeTableTemplateDetailsId: data.sessionEffectivenessModel?.subjectlist?[0].timeTableTemplateDetailsId ??'',
-                                BatchId: data.sessionEffectivenessModel?.subjectlist?[0].batchId ??0,
-                                mode: 2,
-                                //subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
-                                 subjectCode: subjectCode??'',
-                                action: 39,
-                                BatchClassId: data.sessionEffectivenessModel?.subjectlist?[0].batchClassId ??0,
-                                isLocallySavedData: 'FALSE',
-                                subjectId:data.sessionEffectivenessModel?.subjectlist?[0].subjectId ??0 ,
-                                ClassId: data.sessionEffectivenessModel?.subjectlist?[0].classId ??0,
-                                ClassBatchSectionId: data.sessionEffectivenessModel?.subjectlist?[0].classBatchSectionId ??0,
-                                DepartmentId: data.sessionEffectivenessModel?.subjectlist?[0].departmentId ??0,
-                                status: selectedRadio??0,
-                                randomNum: 0.0780400788501232,
-                                ProgramId: data.sessionEffectivenessModel?.subjectlist?[0].programId ??0);
+
+                                if( selectedSessionTime.trim().isEmpty){
+                                  CustomWidgets.getToast(message: "Please select a session", color:  Color(0xff273746));
+
+                                }
+                               else if(selectedSessionTime.trim().isNotEmpty &&selectedRadio?.toInt()==newValue){
+                                  CustomWidgets.getToast(message: "Please select a feedback", color:  Color(0xff273746));
+
+                                }
+
+                                else  {
+                                  await sessionEffectivenessViewmodel
+                                      ?.feedbackDetails(
+                                      timeTableTemplateDetailsId: data
+                                          .sessionEffectivenessModel
+                                          ?.subjectlist?[0]
+                                          .timeTableTemplateDetailsId ?? '',
+                                      BatchId: data.sessionEffectivenessModel
+                                          ?.subjectlist?[0].batchId ?? 0,
+                                      mode: 2,
+                                      subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                      //subjectCode: subjectCode,
+                                      action: 39,
+                                      BatchClassId: data
+                                          .sessionEffectivenessModel
+                                          ?.subjectlist?[0].batchClassId ?? 0,
+                                      isLocallySavedData: 'FALSE',
+                                      subjectId: data.sessionEffectivenessModel
+                                          ?.subjectlist?[0].subjectId ?? 0,
+                                      ClassId: data.sessionEffectivenessModel
+                                          ?.subjectlist?[0].classId ?? 0,
+                                      ClassBatchSectionId: data
+                                          .sessionEffectivenessModel
+                                          ?.subjectlist?[0]
+                                          .classBatchSectionId ?? 0,
+                                      DepartmentId: data
+                                          .sessionEffectivenessModel
+                                          ?.subjectlist?[0].departmentId ?? 0,
+                                      status: selectedRadio ?? 0,
+                                      randomNum: 0.0780400788501232,
+                                      ProgramId: data.sessionEffectivenessModel
+                                          ?.subjectlist?[0].programId ?? 0);
+                                }
 
                               },
                               onDoubleTap: (){
@@ -644,15 +678,16 @@ print("data ${dataVal}");
                                 )),
 
                             SizedBox(height: 70,),
+
                           ],
-                        ):
-                       Container(
-                         margin: EdgeInsets.only(top: 10),
-                         width: MediaQuery.of(context).size.width/1,
-                         child: Text("Session not started yet. Please try after session has started",style: TextStyle(
-                           fontSize: 14,color: Colors.red
-                         ),),
-                       ),
+                        ): Container(
+                          margin: EdgeInsets.only(top: 10),
+                          width: MediaQuery.of(context).size.width/1,
+                          child: Text("No session scheduled for the selected subject today",style: TextStyle(
+                              fontSize: 14,color: Colors.red,
+                            fontWeight: FontWeight.w400
+                          ),),
+                        ),
                       ],
                     )
 
@@ -681,7 +716,6 @@ print("data ${dataVal}");
                 itemCount: time.length,
                 itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-
                     onTap: (){
                       setState(() {
                         selectedSessionTime=time[index];
