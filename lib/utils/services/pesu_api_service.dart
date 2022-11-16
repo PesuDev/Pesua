@@ -155,7 +155,7 @@ class PesuApiService {
           data: formData);
       log('Status Code :: ${response.statusCode}    url=  ${_baseURL}${endPoint}');
       if (response.statusCode == 200 && response.data.toString().isNotEmpty) {
-        log('Response :: ${response.data.toString()}');
+        log('Response :: ${response.data}');
         return response.data;
       }
     } on SocketException {
