@@ -1497,7 +1497,6 @@ class _MyProfileState extends State<MyProfile> {
                                     _formKey.currentState?.validate();
                                    if(oldPassword==newPasswordController.text){
                                     CustomWidgets.getToast(message: "New password can't be same as old password", color:  Color(0xff273746));
-
                                   }
                                    else if(oldPassword==currentPasswordController.text){
                                       await profileViewmodel

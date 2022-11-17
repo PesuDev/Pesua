@@ -13,3 +13,7 @@ const sp_branch="sp_branchId";
 const sp_className="sp_className";
 const sp_DepartmentId="sp_DepartmentId";
 const sp_programId="sp_programId";
+const sp_session_subjectName="sp_session_subjectName";
+const sp_session_subjecttime="sp_session_subjecttime";
+const sp_session_currentDate="sp_session_currentDate";
+const sp_session_currentTime="sp_session_currentTime";
