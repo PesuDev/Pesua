@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -133,14 +135,10 @@ drop()async{
     days();
 
   }
-  void dispose() {
-    _connectivitySubscription.cancel();
-    super.dispose();
-  }
-  int? newValue=0;
-  bool _isShow = true;
-  bool _isShowTime = true;
-  int? selectedRadio=0;
+
+
+
+  int? selectedRadio;
   int? timeRadio;
   var selectValue=false;
   var grid1=false;
@@ -204,10 +202,6 @@ var todayDays;
     DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="sunday"?7:0;
 
   }
-
-
-
-
 
   List<String> time=[];
 
@@ -289,7 +283,6 @@ String? adTime="10:0";
                               ))
                                   .toList(),
                               onChanged: (item) {
-
                                 print("Oye");
 
 
@@ -299,29 +292,13 @@ String? adTime="10:0";
 time=[                          ];
                                for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
                                     if(dataVal.day==todayDays &&dataVal.subjectName==item){
-print(                              "data ${dataVal}");
-
-                                      return time.add(dataVal.startTiming.toString());
-
+print("data ${dataVal}");
+                                time.add(dataVal.startTiming.toString());
                                     }
-
                                }
-                                  //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
-                                  //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
-                                  //     print("subject>>${itemValueTera.subjectName}");
-                                  //     print("item>>${item}");
-                                  //
-                                  //       print("dedo>>${itemValueTera.startTiming}");
-                                  //       return itemValueTera.startTiming;
-                                  //
-                                  //   }else{
-                                  //
-                                  //   }
-                                  //
-                                  //
-                                  // }).toList();
                               var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                               if(item==itemValue.subjectName){
+                                subjectCode=itemValue.subjectCode;
                               return itemValue.subjectCode.toString();
                           }
 
@@ -329,24 +306,12 @@ print(                              "data ${dataVal}");
                           });
                                   print("TeimeMera>>${time}");
                                   print("subjectCode>>${subjectCodeList}");
-                                  // for(var data in timeTable!){
-                                  //   if(data !=null){
-                                  //     time=time.!add(data.toString());
-                                  //   }
-                                  // }
-
-
-                                  for (var subjectData in subjectCodeList!){
-                                      if(subjectData !=null){
-                                      subjectCode=subjectData;
-                                      }
-                                    }
-
-
+                                  time.clear();
                                 });
                                 print("Hoye");
                                 print("sesso${sessionTime}");
                                 print("tii${time}");
+                                print("tii$subjectCode");
                                 print("myyyyy${subjectCode}");
 
                               },
