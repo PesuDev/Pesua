@@ -548,7 +548,7 @@ class _LoginState extends State<Login> {
                                      action: 11,
                                      mode: 1,
                                      loginId: forgetPasswordController.text,
-                                     appId: 2,
+                                     appId: 1,
                                      randomNum: 0.3145632102349487);
                                }
 

@@ -87,9 +87,7 @@ class ForgetPasswordApi1 {
 
     });
     if (data != null ) {
-     //CustomWidgets.getToast(message: "We have sent the password to ay****as@gmail.com, You will receive your password in next 5 minute", color:  Colors.grey);
 
-      // return UpdatePasswordModel.fromJson(data);
       log("msg$data");
 
     }

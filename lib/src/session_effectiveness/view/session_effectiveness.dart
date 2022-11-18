@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -126,6 +128,7 @@ var todayDays;
 
 
 
+var selectedSessionTime="Please Select Session Time";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,35 +197,20 @@ var todayDays;
                                   .toList(),
                               onChanged: (item) {
                                 print("Oye");
-                                time=[];
+
+
                                 setState(() {
                                   subject=item;
-
+time=[];
                                for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
                                     if(dataVal.day==todayDays &&dataVal.subjectName==item){
 print("data ${dataVal}");
-
-                                      return time.add(dataVal.startTiming.toString());
-
+                                time.add(dataVal.startTiming.toString());
                                     }
-
                                }
-                                  //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
-                                  //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
-                                  //     print("subject>>${itemValueTera.subjectName}");
-                                  //     print("item>>${item}");
-                                  //
-                                  //       print("dedo>>${itemValueTera.startTiming}");
-                                  //       return itemValueTera.startTiming;
-                                  //
-                                  //   }else{
-                                  //
-                                  //   }
-                                  //
-                                  //
-                                  // }).toList();
                               var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                               if(item==itemValue.subjectName){
+                                subjectCode=itemValue.subjectCode;
                               return itemValue.subjectCode.toString();
                           }
 
@@ -230,25 +218,12 @@ print("data ${dataVal}");
                           });
                                   print("TeimeMera>>${time}");
                                   print("subjectCode>>${subjectCodeList}");
-                                  // for(var data in timeTable!){
-                                  //   if(data !=null){
-                                  //     time=time.!add(data.toString());
-                                  //   }
-                                  // }
-
-
-                                  for (var subjectData in subjectCodeList!){
-                                      if(subjectData !=null){
-                                      subjectCode=subjectData;
-                                      }
-                                    }
                                   time.clear();
-
-
                                 });
                                 print("Hoye");
                                 print("sesso${sessionTime}");
                                 print("tii${time}");
+                                print("tii$subjectCode");
 
                               },
                             icon: Icon(Icons.keyboard_arrow_down),
@@ -295,39 +270,22 @@ print("data ${dataVal}");
                             fontWeight: FontWeight.w700,fontSize: 15,
                         ),),
                         SizedBox(height: 10,),
-                    time.length>0?    Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey)
+                    time.length>0?    InkWell(
+                      onTap: (){
+                        _timeBottomSheet(time: time);
+                      },
+                      child: Container(
+                        width: double.infinity,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)
+                            ),
+                            height: 34,
+                            child:Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("$selectedSessionTime "),
+                            ),
                           ),
-                          height: 34,
-                          child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration.collapsed(hintText: ''),
-
-                              hint: Padding(
-                                padding: const EdgeInsets.only(top: 5, left: 10),
-                                child:
-
-                                Text("data")
-                              ),
-
-                              items:
-                            time.map((droptime) => DropdownMenuItem<String>(
-                              value: droptime,
-                              child:
-
-                              Text(
-                              "${droptime.toString()}"
-                              ),
-                            )
-                              ,).toList(),
-                              onChanged: (item) {
-                                // _timeBottomSheet();
-
-                              }
-                              ,icon: Icon(Icons.keyboard_arrow_down),
-                            iconSize: 15,
-                              ),
-                        ):Container(),
+                    ):Container(),
                         data.sessionEffectivenessModel!.timetableList!=null && time.toString().isNotEmpty ?
                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -518,7 +476,7 @@ print("data ${dataVal}");
                                 ],
                               ),
                             ),
-                            SizedBox(height: 20,),
+                            SizedBox(height: 40,),
 
                             GestureDetector(
                               onTap: (){
@@ -598,6 +556,8 @@ print("data ${dataVal}");
                                     ]
 
                                 )),
+
+                            SizedBox(height: 70,),
                           ],
                         ):
                        Container(
@@ -620,7 +580,7 @@ print("data ${dataVal}");
 
   }
 
-  void _timeBottomSheet() {
+  void _timeBottomSheet({required List<String> time}) {
 
     showModalBottomSheet(
         context: context,
@@ -628,41 +588,25 @@ print("data ${dataVal}");
           return
             new Container(
              // color: Colors.black,
-              child: ListView(
-                children: [
-                  ListTile(
-                    leading: Radio(
-                        value: 8,
-                        groupValue: timeRadio,
-                        onChanged: (int? val){
-                          setState(() {
-                            timeRadio=val;
+              child: ListView.builder
 
+                (
+                itemCount: time.length,
+                itemBuilder: (BuildContext context, int index) {
+                return InkWell(
 
-                          });
-                          print(timeRadio);
-                          // print(val);
+                    onTap: (){
+                      setState(() {
+                        selectedSessionTime=time[index];
+                        Navigator.pop(context);
+                      });
+                    },
+                    child: Container(
 
-                        }),
-                    title: Text('Time',style: TextStyle(color: Colors.black),),
-                  ),
-                  ListTile(
-                    leading: Radio(
-                        value: 9,
-                        groupValue: timeRadio,
-                        onChanged: (int? val){
-                          setState(() {
-                            timeRadio=val;
+                      margin: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
+                      child: Text("${time[index]}"),));
+              },
 
-
-                          });
-                          print(timeRadio);
-                          // print(val);
-
-                        }),
-                    title: Text('Time',style: TextStyle(color: Colors.black),),
-                  ),
-                ],
               ),
             );
         });

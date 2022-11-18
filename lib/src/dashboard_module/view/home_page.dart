@@ -448,10 +448,10 @@ class _HomePageState extends State<HomePage> {
                                           Container(
                                             height: _mainHeight * 0.27,
 
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(5),
-                                            ),
+                                            // decoration: BoxDecoration(
+                                            //     borderRadius:
+                                            //     BorderRadius.circular(5),
+                                            // ),
                                             child:    Image.memory(
                                         myImage,
                                         gaplessPlayback: true,
