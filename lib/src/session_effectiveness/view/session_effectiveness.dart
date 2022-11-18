@@ -289,12 +289,12 @@ String? adTime="10:0";
                               ))
                                   .toList(),
                               onChanged: (item) {
+
                                 print("Oye");
 
 
                                 setState(() {
                                   subject=item;
-                                  _isShow=true;
 
 time=[                          ];
                                for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
@@ -432,7 +432,7 @@ print(                              "data ${dataVal}");
 
 
 
-                            (checkingSubjectname !=subject && checkingSubjectTime !=selectedSessionConditionTime)?
+                            // (   checkingCurrentDate!=todayDate)?
 
                           _isShow?
                             Visibility(
@@ -636,7 +636,7 @@ print(                              "data ${dataVal}");
 
                                       }
                                       else if(selectedSessionTime.trim().isNotEmpty &&selectedRadio?.toInt()==newValue){
-                                        CustomWidgets.getToast(message: "Please select a feedback", color:  Color(0xff273746));
+                                        CustomWidgets.getToast(message: "Please choose option", color:  Color(0xff273746));
 
                                       }
 
@@ -762,10 +762,12 @@ print(                              "data ${dataVal}");
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Text("Your subject feedback has been updated. Thank you"),
-                          ):Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text("Your feedback have been submites" " ${showDate}" "${feedbackCondtionTime}"),
                           )
+                          //       :
+                          //   Padding(
+                          //   padding: const EdgeInsets.only(top: 10),
+                          //   child: Text("Your feedback have been submited" " ${showDate}" "${feedbackCondtionTime}"),
+                          // )
 
                           ],
                         ):
