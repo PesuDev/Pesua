@@ -92,7 +92,7 @@ class _ESAResultsState extends State<ESAResults> {
                     )),
 
                 Container(
-                  height: MediaQuery.of(context).size.height/1.29,
+                  height: MediaQuery.of(context).size.height/1.4,
                     margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: TabBarView(
                     children: [

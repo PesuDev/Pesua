@@ -96,7 +96,7 @@ class _AnnouncementState extends State<Announcement> {
               child: Padding(
                   padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                   child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: AlwaysScrollableScrollPhysics(),
                       itemCount: value.announcementBannerModel?.length,
                       itemBuilder: (BuildContext context, int index) {
                         String? base64Image = (value
