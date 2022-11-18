@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -73,31 +71,31 @@ class _SessionEffectState extends State<SessionEffect> {
   }
 
 
-var checkingSubjectname;
-var checkingSubjectTime;
-var checkingCurrentDate;
-var checkingCurrentTime;
-var sheduledTime;
-var feedbackCondtionTime=  DateFormat('h:mm a').format(DateTime.now());
-final checkingScheduledTime= DateFormat('h:mm').format(DateTime.now()) ;
+  var checkingSubjectname;
+  var checkingSubjectTime;
+  var checkingCurrentDate;
+  var checkingCurrentTime;
+  var sheduledTime;
+  var feedbackCondtionTime=  DateFormat('h:mm a').format(DateTime.now());
+  final checkingScheduledTime= DateFormat('h:mm').format(DateTime.now()) ;
 
 
 
 
-drop()async{
-  SharedPreferenceUtil util =
-  SharedPreferenceUtil();
-  checkingSubjectname = await util.getString(sp_session_subjectName);
-  checkingSubjectTime = await util.getString(sp_session_subjecttime);
-  checkingCurrentDate = await util.getString(sp_session_currentDate);
-  checkingCurrentTime = await util.getString(sp_session_currentTime);
+  drop()async{
+    SharedPreferenceUtil util =
+    SharedPreferenceUtil();
+    checkingSubjectname = await util.getString(sp_session_subjectName);
+    checkingSubjectTime = await util.getString(sp_session_subjecttime);
+    checkingCurrentDate = await util.getString(sp_session_currentDate);
+    checkingCurrentTime = await util.getString(sp_session_currentTime);
 
-}
+  }
   @override
   void initState() {
-  print("time_AP_PM${feedbackCondtionTime}");
-  print("time${checkingScheduledTime}");
-  print("chang${selectedSessionConditionTime}");
+    print("time_AP_PM${feedbackCondtionTime}");
+    print("time${checkingScheduledTime}");
+    print("chang${selectedSessionConditionTime}");
 
 
     drop();
@@ -135,10 +133,14 @@ drop()async{
     days();
 
   }
-
-
-
-  int? selectedRadio;
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
+  }
+  int? newValue=0;
+  bool _isShow = true;
+  bool _isShowTime = true;
+  int? selectedRadio=0;
   int? timeRadio;
   var selectValue=false;
   var grid1=false;
@@ -147,10 +149,10 @@ drop()async{
   var grid4=false;
   var selectColor=Colors.blue;
   var unselectColor=Colors.white;
-var subject;
-var subjectCode;
-var sessionTime;
-var todayDays;
+  var subject;
+  var subjectCode;
+  var sessionTime;
+  var todayDays;
 
   setSelectedRadio(int val) {
     setState(() {
@@ -175,11 +177,11 @@ var todayDays;
     String datetime7 = DateFormat(DateFormat.WEEKDAY).format(date);
 
 
-   // var dateParse = DateTime.parse(date);
+    // var dateParse = DateTime.parse(date);
 
-   // var formattedDate = "${dateParse.day}-${dateParse.month.toString()}-${dateParse.year}";
+    // var formattedDate = "${dateParse.day}-${dateParse.month.toString()}-${dateParse.year}";
     setState(() {
-     day=datetime4;
+      day=datetime4;
       month=datetime5;
       year=datetime6;
       weakday=datetime7;
@@ -192,8 +194,8 @@ var todayDays;
   }
 
 
-   days(){
-     todayDays=DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?1:
+  days(){
+    todayDays=DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="monday"?1:
     DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="tuesday"?2:
     DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="wednesday"?3:
     DateFormat('EEEE').format(DateTime.now()).toString().toLowerCase()=="thursday"?4:
@@ -203,6 +205,10 @@ var todayDays;
 
   }
 
+
+
+
+
   List<String> time=[];
 
 
@@ -211,14 +217,14 @@ var todayDays;
 
 
 //var selectedSessionTime="Please Select Session Time";
-var selectedSessionTime="";
-String? selectedSessionConditionTime;
-String? adTime="10:0";
+  var selectedSessionTime="";
+  String? selectedSessionConditionTime;
+  String? adTime="10:0";
   @override
   Widget build(BuildContext context) {
     return _connectionStatus == true
         ?
-      Scaffold(
+    Scaffold(
         backgroundColor: Colors.white,
 
         appBar: sideNavAppBar("Session Effectiveness"),
@@ -250,502 +256,529 @@ String? adTime="10:0";
           Container(
             margin: EdgeInsets.all(10.0),
             child: SingleChildScrollView(
-              child:
-                 Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 5,),
-                        Text(
-                          '$todayDate',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,fontSize: 17,
-                          ),),
-                        SizedBox(height: 10,),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey)
+                child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 5,),
+                    Text(
+                      '$todayDate',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,fontSize: 17,
+                      ),),
+                    SizedBox(height: 10,),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey)
+                      ),
+                      height: 34,
+                      child: DropdownButtonFormField<String>(
+                        decoration: InputDecoration.collapsed(hintText: ''),
+
+                        hint: Padding(
+                          padding: const EdgeInsets.only(left: 10,top: 5),
+                          child: Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??""),
+                        ),
+                        value:subject,
+                        items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
+                          value: item.subjectName,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 7,left: 10),
+                            child: Text(item.subjectName.toString(),),
                           ),
-                          height: 34,
-                          child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration.collapsed(hintText: ''),
+                        ))
+                            .toList(),
+                        onChanged: (item) {
 
-                              hint: Padding(
-                                padding: const EdgeInsets.only(left: 10,top: 5),
-                                child: Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??""),
-                              ),
-                              value:subject,
-                              items: data.sessionEffectivenessModel?.stuentsubjectlist?.map((item) => DropdownMenuItem<String>(
-                                value: item.subjectName,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 7,left: 10),
-                                  child: Text(item.subjectName.toString(),),
-                                ),
-                              ))
-                                  .toList(),
-                              onChanged: (item) {
-                                print("Oye");
+                          print("Oye");
 
 
-                                setState(() {
-                                  subject=item;
+                          setState(() {
+                            subject=item;
 
-time=[                          ];
-                               for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
-                                    if(dataVal.day==todayDays &&dataVal.subjectName==item){
-print("data ${dataVal}");
-                                time.add(dataVal.startTiming.toString());
-                                    }
-                               }
-                              var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                            time=[                          ];
+                            for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
+                              if(dataVal.day==todayDays &&dataVal.subjectName==item){
+                                print(                              "data ${dataVal}");
+
+                                return time.add(dataVal.startTiming.toString());
+
+                              }
+
+                            }
+                            //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
+                            //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
+                            //     print("subject>>${itemValueTera.subjectName}");
+                            //     print("item>>${item}");
+                            //
+                            //       print("dedo>>${itemValueTera.startTiming}");
+                            //       return itemValueTera.startTiming;
+                            //
+                            //   }else{
+                            //
+                            //   }
+                            //
+                            //
+                            // }).toList();
+                            var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                               if(item==itemValue.subjectName){
-                                subjectCode=itemValue.subjectCode;
-                              return itemValue.subjectCode.toString();
-                          }
+                                return itemValue.subjectCode.toString();
+                              }
+
+
+                            });
+                            print("TeimeMera>>${time}");
+                            print("subjectCode>>${subjectCodeList}");
+                            // for(var data in timeTable!){
+                            //   if(data !=null){
+                            //     time=time.!add(data.toString());
+                            //   }
+                            // }
+
+
+                            for (var subjectData in subjectCodeList!){
+                              if(subjectData !=null){
+                                subjectCode=subjectData;
+                              }
+                            }
 
 
                           });
-                                  print("TeimeMera>>${time}");
-                                  print("subjectCode>>${subjectCodeList}");
-                                  time.clear();
-                                });
-                                print("Hoye");
-                                print("sesso${sessionTime}");
-                                print("tii${time}");
-                                print("tii$subjectCode");
-                                print("myyyyy${subjectCode}");
+                          print("Hoye");
+                          print("sesso${sessionTime}");
+                          print("tii${time}");
+                          print("myyyyy${subjectCode}");
 
-                              },
-                            icon: Icon(Icons.keyboard_arrow_down),
-                            iconSize: 15,
-                              ),
-                        ),
+                        },
+                        icon: Icon(Icons.keyboard_arrow_down),
+                        iconSize: 15,
+                      ),
+                    ),
 
-                        SizedBox(
-                          height: 15,
-                        ),
+                    SizedBox(
+                      height: 15,
+                    ),
 
 
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            subjectCode !=null?
-                            Text(
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        subjectCode !=null?
+                        Text(
                           "${subjectCode}",
 
-                              style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectCode??""),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width/1.5,
-                              child:
-                                  subject !=null?
-                              Text(
-                                "${subject}" ,style: TextStyle(
-                                fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
-                              ),
-                                maxLines: 2,
-                              ):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??"",style:TextStyle(
-                                      fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
-                                  ) ,),
-                            ),
-                          ],
-                        ),
+                          style: TextStyle(color: Colors.grey,fontSize: 15,fontWeight: FontWeight.w600),):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectCode??""),
                         SizedBox(
-                          height: 10,
+                          width: 5,
                         ),
-                        data.sessionEffectivenessModel!.timetableList!=null && time.length>0 ?
+                        Container(
+                          width: MediaQuery.of(context).size.width/1.5,
+                          child:
+                          subject !=null?
+                          Text(
+                            "${subject}" ,style: TextStyle(
+                              fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
+                          ),
+                            maxLines: 2,
+                          ):Text(data.sessionEffectivenessModel?.stuentsubjectlist?[0].subjectName??"",style:TextStyle(
+                              fontSize: 15,fontWeight: FontWeight.w500,color: Colors.black
+                          ) ,),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    data.sessionEffectivenessModel!.timetableList!=null && time.length>0 ?
 
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Please select a session",style: TextStyle(
-                                fontWeight: FontWeight.w700,fontSize: 15,
-                            ),),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Please select a session",style: TextStyle(
+                          fontWeight: FontWeight.w700,fontSize: 15,
+                        ),),
 
-                            SizedBox(height: 10,),
-                            //checkingSubjectTime!=selectedSessionTime?
-                            time.length>0?InkWell(
-                              onTap: (){
-                                _timeBottomSheet(time: time);
-                              },
+                        SizedBox(height: 10,),
+                        //checkingSubjectTime!=selectedSessionTime?
+                        time.length>0?InkWell(
+                          onTap: (){
+                            _timeBottomSheet(time: time);
+                          },
+                          child:
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey)
+                            ),
+                            height: 34,
+                            child:Padding(
+                              padding: const EdgeInsets.all(8.0),
                               child:
+                              selectedSessionTime.trim().isNotEmpty? Text("$selectedSessionTime "):Text("Please Select Session Time"),
+                            ),
+                          ),
+                        ):Container(),
+                        // Container(height: 34,
+                        //   width: double.infinity,
+                        //   decoration: BoxDecoration(
+                        //       border: Border.all(color: Colors.grey)
+                        //   ),
+                        //   child:Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child:
+                        //     Text("$checkingSubjectTime "),
+                        //   ),
+                        // ),
+
+
+
+                        (checkingCurrentDate!=todayDate)?
+                        _isShow?
+                        Visibility(
+                          visible: _isShow,
+
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.grey)
-                                ),
-                                height: 34,
-                                child:Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                  selectedSessionTime.trim().isNotEmpty? Text("$selectedSessionTime "):Text("Please Select Session Time"),
-                                ),
-                              ),
-                            ):Container(),
-                            // Container(height: 34,
-                            //   width: double.infinity,
-                            //   decoration: BoxDecoration(
-                            //       border: Border.all(color: Colors.grey)
-                            //   ),
-                            //   child:Padding(
-                            //     padding: const EdgeInsets.all(8.0),
-                            //     child:
-                            //     Text("$checkingSubjectTime "),
-                            //   ),
-                            // ),
-
-
-
-                            // (   checkingCurrentDate!=todayDate)?
-
-                          _isShow?
-                            Visibility(
-                              visible: _isShow,
-
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 10),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                margin: EdgeInsets.only(top: 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Please provide Session Effectiveness Feedback Below",style: TextStyle(
+                                        fontSize: 14
+                                    ),),
+                                    SizedBox(height: 10,),
+                                    Row(
                                       children: [
-                                        Text("Please provide Session Effectiveness Feedback Below",style: TextStyle(
-                                            fontSize: 14
-                                        ),),
-                                        SizedBox(height: 10,),
-                                        Row(
+                                        RotatedBox(
+                                            quarterTurns: 7,
+                                            child: Text("Learning Effectiveness",style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w600),)),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
                                           children: [
-                                            RotatedBox(
-                                                quarterTurns: 7,
-                                                child: Text("Learning Effectiveness",style: TextStyle(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w600),)),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Column(
+                                            Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height: 130,
-                                                      width: 170,
-                                                      //color: Colors.amber,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.black),
-                                                        color: grid1==true?selectColor:unselectColor,
-                                                        borderRadius: BorderRadius.only(topLeft:Radius.circular(10)),
-                                                        // color: Colors.amber
+                                                Container(
+                                                  height: 130,
+                                                  width: 170,
+                                                  //color: Colors.amber,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(color: Colors.black),
+                                                    color: grid1==true?selectColor:unselectColor,
+                                                    borderRadius: BorderRadius.only(topLeft:Radius.circular(10)),
+                                                    // color: Colors.amber
 
-                                                      ),
-                                                      child:
-                                                      Column(
-                                                        children: [
-                                                          SizedBox(height: 30,),
-                                                          Text("Low/High",style: TextStyle(
-                                                              fontWeight: FontWeight.w700,fontSize: 15),),
-                                                          Radio(
-                                                              value: 1,
-                                                              groupValue: selectedRadio,
-                                                              onChanged: (int? val){
-                                                                selectedRadio=val;
-                                                                setState(() {
-                                                                  grid1=true;
-                                                                  grid2=false;
-                                                                  grid3=false;
-                                                                  grid4=false;
+                                                  ),
+                                                  child:
+                                                  Column(
+                                                    children: [
+                                                      SizedBox(height: 30,),
+                                                      Text("Low/High",style: TextStyle(
+                                                          fontWeight: FontWeight.w700,fontSize: 15),),
+                                                      Radio(
+                                                          value: 1,
+                                                          groupValue: selectedRadio,
+                                                          onChanged: (int? val){
+                                                            selectedRadio=val;
+                                                            setState(() {
+                                                              grid1=true;
+                                                              grid2=false;
+                                                              grid3=false;
+                                                              grid4=false;
 
-                                                                });
-                                                                print(selectedRadio);
-                                                                // print(val);
+                                                            });
+                                                            print(selectedRadio);
+                                                            // print(val);
 
-                                                              })
+                                                          })
 
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Container(
-
-                                                      height: 130,
-                                                      width: 170,
-                                                      //color: Colors.amber,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.black),
-                                                        color: grid2==true?selectColor:unselectColor,
-
-                                                        borderRadius: BorderRadius.only(topRight:Radius.circular(10)),
-
-                                                        //color: Colors.amber
-
-                                                      ),
-                                                      child:Column(
-                                                        children: [
-                                                          SizedBox(height: 30,),
-                                                          Text("High/High",style: TextStyle(
-                                                              fontWeight: FontWeight.w700,fontSize: 15),),
-                                                          Radio(
-                                                              value: 2,
-                                                              groupValue:selectedRadio,
-                                                              onChanged: (int? val){
-                                                                selectedRadio=val;
-                                                                setState(() {
-                                                                  grid2=true;
-                                                                  grid1=false;
-                                                                  grid3=false;
-                                                                  grid4=false;
-
-                                                                });
-                                                                print(selectedRadio);
-
-                                                              })
-
-                                                        ],
-                                                      ),
-
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      height: 130,
-                                                      width: 170,
-                                                      //color: Colors.amber,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.black),
-                                                        color: grid3==true?selectColor:unselectColor,
-                                                        borderRadius: BorderRadius.only(bottomLeft:Radius.circular(10)),
+                                                Container(
 
-                                                        // color: Colors.amber
+                                                  height: 130,
+                                                  width: 170,
+                                                  //color: Colors.amber,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(color: Colors.black),
+                                                    color: grid2==true?selectColor:unselectColor,
 
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          SizedBox(height: 30,),
-                                                          Text("Low/Low",style: TextStyle(
-                                                              fontWeight:FontWeight.w700,fontSize: 15),),
-                                                          Radio(
-                                                              value: 3,
-                                                              groupValue:selectedRadio,
-                                                              onChanged: (int? val){
-                                                                selectedRadio=val;
-                                                                setState(() {
-                                                                  grid3=true;
-                                                                  grid2=false;
-                                                                  grid1=false;
-                                                                  grid4=false;
+                                                    borderRadius: BorderRadius.only(topRight:Radius.circular(10)),
 
-                                                                });
-                                                                print(selectedRadio);
+                                                    //color: Colors.amber
 
-                                                              })
+                                                  ),
+                                                  child:Column(
+                                                    children: [
+                                                      SizedBox(height: 30,),
+                                                      Text("High/High",style: TextStyle(
+                                                          fontWeight: FontWeight.w700,fontSize: 15),),
+                                                      Radio(
+                                                          value: 2,
+                                                          groupValue:selectedRadio,
+                                                          onChanged: (int? val){
+                                                            selectedRadio=val;
+                                                            setState(() {
+                                                              grid2=true;
+                                                              grid1=false;
+                                                              grid3=false;
+                                                              grid4=false;
 
-                                                        ],
-                                                      ),
+                                                            });
+                                                            print(selectedRadio);
 
-                                                    ),
-                                                    Container(
-                                                      height: 130,
-                                                      width: 170,
-                                                      //color: Colors.amber,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.black),
-                                                        color: grid4==true?selectColor:unselectColor,
-                                                        borderRadius: BorderRadius.only(bottomRight:Radius.circular(10)),
+                                                          })
 
-                                                        //color: Colors.amber
-                                                      ),
-                                                      child:Column(
-                                                        children: [
-                                                          SizedBox(height: 30,),
-                                                          Text("High/Low",style: TextStyle(
-                                                              fontWeight: FontWeight.w700,fontSize: 15),),
-                                                          Radio(
-                                                              value:4,
-                                                              groupValue:selectedRadio,
-                                                              onChanged: (int? val){
-                                                                selectedRadio=val;
-                                                                setState(() {
-                                                                  grid4=true;
-                                                                  grid2=false;
-                                                                  grid3=false;
-                                                                  grid1=false;
+                                                    ],
+                                                  ),
 
-                                                                });
-                                                                print(selectedRadio);
-
-                                                              })
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
                                                 ),
                                               ],
                                             ),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 130,
+                                                  width: 170,
+                                                  //color: Colors.amber,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(color: Colors.black),
+                                                    color: grid3==true?selectColor:unselectColor,
+                                                    borderRadius: BorderRadius.only(bottomLeft:Radius.circular(10)),
 
+                                                    // color: Colors.amber
 
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(height: 30,),
+                                                      Text("Low/Low",style: TextStyle(
+                                                          fontWeight:FontWeight.w700,fontSize: 15),),
+                                                      Radio(
+                                                          value: 3,
+                                                          groupValue:selectedRadio,
+                                                          onChanged: (int? val){
+                                                            selectedRadio=val;
+                                                            setState(() {
+                                                              grid3=true;
+                                                              grid2=false;
+                                                              grid1=false;
+                                                              grid4=false;
+
+                                                            });
+                                                            print(selectedRadio);
+
+                                                          })
+
+                                                    ],
+                                                  ),
+
+                                                ),
+                                                Container(
+                                                  height: 130,
+                                                  width: 170,
+                                                  //color: Colors.amber,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(color: Colors.black),
+                                                    color: grid4==true?selectColor:unselectColor,
+                                                    borderRadius: BorderRadius.only(bottomRight:Radius.circular(10)),
+
+                                                    //color: Colors.amber
+                                                  ),
+                                                  child:Column(
+                                                    children: [
+                                                      SizedBox(height: 30,),
+                                                      Text("High/Low",style: TextStyle(
+                                                          fontWeight: FontWeight.w700,fontSize: 15),),
+                                                      Radio(
+                                                          value:4,
+                                                          groupValue:selectedRadio,
+                                                          onChanged: (int? val){
+                                                            selectedRadio=val;
+                                                            setState(() {
+                                                              grid4=true;
+                                                              grid2=false;
+                                                              grid3=false;
+                                                              grid1=false;
+
+                                                            });
+                                                            print(selectedRadio);
+
+                                                          })
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                        SizedBox(height: 10,),
-                                        Center(child: Text("Session Effectiveness",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14),))
+
+
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(height: 40,),
-
-                                  GestureDetector(
-                                    onTap: ()async{
-
-                                      if( selectedSessionTime.trim().isEmpty){
-                                        CustomWidgets.getToast(message: "Please select a session", color:  Color(0xff273746));
-
-                                      }
-                                      else if(selectedSessionTime.trim().isNotEmpty &&selectedRadio?.toInt()==newValue){
-                                        CustomWidgets.getToast(message: "Please choose option", color:  Color(0xff273746));
-
-                                      }
-
-                                      else  {
-                                        await sessionEffectivenessViewmodel
-                                            ?.feedbackDetails(
-                                            timeTableTemplateDetailsId: data
-                                                .sessionEffectivenessModel
-                                                ?.subjectlist?[0]
-                                                .timeTableTemplateDetailsId ?? '',
-                                            BatchId: data.sessionEffectivenessModel
-                                                ?.subjectlist?[0].batchId ?? 0,
-                                            mode: 2,
-                                            subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
-                                            //subjectCode: subjectCode,
-                                            action: 39,
-                                            BatchClassId: data
-                                                .sessionEffectivenessModel
-                                                ?.subjectlist?[0].batchClassId ?? 0,
-                                            isLocallySavedData: 'FALSE',
-                                            subjectId: data.sessionEffectivenessModel
-                                                ?.subjectlist?[0].subjectId ?? 0,
-                                            ClassId: data.sessionEffectivenessModel
-                                                ?.subjectlist?[0].classId ?? 0,
-                                            ClassBatchSectionId: data
-                                                .sessionEffectivenessModel
-                                                ?.subjectlist?[0]
-                                                .classBatchSectionId ?? 0,
-                                            DepartmentId: data
-                                                .sessionEffectivenessModel
-                                                ?.subjectlist?[0].departmentId ?? 0,
-                                            status: selectedRadio ?? 0,
-                                            randomNum: 0.0780400788501232,
-                                            ProgramId: data.sessionEffectivenessModel
-                                                ?.subjectlist?[0].programId ?? 0);
-
-                                        SharedPreferenceUtil util =
-                                        SharedPreferenceUtil();
-
-                                        await util.setString(
-                                            sp_session_subjectName,subject);
-                                        print("printSubject${sp_session_subjectName}");
-                                        await util.setString(
-                                            sp_session_subjecttime,selectedSessionConditionTime??"");
-                                        print("printSubjectTime${sp_session_subjecttime}");
-                                        await util.setString(
-                                            sp_session_currentDate,todayDate);
-                                        await util.setString(
-                                            sp_session_currentTime,feedbackCondtionTime);
-                                        print("printSubjectTime${sp_session_currentDate}");
-                                        setState(() {
-                                          _isShow = !_isShow;
-                                        });
-                                      }
-
-                                    },
-                                    onDoubleTap: (){
-
-                                    },
-                                    child: Container(
-                                      height: 34,
-                                      color: Color(0xff337ab7),
-                                      width: double.infinity,
-                                      child: Center(
-                                          child: Text(
-                                            "Submit",
-                                            style: TextStyle(
-                                                fontSize: 15,fontWeight: FontWeight.w400,color: Colors.white),
-                                            textAlign: TextAlign.center,
-
-
-                                          )),
-                                    ),
-                                  ),
-                                  SizedBox(height: 20,),
-                                  Text("Note :",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14),),
-                                  SizedBox(height: 10,),
-                                  Text("Please mark the area on the grid that accurately reflects today's session.",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 14),),
-                                  SizedBox(height: 10,),
-
-                                  Text("Session Effectiveness vs Learning Effectiveness",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  SizedBox(height: 5,),
-                                  RichText(
-                                      text: TextSpan(
-                                          children: [
-                                            TextSpan(text:"Low/Low:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
-                                            TextSpan(text:"Low Session Effectiveness and Low Learning (Ineffective Teaching, Hard Concepts).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
-                                          ]
-
-                                      )),
-                                  SizedBox(height: 10,),
-                                  RichText(
-                                      text: TextSpan(
-                                          children: [
-                                            TextSpan(text:"High/Low:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
-                                            TextSpan(text:"High Session Effectiveness and Low Learning (Low Attention Span, Non Interesting Subject, Fatigue, Tough Concepts).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
-                                          ]
-
-                                      )),
-                                  SizedBox(height: 10,),
-                                  RichText(
-                                      text: TextSpan(
-                                          children: [
-                                            TextSpan(text:"Low/High:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
-                                            TextSpan(text:"Low Session Effectiveness and High Learning (Self Learning, Peer based Learning, Books, Media).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
-                                          ]
-
-                                      )),   SizedBox(height: 10,),
-                                  RichText(
-                                      text: TextSpan(
-                                          children: [
-                                            TextSpan(text:"High/High:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
-                                            TextSpan(text:"High Session Effectiveness and High Learning (Elevated Teaching Quality, Creative Methodologies, Great Learning Experience, Interesting and Relevant Subject).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
-                                          ]
-
-                                      )),
-
-                                  SizedBox(height: 70,),
-
-                                ],
+                                    SizedBox(height: 10,),
+                                    Center(child: Text("Session Effectiveness",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 14),))
+                                  ],
+                                ),
                               ),
-                            ):
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text("Your subject feedback has been updated. Thank you"),
-                          )
-                          //       :
-                          //   Padding(
-                          //   padding: const EdgeInsets.only(top: 10),
-                          //   child: Text("Your feedback have been submited" " ${showDate}" "${feedbackCondtionTime}"),
-                          // )
+                              SizedBox(height: 40,),
 
-                          ],
+                              GestureDetector(
+                                onTap: ()async{
+
+                                  if( selectedSessionTime.trim().isEmpty){
+                                    CustomWidgets.getToast(message: "Please select a session", color:  Color(0xff273746));
+
+                                  }
+                                  else if(selectedSessionTime.trim().isNotEmpty &&selectedRadio?.toInt()==newValue){
+                                    CustomWidgets.getToast(message: "Please choose option", color:  Color(0xff273746));
+
+                                  }
+
+                                  else  {
+                                    await sessionEffectivenessViewmodel
+                                        ?.feedbackDetails(
+                                        timeTableTemplateDetailsId: data
+                                            .sessionEffectivenessModel
+                                            ?.subjectlist?[0]
+                                            .timeTableTemplateDetailsId ?? '',
+                                        BatchId: data.sessionEffectivenessModel
+                                            ?.subjectlist?[0].batchId ?? 0,
+                                        mode: 2,
+                                        subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                        //subjectCode: subjectCode,
+                                        action: 39,
+                                        BatchClassId: data
+                                            .sessionEffectivenessModel
+                                            ?.subjectlist?[0].batchClassId ?? 0,
+                                        isLocallySavedData: 'FALSE',
+                                        subjectId: data.sessionEffectivenessModel
+                                            ?.subjectlist?[0].subjectId ?? 0,
+                                        ClassId: data.sessionEffectivenessModel
+                                            ?.subjectlist?[0].classId ?? 0,
+                                        ClassBatchSectionId: data
+                                            .sessionEffectivenessModel
+                                            ?.subjectlist?[0]
+                                            .classBatchSectionId ?? 0,
+                                        DepartmentId: data
+                                            .sessionEffectivenessModel
+                                            ?.subjectlist?[0].departmentId ?? 0,
+                                        status: selectedRadio ?? 0,
+                                        randomNum: 0.0780400788501232,
+                                        ProgramId: data.sessionEffectivenessModel
+                                            ?.subjectlist?[0].programId ?? 0);
+
+                                    SharedPreferenceUtil util =
+                                    SharedPreferenceUtil();
+
+                                    await util.setString(
+                                        sp_session_subjectName,subject);
+                                    print("printSubject${sp_session_subjectName}");
+                                    await util.setString(
+                                        sp_session_subjecttime,selectedSessionConditionTime??"");
+                                    print("printSubjectTime${sp_session_subjecttime}");
+                                    await util.setString(
+                                        sp_session_currentDate,todayDate);
+                                    await util.setString(
+                                        sp_session_currentTime,feedbackCondtionTime);
+                                    print("printSubjectTime${sp_session_currentDate}");
+                                    setState(() {
+                                      _isShow = !_isShow;
+                                    });
+                                  }
+
+                                },
+                                onDoubleTap: (){
+
+                                },
+                                child: Container(
+                                  height: 34,
+                                  color: Color(0xff337ab7),
+                                  width: double.infinity,
+                                  child: Center(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                            fontSize: 15,fontWeight: FontWeight.w400,color: Colors.white),
+                                        textAlign: TextAlign.center,
+
+
+                                      )),
+                                ),
+                              ),
+                              SizedBox(height: 20,),
+                              Text("Note :",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 14),),
+                              SizedBox(height: 10,),
+                              Text("Please mark the area on the grid that accurately reflects today's session.",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 14),),
+                              SizedBox(height: 10,),
+
+                              Text("Session Effectiveness vs Learning Effectiveness",style: TextStyle(fontWeight: FontWeight.bold),),
+                              SizedBox(height: 5,),
+                              RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(text:"Low/Low:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
+                                        TextSpan(text:"Low Session Effectiveness and Low Learning (Ineffective Teaching, Hard Concepts).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
+                                      ]
+
+                                  )),
+                              SizedBox(height: 10,),
+                              RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(text:"High/Low:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
+                                        TextSpan(text:"High Session Effectiveness and Low Learning (Low Attention Span, Non Interesting Subject, Fatigue, Tough Concepts).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
+                                      ]
+
+                                  )),
+                              SizedBox(height: 10,),
+                              RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(text:"Low/High:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
+                                        TextSpan(text:"Low Session Effectiveness and High Learning (Self Learning, Peer based Learning, Books, Media).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
+                                      ]
+
+                                  )),   SizedBox(height: 10,),
+                              RichText(
+                                  text: TextSpan(
+                                      children: [
+                                        TextSpan(text:"High/High:",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black), ),
+                                        TextSpan(text:"High Session Effectiveness and High Learning (Elevated Teaching Quality, Creative Methodologies, Great Learning Experience, Interesting and Relevant Subject).",style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black), ),
+                                      ]
+
+                                  )),
+
+                              SizedBox(height: 70,),
+
+                            ],
+                          ),
                         ):
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          width: MediaQuery.of(context).size.width/1,
-                          child: Text("No session scheduled for the selected subject today",style: TextStyle(
-                              fontSize: 14,color: Colors.red,
-                            fontWeight: FontWeight.w400
-                          ),),
-                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text("Your subject feedback has been updated. Thank you"),
+                        ):
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text("Your feedback have been submited" " ${showDate}" "${feedbackCondtionTime}"),
+                        )
+
                       ],
-                    )
+                    ):
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      width: MediaQuery.of(context).size.width/1,
+                      child: Text("No session scheduled for the selected subject today",style: TextStyle(
+                          fontSize: 14,color: Colors.red,
+                          fontWeight: FontWeight.w400
+                      ),),
+                    ),
+                  ],
+                )
 
             ),
           )
@@ -765,26 +798,26 @@ print("data ${dataVal}");
         builder: (builder) {
           return
             new Container(
-             // color: Colors.black,
+              // color: Colors.black,
               child: ListView.builder
 
                 (
                 itemCount: time.length,
                 itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                    onTap: (){
-                      setState(() {
-                        selectedSessionTime=time[index];
-                        selectedSessionConditionTime=selectedSessionTime.trim();
-                        print("mari ${selectedSessionConditionTime}");
-                        Navigator.pop(context);
-                      });
-                    },
-                    child: Container(
+                  return InkWell(
+                      onTap: (){
+                        setState(() {
+                          selectedSessionTime=time[index];
+                          selectedSessionConditionTime=selectedSessionTime.trim();
+                          print("mari ${selectedSessionConditionTime}");
+                          Navigator.pop(context);
+                        });
+                      },
+                      child: Container(
 
-                      margin: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
-                      child: Text("${time[index]}"),));
-              },
+                        margin: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
+                        child: Text("${time[index]}"),));
+                },
 
               ),
             );
