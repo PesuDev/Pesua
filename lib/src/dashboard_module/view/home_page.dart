@@ -65,9 +65,9 @@ class _HomePageState extends State<HomePage> {
     announcementViewModel =
         Provider.of<AnnouncementViewModel>(context, listen: false);
 
-    announcementViewModel?.getAnnouncementListInfo(
+    announcementViewModel?.getAnnouncementListInfo();
+    announcementViewModel?.getAnnouncementListInfoForMarquee();
 
-    );
     _viewModel = Provider.of<SeatingInfoViewModel>(context, listen: false);
     _viewModel.getSeatingInfoDetails(
         action: 13,
@@ -108,26 +108,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     _mainHeight = MediaQuery.of(context).size.height;
     _mainWidth = MediaQuery.of(context).size.width;
-    return RefreshIndicator(
-      onRefresh: _submittedRefreshList,
-      child: Consumer2<AnnouncementViewModel, SeatingInfoViewModel>(
-        builder: (context, value, data, child) {
-          return SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.white,
+    return Consumer2<AnnouncementViewModel, SeatingInfoViewModel>(
+      builder: (context, value, data, child) {
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.white,
 
-                title: Image.asset(
-                  'assets/images/logo.png',
-                  height: 30,
-                ),
-                // titleSpacing: 40,
-                elevation: 0,
+              title: Image.asset(
+                'assets/images/logo.png',
+                height: 30,
               ),
-              // backgroundColor: Colors.grey,
-              body: Padding(
+              // titleSpacing: 40,
+              elevation: 0,
+            ),
+            // backgroundColor: Colors.grey,
+            body: RefreshIndicator(
+              onRefresh: _submittedRefreshList,
+              child: Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: SingleChildScrollView(
+                        physics: AlwaysScrollableScrollPhysics(),
                           child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                 child:
                               sp_token !=null?  getDrawerDetails(context: context):Text("")),
 
-                                value.marqueLength!=-1? value.marqueLength>=1?         Container(
+                                value.marqueLength!=-1? value.marqueLength>=1? Container(
                                     margin: EdgeInsets.only(top: 5),
                                     width: MediaQuery.of(context).size.width,
                                     height: 60,
@@ -297,6 +298,7 @@ class _HomePageState extends State<HomePage> {
                                 ): value.marqueLength ==0?Container():
                                 shimmerUi():Container(),
                                 SizedBox(height: 10,),
+
                                 Container(
                               color: Colors.white,
                               padding: EdgeInsets.only(
@@ -406,9 +408,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: _mainHeight * 0.01,
-                            ),
+                            // SizedBox(
+                            //   height: _mainHeight * 0.01,
+                            // ),
 
                      value.bannerLength !=-1?   value.bannerLength>=1?    Container(
                               height: _mainHeight * 0.27,
@@ -460,7 +462,7 @@ class _HomePageState extends State<HomePage> {
                                           Positioned(
                                             bottom: 0,
                                             child: Container(
-                                                padding: EdgeInsets.only(top: 5),
+                                                padding: EdgeInsets.only(top: 5,left: 10),
                                                 width: _mainWidth,
                                                 alignment: Alignment.center,
                                                 decoration: BoxDecoration(
@@ -471,7 +473,7 @@ class _HomePageState extends State<HomePage> {
                                                   //     bottomRight:
                                                   //     Radius.circular(5)),
                                                 ),
-                                                height: 25,
+                                                // height: 45,
                                                 child: Align(
                                                   alignment: Alignment.topCenter,
                                                   child: Text(
@@ -480,6 +482,7 @@ class _HomePageState extends State<HomePage> {
                                                     index]
                                                         .announcementName ??
                                                         "",
+                                                    maxLines: 2,
                                                     // "Invitation to Participate from dated - 07 June 2022",
                                                     style: TextStyle(
                                                         fontSize: 16,
@@ -498,7 +501,7 @@ class _HomePageState extends State<HomePage> {
 
                                 //  itemCount: imageList.length,
                               ),
-                            ): value.marqueLength ==0?Container():
+                            ): value.bannerLength ==0?Container():
                      shimmerUi():Container(),
                             SizedBox(
                               height: 10,
@@ -697,7 +700,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Announcement"}  (${currentIndex ??""}/${value.announcementModel?.length})",
+                                      "${"Announcement"}  (${value.announcementModel?.length})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -851,26 +854,26 @@ class _HomePageState extends State<HomePage> {
                                         //   count=(myLength! - currentIndex!);
                                         // });
                                         // },
-          onIndexChanged: (int index) {
-            setState(() {
+        onIndexChanged: (int index) {
+          setState(() {
               currentIndex = index+1;
 
-            });
-          }
+          });
+        }
 
-          ),
+        ),
                                   ),
                                 ],
                               ),
                             ): value.announcementLength ==0?Container():
                                 shimmerUiForAnnouncement():Container(),
-                          ])))
+                          ]))),
+            )
 
-              //drawer: AppDrawerScreen(),
-            ),
-          );
-        },
-      ),
+            //drawer: AppDrawerScreen(),
+          ),
+        );
+      },
     );
   }
 
