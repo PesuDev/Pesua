@@ -21,6 +21,8 @@ class SeatingInfo extends StatefulWidget {
 class _SeatingInfoState extends State<SeatingInfo> {
   late SeatingInfoViewModel _viewModel;
   Timestamp? time;
+
+
   @override
   void initState() {
     super.initState();
@@ -411,14 +413,11 @@ class _SeatingInfoState extends State<SeatingInfo> {
                             // ),
                           ],
                         );
-                      }
-                      ),
+                      }),
                 )
               : Center(
             child: CircularProgressIndicator(),
           );
-        }
-        )
-    );
+        }));
   }
 }

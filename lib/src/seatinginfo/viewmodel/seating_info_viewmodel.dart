@@ -29,7 +29,35 @@ class SeatingInfoViewModel extends ChangeNotifier {
         callMethod: callMethod);
 
      seatingInfoModel = data;
+     if(data !=null){
+for(int i=0; i<data!.length; i++){
+  for(int j=i; j<data.length-1;j++) {
+ if (i == j) {
+      if (data[i].assessmentName == data[j + 1].assessmentName &&
+          data[i].roomName == data[j + 1].roomName) {
+        sameSeatingInfoModel.add(data[j-1]);
+      }
+    }
+    else {
+      if (data[i].assessmentName == data[j ].assessmentName &&
+          data[i].roomName == data[j].roomName) {
+        sameSeatingInfoModel.add(data[j]);
+      }
+    }
+  }
+  if(i==data.length-1){
+    if(data[i].assessmentName==data[i-1].assessmentName && data[i].roomName==data[i-1].roomName){
+      sameSeatingInfoModel.add(data[i]);
+    }
+  }
 
+  // if(i==data.length-1){
+  //   if(data[i])
+  //   print("oye");
+  // }
+}
+}
     notifyListeners();
+
   }
 }
