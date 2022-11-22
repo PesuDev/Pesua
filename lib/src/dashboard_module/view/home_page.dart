@@ -296,171 +296,7 @@ class _HomePageState extends State<HomePage> {
                                     )
                                 ): value.marqueLength ==0?Container():
                                 shimmerUi():Container(),
-                                // value.announcementMarque !=null?
-                                // Container(
-                                //
-                                //       height: MediaQuery.of(context).size.height / 9,
-                                //       color: Colors.white,
-                                //       child: Column(
-                                //         crossAxisAlignment: CrossAxisAlignment.start,
-                                //         children: [
-                                //           Padding(
-                                //             padding: const EdgeInsets.only(left: 7,top: 4),
-                                //             child: Text(
-                                //               "${"Marque Announcement"}  (${currentIndexMarque ??""}/${value.announcementMarque?.length ?? ""})",
-                                //               style: TextStyle(
-                                //                   color: Color(0xfffd981b),
-                                //                   fontSize: 14,
-                                //                   fontFamily: 'Open Sans',
-                                //                   fontWeight: FontWeight.w600),
-                                //             ),
-                                //           ),
-                                //       Container(
-                                //           margin: EdgeInsets.only(top: 5),
-                                //
-                                //           width: MediaQuery.of(context).size.width,
-                                //           height: 60,
-                                //           child:
-                                //
-                                //           Swiper(
-                                //             autoplay: true,
-                                //               onIndexChanged: (int index) {
-                                //                 setState(() {
-                                //                   currentIndexMarque = index+1;
-                                //
-                                //                 });
-                                //               },
-                                //             itemBuilder: (BuildContext context, int index){
-                                //      //         print("latika jain  ${value.announcementMarque?.length}");
-                                //               String? base64Image = (value
-                                //                   .announcementMarque![index]
-                                //                   .pictureIconPath);
-                                //               final UriData? mydata =
-                                //                   Uri.parse(base64Image.toString())
-                                //                       .data;
-                                //               Uint8List? myImage =
-                                //               mydata?.contentAsBytes();
-                                //               return
-                                //                 Container(
-                                //
-                                //                   width:MediaQuery.of(context).size.width,
-                                //                   color: Colors.white,
-                                //                   child: Row(
-                                //                     children: [
-                                //                       myImage != null && (value
-                                //                           .announcementMarque![index]
-                                //                           .pictureIconPath)!.isNotEmpty
-                                //                           ?
-                                //                       Container(
-                                //                         margin: EdgeInsets.only(
-                                //                           left: 7,
-                                //                         ),
-                                //                         width: 50,
-                                //                         height: 50,
-                                //                         decoration: BoxDecoration(
-                                //                           borderRadius:
-                                //                           BorderRadius.circular(
-                                //                               0),
-                                //                           image:
-                                //                           new DecorationImage(
-                                //                               fit: BoxFit.fill,
-                                //                               image:
-                                //                               MemoryImage(
-                                //                                   myImage,
-                                //                                   scale:
-                                //                                   0.5)),
-                                //                         ),
-                                //                       ):Text(""),
-                                //                       SizedBox(
-                                //                         width: 10,
-                                //                       ),
-                                //
-                                //                       Column(
-                                //                         children: [
-                                //                           SizedBox(
-                                //                             height: 10,
-                                //                           ),
-                                //                           Row(
-                                //                             crossAxisAlignment: CrossAxisAlignment.start,
-                                //                             children: [
-                                //                               Container(
-                                //                                 //color: Colors.blue,
-                                //                                 width: MediaQuery.of(context).size.width/1.7,
-                                //                                 child:   Text(
-                                //                                   value
-                                //                                       .announcementMarque?[
-                                //                                   index] .announcementName.toString()??
-                                //                                       'No Name',
-                                //                                   style: TextStyle(
-                                //                                       color: Color(
-                                //                                           0xff337ab7),
-                                //                                       fontSize: 14,
-                                //                                       fontFamily:
-                                //                                       'Open Sans',
-                                //                                       fontWeight:
-                                //                                       FontWeight
-                                //                                           .normal),
-                                //                                   maxLines: 2,
-                                //                                 ),
-                                //
-                                //                               ),
-                                //                               SizedBox(width: 5,),
-                                //                               Icon(Icons.circle,
-                                //                                   color:
-                                //                                   Color(0xff337ab7),
-                                //                                   size: 10),
-                                //
-                                //                             ],
-                                //                           ),
-                                //                           SizedBox(
-                                //                             height: 5,
-                                //                           ),
-                                //                           Row(
-                                //                             children: [
-                                //                               Container(
-                                //                                 // color: Colors.blue,
-                                //                                 width: MediaQuery.of(context).size.width/1.7,
-                                //                                 child:   Text(
-                                //                                   "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementMarque?[index].startdate}"))} ",
-                                //                                   style: TextStyle(
-                                //                                       color: Color(
-                                //                                           0xff333333),
-                                //                                       fontSize: 14,
-                                //                                       fontFamily:
-                                //                                       'Open Sans',
-                                //                                       fontWeight:
-                                //                                       FontWeight
-                                //                                           .normal),
-                                //                                   maxLines: 2,
-                                //                                 ),
-                                //
-                                //                               ),
-                                //                               SizedBox(width: 5,),
-                                //
-                                //                               Icon(Icons.arrow_forward_ios_rounded,
-                                //                                   color:
-                                //                                   Color(0xff337ab7),
-                                //                                   size: 10),
-                                //
-                                //                             ],
-                                //                           ),
-                                //                         ],
-                                //                       ),
-                                //                     ],
-                                //                   ),
-                                //                 );
-                                //             },
-                                //             itemCount: value.announcementMarque?.length ??0,
-                                //
-                                //           )
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ):Container(
-                                //   child:Text("")
-                                // ),
                                 SizedBox(height: 10,),
-
                                 Container(
                               color: Colors.white,
                               padding: EdgeInsets.only(
@@ -574,7 +410,7 @@ class _HomePageState extends State<HomePage> {
                               height: _mainHeight * 0.01,
                             ),
 
-                     value.bannerLength==-1?   value.bannerLength>=1?    Container(
+                     value.bannerLength !=-1?   value.bannerLength>=1?    Container(
                               height: _mainHeight * 0.27,
 
                               child: Swiper(
@@ -679,7 +515,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 8,
                             ),
-                     value.importantAnnouncementLength==-1?value.importantAnnouncementLength>=1?
+                     value.importantAnnouncementLength !=-1?value.importantAnnouncementLength>=1?
                      Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
@@ -852,7 +688,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 10,
                             ),
-                                value.announcementLength==-1?value.announcementLength>=1?    Container(
+                                value.announcementLength !=-1?value.announcementLength>=1?    Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
                               child: Column(

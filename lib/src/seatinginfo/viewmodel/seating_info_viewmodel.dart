@@ -8,6 +8,9 @@ import '../model/seating_info_model.dart';
 class SeatingInfoViewModel extends ChangeNotifier {
   late final SeatingInfoApi _apiService = SeatingInfoApi();
   List<SeatingInfoModel>? seatingInfoModel;
+
+  List<SeatingInfoModel> differentSeatingInfoModel=[];
+  List<SeatingInfoModel> sameSeatingInfoModel=[];
   SharedPreferenceUtil preferenceUtil=SharedPreferenceUtil();
 
 
@@ -26,6 +29,7 @@ class SeatingInfoViewModel extends ChangeNotifier {
         callMethod: callMethod);
 
      seatingInfoModel = data;
+
     notifyListeners();
   }
 }

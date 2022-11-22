@@ -62,7 +62,7 @@ class _AnnouncementsState extends State<Announcements> {
         ),
         body:
         Consumer<AnnouncementViewModel>(builder: (context, value, child) {
-          return value.announcementLength== -1?
+          return value.announcementLength != -1?
                   value.announcementLength>=1?
                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +205,8 @@ class _AnnouncementsState extends State<Announcements> {
 
                   ],
                 )
-              : value.announcementLength==0?Center(child: Text("No Announcements Available"),):attendanceList():Container(child: Center(child: Text("No Announcements Available"),),);
+              : value.announcementLength==0?Center(child: Text("No Announcements Available"),):
+                  attendanceList():attendanceList();
         })
     );
   }
