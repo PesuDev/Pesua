@@ -164,43 +164,6 @@ class _ISAResultsState extends State<ISAResults> {
           }),
         ));
   }
-
-  void _semBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        builder: (builder) {
-          return Consumer<IsaViewModel>(builder: (context, model, child) {
-            return new Container(
-              color: Color(0xFF737373),
-              //could change this to Color(0xFF737373),
-              //so you don't have to change MaterialApp canvasColor
-              child: new Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  decoration: new BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(30.0),
-                          topRight: const Radius.circular(30.0))),
-                  child: Column(
-                    children: [
-                      ListView.separated(
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('2 00}'),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider();
-                        },
-                      )
-                    ],
-                  )),
-            );
-          });
-        });
-  }
-
   Widget resultDetails() {
     return Consumer<IsaViewModel>(builder: (context, model, child) {
       var subjectName =
@@ -262,6 +225,7 @@ class _ISAResultsState extends State<ISAResults> {
                                 model.isaResultModel?[j].subjectCode)
                             ? Container(
                                 padding: EdgeInsets.only(left: 4, top: 7),
+                                color:model.isaResultModel?[j].iSAMaster=="Final ISA"? Colors.cyan.shade100:Colors.white,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -315,7 +279,7 @@ class _ISAResultsState extends State<ISAResults> {
                                               6.5,
                                           child: Icon(
                                             Icons.bar_chart,
-                                            color: Colors.black,
+                                            color: Colors.blueAccent,
                                           )),
                                     )
                                   ],
