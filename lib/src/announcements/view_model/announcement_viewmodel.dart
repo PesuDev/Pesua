@@ -50,7 +50,7 @@ marqueLength=announcementMarque?.length ?? 0 ;
   final importantData=await _apiService.fetchAnnouncementImportant();
   announcementImportant=[];
   for(var important in importantData!){
-    if(important.announcementType==1){
+    if(important.announcementType==1 && important.announcementPriority==1){
 //      print("data>>>>>> latika   ${i.announcementId}");
 announcementImportant?.add(important);
      // announcementMarque?.add(bannerData);
@@ -64,7 +64,7 @@ announcementImportant?.add(important);
   final bannerDashData=await _apiService.fetchAnnouncementBannerDash();
  announcementBannerDashModel=[];
   for(var important in bannerDashData!){
-    if(important.announcementType==2){
+    if(important.announcementType==2 && important.announcementPriority==1){
 //      print("data>>>>>> latika   ${i.announcementId}");
       announcementBannerDashModel?.add(important);
       // announcementMarque?.add(bannerData);
