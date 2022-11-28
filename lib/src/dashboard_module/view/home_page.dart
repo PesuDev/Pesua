@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
 
   // late String live=currentDate + " " + Time;
 
-   int? currentIndex;
-   int? currentIndexMarque;
-   int? currentIndexImportant;
+   int currentIndex=1;
+   int currentIndexMarque=1;
+   int currentIndexImportant=1;
    int? myLength;
    int? count;
    int ?length;
@@ -674,7 +674,8 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         );
                                       },
-                                      autoplay: true,
+                                        autoplay: value.announcementImportant!.length>1? true:false,
+                                        loop: value.announcementImportant!.length>1? true:false,
                                       itemCount: value.announcementImportant!.length,
                                         onIndexChanged: (int index) {
                                           setState(() {
@@ -691,7 +692,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 10,
                             ),
-                                value.announcementLength !=-1?value.announcementLength>=1?    Container(
+                                value.typeTwoPriorityLength ==-1?value.typeTwoPriorityLength >=1?    Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
                               child: Column(
@@ -717,7 +718,7 @@ class _HomePageState extends State<HomePage> {
                                           (BuildContext context, int index) {
 
                                         String? base64Image = (value
-                                            .announcementModel![index]
+                                            .announcementTypeTwoModel![index]
                                             .pictureIconPath);
                                         final UriData? mydata =
                                             Uri.parse(base64Image.toString())
@@ -734,7 +735,7 @@ class _HomePageState extends State<HomePage> {
                                                             AnnouncementViewModel(),
                                                         child: Announcement(
                                                             announcementId: value
-                                                                .announcementModel?[
+                                                                .announcementTypeTwoModel?[
                                                                     index]
                                                                 .announcementId))));
                                           },
@@ -785,7 +786,7 @@ class _HomePageState extends State<HomePage> {
                                                           // height:MediaQuery.of(context).size.height/40,
                                                           child: Text(
                                                             value
-                                                                    .announcementModel?[
+                                                                    .announcementTypeTwoModel?[
                                                                         index]
                                                                     .announcementName ??
                                                                 'fvhggzdfzfzjfkjzkjzkjkjkj 5tftdrkeskkwerktgy6t5fdreswrfgfrdes',
@@ -816,7 +817,7 @@ class _HomePageState extends State<HomePage> {
                                                               1.3,
                                                           // height:MediaQuery.of(context).size.height/40,
                                                           child: Text(
-                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementModel?[index].startdate}"))} ",
+                                                            "Date :${DateTimeUtil.convertDate(int.parse("${value.announcementTypeTwoModel?[index].startdate}"))} ",
                                                             style: TextStyle(
                                                                 color: Color(
                                                                     0xff333333),
@@ -845,9 +846,9 @@ class _HomePageState extends State<HomePage> {
 
 
                                       },
-
-                                      autoplay: true,
-                                      itemCount: value.announcementModel!.length,
+                                        autoplay: value.announcementTypeTwoModel!.length>1? true:false,
+                                        loop: value.announcementTypeTwoModel!.length>1? true:false,
+                                      itemCount: value.announcementTypeTwoModel!.length,
                                         // onTap: (int){
                                         // setState(() {
                                         //   myLength=value.announcementModel?.length;
@@ -865,7 +866,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               ),
-                            ): value.announcementLength ==0?Container():
+                            ): value.announcementTypeTwoModel ==0?Container():
                                 shimmerUiForAnnouncement():Container(),
                           ]))),
             )
@@ -879,6 +880,7 @@ class _HomePageState extends State<HomePage> {
 
 
   Widget swiper(){
+
     return Consumer<AnnouncementViewModel>(
       builder: (context, data, child) {
         return data.announcementModel != null &&
@@ -966,7 +968,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                autoplay: true,
+                autoplay: data.announcementModel!.length>1? true:false,
+                loop: data.announcementModel!.length>1? true:false,
                 itemCount: data.announcementModel!.length,
                 //  itemCount: imageList.length,
               ):

@@ -12,6 +12,7 @@ import 'package:pesu/src/attendance/model/attendance_list_model.dart';
 import 'package:pesu/src/attendance/model/detailed_attendance_model.dart';
 
 import '../model/announcement_banner_model.dart';
+import '../model/announcement_type_two_priority_type.dart';
 
 class AnnouncementViewModel extends ChangeNotifier {
   late final AnnouncementApiServices _apiService = AnnouncementApiServices();
@@ -19,7 +20,9 @@ List<AnnouncementModel> ?announcementModel;
 
 List<AnnouncementBannerModel> ?announcementBannerModel;
 List<Announcement_marqueModel>? announcementMarque;
+List<AnnouncementTypeTwoPriorityModel>? announcementTypeTwoModel;
 int marqueLength=-1;
+int typeTwoPriorityLength=-1;
 int importantAnnouncementLength=-1;
 int  announcementLength=-1;
 List<AnnouncementImportantModel>? announcementImportant;
@@ -47,6 +50,13 @@ Future <List<AnnouncementModel>?>getAnnouncementListInfo() async {
 
 marqueLength=announcementMarque?.length ?? 0 ;
   }
+  final typeTwo=await _apiService.fetchAnnouncementTypeTwo();
+  announcementTypeTwoModel=[];
+  for(var typeTwo in typeTwo!){
+    if(typeTwo.announcementPriority==2){
+      announcementTypeTwoModel?.add(typeTwo);
+    }
+  }
   final importantData=await _apiService.fetchAnnouncementImportant();
   announcementImportant=[];
   for(var important in importantData!){
@@ -60,7 +70,7 @@ announcementImportant?.add(important);
 
   }
   importantAnnouncementLength=announcementImportant?.length??0;
-
+typeTwoPriorityLength=announcementTypeTwoModel?.length ??0;
   final bannerDashData=await _apiService.fetchAnnouncementBannerDash();
  announcementBannerDashModel=[];
   for(var important in bannerDashData!){
