@@ -344,7 +344,7 @@ class _LoginState extends State<Login> {
                                     : Icons.visibility_off,
                                 color: Colors.white,
                               ),
-                            )
+                            ),
                         ),
                         onChanged: (text) {
                           setState(() {});

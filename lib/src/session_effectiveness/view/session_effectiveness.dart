@@ -85,9 +85,7 @@ class _SessionEffectState extends State<SessionEffect> {
   drop()async{
     SharedPreferenceUtil util =
     SharedPreferenceUtil();
-    checkingSubjectname = await util.getString(sp_session_subjectName);
     checkingSubjectTime = await util.getString(sp_session_subjecttime);
-    checkingCurrentDate = await util.getString(sp_session_currentDate);
     checkingCurrentTime = await util.getString(sp_session_currentTime);
 
   }
@@ -96,6 +94,7 @@ class _SessionEffectState extends State<SessionEffect> {
     print("time_AP_PM${feedbackCondtionTime}");
     print("time${checkingScheduledTime}");
     print("chang${selectedSessionConditionTime}");
+
 
 
     drop();
@@ -151,6 +150,8 @@ class _SessionEffectState extends State<SessionEffect> {
   var unselectColor=Colors.white;
   var subject;
   var subjectCode;
+  var timetableDetailID;
+  var subjectID;
   var sessionTime;
   var todayDays;
 
@@ -210,6 +211,7 @@ class _SessionEffectState extends State<SessionEffect> {
 
 
   List<String> time=[];
+  List<String> feedbacktime=[];
 
 
 
@@ -219,7 +221,6 @@ class _SessionEffectState extends State<SessionEffect> {
 //var selectedSessionTime="Please Select Session Time";
   var selectedSessionTime="";
   String? selectedSessionConditionTime;
-  String? adTime="10:0";
   @override
   Widget build(BuildContext context) {
     return _connectionStatus == true
@@ -289,58 +290,57 @@ class _SessionEffectState extends State<SessionEffect> {
                         ))
                             .toList(),
                         onChanged: (item) {
-
                           print("Oye");
-
-
                           setState(() {
-                            subject=item;
 
-                            time=[                          ];
+                            subject=item;
+                            time=[];
                             for(var dataVal in data.sessionEffectivenessModel!.timetableList!){
                               if(dataVal.day==todayDays &&dataVal.subjectName==item){
-                                print(                              "data ${dataVal}");
-
-                                return time.add(dataVal.startTiming.toString());
+                                print("data ${dataVal}");
+                                time.add(dataVal.startTiming.toString());
 
                               }
 
                             }
-                            //  time =  data.sessionEffectivenessModel?.timetableList?.map((itemValueTera){
-                            //   if(itemValueTera.day==1 &&itemValueTera.subjectName==item){
-                            //     print("subject>>${itemValueTera.subjectName}");
-                            //     print("item>>${item}");
-                            //
-                            //       print("dedo>>${itemValueTera.startTiming}");
-                            //       return itemValueTera.startTiming;
-                            //
-                            //   }else{
-                            //
-                            //   }
-                            //
-                            //
-                            // }).toList();
+                            selectedSessionTime=time[0];
                             var subjectCodeList=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
                               if(item==itemValue.subjectName){
                                 return itemValue.subjectCode.toString();
                               }
 
+                            });
+                            var subjectCodeList1=   data.sessionEffectivenessModel?.stuentsubjectlist?.map((itemValue){
+                              if(item==itemValue.subjectName){
+                                return itemValue.subjectId;
+                              }
 
                             });
                             print("TeimeMera>>${time}");
                             print("subjectCode>>${subjectCodeList}");
-                            // for(var data in timeTable!){
-                            //   if(data !=null){
-                            //     time=time.!add(data.toString());
-                            //   }
-                            // }
-
-
                             for (var subjectData in subjectCodeList!){
                               if(subjectData !=null){
                                 subjectCode=subjectData;
                               }
                             }
+                            for (var subjectData in subjectCodeList1!){
+                              if(subjectData !=null){
+                                subjectID=subjectData;
+                              }
+                            }
+
+                        // // time detailId mapping
+                        //     var subjectCodeList2=   data.sessionEffectivenessModel?.timetableList?.map((itemValue){
+                        //       if(item==itemValue.subjectCode){
+                        //         return itemValue.timeTableTemplateDetailsId;
+                        //       }
+                        //
+                        //     });
+                        //     for (var subjectData in subjectCodeList2!){
+                        //       if(subjectData !=null){
+                        //         timetableDetailID=subjectData;
+                        //       }
+                        //     }
 
 
                           });
@@ -414,25 +414,11 @@ class _SessionEffectState extends State<SessionEffect> {
                             child:Padding(
                               padding: const EdgeInsets.all(8.0),
                               child:
-                              selectedSessionTime.trim().isNotEmpty? Text("$selectedSessionTime "):Text("Please Select Session Time"),
+                              selectedSessionTime.trim().isNotEmpty? Text("$selectedSessionTime "):Text("${selectedSessionTime}"),
                             ),
                           ),
                         ):Container(),
-                        // Container(height: 34,
-                        //   width: double.infinity,
-                        //   decoration: BoxDecoration(
-                        //       border: Border.all(color: Colors.grey)
-                        //   ),
-                        //   child:Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child:
-                        //     Text("$checkingSubjectTime "),
-                        //   ),
-                        // ),
-
-
-
-                        (checkingCurrentDate!=todayDate)?
+                      //  ( checkingSubjectTime!=selectedSessionTime)?
                         _isShow?
                         Visibility(
                           visible: _isShow,
@@ -644,20 +630,22 @@ class _SessionEffectState extends State<SessionEffect> {
                                         ?.feedbackDetails(
                                         timeTableTemplateDetailsId: data
                                             .sessionEffectivenessModel
-                                            ?.subjectlist?[0]
+                                            ?.timetableList?[0]
                                             .timeTableTemplateDetailsId ?? '',
+                                       // timeTableTemplateDetailsId:timetableDetailID.toString(),
                                         BatchId: data.sessionEffectivenessModel
                                             ?.subjectlist?[0].batchId ?? 0,
                                         mode: 2,
-                                        subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
-                                        //subjectCode: subjectCode,
+                                        //subjectCode: data.sessionEffectivenessModel?.subjectlist?[0].subjectCode??'',
+                                        subjectCode: subjectCode,
                                         action: 39,
                                         BatchClassId: data
                                             .sessionEffectivenessModel
                                             ?.subjectlist?[0].batchClassId ?? 0,
                                         isLocallySavedData: 'FALSE',
-                                        subjectId: data.sessionEffectivenessModel
-                                            ?.subjectlist?[0].subjectId ?? 0,
+                                        // subjectId: data.sessionEffectivenessModel
+                                        //     ?.subjectlist?[0].subjectId ?? 0,
+                                        subjectId:subjectID,
                                         ClassId: data.sessionEffectivenessModel
                                             ?.subjectlist?[0].classId ?? 0,
                                         ClassBatchSectionId: data
@@ -672,20 +660,16 @@ class _SessionEffectState extends State<SessionEffect> {
                                         ProgramId: data.sessionEffectivenessModel
                                             ?.subjectlist?[0].programId ?? 0);
 
+
                                     SharedPreferenceUtil util =
                                     SharedPreferenceUtil();
 
-                                    await util.setString(
-                                        sp_session_subjectName,subject);
-                                    print("printSubject${sp_session_subjectName}");
+
                                     await util.setString(
                                         sp_session_subjecttime,selectedSessionConditionTime??"");
                                     print("printSubjectTime${sp_session_subjecttime}");
                                     await util.setString(
-                                        sp_session_currentDate,todayDate);
-                                    await util.setString(
                                         sp_session_currentTime,feedbackCondtionTime);
-                                    print("printSubjectTime${sp_session_currentDate}");
                                     setState(() {
                                       _isShow = !_isShow;
                                     });
@@ -761,11 +745,12 @@ class _SessionEffectState extends State<SessionEffect> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Text("Your subject feedback has been updated. Thank you"),
-                        ):
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Text("Your feedback have been submited" " ${showDate}" "${feedbackCondtionTime}"),
                         )
+                        //     :
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 10),
+                        //   child: Text("Your feedback have been submited" " ${showDate}" "${checkingCurrentTime}"),
+                        // )
 
                       ],
                     ):
