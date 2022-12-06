@@ -692,7 +692,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: 10,
                             ),
-                                value.typeTwoPriorityLength ==-1?value.typeTwoPriorityLength >=1?    Container(
+                                value.typeTwoPriorityLength !=-1?value.typeTwoPriorityLength >=1?    Container(
                               height: MediaQuery.of(context).size.height / 10,
                               color: Colors.white,
                               child: Column(
@@ -701,7 +701,7 @@ class _HomePageState extends State<HomePage> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 7,top: 4),
                                     child: Text(
-                                      "${"Announcement"}  (${value.announcementModel?.length})",
+                                      "${"Announcement"}  (${value.announcementTypeTwoModel?.length})",
                                       style: TextStyle(
                                           color: Color(0xfffd981b),
                                           fontSize: 14,
@@ -789,7 +789,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .announcementTypeTwoModel?[
                                                                         index]
                                                                     .announcementName ??
-                                                                'fvhggzdfzfzjfkjzkjzkjkjkj 5tftdrkeskkwerktgy6t5fdreswrfgfrdes',
+                                                                '',
                                                             style: TextStyle(
                                                                 color: Color(
                                                                     0xff333333),
